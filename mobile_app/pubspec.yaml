@@ -44,6 +44,8 @@ dependencies:
   web_socket_channel: ^3.0.3
   flutter_dotenv: ^6.0.1
   audioplayers: ^6.8.1
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.2.2
 
 dev_dependencies:
   flutter_test:

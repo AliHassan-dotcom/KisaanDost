@@ -36,7 +36,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     final isUrdu = settings.language == 'ur';
 
     return Scaffold(
-      backgroundColor: const Color(0xFF071D12),
+      backgroundColor: const Color(0xFFF4F7F4),
       appBar: KdAppBar(
         title: isUrdu ? 'موسم اور پیشین گوئی' : 'Weather & Forecast',
         actions: <Widget>[
@@ -51,11 +51,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00E676))),
+              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2E7D32))),
               SizedBox(height: 16),
               Text(
                 'Fetching live Open-Meteo & NASA POWER telemetry...',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: Colors.grey, fontSize: 13),
               ),
             ],
           ),
@@ -70,18 +70,18 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 const SizedBox(height: 16),
                 Text(
                   isUrdu ? 'موسم کا ڈیٹا لوڈ نہیں ہو سکا' : 'Failed to load weather',
-                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '$error',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white60, fontSize: 12),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () => ref.read(weatherProvider.notifier).refresh(),
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00E676), foregroundColor: Colors.black),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2E7D32), foregroundColor: Colors.white),
                   child: Text(isUrdu ? 'دوبارہ کوشش کریں' : 'Retry'),
                 ),
               ],
@@ -90,8 +90,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         ),
         data: (state) => RefreshIndicator(
           onRefresh: () => ref.read(weatherProvider.notifier).refresh(),
-          color: const Color(0xFF00E676),
-          backgroundColor: const Color(0xFF0F2E1E),
+          color: const Color(0xFF2E7D32),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
@@ -108,7 +107,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 const SizedBox(height: 16),
 
                 if (state.current != null) ...<Widget>[
-                  // 2. Main Live Observation Hero Card (Matching Google Weather UI)
+                  // 2. Main Live Observation Hero Card (Clean Light Theme)
                   _buildGoogleStyleWeatherCard(context, state.current!, isUrdu),
                   const SizedBox(height: 16),
 
@@ -145,7 +144,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     );
   }
 
-  /// Big Live Weather Hero Card styled like Google Weather (Screenshot 1)
+  /// Big Live Weather Hero Card styled in clean light mode
   Widget _buildGoogleStyleWeatherCard(
     BuildContext context,
     WeatherSummary current,
@@ -162,11 +161,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F2E1E),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: Colors.green.withAlpha(60)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.green.shade100, width: 1.5),
         boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.black38, blurRadius: 10, offset: Offset(0, 4)),
+          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 3)),
         ],
       ),
       child: Column(
@@ -177,11 +176,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  const Icon(Icons.location_on, color: Color(0xFF00E676), size: 20),
+                  const Icon(Icons.location_on, color: Color(0xFF2E7D32), size: 20),
                   const SizedBox(width: 6),
                   Text(
                     '${current.district}, Punjab',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],
               ),
@@ -192,8 +191,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Icon(_getWeatherIcon(current.weatherCode), color: const Color(0xFFFFD54F), size: 54),
-              const SizedBox(width: 16),
+              Icon(_getWeatherIcon(current.weatherCode), color: Colors.orange.shade700, size: 52),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,15 +200,15 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     Text(
                       temp,
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 38,
+                        color: Color(0xFF1B382B),
+                        fontSize: 36,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -1,
                       ),
                     ),
                     Text(
                       desc,
-                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                      style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
                     ),
                   ],
                 ),
@@ -217,7 +216,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.black26,
+                  color: const Color(0xFFE8F5E9),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Column(
@@ -225,17 +224,17 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                   children: <Widget>[
                     Text(
                       '🌧️ Precip: $precip',
-                      style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 11, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Color(0xFF0277BD), fontSize: 11, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '💧 Humidity: $humidity',
-                      style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      style: const TextStyle(color: Color(0xFF2E7D32), fontSize: 11, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '💨 Wind: $wind',
-                      style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      style: TextStyle(color: Colors.grey.shade800, fontSize: 11),
                     ),
                   ],
                 ),
@@ -249,15 +248,16 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
 
   Widget _buildMetricTabs(bool isUrdu) {
     final tabs = <String>[
-      isUrdu ? 'درجہ حرارت (Temp)' : 'Temperature',
-      isUrdu ? 'بارش (Precipitation)' : 'Precipitation',
-      isUrdu ? 'ہوا (Wind)' : 'Wind',
+      isUrdu ? 'درجہ حرارت' : 'Temperature',
+      isUrdu ? 'بارش' : 'Precipitation',
+      isUrdu ? 'ہوا کی رفتار' : 'Wind',
     ];
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF0F2E1E),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       padding: const EdgeInsets.all(4),
       child: Row(
@@ -269,14 +269,14 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF00E676) : Colors.transparent,
+                  color: isSelected ? const Color(0xFF2E7D32) : Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
                 child: Text(
                   tabs[index],
                   style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.white70,
+                    color: isSelected ? Colors.white : Colors.grey.shade800,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                     fontSize: 12,
                   ),
@@ -289,7 +289,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     );
   }
 
-  /// Hourly Temperature Curve matching Screenshot 1 Google weather timeline
+  /// Hourly Temperature Curve
   Widget _buildHourlyCurveChart(BuildContext context, WeatherSummary current, bool isUrdu) {
     final baseTemp = current.temperatureC ?? 28.0;
 
@@ -307,16 +307,16 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F2E1E),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.withAlpha(50)),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            isUrdu ? '24 گھنٹے کا موسمی چارٹ (Hourly Forecast)' : '24-Hour Trend & Hourly Graph',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+            isUrdu ? '24 گھنٹے کا موسمی چارٹ' : '24-Hour Trend & Hourly Graph',
+            style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 13),
           ),
           const SizedBox(height: 14),
           SingleChildScrollView(
@@ -340,8 +340,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                         valText,
                         style: TextStyle(
                           color: _selectedTab == 0
-                              ? const Color(0xFFFFD54F)
-                              : (_selectedTab == 1 ? const Color(0xFF00E5FF) : const Color(0xFF00E676)),
+                              ? Colors.orange.shade800
+                              : (_selectedTab == 1 ? const Color(0xFF0277BD) : const Color(0xFF2E7D32)),
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                         ),
@@ -351,14 +351,14 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: _selectedTab == 0 ? const Color(0xFFFFD54F) : const Color(0xFF00E676),
+                          color: _selectedTab == 0 ? Colors.orange.shade800 : const Color(0xFF2E7D32),
                           shape: BoxShape.circle,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         h['time'] as String,
-                        style: const TextStyle(color: Colors.white60, fontSize: 11),
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 11),
                       ),
                     ],
                   ),
@@ -371,7 +371,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     );
   }
 
-  /// 7-Day Forecast Section matching Screenshot 1
+  /// 7-Day Forecast Section
   Widget _build7DayForecastSection(
     BuildContext context,
     WeatherForecast forecast,
@@ -380,9 +380,9 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F2E1E),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.withAlpha(50)),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -392,14 +392,14 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             children: <Widget>[
               Text(
                 isUrdu ? '7 دن کی پیشین گوئی' : '7-Day Forecast',
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 14),
               ),
-              const Icon(Icons.calendar_month, color: Color(0xFF00E676), size: 18),
+              const Icon(Icons.calendar_month, color: Color(0xFF2E7D32), size: 18),
             ],
           ),
           const SizedBox(height: 14),
 
-          // Horizontal 7-Day Card Strip with expanded layout
+          // Horizontal 7-Day Card Strip
           SizedBox(
             height: 145,
             child: ListView.builder(
@@ -412,13 +412,13 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 final rainProb = day.precipitationProbabilityMax ?? 0;
 
                 return Container(
-                  width: 80,
+                  width: 82,
                   margin: const EdgeInsets.only(right: 10),
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                   decoration: BoxDecoration(
-                    color: index == 0 ? const Color(0xFF1B4D33) : const Color(0xFF0A2216),
+                    color: index == 0 ? const Color(0xFFE8F5E9) : const Color(0xFFFAFAFA),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: index == 0 ? const Color(0xFF00E676) : Colors.white12),
+                    border: Border.all(color: index == 0 ? const Color(0xFF2E7D32) : Colors.grey.shade300),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -426,24 +426,24 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     children: <Widget>[
                       Text(
                         _formatDayName(day.date, index),
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11),
+                        style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 11),
                       ),
                       const SizedBox(height: 4),
                       Icon(
                         rainProb > 40 ? Icons.thunderstorm : (maxTemp.contains('35') || maxTemp.contains('36') ? Icons.wb_sunny : Icons.wb_sunny_outlined),
                         size: 22,
-                        color: rainProb > 40 ? const Color(0xFF00E5FF) : const Color(0xFFFFD54F),
+                        color: rainProb > 40 ? const Color(0xFF0277BD) : Colors.orange.shade700,
                       ),
                       const SizedBox(height: 4),
                       Text(
                         '$maxTemp / $minTemp',
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11),
+                        style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 11),
                       ),
                       if (rainProb > 0) ...[
                         const SizedBox(height: 2),
                         Text(
                           '$rainProb% rain',
-                          style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 9, fontWeight: FontWeight.bold),
+                          style: const TextStyle(color: Color(0xFF0277BD), fontSize: 9, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ],
@@ -469,28 +469,28 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     }
   }
 
-  /// Excessive Heat Advisory Card matching Screenshot 1
+  /// Excessive Heat Advisory Card
   Widget _buildSevereWeatherAdvisoryCard(BuildContext context, WeatherSummary current, bool isUrdu) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A1B0E),
+        color: const Color(0xFFFFF3E0),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFFF9800).withAlpha(120)),
+        border: Border.all(color: Colors.orange.shade300),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
-              const Icon(Icons.warning_amber_rounded, color: Color(0xFFFF9800), size: 24),
+              Icon(Icons.warning_amber_rounded, color: Colors.orange.shade900, size: 24),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   isUrdu
                       ? 'شدید گرمی اور موسم کی الرٹ (${current.district})'
                       : 'Excessive Heat Advisory — ${current.district}, Pakistan',
-                  style: const TextStyle(color: Color(0xFFFFB74D), fontWeight: FontWeight.bold, fontSize: 14),
+                  style: TextStyle(color: Colors.orange.shade900, fontWeight: FontWeight.bold, fontSize: 14),
                 ),
               ),
             ],
@@ -500,7 +500,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             isUrdu
                 ? 'پنجاب کے زرعی علاقوں میں شدید گرمی اور درجہ حرارت 36 ڈگری سے تجاوز کرنے کا امکان ہے۔ فصلوں میں نمی برقرار رکھنے کے لیے صبح سویرے یا رات کے وقت ہلکی آبپاشی کریں۔ اسپرے صبح 10 بجے سے پہلے مکمل کریں۔'
                 : 'Severe heat and temperatures reaching up to 36°C expected in this agricultural zone. Schedule early morning irrigation and complete chemical spray before 10 AM to prevent crop scorching.',
-            style: const TextStyle(color: Colors.white70, fontSize: 12, height: 1.4),
+            style: TextStyle(color: Colors.brown.shade800, fontSize: 12, height: 1.4),
           ),
         ],
       ),
@@ -517,16 +517,16 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F2E1E),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.green.withAlpha(50)),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             isUrdu ? 'ناسا پاور تاریخی موسمی اوسط (NASA POWER)' : 'Historical Monthly Climatology (NASA POWER)',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+            style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 13),
           ),
           const SizedBox(height: 10),
           ...historical.take(4).map((h) {
@@ -541,11 +541,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 children: <Widget>[
                   Text(
                     period,
-                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                    style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
                   ),
                   Text(
                     '$temp · $rain',
-                    style: const TextStyle(color: Color(0xFF00E676), fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Color(0xFF2E7D32), fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -560,7 +560,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.black26,
+        color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -568,12 +568,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         children: <Widget>[
           Text(
             current.attribution ?? 'Weather data by Open-Meteo.com under CC BY 4.0',
-            style: const TextStyle(fontSize: 10, color: Colors.white60),
+            style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
           ),
           const SizedBox(height: 4),
           const Text(
             'Attribution: Weather data by Open-Meteo.com (CC BY 4.0) & NASA POWER Agricultural Meteorology.',
-            style: TextStyle(fontSize: 9, color: Colors.white38),
+            style: TextStyle(fontSize: 9, color: Colors.grey),
           ),
         ],
       ),

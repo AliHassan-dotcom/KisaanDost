@@ -10,6 +10,7 @@ import '../config/gemini_live_config.dart';
 import '../models/voice_chat_message.dart';
 import '../services/audio_service.dart';
 import '../services/gemini_live_service.dart';
+import '../services/voice_assistant_engine.dart';
 
 /// Lifecycle state of the voice agent
 enum VoiceAgentState {
@@ -81,81 +82,102 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
   VoiceNotifier({
     AudioService? audioService,
     GeminiLiveService? geminiLiveService,
+    VoiceAssistantEngine? voiceEngine,
   })  : _audioService = audioService ?? AudioService(),
         _geminiLiveService = geminiLiveService ?? GeminiLiveService(),
+        _voiceEngine = voiceEngine ?? VoiceAssistantEngine(),
         super(VoiceState(apiKey: GeminiLiveConfig.apiKey));
 
   final AudioService _audioService;
   final GeminiLiveService _geminiLiveService;
+  final VoiceAssistantEngine _voiceEngine;
 
-  String? _currentAssistantMessageId;
+  String? _currentUserRecognizedText;
 
-  /// Start voice session
-  Future<void> startSession() async {
-    state = state.copyWith(clearError: true);
+  /// Start voice listening session with real speech recognition
+  Future<void> startSession({String languageCode = 'ur_PK'}) async {
+    state = state.copyWith(
+      clearError: true,
+      connectionState: GeminiLiveConnectionState.connected,
+      agentState: VoiceAgentState.listening,
+    );
 
-    final key = state.apiKey.isNotEmpty ? state.apiKey : GeminiLiveConfig.apiKey;
-    final isRealKey = key.isNotEmpty && !key.contains('your_') && !key.contains('here');
+    await _voiceEngine.startListening(
+      languageCode: languageCode,
+      onResult: (text, isFinal) {
+        _currentUserRecognizedText = text;
 
-    if (isRealKey) {
-      // Connect to Google Gemini Live WebSocket
-      await _geminiLiveService.connect(
-        apiKey: key,
-        voiceName: state.selectedVoice,
-        onStateChanged: (connState) {
-          state = state.copyWith(connectionState: connState);
-          if (connState == GeminiLiveConnectionState.connected) {
-            state = state.copyWith(agentState: VoiceAgentState.listening);
-          } else if (connState == GeminiLiveConnectionState.disconnected) {
-            state = state.copyWith(agentState: VoiceAgentState.idle);
-          }
-        },
-        onAudioReceived: (pcmBytes) {
-          state = state.copyWith(agentState: VoiceAgentState.speaking);
-          _audioService.queueAudioChunk(pcmBytes);
-        },
-        onTranscriptReceived: (textChunk, isUser) {
-          _handleTranscriptChunk(textChunk, isUser);
-        },
-        onInterrupted: () {
-          _audioService.stopPlayback();
-          state = state.copyWith(agentState: VoiceAgentState.interrupted);
-        },
-        onTurnComplete: () {
-          state = state.copyWith(agentState: VoiceAgentState.listening);
-          _currentAssistantMessageId = null;
-        },
-        onError: (err) {
-          debugPrint('Gemini Live WS Error: $err, falling back to local agronomist');
+        // Update live transcription while user is speaking
+        final existingIndex = state.messages.indexWhere((m) => m.id == 'live_user_speech');
+        if (existingIndex >= 0) {
+          final updated = List<VoiceChatMessage>.from(state.messages);
+          updated[existingIndex] = VoiceChatMessage(
+            id: 'live_user_speech',
+            sender: 'user',
+            text: text,
+            timestamp: DateTime.now(),
+          );
+          state = state.copyWith(messages: updated, agentState: VoiceAgentState.listening);
+        } else {
+          final liveMsg = VoiceChatMessage(
+            id: 'live_user_speech',
+            sender: 'user',
+            text: text,
+            timestamp: DateTime.now(),
+          );
           state = state.copyWith(
-            connectionState: GeminiLiveConnectionState.connected,
+            messages: <VoiceChatMessage>[...state.messages, liveMsg],
             agentState: VoiceAgentState.listening,
           );
-        },
-      );
-    } else {
-      // Grounded Agronomist mode with dataset integration
-      state = state.copyWith(
-        connectionState: GeminiLiveConnectionState.connected,
-        agentState: VoiceAgentState.listening,
-      );
-    }
+        }
 
-    // Start Audio Capture & Microphone Monitoring
-    await _audioService.startRecording(
-      onAudioChunk: (pcmChunk) {
-        if (!state.isMuted && _geminiLiveService.isConnected) {
-          _geminiLiveService.sendRealtimeAudioChunk(pcmChunk);
+        // When user finishes utterance, send text to AI Agronomist
+        if (isFinal && text.trim().isNotEmpty) {
+          final finalizedText = text.trim();
+          _currentUserRecognizedText = null;
+
+          // Replace temporary live message with finalized message
+          final filtered = state.messages.where((m) => m.id != 'live_user_speech').toList();
+          final userMsg = VoiceChatMessage(
+            id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
+            sender: 'user',
+            text: finalizedText,
+            timestamp: DateTime.now(),
+          );
+          state = state.copyWith(messages: <VoiceChatMessage>[...filtered, userMsg]);
+
+          sendTextMessage(finalizedText);
         }
       },
-      onInputAmplitude: (amp) {
-        state = state.copyWith(micLevel: amp);
+      onSoundLevel: (level) {
+        state = state.copyWith(micLevel: level);
+      },
+      onSpeechStart: () {
+        state = state.copyWith(agentState: VoiceAgentState.listening);
+      },
+      onSpeechEnd: () {
+        if (_currentUserRecognizedText != null && _currentUserRecognizedText!.trim().isNotEmpty) {
+          final text = _currentUserRecognizedText!.trim();
+          _currentUserRecognizedText = null;
+          sendTextMessage(text);
+        }
+      },
+      onTtsStart: () {
+        state = state.copyWith(agentState: VoiceAgentState.speaking);
+      },
+      onTtsEnd: () {
+        state = state.copyWith(agentState: VoiceAgentState.listening);
+      },
+      onError: (err) {
+        debugPrint('Voice Engine Error: $err');
       },
     );
   }
 
   /// Stop voice session
   Future<void> stopSession() async {
+    await _voiceEngine.stopListening();
+    await _voiceEngine.stopSpeaking();
     await _audioService.stopRecording();
     await _audioService.stopPlayback();
     await _geminiLiveService.disconnect();
@@ -168,38 +190,37 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
     );
   }
 
-  /// Interruption trigger
+  /// Interruption trigger (Barge-in)
   void interrupt() {
+    _voiceEngine.stopSpeaking();
     _audioService.stopPlayback();
     state = state.copyWith(agentState: VoiceAgentState.interrupted);
   }
 
-  /// Send text query / suggestion chip
-  Future<void> sendTextMessage(String text) async {
-    final userMsg = VoiceChatMessage(
-      id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
-      sender: 'user',
-      text: text,
-      timestamp: DateTime.now(),
-    );
-    state = state.copyWith(
-      messages: <VoiceChatMessage>[...state.messages, userMsg],
-      agentState: VoiceAgentState.speaking,
-    );
-
-    if (_geminiLiveService.isConnected) {
-      _geminiLiveService.sendTextMessage(text);
-      return;
+  /// Send text query / suggestion chip and speak back the audio answer
+  Future<void> sendTextMessage(String text, {String language = 'ur'}) async {
+    // If not already in messages list, add user message
+    if (!state.messages.any((m) => m.text == text && m.sender == 'user')) {
+      final userMsg = VoiceChatMessage(
+        id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
+        sender: 'user',
+        text: text,
+        timestamp: DateTime.now(),
+      );
+      state = state.copyWith(
+        messages: <VoiceChatMessage>[...state.messages, userMsg],
+        agentState: VoiceAgentState.speaking,
+      );
     }
 
-    // Call backend AI Agronomist API if accessible or fallback to smart agronomist brain
+    // Call backend AI Agronomist API or smart dataset synthesis
     String responseText = '';
     try {
       final url = Uri.parse('${AppConfig.apiBaseUrl}/ai/ask');
       final res = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'query': text, 'district': 'Lahore', 'crop': 'Wheat', 'language': 'ur'}),
+        body: jsonEncode({'query': text, 'district': 'Lahore', 'crop': 'Wheat', 'language': language}),
       ).timeout(const Duration(seconds: 3));
 
       if (res.statusCode == 200) {
@@ -207,11 +228,11 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
         responseText = data['answer'] as String? ?? '';
       }
     } catch (_) {
-      // Local comprehensive dataset synthesis
+      // Local fallback
     }
 
     if (responseText.isEmpty) {
-      await Future<void>.delayed(const Duration(milliseconds: 400));
+      await Future<void>.delayed(const Duration(milliseconds: 300));
       responseText = _generateAgronomistAnswer(text);
     }
 
@@ -224,55 +245,27 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
 
     state = state.copyWith(
       messages: <VoiceChatMessage>[...state.messages, aiMsg],
-      agentState: VoiceAgentState.listening,
+      agentState: VoiceAgentState.speaking,
     );
+
+    // Speak the answer out loud using Android TTS audio!
+    await _voiceEngine.speak(responseText, language: language);
   }
 
   String _generateAgronomistAnswer(String query) {
     final q = query.toLowerCase();
     if (q.contains('yellow rust') || q.contains('پیلی کنگی') || q.contains('rust') || q.contains('کنگی') || q.contains('علاج')) {
-      return '🌾 **گندم کی پیلی کنگی (Yellow Rust) کا مصدقہ علاج:**\nمحکمہ زراعت پنجاب کی ہدایات کے مطابق فوری طور پر **پروپیکونازول (Tilt 250 EC)** یا **ٹیبوکونازول (Folicur)** 200 سے 250 ملی لیٹر فی ایکڑ 100 لیٹر پانی میں ملا کر اسپرے کریں۔ اسپرے صبح کے وقت کریں اور حفاظتی ماسک پہنیں۔';
+      return 'گندم کی پیلی کنگی کے مصدقہ علاج کے لیے فوری طور پر پروپیکونازول (Tilt 250 EC) یا ٹیبوکونازول (Folicur) 200 سے 250 ملی لیٹر فی ایکڑ 100 لیٹر پانی میں ملا کر اسپرے کریں۔ اسپرے صبح کے وقت کریں اور ماسک پہنیں۔';
     } else if (q.contains('irrigate') || q.contains('پانی') || q.contains('آبپاشی') || q.contains('water')) {
-      return '💧 **آبپاشی کی رہنمائی:**\nسیٹلائٹ اور موسمی ڈیٹا کے مطابق آئندہ 48 گھنٹوں میں پنجاب کے میدانی علاقوں میں بارش کا 70% امکان ہے اور زمین میں نمی کا تناسب 16.9% ہے۔ اس لیے آج آبپاشی مؤخر کریں تاکہ فصل میں فالتو پانی کھڑا نہ ہو۔';
+      return 'آبپاشی کی رہنمائی: سیٹلائٹ اور موسمی ڈیٹا کے مطابق آئندہ 48 گھنٹوں میں پنجاب کے میدانی علاقوں میں بارش کا 70 فیصد امکان ہے اور زمین میں نمی 16.9 فیصد ہے۔ اس لیے آج آبپاشی مؤخر کریں تاکہ فالتو پانی کھڑا نہ ہو۔';
     } else if (q.contains('mandi') || q.contains('rate') || q.contains('منڈی') || q.contains('ریٹ') || q.contains('قیمت') || q.contains('لاہور')) {
-      return '📈 **پنجاب منڈی ریٹ اپڈیٹ:**\n• گندم (Wheat 40kg): ₨ 3,850 روپے\n• باسمتی چاول (Super Basmati): ₨ 11,200 روپے\n• کپاس (Phutti): ₨ 8,400 روپے\n• کماد (Sugarcane): ₨ 425 روپے\n• مکئی (Maize): ₨ 2,650 روپے فی 40 کلو ریکارڈ کیا گیا ہے۔';
+      return 'پنجاب منڈی ریٹ اپڈیٹ: لاہور غلہ منڈی میں آج گندم کی قیمت 3,850 روپے، باسمتی چاول 11,200 روپے، کپاس 8,400 روپے، اور کماد 425 روپے فی من چل رہی ہے۔';
     } else if (q.contains('sugarcane') || q.contains('کماد') || q.contains('borer') || q.contains('کیڑا')) {
-      return '🐛 **کماد کے کیڑوں کا تدارک:**\nکماد میں ٹاپ بورر اور پائریلا کے کنٹرول کے لیے **کلورپائریفوس (Chlorpyrifos 40 EC)** 1.5 لیٹر فی ایکڑ 150 لیٹر پانی میں ملا کر اسپرے کریں اور نائٹروجن کا متوازن استعمال کریں۔';
+      return 'کماد کے کیڑوں کا تدارک: کماد میں ٹاپ بورر اور پائریلا کے کنٹرول کے لیے کلورپائریفوس (Chlorpyrifos 40 EC) 1.5 لیٹر فی ایکڑ اسپرے کریں اور نائٹروجن کھاد کا متوازن استعمال کریں۔';
     } else if (q.contains('rain') || q.contains('بارش') || q.contains('weather') || q.contains('موسم')) {
-      return '🌦️ **موسمیاتی الرٹ:**\nجی ہاں، کل پنجاب کے زرعی علاقوں میں تیز ہواؤں کے ساتھ بارش متوقع ہے۔ کھاد اور کیڑے مار ادویات کا اسپرے بارش سے پہلے شام 6 بجے تک مکمل کر لیں۔';
+      return 'موسمیاتی الرٹ: جی ہاں، کل پنجاب کے زرعی علاقوں میں تیز ہواؤں کے ساتھ بارش متوقع ہے۔ کھاد اور اسپرے کا کام بارش سے پہلے شام 6 بجے تک مکمل کر لیں۔';
     } else {
-      return '🌿 **کسان دوست زرعی مشیر:**\nآپ کے سوال کے مطابق، پنجاب زرعی ماڈل سفارش کرتا ہے کہ زمین کی زرخیزی اور فصل کی صحت کے لیے ڈی اے پی اور یوریا کا متوازن استعمال کریں اور سیٹلائٹ این ڈی وی آئی الرٹ کے مطابق فصل کی نگرانی رکھیں۔';
-    }
-  }
-
-  void _handleTranscriptChunk(String textChunk, bool isUser) {
-    if (isUser) {
-      final userMsg = VoiceChatMessage(
-        id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
-        sender: 'user',
-        text: textChunk,
-        timestamp: DateTime.now(),
-      );
-      state = state.copyWith(messages: <VoiceChatMessage>[...state.messages, userMsg]);
-    } else {
-      if (_currentAssistantMessageId == null) {
-        _currentAssistantMessageId = 'msg_${DateTime.now().millisecondsSinceEpoch}';
-        final newMsg = VoiceChatMessage(
-          id: _currentAssistantMessageId!,
-          sender: 'assistant',
-          text: textChunk,
-          timestamp: DateTime.now(),
-        );
-        state = state.copyWith(messages: <VoiceChatMessage>[...state.messages, newMsg]);
-      } else {
-        final updated = state.messages.map((m) {
-          if (m.id == _currentAssistantMessageId) {
-            return m.copyWith(text: '${m.text}$textChunk');
-          }
-          return m;
-        }).toList();
-        state = state.copyWith(messages: updated);
-      }
+      return 'کسان دوست زرعی مشیر: آپ کی فصل کی بہتر پیداوار کے لیے محکمہ زراعت پنجاب کی ہدایات کے مطابق کھاد کا متوازن استعمال کریں اور موسمی الرٹ کے مطابق اسپرے کریں۔';
     }
   }
 
@@ -290,6 +283,7 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
 
   @override
   void dispose() {
+    _voiceEngine.dispose();
     _audioService.dispose();
     _geminiLiveService.dispose();
     super.dispose();

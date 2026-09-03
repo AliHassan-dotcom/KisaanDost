@@ -60,19 +60,22 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
     });
   }
 
-  void _submitText(String text) {
+  void _submitText(String text, bool isUrdu) {
     final query = text.trim();
     if (query.isEmpty) return;
     _textController.clear();
 
     final voiceNotifier = ref.read(voiceProvider.notifier);
     final state = ref.read(voiceProvider);
+    final langCode = isUrdu ? 'ur_PK' : 'en_US';
+    final lang = isUrdu ? 'ur' : 'en';
+
     if (!state.isConnected) {
-      voiceNotifier.startSession().then((_) {
-        voiceNotifier.sendTextMessage(query);
+      voiceNotifier.startSession(languageCode: langCode).then((_) {
+        voiceNotifier.sendTextMessage(query, language: lang);
       });
     } else {
-      voiceNotifier.sendTextMessage(query);
+      voiceNotifier.sendTextMessage(query, language: lang);
     }
   }
 
@@ -216,7 +219,9 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                         if (voiceState.isConnected) {
                           ref.read(voiceProvider.notifier).stopSession();
                         } else {
-                          ref.read(voiceProvider.notifier).startSession();
+                          ref.read(voiceProvider.notifier).startSession(
+                            languageCode: isUrdu ? 'ur_PK' : 'en_US',
+                          );
                         }
                       },
                     ),
@@ -370,7 +375,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                 child: ActionChip(
                   avatar: const Icon(Icons.chat_bubble_outline, size: 14, color: Colors.green),
                   label: Text(text, style: const TextStyle(fontSize: 12)),
-                  onPressed: () => _submitText(text),
+                  onPressed: () => _submitText(text, isUrdu),
                 ),
               );
             }).toList(),
@@ -474,7 +479,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
         Expanded(
           child: TextField(
             controller: _textController,
-            onSubmitted: _submitText,
+            onSubmitted: (val) => _submitText(val, isUrdu),
             decoration: InputDecoration(
               hintText: isUrdu ? 'فصل، بیماری یا منڈی ریٹ کے بارے میں پوچھیں...' : 'Ask about crops, pests, mandi rates...',
               hintStyle: const TextStyle(fontSize: 12),
@@ -486,7 +491,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
         const SizedBox(width: 8),
         IconButton.filled(
           icon: const Icon(Icons.send, size: 18),
-          onPressed: () => _submitText(_textController.text),
+          onPressed: () => _submitText(_textController.text, isUrdu),
         ),
       ],
     );
