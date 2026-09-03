@@ -31,7 +31,10 @@ class AuthRepositoryImpl implements AuthRepository {
     if (response.statusCode != HttpStatus.ok) {
       throw ApiException.fromResponse(response);
     }
-    final user = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    final user = User.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+      fallbackPhone: phone.trim(),
+    );
     await _persistToken(user.accessToken);
     return user;
   }
@@ -55,7 +58,10 @@ class AuthRepositoryImpl implements AuthRepository {
     if (response.statusCode != HttpStatus.ok) {
       throw ApiException.fromResponse(response);
     }
-    final user = User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    final user = User.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+      fallbackPhone: phone.trim(),
+    );
     await _persistToken(user.accessToken);
     return user;
   }
