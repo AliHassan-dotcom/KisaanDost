@@ -3,7 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'config/app_config.dart';
+import 'providers/settings_provider.dart';
 import 'routing/app_router.dart';
+import 'theme/app_theme.dart';
 import 'utils/logger.dart';
 
 void main() {
@@ -20,21 +22,13 @@ class KisaanDostApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final settings = ref.watch(settingsProvider);
 
     return MaterialApp.router(
       title: 'Kisaan Dost',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      locale: Locale(settings.language),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const <Locale>[
         Locale('en'),

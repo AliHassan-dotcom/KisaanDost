@@ -115,8 +115,6 @@ class MarketScreen extends ConsumerWidget {
 
                   if (state.price!.isStale || state.price!.warning != null)
                     _buildWarningBanner(context, state.price!.warning ?? 'Showing retained historical AMIS observation.'),
-
-                  _buildSourceProvenanceCard(context, state.price!, isUrdu),
                 ] else
                   Card(
                     child: Padding(
@@ -230,6 +228,11 @@ class MarketScreen extends ConsumerWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 8),
+            Text(
+              '${price.sourceName ?? "Official AMIS Punjab"}',
+              style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+            ),
           ],
         ),
       ),
@@ -273,41 +276,6 @@ class MarketScreen extends ConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSourceProvenanceCard(BuildContext context, MarketPrice price, bool isUrdu) {
-    return Card(
-      elevation: 0,
-      color: Colors.grey.shade50,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: Colors.grey.shade300),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              isUrdu ? 'ماخذ اور تصدیق:' : 'Source & Verification:',
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '${price.sourceName ?? 'Official AMIS Punjab'} · ${price.sourceUrl ?? 'http://www.amis.pk/'}',
-              style: TextStyle(fontSize: 11, color: Colors.grey.shade700),
-            ),
-            if (price.retrievedAt != null) ...<Widget>[
-              const SizedBox(height: 2),
-              Text(
-                isUrdu ? 'حاصل کرنے کا وقت: ${price.retrievedAt}' : 'Retrieved At: ${price.retrievedAt}',
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
-              ),
-            ],
-          ],
-        ),
       ),
     );
   }

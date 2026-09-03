@@ -155,6 +155,13 @@ class MarketService:
                     continue
             filtered.append(self._parse_item(r))
 
+        # If no specific market match, fallback to provincial entries for this commodity
+        if not filtered and m_clean:
+            for r in all_rows:
+                r_cname = r.get("commodity_name", "").lower()
+                if c_clean and (c_clean in r_cname or r_cname in c_clean):
+                    filtered.append(self._parse_item(r))
+
         return MarketLatestResponse(
             commodity=commodity,
             market=market,

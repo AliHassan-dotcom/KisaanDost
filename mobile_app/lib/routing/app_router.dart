@@ -145,6 +145,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const PestAlertsScreen(),
       ),
       GoRoute(
+        path: '/pest-alerts',
+        builder: (context, state) => const PestAlertsScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.satellite,
         builder: (context, state) => const SatelliteScreen(),
       ),
