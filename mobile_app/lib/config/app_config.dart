@@ -1,13 +1,29 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 /// Environment-aware configuration and single source of truth for API base URL.
 class AppConfig {
   const AppConfig._();
 
-  static String _activeBaseUrl = const String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: 'http://192.168.1.7:8000',
-  );
+  static String _activeBaseUrl = 'http://192.168.1.5:8000';
 
-  static String get apiBaseUrl => _activeBaseUrl;
+  static String get apiBaseUrl {
+    // 1. Check explicit runtime override
+    if (_activeBaseUrl.isNotEmpty && _activeBaseUrl != 'http://192.168.1.5:8000') {
+      return _activeBaseUrl;
+    }
+
+    // 2. Check dart-define
+    const dartDefine = String.fromEnvironment('API_BASE_URL');
+    if (dartDefine.isNotEmpty) return dartDefine;
+
+    // 3. Check flutter_dotenv
+    try {
+      final envVal = dotenv.env['API_BASE_URL'];
+      if (envVal != null && envVal.isNotEmpty) return envVal;
+    } catch (_) {}
+
+    return _activeBaseUrl;
+  }
 
   static void setActiveBaseUrl(String url) {
     var cleaned = url.trim();
@@ -26,11 +42,11 @@ class AppConfig {
 
   /// Fallback candidates when network changes between USB tunnel, Wi-Fi, and emulator.
   static List<String> get candidateBaseUrls => <String>[
-        _activeBaseUrl,
+        apiBaseUrl,
+        'http://192.168.1.5:8000',
         'http://192.168.1.7:8000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://192.168.1.5:8000',
         'http://10.0.2.2:8000',
       ];
 
