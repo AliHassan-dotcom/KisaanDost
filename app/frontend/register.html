@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Register</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2>Create account</h2>
+      <form id="registerForm">
+        <label>Name</label>
+        <input type="text" id="name" required>
+        <label>Phone</label>
+        <input type="tel" id="phone" required placeholder="03001234567">
+        <label>Password</label>
+        <input type="password" id="password" required minlength="6">
+        <label>Role</label>
+        <select id="role">
+          <option value="farmer">Farmer</option>
+          <option value="extension_worker">Extension Worker</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit" class="btn">Create account</button>
+      </form>
+      <p style="text-align:center;margin-top:12px;"><a href="/login.html">Already have an account?</a></p>
+      <div id="message"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const body = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value,
+        role: document.getElementById("role").value,
+      };
+      const resp = await fetch(`${API_PREFIX}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await resp.json();
+      if (resp.ok && data.access_token) {
+        localStorage.setItem("kd_token", data.access_token);
+        window.location.href = "/";
+      } else {
+        showError(document.getElementById("message"), data.detail || data.error?.message || "Registration failed");
+      }
+    });
+  </script>
+</body>
+</html>

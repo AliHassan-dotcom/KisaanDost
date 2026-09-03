@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Profile</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2>Profile</h2>
+      <form id="profileForm">
+        <label>Name</label>
+        <input type="text" id="name">
+        <label>Email</label>
+        <input type="email" id="email">
+        <label>District</label>
+        <input type="text" id="district" list="districts">
+        <datalist id="districts"></datalist>
+        <label>Primary crop</label>
+        <input type="text" id="crop">
+        <label>Farm size (acres)</label>
+        <input type="number" id="farm_size_acres" step="0.1" min="0.1" max="2000">
+        <label>Irrigation type</label>
+        <input type="text" id="irrigation_type">
+        <label>Language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="ur">اردو</option>
+        </select>
+        <button type="submit" class="btn" data-i18n="save">Save</button>
+      </form>
+      <div id="message"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    renderNav("settings");
+    async function loadProfile() {
+      const [profileResp, districtsResp] = await Promise.all([
+        apiFetch("/profile"),
+        apiFetch("/weather/districts"),
+      ]);
+      if (!profileResp) return;
+      const profile = (await profileResp.json()).data;
+      document.getElementById("name").value = profile.name || "";
+      document.getElementById("email").value = profile.email || "";
+      document.getElementById("district").value = profile.district || "";
+      document.getElementById("crop").value = profile.crop || "";
+      document.getElementById("farm_size_acres").value = profile.farm_size_acres || "";
+      document.getElementById("irrigation_type").value = profile.irrigation_type || "";
+      document.getElementById("language").value = profile.language || "en";
+      if (districtsResp && districtsResp.ok) {
+        const districts = (await districtsResp.json()).data;
+        const dl = document.getElementById("districts");
+        dl.innerHTML = districts.map(d => `<option value="${d}">`).join("");
+      }
+    }
+    document.getElementById("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const updates = {};
+      ["name","email","district","crop","farm_size_acres","irrigation_type","language"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el.value !== "") updates[id] = id === "farm_size_acres" ? parseFloat(el.value) : el.value;
+      });
+      const resp = await apiFetch("/profile", { method: "PATCH", body: JSON.stringify(updates) });
+      if (!resp) return;
+      const data = await resp.json();
+      if (resp.ok) {
+        setLanguage(data.language || "en");
+        document.getElementById("message").innerHTML = "<div class='status-pill status-live'>Saved</div>";
+      } else {
+        showError(document.getElementById("message"), data.detail || data.error?.message);
+      }
+    });
+    loadProfile();
+  </script>
+</body>
+</html>

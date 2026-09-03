@@ -1,0 +1,19 @@
+[
+  {
+    "id": "notif_spray_Multan District_2026-09-02",
+    "user_id": "default_farmer",
+    "type": "advisory_reminder",
+    "title": "Optimal Spray Window: Multan District",
+    "title_ur": "\u0633\u067e\u0631\u06d2 \u06a9\u06cc\u0644\u0626\u06d2 \u0633\u0627\u0632\u06af\u0627\u0631 \u0645\u0648\u0633\u0645: Multan District",
+    "message": "Favorable calm weather (Wind: 9.7 km/h, Rain: 0.0mm). Ideal conditions for crop protection sprays.",
+    "message_ur": "\u06c1\u0648\u0627 \u06a9\u06cc \u0631\u0641\u062a\u0627\u0631 9.7 \u06a9\u0644\u0648\u0645\u06cc\u0679\u0631 \u0641\u06cc \u06af\u06be\u0646\u0679\u06c1 \u0627\u0648\u0631 \u0628\u0627\u0631\u0634 \u06a9\u0627 \u0627\u0645\u06a9\u0627\u0646 \u0646\u06c1\u06cc\u06ba\u06d4 \u062d\u0641\u0627\u0638\u062a\u06cc \u0633\u067e\u0631\u06d2 \u06a9\u06cc\u0644\u0626\u06d2 \u0645\u0648\u0632\u0648\u06ba \u0648\u0642\u062a\u06d4",
+    "severity": "info",
+    "created_at_utc": "2026-09-02T03:08:30.834897+00:00",
+    "is_read": true,
+    "source_attribution": "Punjab Agriculture Department & Open-Meteo",
+    "metadata": {
+      "wind_kmh": 9.7,
+      "precipitation_mm": 0.0
+    }
+  }
+]

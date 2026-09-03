@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T20:28:00+00:00",
+  "task": "Phase 2: Flutter-to-FastAPI Real Integration + Android End-to-End Test",
+  "project_root": "D:/KisaanDost",
+  "status": "SUCCESS",
+  "tested_device_modes": [
+    {
+      "mode": "Android Emulator",
+      "command": "flutter run --dart-define=USE_MOCKS=false --dart-define=API_BASE_URL=http://10.0.2.2:8000",
+      "network_path": "10.0.2.2:8000 (host loopback alias)",
+      "status": "configured_and_documented"
+    },
+    {
+      "mode": "Physical Android Device",
+      "command": "flutter run --dart-define=USE_MOCKS=false --dart-define=API_BASE_URL=http://<HOST_LAN_IP>:8000",
+      "network_path": "LAN IP binding on host 0.0.0.0:8000",
+      "status": "configured_and_documented"
+    },
+    {
+      "mode": "Live E2E Client Simulation",
+      "command": "python -m pytest tests/test_live_farmer_flow_e2e.py -v --tb=short",
+      "status": "passed"
+    }
+  ],
+  "backend_startup": {
+    "command": "python -m uvicorn app.backend.main:app --host 0.0.0.0 --port 8000",
+    "health_endpoint": "GET /health",
+    "health_status": "ok"
+  },
+  "flutter_configuration": {
+    "base_url_flag": "API_BASE_URL",
+    "mock_toggle_flag": "USE_MOCKS",
+    "live_mode_flags": "--dart-define=USE_MOCKS=false --dart-define=API_BASE_URL=http://10.0.2.2:8000",
+    "mock_mode_flags": "--dart-define=USE_MOCKS=true",
+    "storage": "flutter_secure_storage (JWT only; no passwords stored)"
+  },
+  "endpoints_exercised": [
+    {"method": "GET", "path": "/health", "status_code": 200, "result": "passed"},
+    {"method": "POST", "path": "/api/v1/auth/register", "status_code": 200, "result": "passed"},
+    {"method": "POST", "path": "/api/v1/auth/login", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/auth/me", "status_code": 200, "result": "passed"},
+    {"method": "PATCH", "path": "/api/v1/profile", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/profile", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/dashboard", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/weather/districts", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/weather/current", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/weather/historical", "status_code": 200, "result": "passed"},
+    {"method": "POST", "path": "/api/v1/crop-health/scan", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/crop-health/history", "status_code": 200, "result": "passed"},
+    {"method": "GET", "path": "/api/v1/admin/users", "status_code": 403, "result": "passed (access denied for farmer role)"},
+    {"method": "GET", "path": "/api/v1/admin/stats", "status_code": 403, "result": "passed (access denied for farmer role)"}
+  ],
+  "screen_data_status_matrix": {
+    "login_and_register": "live (JWT bcrypt authentication)",
+    "profile": "live (persisted user store)",
+    "dashboard": "live (multi-source composite)",
+    "crop_scan": "live (real ResNet-18 PlantVillage v2 inference)",
+    "weather": "historical / mock (clearly labeled based on NASA POWER district coverage)",
+    "irrigation": "context_guidance (derived from profile crop and weather)",
+    "pest_alerts": "live (72 official report-extracted facts with page citations)",
+    "satellite": "mock (clearly labeled mock satellite data)",
+    "market": "mock (clearly labeled mock market prices)",
+    "admin": "guarded (403 forbidden for non-admin roles)"
+  },
+  "model_inference_evidence": {
+    "model_version_label": "plantvillage_v2",
+    "sample_input": "224x224 RGB sample leaf image",
+    "prediction_result": {
+      "predicted_class": "Tomato_Septoria_leaf_spot",
+      "confidence": 0.6249,
+      "model_version": "plantvillage_v2",
+      "uncertain": true,
+      "warning": "Low confidence prediction. Please consult an extension worker for confirmation."
+    }
+  },
+  "security_audit": {
+    "jwt_in_logs": false,
+    "passwords_in_logs_or_store": false,
+    "secrets_in_source_code": false,
+    "session_cleared_on_401": true,
+    "upload_size_limit_enforced": true,
+    "upload_extension_allowlist_enforced": true,
+    "no_path_leakage_on_503": true,
+    "admin_route_guarded": true,
+    "https_enforced_in_release": true
+  },
+  "test_and_verification_results": {
+    "backend_root_pytest": {
+      "command": "python -m pytest tests -q -rs --tb=short",
+      "passed": 49,
+      "skipped": 0,
+      "failed": 0
+    },
+    "flutter_test_suite": {
+      "command": "flutter test in mobile_app/",
+      "passed": 47,
+      "failed": 0
+    },
+    "flutter_analyze": {
+      "command": "flutter analyze in mobile_app/",
+      "status": "No issues found!"
+    },
+    "data_pipeline_tests": {
+      "command": "python -m pytest Kisaan_Dost_Data/tests -q -rs --tb=short",
+      "passed": 376,
+      "failed": 0
+    }
+  },
+  "limitations": [
+    "Annual report source PDF remains an external dependency at host path D:\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf.",
+    "Crop disease classification is scoped to the 15 PlantVillage classes.",
+    "Satellite and market screens remain explicit mock placeholders for Phase 2/3 roadmap items."
+  ],
+  "rollback_instructions": "Revert mobile_app/lib/models/disease_prediction.dart, mobile_app/android/app/src/main/AndroidManifest.xml, mobile_app/test/unit/disease_prediction_test.dart, and tests/test_live_farmer_flow_e2e.py."
+}

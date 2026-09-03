@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.1",
+  "task": "Phase 7B: AMIS Punjab Scheduled Updates + Commodity Expansion",
+  "generated_at_utc": "2026-09-01T22:15:00+00:00",
+  "status": "complete",
+  "source_integration": {
+    "source_name": "Official AMIS Punjab",
+    "base_url": "http://www.amis.pk/ViewPrices.aspx?searchType=0&commodityId=",
+    "transport": "HTTP (standard GET request; HTTPS not supported upstream)",
+    "allowlisted_commodities": [
+      {"commodity_id": 1, "commodity_name": "Wheat", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 3, "commodity_name": "Rice Basmati Super (New)", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 4, "commodity_name": "Rice (IRRI)", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 9, "commodity_name": "Gram Black Bareek", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 11, "commodity_name": "Moong", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 17, "commodity_name": "Maize", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 21, "commodity_name": "Potato Fresh", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 22, "commodity_name": "Potato Store", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 23, "commodity_name": "Onion", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 26, "commodity_name": "Tomato", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 49, "commodity_name": "Seed Cotton(Phutti)", "default_unit": "Rs/100Kg"},
+      {"commodity_id": 125, "commodity_name": "Sugarcane", "default_unit": "Rs/100Kg"}
+    ],
+    "request_rate_policy": {
+      "max_requests_per_daily_run": 12,
+      "concurrency": 0,
+      "scheduled_runner": "Kisaan_Dost_Data/scripts/run_daily_amis_collection.py",
+      "user_agent": "KisaanDost-MarketConnector/1.1 (Agricultural Platform POC Phase 7B)"
+    }
+  },
+  "market_to_district_mapping": {
+    "mapping_path": "Kisaan_Dost_Data/processed/amis_market_district_mapping_v1.csv",
+    "verified_market_mappings_count": 39,
+    "unmapped_behavior": "district remains null without explicit verified mapping"
+  },
+  "data_integrity_invariants": {
+    "raw_evidence_preserved": [
+      "min_price_raw", "max_price_raw", "fqp_price_raw", "quantity_raw", "unit_raw",
+      "source_row_text", "source_row_hash", "source_table_header_text", "parser_version"
+    ],
+    "null_preservation": "blanks/dashes parsed as null (never 0.0)",
+    "price_ordering_validation": "Min <= FQP <= Max checked; anomalies routed to review queue without source alteration",
+    "unit_preservation": "Rs/100Kg (1 Quintal = 100 Kg) preserved verbatim from HTML",
+    "no_price_predictions": "Top movers are purely retrospective mathematical observations across recorded dates"
+  },
+  "artifacts": {
+    "prices_csv": "Kisaan_Dost_Data/processed/amis_market_prices_v1.csv",
+    "review_queue_csv": "Kisaan_Dost_Data/processed/amis_market_price_review_queue_v1.csv",
+    "commodity_catalog_csv": "Kisaan_Dost_Data/processed/amis_commodity_catalog_v1.csv",
+    "market_catalog_csv": "Kisaan_Dost_Data/processed/amis_market_catalog_v1.csv",
+    "market_district_mapping_csv": "Kisaan_Dost_Data/processed/amis_market_district_mapping_v1.csv",
+    "collection_manifest_csv": "Kisaan_Dost_Data/processed/amis_market_collection_manifest_v1.csv",
+    "scheduled_runner_script": "Kisaan_Dost_Data/scripts/run_daily_amis_collection.py",
+    "scheduled_runner_batch": "Kisaan_Dost_Data/scripts/run_daily_amis_collection.bat"
+  },
+  "endpoints": [
+    "/api/v1/market/commodities",
+    "/api/v1/market/latest",
+    "/api/v1/market/movers",
+    "/api/v1/market/history",
+    "/api/v1/market/summary"
+  ],
+  "verification_results": {
+    "amis_connector_pipeline_tests": "6 passed",
+    "backend_market_tests": "7 passed",
+    "all_backend_tests": "77 passed",
+    "data_pipeline_tests": "390 passed",
+    "flutter_tests": "68 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "handoff_completeness_gate": "COMPLETE (0 Active Blockers)"
+  }
+}

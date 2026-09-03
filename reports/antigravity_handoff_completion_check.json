@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T20:02:00+00:00",
+  "project_root": "D:/KisaanDost",
+  "completeness_status": "COMPLETE",
+  "safe_for_feature_continuation": true,
+  "freeze_and_handoff_audit": {
+    "read_only_guarantee": true,
+    "product_code_modified": false,
+    "dependencies_modified": false,
+    "mock_substitutions_made": false,
+    "overwritten_artifacts": []
+  },
+  "verified_reports_and_scripts": {
+    "handoff_reports_total": 10,
+    "handoff_reports_present": [
+      "reports/final_project_verification.md",
+      "reports/final_project_verification.json",
+      "reports/project_handoff_manifest.md",
+      "reports/project_handoff_manifest.json",
+      "reports/test_build_matrix.md",
+      "reports/data_model_api_lineage.md",
+      "reports/mobile_mvp_demo_guide.md",
+      "reports/security_status_and_production_backlog.md",
+      "reports/antigravity_continuation_plan.md",
+      "reports/pesticide_report_source_reproducibility_status.md"
+    ],
+    "verification_scripts_present": [
+      "scripts/run_final_verification.py",
+      "scripts/check_handoff_completeness.py"
+    ],
+    "missing_reports_or_scripts": []
+  },
+  "verified_existing_assets": {
+    "live_backend": {
+      "path": "app/",
+      "entrypoint": "app.backend.main:app",
+      "api_prefix": "/api/v1",
+      "endpoints_count": 17,
+      "user_store": "app_data/store/users.json (MVP-only, non-concurrent)"
+    },
+    "live_mobile_app": {
+      "path": "mobile_app/",
+      "entrypoint": "mobile_app/lib/main.dart",
+      "routes_count": 13,
+      "state_management": "flutter_riverpod",
+      "storage": "flutter_secure_storage"
+    },
+    "ml_models": {
+      "baseline_checkpoint": {
+        "path": "Kisaan_Dost_Data/models/best_plantvillage_model.pt",
+        "exists": true,
+        "size_bytes": 44816843,
+        "test_accuracy": 0.8507,
+        "test_macro_f1": 0.8281
+      },
+      "selected_v2_checkpoint": {
+        "path": "Kisaan_Dost_Data/models/best_plantvillage_model_v2.pt",
+        "exists": true,
+        "size_bytes": 44815115,
+        "test_accuracy": 0.8963,
+        "test_macro_f1": 0.8825
+      },
+      "class_mapping": {
+        "path": "Kisaan_Dost_Data/data/processed/plantvillage_class_mapping.csv",
+        "exists": true,
+        "classes_count": 15
+      }
+    },
+    "mobile_build_artifacts": {
+      "debug_apk": {
+        "path": "mobile_app/build/app/outputs/flutter-apk/app-debug.apk",
+        "exists": true,
+        "size_bytes": 157516411,
+        "sha256": "8649a343f8c1b09179afcf81636cc8e0e5291791684ad60eca6daa6ebe0b9e5b",
+        "status": "preserved_unmodified"
+      }
+    },
+    "data_pipeline_and_processed_assets": {
+      "pesticide_facts": {
+        "path": "data/processed/pesticide_report_facts.csv",
+        "rows": 72,
+        "exists": true
+      },
+      "pesticide_chunks": {
+        "path": "data/processed/pesticide_report_chunks.jsonl",
+        "rows": 43,
+        "exists": true
+      },
+      "pesticide_review_queue": {
+        "path": "data/processed/pesticide_report_review_queue.csv",
+        "rows": 1,
+        "exists": true
+      },
+      "pesticide_meta": {
+        "path": "data/processed/pesticide_report_ingestion_meta.json",
+        "pages": 43,
+        "table_warnings": 33,
+        "status": "ok",
+        "exists": true
+      },
+      "weather_aggregates": {
+        "path": "Kisaan_Dost_Data/processed/district_monthly_weather.csv",
+        "exists": true,
+        "size_bytes": 208807
+      },
+      "spatial_join_keys": {
+        "path": "Kisaan_Dost_Data/processed/weather_join_keys.csv",
+        "exists": true,
+        "size_bytes": 72267078
+      },
+      "district_coordinates": {
+        "path": "Kisaan_Dost_Data/processed/district_coordinates.csv",
+        "exists": true,
+        "districts_count": 41
+      },
+      "punjab_boundaries": {
+        "path": "Kisaan_Dost_Data/raw/arcgis/punjab_district_boundaries.geojson",
+        "exists": true,
+        "size_bytes": 2121419
+      },
+      "pbs_census_tables": {
+        "tables_count": 9,
+        "status": "validated_with_known_census_rounding"
+      }
+    }
+  },
+  "verified_test_and_build_evidence": {
+    "backend_and_pesticide_tests": {
+      "command": "python -m pytest tests -q -rs --tb=short",
+      "passed": 38,
+      "skipped": 1,
+      "failed": 0,
+      "skip_reason": "v2 model checkpoint not available at configured root path"
+    },
+    "data_pipeline_tests": {
+      "command": "python -m pytest Kisaan_Dost_Data/tests -q -rs --tb=short",
+      "passed": 376,
+      "skipped": 0,
+      "failed": 0
+    },
+    "mvp_smoke_tests": {
+      "command": "python scripts/run_mvp_smoke_tests.py",
+      "status": "passed (13 passed, 1 model-dependent skip)"
+    },
+    "pbs_data_validation": {
+      "command": "python Kisaan_Dost_Data/scripts/validate_pbs_extracted_tables.py",
+      "status": "passed (all checks passed, 4 acceptable census rounding/species notes)"
+    },
+    "pesticide_artifact_validation": {
+      "command": "validate(data/processed, reports) via scripts/08_validate_pesticide_report.py",
+      "status": "passed",
+      "facts": 72,
+      "chunks": 43,
+      "review_queue": 1,
+      "dose_integrity_violations": 0
+    },
+    "flutter_static_analysis": {
+      "command": "flutter analyze in mobile_app/",
+      "status": "passed (No issues found!)"
+    },
+    "flutter_test_suite": {
+      "command": "flutter test in mobile_app/",
+      "passed": 44,
+      "failed": 0,
+      "status": "passed"
+    },
+    "flutter_debug_apk_build": {
+      "status": "intentionally_skipped_for_freeze_protection",
+      "existing_apk_preserved": true
+    }
+  },
+  "disclosed_blockers": [
+    {
+      "id": "configured_data_model_paths",
+      "severity": "blocker",
+      "classification": "code_configuration",
+      "title": "Configured ML Runtime Path Mismatch",
+      "details": "app/config/settings.py resolves models/best_plantvillage_model_v2.pt relative to project root (D:\\KisaanDost\\models\\best_plantvillage_model_v2.pt), which does not exist. The trained v2 checkpoint actually resides at Kisaan_Dost_Data/models/best_plantvillage_model_v2.pt (44,815,115 bytes).",
+      "impact": "Live /api/v1/crop-health/scan endpoint returns an error/unavailable state rather than serving inference.",
+      "resolution_plan": "Update settings.py model path or configure symlink/env var once product modifications are approved."
+    },
+    {
+      "id": "pesticide_source_pdf_resolution",
+      "severity": "blocker",
+      "classification": "source_portability",
+      "title": "Annual Report PDF Portability Blocker",
+      "details": "The official report PDF is absent at the nested in-repo path Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf. It is present externally on the host at D:\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf (8,058,335 bytes, SHA-256: d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725).",
+      "impact": "Serving existing extracted facts (72 facts) operates correctly. However, cleanly reproducing extraction from scratch on a new machine requires obtaining/transferring the original official source PDF.",
+      "resolution_plan": "Restore official source PDF via approved source transfer process."
+    }
+  ],
+  "environmental_blockers": [],
+  "missing_files": [],
+  "handoff_summary": {
+    "repository_frozen": true,
+    "audit_result": "PASSED",
+    "ready_for_continuation": true,
+    "next_steps": "Awaiting user approval before editing product code, fixing model path, or implementing features."
+  }
+}

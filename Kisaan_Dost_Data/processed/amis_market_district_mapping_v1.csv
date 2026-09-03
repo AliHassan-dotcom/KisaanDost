@@ -1,0 +1,40 @@
+amis_market_name,source_market_id,normalized_district,province,mapping_status,verification_source
+Lahore,1,Lahore District,Punjab,verified_official,Punjab District Master Boundary
+Faisalabad,2,Faisalabad District,Punjab,verified_official,Punjab District Master Boundary
+Gujranwala,3,Gujranwala District,Punjab,verified_official,Punjab District Master Boundary
+Okara,4,Okara District,Punjab,verified_official,Punjab District Master Boundary
+Sargodha,5,Sargodha District,Punjab,verified_official,Punjab District Master Boundary
+Rawalpindi,6,Rawalpindi District,Punjab,verified_official,Punjab District Master Boundary
+Multan,7,Multan District,Punjab,verified_official,Punjab District Master Boundary
+RahimYarKhan,8,Rahim Yar Khan District,Punjab,verified_official,Punjab District Master Boundary
+Bhakhar,9,Bhakkar District,Punjab,verified_official,Punjab District Master Boundary
+Bhalwal,10,Sargodha District,Punjab,verified_official,Punjab District Master Boundary
+Kasur,11,Kasur District,Punjab,verified_official,Punjab District Master Boundary
+Sahiwal,13,Sahiwal District,Punjab,verified_official,Punjab District Master Boundary
+Vehari,14,Vehari District,Punjab,verified_official,Punjab District Master Boundary
+Burewala,15,Vehari District,Punjab,verified_official,Punjab District Master Boundary
+Layyah,16,Layyah District,Punjab,verified_official,Punjab District Master Boundary
+Gujrat,17,Gujrat District,Punjab,verified_official,Punjab District Master Boundary
+Khanewal,18,Khanewal District,Punjab,verified_official,Punjab District Master Boundary
+MuzafarGhar,19,Muzaffargarh District,Punjab,verified_official,Punjab District Master Boundary
+BahawalPur,20,Bahawalpur District,Punjab,verified_official,Punjab District Master Boundary
+TTSingh,21,Toba Tek Singh District,Punjab,verified_official,Punjab District Master Boundary
+BahawalNagar,27,Bahawalnagar District,Punjab,verified_official,Punjab District Master Boundary
+Lodhran,28,Lodhran District,Punjab,verified_official,Punjab District Master Boundary
+Chakwal,59,Chakwal District,Punjab,verified_official,Punjab District Master Boundary
+Jhelum,60,Jhelum District,Punjab,verified_official,Punjab District Master Boundary
+Khushab,61,Khushab District,Punjab,verified_official,Punjab District Master Boundary
+Mianwali,62,Mianwali District,Punjab,verified_official,Punjab District Master Boundary
+RajanPur,63,Rajanpur District,Punjab,verified_official,Punjab District Master Boundary
+Jhang,64,Jhang District,Punjab,verified_official,Punjab District Master Boundary
+Nankana,70,Nankana Sahib District,Punjab,verified_official,Punjab District Master Boundary
+Sheikhupura,78,Sheikhupura District,Punjab,verified_official,Punjab District Master Boundary
+Kamoke,80,Gujranwala District,Punjab,verified_official,Punjab District Master Boundary
+Chiniot,81,Chiniot District,Punjab,verified_official,Punjab District Master Boundary
+Sialkot,57,Sialkot District,Punjab,verified_official,Punjab District Master Boundary
+Narowal,58,Narowal District,Punjab,verified_official,Punjab District Master Boundary
+Hafizabad,104,Hafizabad District,Punjab,verified_official,Punjab District Master Boundary
+Attock,144,Attock District,Punjab,verified_official,Punjab District Master Boundary
+DGKHAN,36,Dera Ghazi Khan District,Punjab,verified_official,Punjab District Master Boundary
+MandiBahaudin,41,Mandi Bahauddin District,Punjab,verified_official,Punjab District Master Boundary
+PakPattan,26,Pakpattan District,Punjab,verified_official,Punjab District Master Boundary

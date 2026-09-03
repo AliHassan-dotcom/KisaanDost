@@ -1,0 +1,7 @@
+commodity_group,commodity_name,fiscal_year,value_million_usd,quantity_thousand_mt,share_of_agri_exports_pct,primary_destinations,data_source,processed_at
+Grains & Cereals,Rice (Basmati),2023-24,950.0,850.0,18.1,"EU, UAE, Saudi Arabia, UK",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Grains & Cereals,Rice (Non-Basmati / IRRI),2023-24,2930.0,5100.0,55.8,"China, Indonesia, Kenya, Malaysia, Philippines",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Fibers & Textiles,Raw Cotton & Yarn,2023-24,480.0,220.0,9.1,"China, Bangladesh, Vietnam",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Horticulture,Fruits (Citrus / Kinnow & Mango),2023-24,410.0,680.0,7.8,"Russia, UAE, Afghanistan, UK",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Horticulture,Vegetables (Potatoes & Onions),2023-24,320.0,890.0,6.1,"Sri Lanka, Malaysia, UAE, Qatar",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Specialty & Other,"Spices, Tobacco & Minor Crops",2023-24,160.0,110.0,3.1,"Middle East, USA, UK",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00

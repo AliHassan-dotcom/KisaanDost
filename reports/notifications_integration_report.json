@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 10: Notifications (Weather Alerts + Market Movers + Advisory Reminders)",
+  "generated_at_utc": "2026-09-02T03:41:45+00:00",
+  "status": "complete",
+  "json_storage_tables": {
+    "user_preferences_table": {
+      "path": "data/processed/user_preferences.json",
+      "atomic_write_strategy": ".tmp file rename with threading lock",
+      "schema_fields": ["user_id", "selected_district", "selected_market", "selected_crops", "alert_types", "channels", "enable_weather_alerts", "enable_market_alerts", "enable_advisory_reminders", "heatwave_temp_threshold", "rainfall_threshold_mm", "frost_temp_threshold", "market_mover_threshold_pct", "fcm_token", "fcm_status", "updated_at_utc"]
+    },
+    "notifications_table": {
+      "path": "data/processed/notifications.json",
+      "atomic_write_strategy": ".tmp file rename with threading lock",
+      "schema_fields": ["id", "user_id", "type", "title", "title_ur", "message", "message_ur", "body", "severity", "created_at_utc", "is_read", "source_attribution", "metadata"]
+    }
+  },
+  "rule_evaluation_engine": {
+    "weather_rules": [
+      {
+        "trigger": "heatwave_threshold",
+        "condition": "Temperature >= heatwave_temp_threshold (default 40.0C)",
+        "source": "Weather data by Open-Meteo.com under CC BY 4.0",
+        "severity": "warning / critical"
+      },
+      {
+        "trigger": "heavy_rain_threshold",
+        "condition": "Precipitation >= rainfall_threshold_mm (default 25.0mm)",
+        "source": "Weather data by Open-Meteo.com under CC BY 4.0",
+        "severity": "warning"
+      },
+      {
+        "trigger": "frost_risk_threshold",
+        "condition": "Temperature <= frost_temp_threshold (default 3.0C)",
+        "source": "Weather data by Open-Meteo.com under CC BY 4.0",
+        "severity": "warning"
+      }
+    ],
+    "market_rules": [
+      {
+        "trigger": "market_mover_threshold",
+        "condition": "Wholesale price change >= market_mover_threshold_pct (default 10.0%) for tracked crops in mandi",
+        "source": "Market data by AMIS Punjab",
+        "severity": "info"
+      }
+    ],
+    "advisory_rules": [
+      {
+        "trigger": "spray_window_reminder",
+        "condition": "Wind speed < 15.0 km/h and precipitation < 1.0mm",
+        "source": "Advisory based on official reports",
+        "severity": "info"
+      }
+    ]
+  },
+  "delivery_channels": {
+    "in_app_inbox": "enabled (active)",
+    "local_device_notifications": "enabled (active simulation)",
+    "fcm_cloud_messaging": "optional (not_configured - skipped cleanly)"
+  },
+  "endpoints": [
+    "/api/v1/notifications/preferences",
+    "/api/v1/notifications/history",
+    "/api/v1/notifications/unread-count",
+    "/api/v1/notifications/mark-read",
+    "/api/v1/notifications/{notification_id}/read",
+    "/api/v1/notifications/evaluate"
+  ],
+  "verification_results": {
+    "notifications_api_tests": "2 passed",
+    "root_backend_tests": "89 passed",
+    "data_pipeline_tests": "396 passed",
+    "flutter_tests": "76 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "handoff_completeness_gate": "COMPLETE (0 Active Blockers)"
+  },
+  "safety_invariants": {
+    "no_ml_forecasting": true,
+    "no_price_predictions": true,
+    "no_policy_advice": true,
+    "strict_provenance_attribution": true
+  }
+}

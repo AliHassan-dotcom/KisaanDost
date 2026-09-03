@@ -1,0 +1,3 @@
+fiscal_year,total_agri_exports_million_usd,total_agri_imports_million_usd,agri_trade_balance_million_usd,agri_share_of_total_national_exports_pct,agri_share_of_total_national_imports_pct,top_export_commodity,top_import_commodity,data_source,processed_at
+2023-24,5250.0,8300.0,-3050.0,17.5,15.2,"Rice (All Varieties - $3,880M)","Palm Oil & Edible Oils ($3,450M)",Pakistan Economic Survey (Foreign Trade Chapter),2026-09-02T04:07:55.596801+00:00
+2022-23,4120.0,9450.0,-5330.0,14.8,17.2,"Rice ($2,140M)","Palm Oil & Edible Oils ($3,710M)",Pakistan Economic Survey (Foreign Trade Chapter),2026-09-02T04:07:55.596801+00:00

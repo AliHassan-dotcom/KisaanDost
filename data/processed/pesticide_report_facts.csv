@@ -1,0 +1,2902 @@
+fact_id,category,crop,pest_or_disease,district,date_or_period,advisory_text,pesticide_name,active_ingredient,formulation,explicit_dose_text,safety_text,quality_control_status,source_report_title,source_report_year,source_filename,source_page,source_section,source_excerpt,extraction_status,confidence,reviewed
+fact_00001,crop_disease_warning,wheat,rust; mildew,,2024-25,"Disease incidence of Wheat in Punjab during 2024-25 |  |  |  | 
+Month | Smut | BrownRust | Yellow Rust | Powdery Mildew
+January | 0.01 | 0.08 | 0.05 | 0.00
+February | 0.17 | 0.18 | 1.06 | 0.01
+March | 1.84 | 1.03 | 4.03 | 0.04
+April | 0.75 | 0.72 | 0.87 | 0.00",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,8,table_1,"Disease incidence of Wheat in Punjab during 2024-25 |  |  |  | 
+Month | Smut | BrownRust | Yellow Rust | Powdery Mildew
+January | 0.01 | 0.08 | 0.05 | 0.00
+February | 0.17 | 0.18 | 1.06 | 0.01
+March | 1.84 | 1.03 | 4.03 | 0.04
+April | 0.75 | 0.72 | 0.87 | 0.00",extracted_from_table,0.85,false
+fact_00002,general_agricultural_advisory,cotton,bollworm,,,"Cotton Bollworms Situation in Punjab during 2024 (Above ETL) |  | 
+Month | PBW | AW
+MARCH | 0.0 | 0.2
+APRIL | 0.0 | 0.8
+MAY | 0.3 | 0.7
+JUNE | 0.2 | 0.1",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,11,table_1,"Cotton Bollworms Situation in Punjab during 2024 (Above ETL) |  | 
+Month | PBW | AW
+MARCH | 0.0 | 0.2
+APRIL | 0.0 | 0.8
+MAY | 0.3 | 0.7
+JUNE | 0.2 | 0.1",extracted_from_table,0.7,false
+fact_00003,crop_disease_warning,sugarcane,,,2024-25,"Disease incidence of Sugarcane in Punjab during 2024-25 |  | 
+Month | RED ROT | WHIP SMUT
+Jul | 4.7 | 1.0
+Aug | 6.4 | 1.1
+Sep | 7.1 | 1.0
+Oct | 4.1 | 0.3",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,21,table_1,"Disease incidence of Sugarcane in Punjab during 2024-25 |  | 
+Month | RED ROT | WHIP SMUT
+Jul | 4.7 | 1.0
+Aug | 6.4 | 1.1
+Sep | 7.1 | 1.0
+Oct | 4.1 | 0.3",extracted_from_table,0.85,false
+fact_00004,pesticide_safety,maize,armyworm; borer,Khanewal; Lodhran; Multan; Vehari,2024-25,"DISTRICTWISE PEST SCOUTING REPORT OF MAIZE 2024-25 (Above ETL) |  |  |  |  |  |  |  | 
+Sr. # | District | Army Worm | Fall Army worm | Hopper | Toka | Shoot Fly | Maize Stem Borer | Helicoverpa
+1 | Multan | 37 | 189 | 0 | 0 | 0 | 0 | 3
+2 | Khanewal | 3 | 209 | 0 | 0 | 6 | 0 | 3
+3 | Vehari | 22 | 111 | 0 | 0 | 0 | 0 | 0
+4 | Lodhran | 0 | 216 | 0 | 0 | 0 | 0 | 0",,,,,"# | District | Army Worm | Fall Army worm | Hopper | Toka | Shoot Fly | Maize Stem Borer | Helicoverpa
+1 | Multan | 37 | 189 | 0 | 0 | 0 | 0 | 3
+2 | Khanewal | 3 | 209 | 0 | 0 | 6 | 0 | 3
+3 | Vehari | 22 | 111 | 0 | 0 | 0 | 0 | 0
+4 | Lodhran | 0 | 216 | 0 | 0 | 0 | 0 | 0",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,23,table_1,"DISTRICTWISE PEST SCOUTING REPORT OF MAIZE 2024-25 (Above ETL) |  |  |  |  |  |  |  | 
+Sr. # | District | Army Worm | Fall Army worm | Hopper | Toka | Shoot Fly | Maize Stem Borer | Helicoverpa
+1 | Multan | 37 | 189 | 0 | 0 | 0 | 0 | 3
+2 | Khanewal | 3 | 209 | 0 | 0 | 6 | 0 | 3
+3 | Vehari | 22 | 111 | 0 | 0 | 0 | 0 | 0
+4 | Lodhran | 0 | 216 | 0 | 0 | 0 | 0 | 0",extracted_from_table,0.9,false
+fact_00005,general_agricultural_advisory,citrus,,,2024-25,"Pest Situation of Citrus in Punjab 2024-25 (Above ETL) |  |  |  |  |  |  |  |  | 
+Month | a
+yll
+s
+P | r
+e
+n
+Mi
+f
+a
+e
+L | y
+fl
+e
+t
+hi
+W | s
+p
+i
+r
+h
+T | r
+a
+pill
+r
+e
+t
+a
+C | s
+e
+al
+c
+S
+d
+e
+R | s
+e
+t
+Mi | g
+u
+b
+y
+al
+e
+M | y
+Fl
+t
+ui
+r
+F
+Jul | 0.0 | 1.2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0
+Aug | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0
+Sep | 0.1 | 1.4 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.1 | 0.0
+Oct | 0.0 | 1.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,26,table_1,"Pest Situation of Citrus in Punjab 2024-25 (Above ETL) |  |  |  |  |  |  |  |  | 
+Month | a
+yll
+s
+P | r
+e
+n
+Mi
+f
+a
+e
+L | y
+fl
+e
+t
+hi
+W | s
+p
+i
+r
+h
+T | r
+a
+pill
+r
+e
+t
+a
+C | s
+e
+al
+c
+S
+d
+e
+R | s
+e
+t
+Mi | g
+u
+b
+y
+al
+e
+M | y
+Fl
+t
+ui
+r
+F
+Jul | 0.0 | 1.2 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0
+Aug | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0
+Sep | 0.1 | 1.4 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.1 | 0.0
+Oct | 0.0 | 1.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0",extracted_from_table,0.7,false
+fact_00006,crop_disease_warning,citrus,,,2024-25,"DISEASE INCIDENCE OF CITRUS IN PUNJAB IN 2024-25 (Above ETL) |  |  |  |  |  |  | 
+Month | p
+Ti
+r
+e
+h
+t
+Wi | r
+a
+k
+n
+a
+C | e
+s
+o
+n
+a
+al
+M | t
+o
+R
+t
+ui
+r
+F | b
+a
+c
+S | s
+si
+o
+m
+m
+u
+G | e
+n
+cli
+e
+D
+w
+o
+Sl
+Jul | 57.2 | 25.5 | 1.0 | 0.0 | 10.6 | 13.6 | 10.0
+Aug | 57.1 | 28.7 | 4.1 | 0.0 | 9.0 | 9.6 | 9.8
+Sep | 58.4 | 30.5 | 1.2 | 0.0 | 7.6 | 9.6 | 10.4
+Oct | 50.3 | 30.9 | 2.8 | 0.0 | 11.0 | 7.8 | 8.1",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,27,table_1,"DISEASE INCIDENCE OF CITRUS IN PUNJAB IN 2024-25 (Above ETL) |  |  |  |  |  |  | 
+Month | p
+Ti
+r
+e
+h
+t
+Wi | r
+a
+k
+n
+a
+C | e
+s
+o
+n
+a
+al
+M | t
+o
+R
+t
+ui
+r
+F | b
+a
+c
+S | s
+si
+o
+m
+m
+u
+G | e
+n
+cli
+e
+D
+w
+o
+Sl
+Jul | 57.2 | 25.5 | 1.0 | 0.0 | 10.6 | 13.6 | 10.0
+Aug | 57.1 | 28.7 | 4.1 | 0.0 | 9.0 | 9.6 | 9.8
+Sep | 58.4 | 30.5 | 1.2 | 0.0 | 7.6 | 9.6 | 10.4
+Oct | 50.3 | 30.9 | 2.8 | 0.0 | 11.0 | 7.8 | 8.1",extracted_from_table,0.85,false
+fact_00007,crop_disease_warning,,,,2024-25,"DISEASE INCIDENCE OF GUAVE IN PUNJAB 2024-25 |  |  | 
+Month | Anthracnose | Decline | Withertip
+Jul | 25.80 | 12.17 | 11.30
+Aug | 21.90 | 7.00 | 8.80
+Sep | 20.81 | 7.24 | 11.31
+Oct | 17.16 | 0.75 | 13.93",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,31,table_2,"DISEASE INCIDENCE OF GUAVE IN PUNJAB 2024-25 |  |  | 
+Month | Anthracnose | Decline | Withertip
+Jul | 25.80 | 12.17 | 11.30
+Aug | 21.90 | 7.00 | 8.80
+Sep | 20.81 | 7.24 | 11.31
+Oct | 17.16 | 0.75 | 13.93",extracted_from_table,0.75,false
+fact_00008,general_agricultural_advisory,vegetables,,,2024-25,"PEST SITUATION OF VEGETABLES IN PUNJAB 2024-25 |  |  |  |  | 
+MONTH | Total No. of Spots | TOTAL AREA | Area Affected (Acre) | No. of Spots Above ETL
+(Hot Spots) | No. of Spots Below ETL
+(Hot Spots)
+Jul-24 | 5112 | 11984 | 6461 | 1473 | 2240
+Aug-24 | 4577 | 10448 | 6186 | 1221 | 2035
+Sep-24 | 4325 | 10951 | 6048 | 1271 | 1642
+Oct-24 | 5363 | 12107 | 5391 | 1070 | 1337",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,33,table_1,"PEST SITUATION OF VEGETABLES IN PUNJAB 2024-25 |  |  |  |  | 
+MONTH | Total No. of Spots | TOTAL AREA | Area Affected (Acre) | No. of Spots Above ETL
+(Hot Spots) | No. of Spots Below ETL
+(Hot Spots)
+Jul-24 | 5112 | 11984 | 6461 | 1473 | 2240
+Aug-24 | 4577 | 10448 | 6186 | 1221 | 2035
+Sep-24 | 4325 | 10951 | 6048 | 1271 | 1642
+Oct-24 | 5363 | 12107 | 5391 | 1070 | 1337",extracted_from_table,0.7,false
+fact_00009,pesticide_quality_control,,,Lahore,,"SUMMARY OF ANTI-ADULTERATION COMPAIGN OF PESTICIDES FROM 01-07-2024 TO
+30.06.2025 |  |  |  |  |  |  |  | 
+ |  | No. of
+sampl
+es
+drawn |  |  |  |  |  | 
+ |  |  | No. of
+unfit
+samples |  | No. of
+raids
+conducted | No. of
+persons
+arrested | Quantity
+seized
+(Kg/L) | Value of
+seized
+Quantity (Rs)
+Sr.
+No. |  |  |  | No. of FIRs
+registered |  |  |  | 
+ | Districts |  |  |  |  |  |  | 
+1 | Lahore | 97 | 2 | 10 | 8 | 6 | 320.48 | 5,379,668",,,,,,registered; enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,35,table_1,"SUMMARY OF ANTI-ADULTERATION COMPAIGN OF PESTICIDES FROM 01-07-2024 TO
+30.06.2025 |  |  |  |  |  |  |  | 
+ |  | No. of
+sampl
+es
+drawn |  |  |  |  |  | 
+ |  |  | No. of
+unfit
+samples |  | No. of
+raids
+conducted | No. of
+persons
+arrested | Quantity
+seized
+(Kg/L) | Value of
+seized
+Quantity (Rs)
+Sr.
+No. |  |  |  | No. of FIRs
+registered |  |  |  | 
+ | Districts |  |  |  |  |  |  | 
+1 | Lahore | 97 | 2 | 10 | 8 | 6 | 320.48 | 5,379,668",extracted_from_table,0.8,false
+fact_00010,pesticide_quality_control,,,Lahore,2024-25,"ANNUAL REPORT
+2024-25
+PEST WARNING & QUALITY CONTROL OF PESTICIDES
+Email: [ pestwarning@yahoo.com ] Tel: [(042) 99204371]
+Website:[ https://pestwarning-agripunjab.punjab.gov.pk/] Address: Agriculture House 21 Davis Road,
+Facebook:[ https://web.facebook.com/agri.pwqcp ] Lahore",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,1,Annual Report,"ANNUAL REPORT
+2024-25
+PEST WARNING & QUALITY CONTROL OF PESTICIDES
+Email: [ pestwarning@yahoo.com ] Tel: [(042) 99204371]
+Website:[ https://pestwarning-agripunjab.punjab.gov.pk/] Address: Agriculture House 21 Davis Road,
+Facebook:[ https://web.facebook.com/agri.pwqcp ] Lahore",extracted,0.8,false
+fact_00011,pesticide_quality_control,cotton; wheat; rice; sugarcane; maize; vegetables; pulses,,,,"2
+PREAMBLE
+The Annual Report 2024–25 of the Directorate General Pest Warning & Quality Control of Pesticides, Punjab, highlights
+the Department’s major activities, achievements and strategic initiatives undertaken during the year. This department
+played a vital role in safeguarding Punjab’s agriculture through systematic pest surveillance, early detection and timely
+pest alerts, ensuring effective protection of major crops including Wheat, Cotton, Rice, Sugarcane, Maize, Gram,
+orchards and vegetables across the province. Aggressive anti-pest campaigns were carried out during both Rabi and
+Kharif seasons for effective pest management to minimize crop losses and promote sustainable production.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,2,Annual Report,"2
+PREAMBLE
+The Annual Report 2024–25 of the Directorate General Pest Warning & Quality Control of Pesticides, Punjab, highlights
+the Department’s major activities, achievements and strategic initiatives undertaken during the year. This department
+played a vital role in safeguarding Punjab’s agriculture through systematic pest surveillance, early detection and timely
+pest alerts, ensuring effective protection of major crops including Wheat, Cotton, Rice, Sugarcane, Maize, Gram,
+orchards and vegetables across the province. Aggressive anti-pest campaigns were carried out during both Rabi and
+Kharif seasons for effective pest management to minimize crop losses and promote sustainable production.",extracted,0.85,false
+fact_00012,pesticide_quality_control,,,Multan,,"Simultaneously, this department strengthened its regulatory framework to ensure provision of quality pesticides
+through a network of 176 Pesticide Inspectors operating under the Agricultural Pesticides Ordinance, 1971 (amended
+2012), and the Punjab Agriculture Pesticide Rules, 2018. Pesticide Anti-adulteration campaigns based on random
+pesticide sampling, intelligence based raids were conducted to curb the sale of substandard products, protect farmers’
+interests and maintain the integrity of the pesticide market across Punjab.",,,,,,non-compliant sample,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,2,Annual Report,"Simultaneously, this department strengthened its regulatory framework to ensure provision of quality pesticides
+through a network of 176 Pesticide Inspectors operating under the Agricultural Pesticides Ordinance, 1971 (amended
+2012), and the Punjab Agriculture Pesticide Rules, 2018. Pesticide Anti-adulteration campaigns based on random
+pesticide sampling, intelligence based raids were conducted to curb the sale of substandard products, protect farmers’
+interests and maintain the integrity of the pesticide market across Punjab.",extracted,0.8,false
+fact_00013,pesticide_safety,rice; vegetables,,,,"During 2024–25, this Directorate General also achieved a significant milestone through the successful execution of the
+ADP project titled “Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables.” The project’s effective
+implementation led to remarkable reduction in pesticide residue interceptions in export consignments from 71 in 2024
+to only 19 in 2025 reflecting substantial improvement in compliance with international food safety standards. This
+success contributed to record-breaking rice exports valued at approximately $ 4 billion.",,,,,"During 2024–25, this Directorate General also achieved a significant milestone through the successful execution of the
+ADP project titled “Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables.” The project’s effective
+implementation led to remarkable reduction in pesticide residue",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,2,Annual Report,"During 2024–25, this Directorate General also achieved a significant milestone through the successful execution of the
+ADP project titled “Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables.” The project’s effective
+implementation led to remarkable reduction in pesticide residue interceptions in export consignments from 71 in 2024
+to only 19 in 2025 reflecting substantial improvement in compliance with international food safety standards. This
+success contributed to record-breaking rice exports valued at approximately $ 4 billion.",extracted,0.85,false
+fact_00014,general_agricultural_advisory,,,,,"The department’s effort was
+commended and acknowledged during the 63rd meeting of the Agricultural Pesticide Technical Advisory Committee
+(APTAC), which recommended its replication in other provinces of Pakistan.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,2,Annual Report,"The department’s effort was
+commended and acknowledged during the 63rd meeting of the Agricultural Pesticide Technical Advisory Committee
+(APTAC), which recommended its replication in other provinces of Pakistan.",extracted,0.6,false
+fact_00015,general_agricultural_advisory,rice; sugarcane; maize; citrus; mango; pulses,,,2024-25,"Pest Surveillance Report of Rice ___________________________________________ 12
+Pesticide Residue Management Plan for Rice Crop 2024-25 __________________________ 14
+Stakeholder Session on Enhancing the Production of Exportable Rice in Punjab __________ 19
+iv. Pest Surveillance Report of Sugarcane ______________________________________ 20
+v. Pest Surveillance Report of Maize ____________________________________________ 22
+vi. Pest Surveillance Report of Gram __________________________________________ 24
+vii. Pest Surveillance Report of Citrus __________________________________________ 25
+viii. Pest Surveillance Report of Mango _________________________________________ 28
+ix.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,3,Table Of Contents,"Pest Surveillance Report of Rice ___________________________________________ 12
+Pesticide Residue Management Plan for Rice Crop 2024-25 __________________________ 14
+Stakeholder Session on Enhancing the Production of Exportable Rice in Punjab __________ 19
+iv. Pest Surveillance Report of Sugarcane ______________________________________ 20
+v. Pest Surveillance Report of Maize ____________________________________________ 22
+vi. Pest Surveillance Report of Gram __________________________________________ 24
+vii. Pest Surveillance Report of Citrus __________________________________________ 25
+viii. Pest Surveillance Report of Mango _________________________________________ 28
+ix.",extracted,0.7,false
+fact_00016,pesticide_quality_control,vegetables,,,2024-25,"Pest Surveillance Report of Guava __________________________________________ 31
+x. Pest Surveillance Report of Vegetables _______________________________________ 33
+2. QUALITY CONTROL OF PESTICIDES __________________________ 34
+i. Punjab Launches Crackdown on Illegal Pesticide Manufacturers ____________________ 36
+ii. Capacity Building Of Pesticides Dealers _______________________________________ 38
+iii. Registration of Pesticide Distributors ________________________________________ 38
+3. DEVELOPMENT PROJECT ___________________________________ 39
+4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE FISCAL YEAR 2024-25 43",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,3,Table Of Contents,"Pest Surveillance Report of Guava __________________________________________ 31
+x. Pest Surveillance Report of Vegetables _______________________________________ 33
+2. QUALITY CONTROL OF PESTICIDES __________________________ 34
+i. Punjab Launches Crackdown on Illegal Pesticide Manufacturers ____________________ 36
+ii. Capacity Building Of Pesticides Dealers _______________________________________ 38
+iii. Registration of Pesticide Distributors ________________________________________ 38
+3. DEVELOPMENT PROJECT ___________________________________ 39
+4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE FISCAL YEAR 2024-25 43",extracted,0.85,false
+fact_00017,pesticide_quality_control,,,,,"4
+INTRODUCTION
+The Directorate General of Pest Warning & Quality Control of Pesticides is a
+specialized wing for Plant Protection of the Punjab Agriculture Department. This is responsible for
+monitoring pest and implementing plant protection activities across the entire province. Its
+mandate includes pest surveillance & management, forecasting, timely advisories to farmers,
+capacity building of farmers, Extension workers and pesticide dealers along with strict regulation
+and enforcement against spurious or substandard pesticides.",,,,,,non-compliant sample,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,4,Introduction,"4
+INTRODUCTION
+The Directorate General of Pest Warning & Quality Control of Pesticides is a
+specialized wing for Plant Protection of the Punjab Agriculture Department. This is responsible for
+monitoring pest and implementing plant protection activities across the entire province. Its
+mandate includes pest surveillance & management, forecasting, timely advisories to farmers,
+capacity building of farmers, Extension workers and pesticide dealers along with strict regulation
+and enforcement against spurious or substandard pesticides.",extracted,0.75,false
+fact_00018,pest_warning,cotton; rice; sugarcane,,,,"By promoting integrated pest
+management, safe pesticide use, the department plays a vital role in safeguarding food security,
+improving crop productivity and supporting sustainable agriculture in the Punjab province. Mandate and Functions
+Pest Surveillance & Forecasting – Regular pest surveillance of all field crops like Cotton,
+Rice, Sugarcane etc. across Punjab to detect pest infestations and disease incidence. Provision of on spot farmer trainings and advisories, pest alerts, bulk messages (What’s
+app groups, Facebook, print/electronic media, and digital platforms).",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,4,Introduction,"By promoting integrated pest
+management, safe pesticide use, the department plays a vital role in safeguarding food security,
+improving crop productivity and supporting sustainable agriculture in the Punjab province. Mandate and Functions
+Pest Surveillance & Forecasting – Regular pest surveillance of all field crops like Cotton,
+Rice, Sugarcane etc. across Punjab to detect pest infestations and disease incidence. Provision of on spot farmer trainings and advisories, pest alerts, bulk messages (What’s
+app groups, Facebook, print/electronic media, and digital platforms).",extracted,0.85,false
+fact_00019,pesticide_safety,,,,,"Quality Control of Pesticides – Regulating pesticide business through enforcement of
+Punjab Agricultural Pesticide Act 2012 (Amended) and Rules 2018 to ensure the provision
+of quality pesticides to the farmers. Capacity Building – Capacity building of pesticide dealers on safe handling, storage,
+transportation and use of pesticides for the provision of both fresh and renewal pesticide
+licenses. Moreover, farmers, Agri Extension agents and pesticide dealer’s trainings are also
+being conducted in the pesticide markets on hazardous pesticides, MRLs, PHI etc.",,,,,"Moreover, farmers, Agri Extension agents and pesticide dealer’s trainings are also
+being conducted in the pesticide markets on hazardous pesticides, MRLs, PHI etc.",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,4,Introduction,"Quality Control of Pesticides – Regulating pesticide business through enforcement of
+Punjab Agricultural Pesticide Act 2012 (Amended) and Rules 2018 to ensure the provision
+of quality pesticides to the farmers. Capacity Building – Capacity building of pesticide dealers on safe handling, storage,
+transportation and use of pesticides for the provision of both fresh and renewal pesticide
+licenses. Moreover, farmers, Agri Extension agents and pesticide dealer’s trainings are also
+being conducted in the pesticide markets on hazardous pesticides, MRLs, PHI etc.",extracted,0.75,false
+fact_00020,pesticide_quality_control,,,,,"Registration of Pesticide Distributors – Conducting inspections of pesticide distributor,
+infrastructures and operations for registration as pesticides distributors in Punjab. Research & Standardization – Conducting research trials on any plant protection issues &
+pesticide efficacy and safety to standardize pesticide doses for specific pest and crop.",,,,,"Research & Standardization – Conducting research trials on any plant protection issues &
+pesticide efficacy and safety to standardize pesticide doses for specific pest and crop.",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,4,Introduction,"Registration of Pesticide Distributors – Conducting inspections of pesticide distributor,
+infrastructures and operations for registration as pesticides distributors in Punjab. Research & Standardization – Conducting research trials on any plant protection issues &
+pesticide efficacy and safety to standardize pesticide doses for specific pest and crop.",extracted,0.75,false
+fact_00021,pesticide_quality_control,rice; pulses,,Bahawalpur; Faisalabad; Gujranwala; Lahore; Multan; Rawalpindi; Sahiwal; Sargodha,,"5
+ORGANOGRAM
+ORGANOGRAM
+DIRECTOR GENERAL OF AGRI. (PWQCP)
+(BS-20)
+Addl. Director Addl. Director Addl. Director
+Addl. Director Addl. Director
+General Agri. General Agri. General Agri. General Agri. General Agri. (PW&QCP), (PW&QCP), (PW&QCP),
+(PW&QCP), HQ
+(PW&QCLahore Central Zone, South Zone Registration
+Lahore
+P), Rice Zone, Faisalabad Multan Lahore
+(BS-20) (BS-20)
+(BS-20) (BS-20) (BS-20)
+Director of Agri. Director of Agri. Director of Agri. Director of Agri.
+(PP)
+(PP), Lahore, (PP), Faisalabad, (PP), Multan,
+Deputy Director
+Gujranwala and Rawalpindi and D.G.Khanand 1. HQ
+of Agri. (PP),
+Sahiwal Sargodha Bahawalpur
+2. Technical
+divisions divisions divisions (BS-18)
+3.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,5,Organogram,"5
+ORGANOGRAM
+ORGANOGRAM
+DIRECTOR GENERAL OF AGRI. (PWQCP)
+(BS-20)
+Addl. Director Addl. Director Addl. Director
+Addl. Director Addl. Director
+General Agri. General Agri. General Agri. General Agri. General Agri. (PW&QCP), (PW&QCP), (PW&QCP),
+(PW&QCP), HQ
+(PW&QCLahore Central Zone, South Zone Registration
+Lahore
+P), Rice Zone, Faisalabad Multan Lahore
+(BS-20) (BS-20)
+(BS-20) (BS-20) (BS-20)
+Director of Agri. Director of Agri. Director of Agri. Director of Agri.
+(PP)
+(PP), Lahore, (PP), Faisalabad, (PP), Multan,
+Deputy Director
+Gujranwala and Rawalpindi and D.G.Khanand 1. HQ
+of Agri. (PP),
+Sahiwal Sargodha Bahawalpur
+2. Technical
+divisions divisions divisions (BS-18)
+3.",extracted,0.9,false
+fact_00022,general_agricultural_advisory,cotton; wheat; rice; sugarcane; maize; vegetables; pulses,,,,"7
+1. PEST SURVEILLANCE & FORECASTING
+ Directorate General conducts regular pest monitoring through field surveys
+by 124 pest scouting teams and covers all field crops (cotton, rice, wheat,
+sugarcane, maize, gram etc.) and orchards/vegetables. On the basis of pest
+surveillance data, pest forecasts & advisories are issued to farming
+community and all the stakeholders. Pest scouting reports are consolidated
+on weekly and fortnightly basis for decision-making & farmer guidance.
+ Random and fixed field surveys of crops are carried out for pest/disease
+incidence by utilizing different monitoring tools including light traps,
+Pheromone traps and sticky traps.
+i.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,7,1. Pest Surveillance & Forecasting,"7
+1. PEST SURVEILLANCE & FORECASTING
+ Directorate General conducts regular pest monitoring through field surveys
+by 124 pest scouting teams and covers all field crops (cotton, rice, wheat,
+sugarcane, maize, gram etc.) and orchards/vegetables. On the basis of pest
+surveillance data, pest forecasts & advisories are issued to farming
+community and all the stakeholders. Pest scouting reports are consolidated
+on weekly and fortnightly basis for decision-making & farmer guidance.
+ Random and fixed field surveys of crops are carried out for pest/disease
+incidence by utilizing different monitoring tools including light traps,
+Pheromone traps and sticky traps.
+i.",extracted,0.7,false
+fact_00023,crop_disease_warning,wheat,aphid; rust,,,"Pest Surveillance Report of Wheat
+Wheat is a major Rabi crop. During 2024–25, it covered an area of 16.252 million acres in Punjab. Pest scouting and surveillance activities were conducted to assess the pest and disease situation. The findings indicated varying levels of pest hotspots and disease incidence across different
+districts of Punjab during the Rabi season 2024–25.
+“Aphid (Feb–Mar) & Wheat Rust (Mar) were the major pests during the wheat crop season”
+Pest surveillance of wheat crop by field teams",,,,,"“Aphid (Feb–Mar) & Wheat Rust (Mar) were the major pests during the wheat crop season”
+Pest surveillance of wheat crop by field teams",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,7,1. Pest Surveillance & Forecasting,"Pest Surveillance Report of Wheat
+Wheat is a major Rabi crop. During 2024–25, it covered an area of 16.252 million acres in Punjab. Pest scouting and surveillance activities were conducted to assess the pest and disease situation. The findings indicated varying levels of pest hotspots and disease incidence across different
+districts of Punjab during the Rabi season 2024–25.
+“Aphid (Feb–Mar) & Wheat Rust (Mar) were the major pests during the wheat crop season”
+Pest surveillance of wheat crop by field teams",extracted,0.85,false
+fact_00024,crop_disease_warning,wheat,rust; mildew,,2024-25,"8
+M
+D
+J
+F
+M
+A
+P
+o n t h
+e c e m b e
+a n u a r y
+e b r u a r y
+a r c h
+p r il
+e
+r
+s t S i t u a t i o n o f W h e a t i n P u n j a b d u r i n g 2 0 2 4 -
+A
+2 5
+p0
+.
+0 .
+0 .
+0 .
+0 .
+h0
+0
+2
+6
+0
+( A
+i0
+0
+1
+0
+0
+b
+d
+o v e E T L )
+Disease incidence of Wheat in Punjab during 2024-25
+Month Smut BrownRust Yellow Rust Powdery Mildew Others
+January 0.01 0.08 0.05 0.00 0.00
+February 0.17 0.18 1.06 0.01 0.01
+March 1.84 1.03 4.03 0.04 0.03
+April 0.75 0.72 0.87 0.00 0.05
+Pest alert for Wheat Rust issued by the
+department for timely rust Management",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,8,1. Pest Surveillance & Forecasting,"8
+M
+D
+J
+F
+M
+A
+P
+o n t h
+e c e m b e
+a n u a r y
+e b r u a r y
+a r c h
+p r il
+e
+r
+s t S i t u a t i o n o f W h e a t i n P u n j a b d u r i n g 2 0 2 4 -
+A
+2 5
+p0
+.
+0 .
+0 .
+0 .
+0 .
+h0
+0
+2
+6
+0
+( A
+i0
+0
+1
+0
+0
+b
+d
+o v e E T L )
+Disease incidence of Wheat in Punjab during 2024-25
+Month Smut BrownRust Yellow Rust Powdery Mildew Others
+January 0.01 0.08 0.05 0.00 0.00
+February 0.17 0.18 1.06 0.01 0.01
+March 1.84 1.03 4.03 0.04 0.03
+April 0.75 0.72 0.87 0.00 0.05
+Pest alert for Wheat Rust issued by the
+department for timely rust Management",extracted,0.85,false
+fact_00025,general_agricultural_advisory,cotton,whitefly; jassid; thrips; bollworm; mealybug,,2024-25; 2024-25,"9
+ii. Pest Surveillance Report of Cotton
+Cotton is a major Kharif crop, cultivated over of 3.221 million acres in Punjab during 2024-25. Pest
+surveillance was undertaken to monitor insect pest dynamics, disease prevalence. The
+fluctuations in pest pressure, particularly whitefly, jassid, thrips, mealybug and bollworms were
+observed during 2024-25.
+“Cotton crop in 2024 was mainly affected by Whitefly, Jassid, Thrips, Mealy Bug, and
+Pink Bollworm insect pests whereas CLCuV and wilting disease also showed
+moderate incidence.”
+Survey of cotton fields by pest scouting teams",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,9,1. Pest Surveillance & Forecasting,"9
+ii. Pest Surveillance Report of Cotton
+Cotton is a major Kharif crop, cultivated over of 3.221 million acres in Punjab during 2024-25. Pest
+surveillance was undertaken to monitor insect pest dynamics, disease prevalence. The
+fluctuations in pest pressure, particularly whitefly, jassid, thrips, mealybug and bollworms were
+observed during 2024-25.
+“Cotton crop in 2024 was mainly affected by Whitefly, Jassid, Thrips, Mealy Bug, and
+Pink Bollworm insect pests whereas CLCuV and wilting disease also showed
+moderate incidence.”
+Survey of cotton fields by pest scouting teams",extracted,0.7,false
+fact_00026,general_agricultural_advisory,cotton,whitefly,,,"10
+M
+M
+A
+M
+J
+J
+A
+S
+O
+D i s
+o n t
+A R C
+P R I L
+A Y
+U N E
+U L Y
+U G U
+E P T E
+C T O
+e
+h
+H
+S
+M
+B
+T
+E
+a
+B
+R
+s
+E
+e
+R
+I n c i d e n c e o f C o t t o
+C L C
+0 . 0
+0 . 0
+0 . 0
+0 . 0
+0 . 4
+1 . 7
+3 . 7
+2 . 9
+V
+n i n P u n j a b d u r
+W
+i n
+ilt
+0 .
+0 .
+0 .
+0 .
+0 .
+0 .
+1 .
+1 .
+g
+in
+0
+0
+0
+1
+2
+3
+8
+7
+g
+2 0 2 4
+Pest alerts of Cotton Whitefly and PBW issued by the Department for timely pest management",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,10,1. Pest Surveillance & Forecasting,"10
+M
+M
+A
+M
+J
+J
+A
+S
+O
+D i s
+o n t
+A R C
+P R I L
+A Y
+U N E
+U L Y
+U G U
+E P T E
+C T O
+e
+h
+H
+S
+M
+B
+T
+E
+a
+B
+R
+s
+E
+e
+R
+I n c i d e n c e o f C o t t o
+C L C
+0 . 0
+0 . 0
+0 . 0
+0 . 0
+0 . 4
+1 . 7
+3 . 7
+2 . 9
+V
+n i n P u n j a b d u r
+W
+i n
+ilt
+0 .
+0 .
+0 .
+0 .
+0 .
+0 .
+1 .
+1 .
+g
+in
+0
+0
+0
+1
+2
+3
+8
+7
+g
+2 0 2 4
+Pest alerts of Cotton Whitefly and PBW issued by the Department for timely pest management",extracted,0.7,false
+fact_00027,crop_disease_warning,rice,,,2024-25,"12
+iii. Pest Surveillance Report of Rice
+Rice is a Kharif crop, cultivated over an area of 6.71
+million acres in Punjab during 2024-25. The pest and
+disease situation of rice in Punjab during the Kharif
+season 2024–25 diversified with different insect pests
+and diseases.
+“Peak season of Rice insect pests and diseases remained in September-October.”
+Pest surveillance of rice crop by field teams",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,12,1. Pest Surveillance & Forecasting,"12
+iii. Pest Surveillance Report of Rice
+Rice is a Kharif crop, cultivated over an area of 6.71
+million acres in Punjab during 2024-25. The pest and
+disease situation of rice in Punjab during the Kharif
+season 2024–25 diversified with different insect pests
+and diseases.
+“Peak season of Rice insect pests and diseases remained in September-October.”
+Pest surveillance of rice crop by field teams",extracted,0.85,false
+fact_00028,pesticide_quality_control,rice,,,2024-25,"14
+Pesticide Residue Management Plan for Rice Crop 2024-25
+Pesticide residues in rice pose a significant threat to exports especially EU. To tackle this,
+Directorate General Pest Warning and Quality Control of Pesticides, in collaboration with various
+departments and organizations, has executed a robust plan titled ""Rice Residues Management
+Action Plan in 2024”. This aims to boost the production of residue-free rice in Punjab. The
+collaborating entities include Agriculture Extension, Rice Research Institute Kala Shah Kaku, Rice
+Exporter Association of Pakistan (REAP), Progressive rice growers and private pesticide
+companies (PCPA, Crop Life).",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,14,1. Pest Surveillance & Forecasting,"14
+Pesticide Residue Management Plan for Rice Crop 2024-25
+Pesticide residues in rice pose a significant threat to exports especially EU. To tackle this,
+Directorate General Pest Warning and Quality Control of Pesticides, in collaboration with various
+departments and organizations, has executed a robust plan titled ""Rice Residues Management
+Action Plan in 2024”. This aims to boost the production of residue-free rice in Punjab. The
+collaborating entities include Agriculture Extension, Rice Research Institute Kala Shah Kaku, Rice
+Exporter Association of Pakistan (REAP), Progressive rice growers and private pesticide
+companies (PCPA, Crop Life).",extracted,0.85,false
+fact_00029,pesticide_quality_control,rice; pulses,,,April 2025,"Salient Activities of this Plan are narrated below:
+ Capacity building & trainings of master trainers:
+Capacity building & training sessions were arranged for Agriculture extension &
+Pest warning master trainers on the mitigation of pesticides residues at Rice Research
+Institute, kala shah kaku in the month of March-April 2025 for further training of Rice
+growers in farmer training programs.
+ Mega Seminars & small farmer gatherings:
+11 mega seminars of all the stakeholders, 1210 small gatherings were
+organized by PW&QCP for public awareness about prohibited and alternate
+recommended pesticides & promotion of IPM especially in Rice districts.
+ Capacity building of pesticide dealers:
+3600 Pesticide dealers were trained on pesticide residues, MRLS, PHI,
+prohibited and alternate recommended",,,,," Capacity building of pesticide dealers:
+3600 Pesticide dealers were trained on pesticide residues, MRLS, PHI,
+prohibited and alternate recommended pesticides in rice core areas.",restricted/banned,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,14,1. Pest Surveillance & Forecasting,"Salient Activities of this Plan are narrated below:
+ Capacity building & trainings of master trainers:
+Capacity building & training sessions were arranged for Agriculture extension &
+Pest warning master trainers on the mitigation of pesticides residues at Rice Research
+Institute, kala shah kaku in the month of March-April 2025 for further training of Rice
+growers in farmer training programs.
+ Mega Seminars & small farmer gatherings:
+11 mega seminars of all the stakeholders, 1210 small gatherings were
+organized by PW&QCP for public awareness about prohibited and alternate
+recommended pesticides & promotion of IPM especially in Rice districts.
+ Capacity building of pesticide dealers:
+3600 Pesticide dealers were trained on pesticide residues, MRLS, PHI,
+prohibited and alternate recommended pesticides in rice core areas.
+ Capacity building of farmers:
+During pest surveillance, farmers were trained in field/On spot trainings
+regarding production of pesticide free rice.
+ Establishment of IPM demo plots:
+Establishment of 40 Integrated Pest Management (IPM) demonstration blocks
+at tehsil level to motivate rice growers for adoption of IPM.
+ Display of prohibited pesticides Pana flexes",extracted,0.85,false
+fact_00030,pesticide_safety,,,Faisalabad,,"15
+Pesticides keeping in view the Pre-Harvest Interval (PHI). In addition, Aggressive social
+media campaign have been initiated through WhatsApp groups at tehsil and district
+levels, along with other social media platforms.
+ Capacity building of stakeholders:
+Capacity building of stakeholders regarding safe storage including REAP,
+owner of shellers, farmers and storage personnel was arranged in collaboration with the
+“Grain Research, Training and Storage Management Cell”, Entomology Department,
+University of Agriculture, Faisalabad.
+ Technical sessions with Stakeholders
+Conducted technical sessions/meetings with pesticide stakeholders i.e.",,,,,"15
+Pesticides keeping in view the Pre-Harvest Interval (PHI).",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,15,1. Pest Surveillance & Forecasting,"15
+Pesticides keeping in view the Pre-Harvest Interval (PHI). In addition, Aggressive social
+media campaign have been initiated through WhatsApp groups at tehsil and district
+levels, along with other social media platforms.
+ Capacity building of stakeholders:
+Capacity building of stakeholders regarding safe storage including REAP,
+owner of shellers, farmers and storage personnel was arranged in collaboration with the
+“Grain Research, Training and Storage Management Cell”, Entomology Department,
+University of Agriculture, Faisalabad.
+ Technical sessions with Stakeholders
+Conducted technical sessions/meetings with pesticide stakeholders i.e.",extracted,0.8,false
+fact_00031,pesticide_quality_control,rice,,Gujranwala; Gujrat; Lahore,,"Crop
+Life Pakistan & Pakistan Crop Protection Association, resultantly pesticide industry issued
+circulars to Pesticide dealers/distributors/member first time ever in the history to stop the
+supplies/Sale of 13 prohibited pesticides in rice core areas in Punjab including Lahore,
+Gujranwala & Gujrat Divisions.
+ Promotion of contract farming through REAP:
+Contract farming was also being promoted through REAP.",,,,,,restricted/banned,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,15,1. Pest Surveillance & Forecasting,"Crop
+Life Pakistan & Pakistan Crop Protection Association, resultantly pesticide industry issued
+circulars to Pesticide dealers/distributors/member first time ever in the history to stop the
+supplies/Sale of 13 prohibited pesticides in rice core areas in Punjab including Lahore,
+Gujranwala & Gujrat Divisions.
+ Promotion of contract farming through REAP:
+Contract farming was also being promoted through REAP.",extracted,0.9,false
+fact_00032,pesticide_quality_control,rice,,Gujranwala; Gujrat; Lahore,,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.
+ In non-core rice areas prohibition warning for use of these 13/not recommended pesticides
+are also being pasted on product labels.
+ Govt. of Punjab played a role in banning of hazardous pesticides and as a result Thirteen
+(13) pesticides have been banned for use in rice crop in 63rd APTAC meeting. Thirteen Prohibited Pesticides in rice crop
+I. Imidacloprid II. Buprofezin
+III. Acetamiprid IV. Thiamethoxam
+V. Chlorpyrifos VI. Profenofos
+VII. Triazophos VIII. Carbendazim
+IX.",Imidacloprid; Thiamethoxam; Acetamiprid; Triazophos; Chlorpyrifos; Carbendazim,,,,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.",restricted/banned,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,15,1. Pest Surveillance & Forecasting,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.
+ In non-core rice areas prohibition warning for use of these 13/not recommended pesticides
+are also being pasted on product labels.
+ Govt. of Punjab played a role in banning of hazardous pesticides and as a result Thirteen
+(13) pesticides have been banned for use in rice crop in 63rd APTAC meeting. Thirteen Prohibited Pesticides in rice crop
+I. Imidacloprid II. Buprofezin
+III. Acetamiprid IV. Thiamethoxam
+V. Chlorpyrifos VI. Profenofos
+VII. Triazophos VIII. Carbendazim
+IX.",ambiguous_dose,0.75,false
+fact_00033,pesticide_quality_control,rice,,,,"19
+Stakeholder Session on Enhancing the Production of Exportable
+Rice in Punjab
+On 3rd June, 2025, Directorate General PWQCP, in collaboration with the Additional
+Secretary (TF), organized a stakeholder session aimed at boosting the production of export-
+quality rice in Punjab.
+ The event was honored by the presence of Secretary Agriculture Punjab, Mr.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,19,1. Pest Surveillance & Forecasting,"19
+Stakeholder Session on Enhancing the Production of Exportable
+Rice in Punjab
+On 3rd June, 2025, Directorate General PWQCP, in collaboration with the Additional
+Secretary (TF), organized a stakeholder session aimed at boosting the production of export-
+quality rice in Punjab.
+ The event was honored by the presence of Secretary Agriculture Punjab, Mr.",extracted,0.85,false
+fact_00034,pesticide_quality_control,rice,,Faisalabad,,"Iftikhar
+Ali Sahoo.
+ Participants included representatives from the Department of Plant Protection,
+TDAP, PARB, Rice Research Institute Kala Shah Kaku, Plant Protection Research
+Institute Faisalabad, Entomological Research Institute Faisalabad, Rice Exporter
+Association of Pakistan (REAP), progressive rice growers, private pesticide
+companies (PCPA, Crop Life), and various wings of the Punjab Agriculture
+Department.
+ All stakeholders shared valuable recommendations to enhance exportable rice
+production by minimizing pesticide residues.
+ Secretary Agriculture Punjab highlighted Pakistan’s remarkable achievement in
+2024, exporting 6 million tons of rice valued at US$ 4 billion.
+ He praised the efforts of Govt. of Punjab, especially Directorate General PWQCP, for
+the successful implementa",,,,,"of Punjab, especially Directorate General PWQCP, for
+the successful implementation of Pesticide Residues Management Plan for rice crop
+and the banning of 13 hazardous pesticides.",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,19,1. Pest Surveillance & Forecasting,"Iftikhar
+Ali Sahoo.
+ Participants included representatives from the Department of Plant Protection,
+TDAP, PARB, Rice Research Institute Kala Shah Kaku, Plant Protection Research
+Institute Faisalabad, Entomological Research Institute Faisalabad, Rice Exporter
+Association of Pakistan (REAP), progressive rice growers, private pesticide
+companies (PCPA, Crop Life), and various wings of the Punjab Agriculture
+Department.
+ All stakeholders shared valuable recommendations to enhance exportable rice
+production by minimizing pesticide residues.
+ Secretary Agriculture Punjab highlighted Pakistan’s remarkable achievement in
+2024, exporting 6 million tons of rice valued at US$ 4 billion.
+ He praised the efforts of Govt. of Punjab, especially Directorate General PWQCP, for
+the successful implementation of Pesticide Residues Management Plan for rice crop
+and the banning of 13 hazardous pesticides.
+ He acknowledged these efforts as essential milestones toward ensuring safer,
+higher-quality rice exports.",extracted,0.9,false
+fact_00035,crop_disease_warning,sugarcane,whitefly,,2024-25; 2024-25,"20
+iv. Pest Surveillance Report of Sugarcane
+Sugarcane is one of the most important cash crops of Pakistan and serving as a major source of
+raw material for the sugar industry. It was cultivated over an area of 2.02 million acres in Punjab
+during 2024-25. Pest surveillance of Sugarcane during 2024-25 was conducted on fortnightly basis
+mainly focusing on borers, pyrilla, whitefly, and diseases affecting the crop. During 2024 main insect pests on Sugarcane were pyrilla, whitefly, black bug and mealy
+bug. Among diseases, red rot and whip smut were the most significant.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,20,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","20
+iv. Pest Surveillance Report of Sugarcane
+Sugarcane is one of the most important cash crops of Pakistan and serving as a major source of
+raw material for the sugar industry. It was cultivated over an area of 2.02 million acres in Punjab
+during 2024-25. Pest surveillance of Sugarcane during 2024-25 was conducted on fortnightly basis
+mainly focusing on borers, pyrilla, whitefly, and diseases affecting the crop. During 2024 main insect pests on Sugarcane were pyrilla, whitefly, black bug and mealy
+bug. Among diseases, red rot and whip smut were the most significant.",extracted,0.85,false
+fact_00036,general_agricultural_advisory,sugarcane,,,,"Survey of the Sugarcane field by Pest Scouting teams
+DUE TO BLACK BUG OUTBREAK IN SUGARCANE, PEST ALERT WAS
+ISSUED DURING THE SUGARCANE SEASON TO FACILITATE TIMELY
+MONITORING AND EFFECTIVE CONTROL MEASURES.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,20,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","Survey of the Sugarcane field by Pest Scouting teams
+DUE TO BLACK BUG OUTBREAK IN SUGARCANE, PEST ALERT WAS
+ISSUED DURING THE SUGARCANE SEASON TO FACILITATE TIMELY
+MONITORING AND EFFECTIVE CONTROL MEASURES.",extracted,0.7,false
+fact_00037,crop_disease_warning,sugarcane,,,2024-25,"21
+Disease incidence of Sugarcane in Punjab during 2024-25
+Month RED ROT WHIP SMUT
+Jul 4.7 1.0
+Aug 6.4 1.1
+Sep 7.1 1.0
+Oct 4.1 0.3
+Feb 0.4 0.5
+Mar 0.7 0.1
+Apr 1.7 0.8
+May 2.5 3.7
+Jun 3.2 2.0
+M o n
+Ju l
+A u g
+S e p
+O c t
+N o v
+M a r
+A p r
+M a y
+Ju n
+th
+P e s t
+0 .4
+0 .4
+0 .0
+0 .0
+0 .0
+0 .0
+0 .8
+1 .0
+0 .9
+S
+B O
+it u
+R E R
+a
+S
+t io n
+000000200
+o
+P
+.7.1.6.8.0.0.3.9.2
+Y
+f
+R
+S
+IL
+u
+L A
+g a r
+001000000
+c a
+W
+.8.5.1.6.1.0.1.1.0
+n
+H
+e
+IT
+in
+E F L
+P
+Y
+u
+100001510
+n
+B
+.2.0.0.0.0.8.1.4.0
+ja
+L A
+b
+C
+d
+K B
+u
+U
+r in
+G
+g 2
+M
+0 .5
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .4
+1 .1
+0
+IT
+2
+E
+4 - 2
+S
+5
+000000000
+(
+.5.1.0.0.0.0.0.0.0
+A
+T
+b
+O K
+o
+A
+v e E
+M
+000000000
+T
+E
+.1.3.2.3.0.0.0.0.1
+L )
+A L Y B U G",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,21,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","21
+Disease incidence of Sugarcane in Punjab during 2024-25
+Month RED ROT WHIP SMUT
+Jul 4.7 1.0
+Aug 6.4 1.1
+Sep 7.1 1.0
+Oct 4.1 0.3
+Feb 0.4 0.5
+Mar 0.7 0.1
+Apr 1.7 0.8
+May 2.5 3.7
+Jun 3.2 2.0
+M o n
+Ju l
+A u g
+S e p
+O c t
+N o v
+M a r
+A p r
+M a y
+Ju n
+th
+P e s t
+0 .4
+0 .4
+0 .0
+0 .0
+0 .0
+0 .0
+0 .8
+1 .0
+0 .9
+S
+B O
+it u
+R E R
+a
+S
+t io n
+000000200
+o
+P
+.7.1.6.8.0.0.3.9.2
+Y
+f
+R
+S
+IL
+u
+L A
+g a r
+001000000
+c a
+W
+.8.5.1.6.1.0.1.1.0
+n
+H
+e
+IT
+in
+E F L
+P
+Y
+u
+100001510
+n
+B
+.2.0.0.0.0.8.1.4.0
+ja
+L A
+b
+C
+d
+K B
+u
+U
+r in
+G
+g 2
+M
+0 .5
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .4
+1 .1
+0
+IT
+2
+E
+4 - 2
+S
+5
+000000000
+(
+.5.1.0.0.0.0.0.0.0
+A
+T
+b
+O K
+o
+A
+v e E
+M
+000000000
+T
+E
+.1.3.2.3.0.0.0.0.1
+L )
+A L Y B U G",extracted,0.85,false
+fact_00038,inspection,maize,armyworm; borer,,,"22
+v. Pest Surveillance Report of Maize
+Maize is an important cereal crop in Punjab, cultivated over 1153 thousand acres (Autumn) & 1563
+thousand acres (Spring) during 2024–25 in both Kharif and Rabi seasons for food, feed, and
+industrial use. To assess pest dynamics during the 2024–25 season, pest scouting surveys were
+conducted. These surveys provided valuable insights into the prevalence and distribution of insect
+pests affecting maize during the season.
+“Maize crop in Punjab was mainly threatened by Fall Armyworm, Stem Borer, and
+Helicoverpa.”
+Pest scouting of Maize field by field teams",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,22,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","22
+v. Pest Surveillance Report of Maize
+Maize is an important cereal crop in Punjab, cultivated over 1153 thousand acres (Autumn) & 1563
+thousand acres (Spring) during 2024–25 in both Kharif and Rabi seasons for food, feed, and
+industrial use. To assess pest dynamics during the 2024–25 season, pest scouting surveys were
+conducted. These surveys provided valuable insights into the prevalence and distribution of insect
+pests affecting maize during the season.
+“Maize crop in Punjab was mainly threatened by Fall Armyworm, Stem Borer, and
+Helicoverpa.”
+Pest scouting of Maize field by field teams",extracted,0.85,false
+fact_00039,pesticide_safety,maize,armyworm; borer,Attock; Bahawalnagar; Bahawalpur; Chiniot; Faisalabad; Jhang; Kasur; Khanewal; Lodhran; Multan; Nankana; Okara; Pakpattan; Sahiwal; Sargodha; Vehari,2024-25,"23
+DISTRICTWISE PEST SCOUTING REPORT OF MAIZE 2024-25 (Above ETL)
+Sr. # District Army Worm Fall Army worm Hopper Toka Shoot Fly Maize Stem Borer Helicoverpa
+1 Multan 37 189 0 0 0 0 3
+2 Khanewal 3 209 0 0 6 0 3
+3 Vehari 22 111 0 0 0 0 0
+4 Lodhran 0 216 0 0 0 0 0
+5 Sahiwal 15 120 0 0 11 1 5
+6 Pakpattan 12 87 0 0 1 0 3
+7 Okara 5 194 0 0 0 0 3
+8 Bahawalpur 78 98 0 0 0 0 0
+9 Bahawalnagar 58 13 0 0 0 0 0
+10 R.Y.Khan 15 98 0 0 1 1 0
+11 D.G.Khan 75 107 0 1 0 2 0
+12 M.Garh 83 165 0 0 7 0 0
+13 Nankana Sahib 1 107 0 4 0 0 1
+14 Kasur 118 130 0 0 1 0 45
+15 Faisalabad 7 456 0 0 1 6 3
+16 Chiniot 22 153 0 0 0 3 1
+17 TTSingh 0 83 0 0 0 0 0
+18 Jhang 2 108 0 5 0 0 0
+19 Sargodha 16 213 0 0 0 0 0
+20 Jehlum 14 54 0 7 0 6 0
+21 Attock 0 14 0 0 0 0 0",,,,,"# District Army Worm Fall Army worm Hopper Toka Shoot Fly Maize Stem Borer Helicoverpa
+1 Multan 37 189 0 0 0 0 3
+2 Khanewal 3 209 0 0 6 0 3
+3 Vehari 22 111 0 0 0 0 0
+4 Lodhran 0 216 0 0 0 0 0
+5 Sahiwal 15 120 0 0 11 1 5
+6 Pakpattan 12 87 0 0 1 0 3
+7 Okara 5 194 0 0 0 0 3
+8 Bahawalpur 78 98 0 0 0 0 0",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,23,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","23
+DISTRICTWISE PEST SCOUTING REPORT OF MAIZE 2024-25 (Above ETL)
+Sr. # District Army Worm Fall Army worm Hopper Toka Shoot Fly Maize Stem Borer Helicoverpa
+1 Multan 37 189 0 0 0 0 3
+2 Khanewal 3 209 0 0 6 0 3
+3 Vehari 22 111 0 0 0 0 0
+4 Lodhran 0 216 0 0 0 0 0
+5 Sahiwal 15 120 0 0 11 1 5
+6 Pakpattan 12 87 0 0 1 0 3
+7 Okara 5 194 0 0 0 0 3
+8 Bahawalpur 78 98 0 0 0 0 0
+9 Bahawalnagar 58 13 0 0 0 0 0
+10 R.Y.Khan 15 98 0 0 1 1 0
+11 D.G.Khan 75 107 0 1 0 2 0
+12 M.Garh 83 165 0 0 7 0 0
+13 Nankana Sahib 1 107 0 4 0 0 1
+14 Kasur 118 130 0 0 1 0 45
+15 Faisalabad 7 456 0 0 1 6 3
+16 Chiniot 22 153 0 0 0 3 1
+17 TTSingh 0 83 0 0 0 0 0
+18 Jhang 2 108 0 5 0 0 0
+19 Sargodha 16 213 0 0 0 0 0
+20 Jehlum 14 54 0 7 0 6 0
+21 Attock 0 14 0 0 0 0 0",extracted,0.9,false
+fact_00040,pest_warning,pulses,,,,"24
+vi. Pest Surveillance Report of Gram
+Gram (Cicer arietinum L.), commonly known as chickpea, is one of the most important pulse crops
+grown in Pakistan. During the 2024–25 season, gram covered an area of 1.505 million acres in
+Punjab. No significant incidence of insect pests was recorded, indicating a healthy crop condition
+with minimal pest pressure throughout the season.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,24,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","24
+vi. Pest Surveillance Report of Gram
+Gram (Cicer arietinum L.), commonly known as chickpea, is one of the most important pulse crops
+grown in Pakistan. During the 2024–25 season, gram covered an area of 1.505 million acres in
+Punjab. No significant incidence of insect pests was recorded, indicating a healthy crop condition
+with minimal pest pressure throughout the season.",extracted,0.85,false
+fact_00041,crop_disease_warning,pulses,,,,"Gram crop was mainly affected by wilt disease.”
+“
+D
+J
+F
+M
+A
+D
+e c e m
+a n u a r
+e b r u a
+a r c h
+p r il
+i
+b
+y
+r y
+s
+e
+e
+M
+r
+a s
+o
+e
+n
+I
+t h
+n c i d e n c e o f G r a m
+B
+C
+l
+2
+2
+0
+0
+0
+r
+i g
+. 5
+. 1
+. 4
+. 8
+. 0
+o
+h
+3
+8
+8
+0
+0
+p
+t
+i n P u n j a b D u r i n g 2
+W
+6 .
+1 3
+2 0
+2 1
+1 1
+0 2
+i l t
+5 8
+. 8 3
+. 9 1
+. 4 7
+. 7 6
+4 - 2 5",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,24,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","Gram crop was mainly affected by wilt disease.”
+“
+D
+J
+F
+M
+A
+D
+e c e m
+a n u a r
+e b r u a
+a r c h
+p r il
+i
+b
+y
+r y
+s
+e
+e
+M
+r
+a s
+o
+e
+n
+I
+t h
+n c i d e n c e o f G r a m
+B
+C
+l
+2
+2
+0
+0
+0
+r
+i g
+. 5
+. 1
+. 4
+. 8
+. 0
+o
+h
+3
+8
+8
+0
+0
+p
+t
+i n P u n j a b D u r i n g 2
+W
+6 .
+1 3
+2 0
+2 1
+1 1
+0 2
+i l t
+5 8
+. 8 3
+. 9 1
+. 4 7
+. 7 6
+4 - 2 5",extracted,0.85,false
+fact_00042,crop_disease_warning,citrus,,,,"25
+vii. Pest Surveillance Report of Citrus
+Citrus is one of the most important fruit crops of Punjab, covering an area of 0.61 million acres as
+per the Crop Reporting Department survey 2024–25. The crop is highly valued for its nutritional
+benefits and enjoys strong demand in both domestic and export markets. However, it remains
+susceptible to various insect pests and diseases, which can significantly impact yield and fruit
+quality.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,25,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","25
+vii. Pest Surveillance Report of Citrus
+Citrus is one of the most important fruit crops of Punjab, covering an area of 0.61 million acres as
+per the Crop Reporting Department survey 2024–25. The crop is highly valued for its nutritional
+benefits and enjoys strong demand in both domestic and export markets. However, it remains
+susceptible to various insect pests and diseases, which can significantly impact yield and fruit
+quality.",extracted,0.85,false
+fact_00043,pest_warning,citrus,,,,"During 2024–25, comprehensive pest and disease surveillance was conducted by the field
+formations of the Directorate General of Pest Warning & Quality Control of Pesticides to monitor
+infestations and assess disease incidence across major citrus-growing regions of Punjab. During 2024–25 Citrus psylla, wither tip, canker and gummosis remained as key threats. Pest surveillance of Citrus Orchard by field teams",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,25,"Due To Black Bug Outbreak In Sugarcane, Pest Alert Was","During 2024–25, comprehensive pest and disease surveillance was conducted by the field
+formations of the Directorate General of Pest Warning & Quality Control of Pesticides to monitor
+infestations and assess disease incidence across major citrus-growing regions of Punjab. During 2024–25 Citrus psylla, wither tip, canker and gummosis remained as key threats. Pest surveillance of Citrus Orchard by field teams",extracted,0.85,false
+fact_00044,crop_disease_warning,citrus,,,2024-25,"27
+DISEASE INCIDENCE OF CITRUS IN PUNJAB IN 2024-25 (Above ETL)
+e
+Month Wi t h e r Ti p C a n k a r M al a n o s e F r ui t R o t S c a b G u m m o si s o w D e cli n
+Sl
+57.2 25.5 1.0 0.0 10.6 13.6 10.0
+Jul
+Aug 57.1 28.7 4.1 0.0 9.0 9.6 9.8
+Sep 58.4 30.5 1.2 0.0 7.6 9.6 10.4
+Oct 50.3 30.9 2.8 0.0 11.0 7.8 8.1
+Nov 53.3 29.2 3.3 0.0 11.2 5.4 9.9
+Dec 47.6 26.7 2.0 0.0 6.5 6.0 8.1
+Jan 53.0 24.6 2.1 0.0 10.3 10.1 11.6
+47.5 32.1 1.8 0.0 0.2 12.2 12.1
+Feb
+60.1 31.3 0.0 0.0 0.0 16.1 12.4
+Mar
+Apr 45.7 23.4 1.1 1.3 3.0 12.4 7.9
+May 55.8 25.7 3.9 1.1 5.9 14.1 8.9
+Jun 50.2 24.6 2.8 0.0 9.0 12.0 9.8",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,27,Citrus Psylla Pest Alert,"27
+DISEASE INCIDENCE OF CITRUS IN PUNJAB IN 2024-25 (Above ETL)
+e
+Month Wi t h e r Ti p C a n k a r M al a n o s e F r ui t R o t S c a b G u m m o si s o w D e cli n
+Sl
+57.2 25.5 1.0 0.0 10.6 13.6 10.0
+Jul
+Aug 57.1 28.7 4.1 0.0 9.0 9.6 9.8
+Sep 58.4 30.5 1.2 0.0 7.6 9.6 10.4
+Oct 50.3 30.9 2.8 0.0 11.0 7.8 8.1
+Nov 53.3 29.2 3.3 0.0 11.2 5.4 9.9
+Dec 47.6 26.7 2.0 0.0 6.5 6.0 8.1
+Jan 53.0 24.6 2.1 0.0 10.3 10.1 11.6
+47.5 32.1 1.8 0.0 0.2 12.2 12.1
+Feb
+60.1 31.3 0.0 0.0 0.0 16.1 12.4
+Mar
+Apr 45.7 23.4 1.1 1.3 3.0 12.4 7.9
+May 55.8 25.7 3.9 1.1 5.9 14.1 8.9
+Jun 50.2 24.6 2.8 0.0 9.0 12.0 9.8",extracted,0.85,false
+fact_00045,general_agricultural_advisory,mango,,,,"28
+viii. Pest Surveillance Report of Mango
+Mango, one of Pakistan’s most important fruit crop, is valued for its exceptional taste, aroma, and
+export potential, contributing significantly to the national economy. During 2024–25, mango
+orchards covered an area of 0.378 million acres, with an average yield of 148.4 maunds per acre.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,28,Citrus Psylla Pest Alert,"28
+viii. Pest Surveillance Report of Mango
+Mango, one of Pakistan’s most important fruit crop, is valued for its exceptional taste, aroma, and
+export potential, contributing significantly to the national economy. During 2024–25, mango
+orchards covered an area of 0.378 million acres, with an average yield of 148.4 maunds per acre.",extracted,0.7,false
+fact_00046,pest_warning,mango,mealybug,,,"Extensive pest surveillance and crop health monitoring were carried out across major mango-
+growing regions, revealing varying levels of pest infestations and disease incidence.
+“During 2024–25, mango mealybug and hopper were observed as major insect
+pests while anthracnose and malformation remained the key disease threats to
+mango orchards.”
+Pest Scouting of Mango orchards by pest scouting teams
+A Mango Hopper Control Campaign was
+launched in response to the increasing
+infestation of Mango Hopper observed in various
+mango-growing areas of the province.",,,,,"“During 2024–25, mango mealybug and hopper were observed as major insect
+pests while anthracnose and malformation remained the key disease threats to
+mango orchards.”
+Pest Scouting of Mango orchards by pest scouting teams
+A Mango Hopper Control Campaign was
+launched in response to the increasing
+inf",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,28,Citrus Psylla Pest Alert,"Extensive pest surveillance and crop health monitoring were carried out across major mango-
+growing regions, revealing varying levels of pest infestations and disease incidence.
+“During 2024–25, mango mealybug and hopper were observed as major insect
+pests while anthracnose and malformation remained the key disease threats to
+mango orchards.”
+Pest Scouting of Mango orchards by pest scouting teams
+A Mango Hopper Control Campaign was
+launched in response to the increasing
+infestation of Mango Hopper observed in various
+mango-growing areas of the province.",extracted,0.85,false
+fact_00047,general_agricultural_advisory,mango,,,,"The
+campaign aimed to protect the mango crop from
+severe damage by promoting timely pest
+surveillance, farmer awareness and the adoption
+of recommended control measures. Field teams
+were mobilized to monitor pest incidence, issue
+advisories, and guide farmers on integrated pest
+management practices to ensure healthy fruit
+production and safeguard yield quality.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,28,Citrus Psylla Pest Alert,"The
+campaign aimed to protect the mango crop from
+severe damage by promoting timely pest
+surveillance, farmer awareness and the adoption
+of recommended control measures. Field teams
+were mobilized to monitor pest incidence, issue
+advisories, and guide farmers on integrated pest
+management practices to ensure healthy fruit
+production and safeguard yield quality.",extracted,0.7,false
+fact_00048,pesticide_safety,mango,,,,"29
+M o n t h M a n g o F r
+uit
+B o r e r M a n g o Ti
+p
+B o r e r M a n g o T h ri
+p s
+H o p p e r F r uit fl y S c al e s G all s/ Mi d g
+e s
+M e al y B u
+g
+J
+A
+S
+O
+F
+M
+A
+M
+J
+U L Y
+U G U
+E P T E
+C T O
+E B R U
+A R C
+P R IL
+A Y
+U N E
+S T
+M B
+B E R
+A R
+H
+E
+Y
+R
+P e s t S
+0
+0
+0
+0
+0
+0
+0
+0
+0
+i t
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+u a t i o n
+0
+0
+0
+0
+0
+0
+0
+0
+0
+o
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+f M a n
+0
+0
+0
+0
+0
+0
+1
+3
+0
+g
+.0
+.0
+.0
+.0
+.0
+.0
+.4
+.5
+.1
+o i n P u n
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .5
+1 5 .2
+6 .7
+0 .0
+j a b 2 0 2 4
+1 .8
+2 .7
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+- 2 5 ( A
+0
+0
+0
+0
+0
+0
+0
+0
+0
+b
+.0
+.3
+.0
+.0
+.3
+.2
+.0
+.0
+.0
+o v e E T
+0
+0
+0
+0
+0
+0
+0
+0
+0
+L
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.1
+.1
+)
+0
+0
+0
+0
+0
+5
+5
+4
+1
+.0
+.0
+.0
+.0
+.8
+.2
+.4
+.3
+.1
+PEST ALERT
+DUE TO MANGO HOPPER OUTBREAK, PEST ALERT WAS
+ISSUED TO ENSURE TIMELY SURVEILLA",,,,,"29
+M o n t h M a n g o F r
+uit
+B o r e r M a n g o Ti
+p
+B o r e r M a n g o T h ri
+p s
+H o p p e r F r uit fl y S c al e s G all s/ Mi d g
+e s
+M e al y B u
+g
+J
+A
+S
+O
+F
+M
+A
+M
+J
+U L Y
+U G U
+E P T E
+C T O
+E B R U
+A R C
+P R IL
+A Y
+U N E
+S T
+M B
+B E R
+A R
+H
+E
+Y
+R
+P e s t S
+0
+0
+0
+0
+0
+0
+0
+0
+0
+i t
+.0
+.0
+.0
+",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,29,Citrus Psylla Pest Alert,"29
+M o n t h M a n g o F r
+uit
+B o r e r M a n g o Ti
+p
+B o r e r M a n g o T h ri
+p s
+H o p p e r F r uit fl y S c al e s G all s/ Mi d g
+e s
+M e al y B u
+g
+J
+A
+S
+O
+F
+M
+A
+M
+J
+U L Y
+U G U
+E P T E
+C T O
+E B R U
+A R C
+P R IL
+A Y
+U N E
+S T
+M B
+B E R
+A R
+H
+E
+Y
+R
+P e s t S
+0
+0
+0
+0
+0
+0
+0
+0
+0
+i t
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+u a t i o n
+0
+0
+0
+0
+0
+0
+0
+0
+0
+o
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+f M a n
+0
+0
+0
+0
+0
+0
+1
+3
+0
+g
+.0
+.0
+.0
+.0
+.0
+.0
+.4
+.5
+.1
+o i n P u n
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .5
+1 5 .2
+6 .7
+0 .0
+j a b 2 0 2 4
+1 .8
+2 .7
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+0 .0
+- 2 5 ( A
+0
+0
+0
+0
+0
+0
+0
+0
+0
+b
+.0
+.3
+.0
+.0
+.3
+.2
+.0
+.0
+.0
+o v e E T
+0
+0
+0
+0
+0
+0
+0
+0
+0
+L
+.0
+.0
+.0
+.0
+.0
+.0
+.0
+.1
+.1
+)
+0
+0
+0
+0
+0
+5
+5
+4
+1
+.0
+.0
+.0
+.0
+.8
+.2
+.4
+.3
+.1
+PEST ALERT
+DUE TO MANGO HOPPER OUTBREAK, PEST ALERT WAS
+ISSUED TO ENSURE TIMELY SURVEILLANCE AND
+MANAGEMENT ACTIONS.",extracted,0.85,false
+fact_00049,pest_warning,,mealybug,,2024-25; 2024-25,"The crop was regularly monitored by pest scouting
+teams throughout the season to assess pest and
+Mealybug
+Fruitfly
+disease incidence across major guava-growing regions.
+“Major issues observed including fruit fly infestation, Anthracnose and Wither
+Tip diseases, posing significant threats to guava orchards during 2024-25.”
+DISEASE INCIDENCE OF GUAVE IN PUNJAB 2024-25
+Month Anthracnose Decline Withertip
+Jul 25.80 12.17 11.30
+Aug 21.90 7.00 8.80
+Sep 20.81 7.24 11.31
+Oct 17.16 0.75 13.93
+Nov 16.67 0.71 13.33
+Dec 22.39 1.78 11.45
+Jan 20.92 2.19 12.90
+Feb 23.08 3.59 10.51
+Mar 24.58 0.72 14.70
+Apr 22.56 0.00 13.26
+May 21.03 2.34 14.25
+Jun 20.10 1.01 15.58",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,31,Fortnightly Pest Situation Report Of Mango 2024-25,"The crop was regularly monitored by pest scouting
+teams throughout the season to assess pest and
+Mealybug
+Fruitfly
+disease incidence across major guava-growing regions.
+“Major issues observed including fruit fly infestation, Anthracnose and Wither
+Tip diseases, posing significant threats to guava orchards during 2024-25.”
+DISEASE INCIDENCE OF GUAVE IN PUNJAB 2024-25
+Month Anthracnose Decline Withertip
+Jul 25.80 12.17 11.30
+Aug 21.90 7.00 8.80
+Sep 20.81 7.24 11.31
+Oct 17.16 0.75 13.93
+Nov 16.67 0.71 13.33
+Dec 22.39 1.78 11.45
+Jan 20.92 2.19 12.90
+Feb 23.08 3.59 10.51
+Mar 24.58 0.72 14.70
+Apr 22.56 0.00 13.26
+May 21.03 2.34 14.25
+Jun 20.10 1.01 15.58",extracted,0.85,false
+fact_00050,general_agricultural_advisory,vegetables,,,September 2024; April 2025; April 2025,"33
+x. Pest Surveillance Report of Vegetables
+During the year 2024–25, a total of 83,156 spots covering 0.18 million acres of vegetable
+crops were surveyed across Punjab. Monitoring data revealed that pest infestation fluctuated
+throughout the year with two critical peaks: the first during July–September 2024, when the affected
+area consistently remained above 6,000 acres, and the second during February–April 2025, with
+infestation reaching its maximum of 7,667 acres in April 2025.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,33,Pest Situation Of Vegetables In Punjab 2024-25,"33
+x. Pest Surveillance Report of Vegetables
+During the year 2024–25, a total of 83,156 spots covering 0.18 million acres of vegetable
+crops were surveyed across Punjab. Monitoring data revealed that pest infestation fluctuated
+throughout the year with two critical peaks: the first during July–September 2024, when the affected
+area consistently remained above 6,000 acres, and the second during February–April 2025, with
+infestation reaching its maximum of 7,667 acres in April 2025.",extracted,0.7,false
+fact_00051,crop_disease_warning,,,,,"34
+2. QUALITY CONTROL OF PESTICIDES
+Regulation of Pesticides business by 176 Pesticide Inspectors under Agricultural Pesticides
+Ordinance, 1971 (amended in 2012) and Punjab Agriculture Pesticide Rules 2018.
+ Pesticide Anti-adulteration activities:
+High-quality pesticides are essential for farmers to effectively combat crop pests and
+diseases, thereby ensuring substantial yields. Use of counterfeit or inferior pesticides leads to
+decreased productivity for agricultural producers. Punjab accounts for approximately 80% of
+agricultural pesticide consumption in the country.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,34,2. QUALITY CONTROL OF PESTICIDES,"34
+2. QUALITY CONTROL OF PESTICIDES
+Regulation of Pesticides business by 176 Pesticide Inspectors under Agricultural Pesticides
+Ordinance, 1971 (amended in 2012) and Punjab Agriculture Pesticide Rules 2018.
+ Pesticide Anti-adulteration activities:
+High-quality pesticides are essential for farmers to effectively combat crop pests and
+diseases, thereby ensuring substantial yields. Use of counterfeit or inferior pesticides leads to
+decreased productivity for agricultural producers. Punjab accounts for approximately 80% of
+agricultural pesticide consumption in the country.",extracted,0.75,false
+fact_00052,pesticide_quality_control,,,,2024-25,"Similarly, the production is also concentrated in
+Punjab with more than 3/4th of total manufacturing and refilling plants located in the Province. At
+present, 950 pesticide distributors and 17,000 registered pesticide dealers are working in the
+province. During financial year 2024-25, an aggressive campaign against the adulterated and
+spurious pesticides was initiated for both Rabi and Kharif seasons. Farmers, especially in remote
+districts, have easier access to sub-standard pesticides. Therefore, strategic and intelligence-
+based pesticide sampling was carried out in both remote and central regions of Punjab for the
+provision of quality products.",,,,,,non-compliant sample; registered,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,34,2. QUALITY CONTROL OF PESTICIDES,"Similarly, the production is also concentrated in
+Punjab with more than 3/4th of total manufacturing and refilling plants located in the Province. At
+present, 950 pesticide distributors and 17,000 registered pesticide dealers are working in the
+province. During financial year 2024-25, an aggressive campaign against the adulterated and
+spurious pesticides was initiated for both Rabi and Kharif seasons. Farmers, especially in remote
+districts, have easier access to sub-standard pesticides. Therefore, strategic and intelligence-
+based pesticide sampling was carried out in both remote and central regions of Punjab for the
+provision of quality products.",extracted,0.75,false
+fact_00053,pesticide_quality_control,,,Multan; Okara; Sahiwal,2024-25,"During 2024-25, a total of 5,217 pesticide samples were drawn. The unfit ratio stood at
+4.2%, with 241 samples declared unfit
+(Adulterated/Substandard). Pesticide inspectors filed TOP 5 RAID DISTRICTS IN TERMS OF
+WORTH (MILLION RS.)
+470 FIRs, encompassing both routine checks and
+3.1%
+raids, against offenders. Raids against individuals
+3.3%
+3.4%
+involved in manufacturing and selling of substandard
+4.8%
+pesticides have increased to 363 in this financial year
+as compared to previous year owing to strict Multan
+enforcements by the department’s authorities. During 50% Okara
+R.Y. Khan
+raids, inspectors detained 239 individuals involved in
+Sahiwal
+the act.",,,,,,non-compliant sample,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,34,2. QUALITY CONTROL OF PESTICIDES,"During 2024-25, a total of 5,217 pesticide samples were drawn. The unfit ratio stood at
+4.2%, with 241 samples declared unfit
+(Adulterated/Substandard). Pesticide inspectors filed TOP 5 RAID DISTRICTS IN TERMS OF
+WORTH (MILLION RS.)
+470 FIRs, encompassing both routine checks and
+3.1%
+raids, against offenders. Raids against individuals
+3.3%
+3.4%
+involved in manufacturing and selling of substandard
+4.8%
+pesticides have increased to 363 in this financial year
+as compared to previous year owing to strict Multan
+enforcements by the department’s authorities. During 50% Okara
+R.Y. Khan
+raids, inspectors detained 239 individuals involved in
+Sahiwal
+the act.",extracted,0.8,false
+fact_00054,pesticide_quality_control,,,Faisalabad; Kasur; Lahore; Nankana; Sheikhupura,,"35
+The table below illustrates district-wise progress of the anti-adulteration efforts. SUMMARY OF ANTI-ADULTERATION COMPAIGN OF PESTICIDES FROM 01-07-2024 TO
+30.06.2025
+No. of
+sampl No. of No. of No. of Quantity Value of
+Sr. es unfit No. of FIRs raids persons seized seized
+No. Districts drawn samples registered conducted arrested (Kg/L) Quantity (Rs)
+1 Lahore 97 2 10 8 6 320.48 5,379,668
+2 Sheikhupura 188 8 20 16 4 2073.05 2,518,388
+3 Kasur 148 6 16 9 5 314.12 1,509,363
+4 Nankana Sahib 118 3 9 6 0 291.65 410,755
+5 Faisalabad 234 5 16 14 11 2119.905 4,746,043
+6 T.T.",,,,,,registered; enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,35,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"35
+The table below illustrates district-wise progress of the anti-adulteration efforts. SUMMARY OF ANTI-ADULTERATION COMPAIGN OF PESTICIDES FROM 01-07-2024 TO
+30.06.2025
+No. of
+sampl No. of No. of No. of Quantity Value of
+Sr. es unfit No. of FIRs raids persons seized seized
+No. Districts drawn samples registered conducted arrested (Kg/L) Quantity (Rs)
+1 Lahore 97 2 10 8 6 320.48 5,379,668
+2 Sheikhupura 188 8 20 16 4 2073.05 2,518,388
+3 Kasur 148 6 16 9 5 314.12 1,509,363
+4 Nankana Sahib 118 3 9 6 0 291.65 410,755
+5 Faisalabad 234 5 16 14 11 2119.905 4,746,043
+6 T.T.",extracted,0.8,false
+fact_00055,inspection,,,Multan,2024-25,"36
+i. Punjab Launches Crackdown o n Illegal Pesticide Manufacturers
+Pesticide inspectors continued crackdown on illegal pesticide operations in Punjab. These
+coordinated efforts demonstrate the government's commitment to combating the distribution of
+unregistered and potentially harmful pesticides. During fiscal year 2024-25, Multan team conducted successful raids on six illegal
+manufacturing units at different locations in the district. Details are given as under:
+ Successful crack down on illicit
+pesticide manufacturing factory situated at Basti
+dogran near pull Muzaffarabad Multan. The
+inspection revealed various companies packing
+materials and seals.",,,,,,registered,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,36,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"36
+i. Punjab Launches Crackdown o n Illegal Pesticide Manufacturers
+Pesticide inspectors continued crackdown on illegal pesticide operations in Punjab. These
+coordinated efforts demonstrate the government's commitment to combating the distribution of
+unregistered and potentially harmful pesticides. During fiscal year 2024-25, Multan team conducted successful raids on six illegal
+manufacturing units at different locations in the district. Details are given as under:
+ Successful crack down on illicit
+pesticide manufacturing factory situated at Basti
+dogran near pull Muzaffarabad Multan. The
+inspection revealed various companies packing
+materials and seals.",extracted,0.8,false
+fact_00056,pesticide_quality_control,,,Bahawalpur; Multan,,"Nine samples were collected
+for quality testing, later found unfit by the
+Raid on illegal pesticide manufacturing factory at basti
+laboratory. This operation resulted in the dogran
+confiscation of 634 kg/L of products valued 2.36
+million rupees.
+ Illegal pesticide manufacturing unit
+was traced in Basti Illahabad, near Wazirabad
+Bahawalpur Road, Multan. FIR was lodged
+against the accused at Police Station Basti
+Malook. During the operation, concerned
+inspector seized 19,951 kg/L of granular Shutting down illegal factory at basti illahabad
+pesticide, worth approximately 10 million rupees.",,,,,,enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,36,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"Nine samples were collected
+for quality testing, later found unfit by the
+Raid on illegal pesticide manufacturing factory at basti
+laboratory. This operation resulted in the dogran
+confiscation of 634 kg/L of products valued 2.36
+million rupees.
+ Illegal pesticide manufacturing unit
+was traced in Basti Illahabad, near Wazirabad
+Bahawalpur Road, Multan. FIR was lodged
+against the accused at Police Station Basti
+Malook. During the operation, concerned
+inspector seized 19,951 kg/L of granular Shutting down illegal factory at basti illahabad
+pesticide, worth approximately 10 million rupees.",extracted,0.8,false
+fact_00057,pesticide_quality_control,,,Multan; Vehari,,"In addition, nine pesticide samples collected for
+laboratory analysis were declared unfit.
+ An illegal pesticide factory located at
+Fatima Jinnah Town, near Vehari Chowk, Multan
+was traced by Multan team. The raid led to the
+recovery of empty cans, bottles, tubs, buckets,
+cartons, fake labels, loose granules, and finished
+products used in the illicit manufacturing process. During the operation, 546.79 kg/L of granular
+pesticide, valued 10.81 million rupees
+Raid on illegal manufacturing unit at Fatimah Jinnah Town
+confiscated.",,,,,,non-compliant sample; enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,36,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"In addition, nine pesticide samples collected for
+laboratory analysis were declared unfit.
+ An illegal pesticide factory located at
+Fatima Jinnah Town, near Vehari Chowk, Multan
+was traced by Multan team. The raid led to the
+recovery of empty cans, bottles, tubs, buckets,
+cartons, fake labels, loose granules, and finished
+products used in the illicit manufacturing process. During the operation, 546.79 kg/L of granular
+pesticide, valued 10.81 million rupees
+Raid on illegal manufacturing unit at Fatimah Jinnah Town
+confiscated.",extracted,0.8,false
+fact_00058,pesticide_quality_control,,,Multan,,"37
+ Team Multan traced an
+illegal/unregistered factory situated near BCG
+chowk Multan. FIR was registered against
+accused in Police station Muzaffarabad. During
+raid, 106.31 Kg/L of illegal pesticide of worth 0.31
+million rupees was confiscated. During raid, empty
+Illegal factory traced near BCG Chowk Multan
+bottles and fake labels were recovered.
+ A successful operation against
+illegal pesticide manufacturing factory near MM
+Plastic, Industrial State, Multan was led by team
+Multan, where unauthorized pesticides
+production was underway. FIR was filed at the
+Muzaffarabad police station against the
+offenders.",,,,,,non-compliant sample; registered; enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,37,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"37
+ Team Multan traced an
+illegal/unregistered factory situated near BCG
+chowk Multan. FIR was registered against
+accused in Police station Muzaffarabad. During
+raid, 106.31 Kg/L of illegal pesticide of worth 0.31
+million rupees was confiscated. During raid, empty
+Illegal factory traced near BCG Chowk Multan
+bottles and fake labels were recovered.
+ A successful operation against
+illegal pesticide manufacturing factory near MM
+Plastic, Industrial State, Multan was led by team
+Multan, where unauthorized pesticides
+production was underway. FIR was filed at the
+Muzaffarabad police station against the
+offenders.",extracted,0.8,false
+fact_00059,pesticide_quality_control,,,Multan,,"The operation led to the confiscation
+Raid conducted on illegal factory near MM Plastic,
+of 3540 kg/L of counterfeit pesticides worth 10.83
+Industrial State, Multan
+million rupees. Fifteen samples were collected for
+quality testing, later found unfit by the laboratory.
+ Another illegal manufacturing unit
+located near Near Bakht Enterprises, Plot No. 18,
+hameed Town, Industrial Estate, Multan was
+traced by Multan team. The inspection revealed
+discovered empty bottles, unauthorized labels,
+loose monomehypo granules, labels, illegally
+Raid on illegal manufacturing unit Near Bakht Enterprises
+packaged finished product, seals and sewing
+Multan
+machines during the operation.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,37,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"The operation led to the confiscation
+Raid conducted on illegal factory near MM Plastic,
+of 3540 kg/L of counterfeit pesticides worth 10.83
+Industrial State, Multan
+million rupees. Fifteen samples were collected for
+quality testing, later found unfit by the laboratory.
+ Another illegal manufacturing unit
+located near Near Bakht Enterprises, Plot No. 18,
+hameed Town, Industrial Estate, Multan was
+traced by Multan team. The inspection revealed
+discovered empty bottles, unauthorized labels,
+loose monomehypo granules, labels, illegally
+Raid on illegal manufacturing unit Near Bakht Enterprises
+packaged finished product, seals and sewing
+Multan
+machines during the operation.",extracted,0.8,false
+fact_00060,pesticide_quality_control,,,,,"A total of 68272 kg/L of pesticides, worth 41.38 million rupees, was seized and
+handed over to the police. Seven pesticides samples were also been taken for quality
+analysis, later found unfit by the laboratory.",,,,,"Seven pesticides samples were also been taken for quality
+analysis, later found unfit by the laboratory.",enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,37,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"A total of 68272 kg/L of pesticides, worth 41.38 million rupees, was seized and
+handed over to the police. Seven pesticides samples were also been taken for quality
+analysis, later found unfit by the laboratory.",extracted,0.75,false
+fact_00061,pesticide_quality_control,,,,2024-25,"38
+ii. Capacity Building Of Pesticides Dealers
+An important function of pest warning and QCP involves the registration and training
+of pesticide dealers on safe handling of pesticides. During 2024-25, a total of 16,066 dealers
+underwent training on safe pesticide management practices, with 7,799 fresh dealers and 8,267
+renewals. The training curriculum included various topics, including the Punjab Agriculture
+Pesticide Act 2012 (amended) and Punjab Agriculture Pesticide Rules 2018, recognizing insect
+pests and diseases along with their timely
+control measures, identifying beneficial insects,
+and understanding different types of pesticides
+and their formulations.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,38,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"38
+ii. Capacity Building Of Pesticides Dealers
+An important function of pest warning and QCP involves the registration and training
+of pesticide dealers on safe handling of pesticides. During 2024-25, a total of 16,066 dealers
+underwent training on safe pesticide management practices, with 7,799 fresh dealers and 8,267
+renewals. The training curriculum included various topics, including the Punjab Agriculture
+Pesticide Act 2012 (amended) and Punjab Agriculture Pesticide Rules 2018, recognizing insect
+pests and diseases along with their timely
+control measures, identifying beneficial insects,
+and understanding different types of pesticides
+and their formulations.",extracted,0.75,false
+fact_00062,pesticide_quality_control,pulses,,,2024-25; 2024-25; 2024-25,"Pesticide dealers were required to complete
+mandatory training from the department before
+the issuance of licenses. During 2024-25, 13,205
+licenses have been issued to the dealers after
+approval from District Pesticide License
+committee. Pesticide dealers training and licensing program generated 233 million rupees revenue during the
+fiscal year 2024-25.
+iii. Registration of Pesticide Distributors
+In Punjab, the Directorate General Pest
+Warning grants distribution licenses for Agricultural
+pesticides to distributors/firms. During 2024-25, a total of
+627 distribution licenses were issued, comprising 354 new
+licenses and 273 renewals.",,,,,"During 2024-25, 13,205
+licenses have been issued to the dealers after
+approval from District Pesticide License
+committee.",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,38,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"Pesticide dealers were required to complete
+mandatory training from the department before
+the issuance of licenses. During 2024-25, 13,205
+licenses have been issued to the dealers after
+approval from District Pesticide License
+committee. Pesticide dealers training and licensing program generated 233 million rupees revenue during the
+fiscal year 2024-25.
+iii. Registration of Pesticide Distributors
+In Punjab, the Directorate General Pest
+Warning grants distribution licenses for Agricultural
+pesticides to distributors/firms. During 2024-25, a total of
+627 distribution licenses were issued, comprising 354 new
+licenses and 273 renewals.",extracted,0.85,false
+fact_00063,pesticide_quality_control,,,,,"These licenses were granted
+after physical inspections of infrastructure as per SOPs. Total 54.70 million Rupees revenue was generated from
+registration of pesticide distributors.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,38,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"These licenses were granted
+after physical inspections of infrastructure as per SOPs. Total 54.70 million Rupees revenue was generated from
+registration of pesticide distributors.",extracted,0.75,false
+fact_00064,pesticide_quality_control,rice; vegetables,,Gujranwala; Lahore,2022-26; 2024-25,"39
+3. DEVELOPMENT PROJECT
+The Director General of Pest Warning and Quality Control of Pesticides, wing
+of Punjab Agriculture department has been carried out an ADP project titled
+“Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables through
+Capacity Building of Farmers and Extension Agents”. Gestation period: 2022-26
+Total Budget allocation: 317.723 Million rupees
+Budget allocation (2024-25): 91.961 Million rupees
+This project focuses on addressing pesticide residue concerns across the
+entire production-to-marketing chain by actively engaging and linking all relevant
+stakeholders. Its covers ten districts in the Lahore and Gujranwala divisions.",,,,,"DEVELOPMENT PROJECT
+The Director General of Pest Warning and Quality Control of Pesticides, wing
+of Punjab Agriculture department has been carried out an ADP project titled
+“Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables through
+Capacity Building of Farmers and Extension Age",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,39,3. DEVELOPMENT PROJECT,"39
+3. DEVELOPMENT PROJECT
+The Director General of Pest Warning and Quality Control of Pesticides, wing
+of Punjab Agriculture department has been carried out an ADP project titled
+“Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables through
+Capacity Building of Farmers and Extension Agents”. Gestation period: 2022-26
+Total Budget allocation: 317.723 Million rupees
+Budget allocation (2024-25): 91.961 Million rupees
+This project focuses on addressing pesticide residue concerns across the
+entire production-to-marketing chain by actively engaging and linking all relevant
+stakeholders. Its covers ten districts in the Lahore and Gujranwala divisions.",extracted,0.9,false
+fact_00065,pesticide_quality_control,rice; vegetables,,,,"Following practices are being followed in said project:
+ Conduct regular surveillance and provide on-spot training to farmers regarding integrated pest
+management (IPM) strategies, including cultural, mechanical, biological practices and need-
+based use of recommended pesticides upon reaching ETL.
+ Capacity building of farmers and extension agents on the hazardous health and environmental
+impacts arising from pesticide residues through large and small-scale gatherings.
+ Capacity building of pesticide dealers regarding the pesticide residues through large and small-
+scale gatherings.
+ Promoting the awareness regarding PHI, MRLs among the farmers through print and electronic
+media.
+ Mandatory inclusion of PHI on pesticide product labels for awareness of farmers.
+ Establishment of IPM d",,,,," Capacity building of farmers and extension agents on the hazardous health and environmental
+impacts arising from pesticide residues through large and small-scale gatherings.",,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,39,3. DEVELOPMENT PROJECT,"Following practices are being followed in said project:
+ Conduct regular surveillance and provide on-spot training to farmers regarding integrated pest
+management (IPM) strategies, including cultural, mechanical, biological practices and need-
+based use of recommended pesticides upon reaching ETL.
+ Capacity building of farmers and extension agents on the hazardous health and environmental
+impacts arising from pesticide residues through large and small-scale gatherings.
+ Capacity building of pesticide dealers regarding the pesticide residues through large and small-
+scale gatherings.
+ Promoting the awareness regarding PHI, MRLs among the farmers through print and electronic
+media.
+ Mandatory inclusion of PHI on pesticide product labels for awareness of farmers.
+ Establishment of IPM demo plots to implement the IPM strategies for residue free rice
+production.
+ Collection of rice and vegetable samples from farmers’ fields for pesticide residue analysis.",extracted,0.85,false
+fact_00066,general_agricultural_advisory,,,,2024-25,"40
+GLIMPSES OF PROJECT RELATED ACTIVITIES IN FISCAL YEAR 2024-25
+Integrated pest management activities at IPM demo farm
+Capacity building of Pesticide dealers & farmers in small and mega gatherings
+regarding the safer use of pesticides
+Mass awareness through print and social media regarding the pesticide",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,40,Glimpses Of Project Related Activities In Fiscal Year 2024-25,"40
+GLIMPSES OF PROJECT RELATED ACTIVITIES IN FISCAL YEAR 2024-25
+Integrated pest management activities at IPM demo farm
+Capacity building of Pesticide dealers & farmers in small and mega gatherings
+regarding the safer use of pesticides
+Mass awareness through print and social media regarding the pesticide",extracted,0.6,false
+fact_00067,pesticide_quality_control,rice; vegetables; pulses,,,2024-25; 2024-25,"PARTICULARS TARGETS ACHIEVEMENTS
+NO. 2024-25 2024-25
+1 Establishment of IPM Demo blocks
+1) 40 rice IPM Blocks 5 0 5 0
+2) 10 vegetable IPM Blocks
+2 Number of farmers covered during
+25,000 25050
+pest scouting of rice and vegetables
+3 Number of pest surveillance reports
+48 48
+of IPM Blocks
+4 Number of pest surveillance reports
+40 40
+of vegetables
+5 Number of pest surveillance reports
+12 12
+of rice nursery
+6 Number of pest surveillance reports
+20 20
+of rice crop
+7 Awareness Campaigns
+i) Number of TV Programs i ) 2 i ) 2
+ii)Number of Radio Talks i i) 5 0 i i ) 5 0
+iii) Number of Newspaper Ads i i i ) 0 5 i i i ) 0 5
+iv) Literature Publication iv)50000 iv)50000
+8 Number of farmers trained during
+25,000 25050
+surveillance
+9 Small gatherings 1,200 1210
+10 Number of trainings for extension
+20 20
+ag",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,41,Physical Progress In Fiscal Year 2024-25,"PARTICULARS TARGETS ACHIEVEMENTS
+NO. 2024-25 2024-25
+1 Establishment of IPM Demo blocks
+1) 40 rice IPM Blocks 5 0 5 0
+2) 10 vegetable IPM Blocks
+2 Number of farmers covered during
+25,000 25050
+pest scouting of rice and vegetables
+3 Number of pest surveillance reports
+48 48
+of IPM Blocks
+4 Number of pest surveillance reports
+40 40
+of vegetables
+5 Number of pest surveillance reports
+12 12
+of rice nursery
+6 Number of pest surveillance reports
+20 20
+of rice crop
+7 Awareness Campaigns
+i) Number of TV Programs i ) 2 i ) 2
+ii)Number of Radio Talks i i) 5 0 i i ) 5 0
+iii) Number of Newspaper Ads i i i ) 0 5 i i i ) 0 5
+iv) Literature Publication iv)50000 iv)50000
+8 Number of farmers trained during
+25,000 25050
+surveillance
+9 Small gatherings 1,200 1210
+10 Number of trainings for extension
+20 20
+agents 2/district/annum
+11 Number of pesticide dealers trained 1,000 1200
+12 Seminars/Mega events 11 11
+13 Sample analyses 200 200",extracted,0.85,false
+fact_00068,inspection,rice; vegetables,,,,"42
+MID TERM EVALUATION OF PROJECT
+Conclusion by the mid-term evaluation team:
+The project “Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables through
+Capacity Building of Farmers and Extension Agents” has made commendable progress towards
+addressing pesticide residue challenges in Punjab’s Agriculture.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,42,Mid Term Evaluation Of Project,"42
+MID TERM EVALUATION OF PROJECT
+Conclusion by the mid-term evaluation team:
+The project “Mitigating Emerging Issues of Pesticide Residues in Rice and Vegetables through
+Capacity Building of Farmers and Extension Agents” has made commendable progress towards
+addressing pesticide residue challenges in Punjab’s Agriculture.",extracted,0.85,false
+fact_00069,general_agricultural_advisory,,,,2024-25; 2024-25,"KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE
+FISCAL YEAR 2024-25
+KEY PERFORMANCE INDICATORS FOR YEAR 2024-25
+Name of
+Sr 1st Half Year 2nd Half Year
+Broader Task / Activity / Assignment Unit Status Total Target
+# (Jul - Dec) (Jan - Jun)
+Area
+Spots to be Visited During Pest Survey of field
+Planned 270,000 140,000 130,000
+1 Crops Number of Spots
+g SOV: Weekly/ Fortnightly Reports Achieved 352,707 180,577 172,130
+n
+s c o
+uti
+2
+I
+( S
+P
+L O a
+M
+V rg
+D
+: e M
+e
+f
+m
+a a r n
+o
+m a
+f
+g s
+a
+) e
+r m
+m
+s
+e n
+b
+t
+y
+R
+P
+e
+W
+po r
+s
+t
+t a
+o
+f
+f
+f
+F
+a
+a
+b
+r
+o
+m
+v e
+o n
+1 2
+d
+.
+a
+5
+t
+A
+a
+c res
+Nu B m lo b c e k r s o f A
+P
+c
+la
+h
+n
+ie
+n
+v
+e
+e
+d
+d
+1
+1
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+st register.
+e IPM Demo farms by PW staff below 12.5Acres
+P (Small farms) Number of Planned 100 100 100
+3 SOV: Management Report of",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,43,4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE,"KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE
+FISCAL YEAR 2024-25
+KEY PERFORMANCE INDICATORS FOR YEAR 2024-25
+Name of
+Sr 1st Half Year 2nd Half Year
+Broader Task / Activity / Assignment Unit Status Total Target
+# (Jul - Dec) (Jan - Jun)
+Area
+Spots to be Visited During Pest Survey of field
+Planned 270,000 140,000 130,000
+1 Crops Number of Spots
+g SOV: Weekly/ Fortnightly Reports Achieved 352,707 180,577 172,130
+n
+s c o
+uti
+2
+I
+( S
+P
+L O a
+M
+V rg
+D
+: e M
+e
+f
+m
+a a r n
+o
+m a
+f
+g s
+a
+) e
+r m
+m
+s
+e n
+b
+t
+y
+R
+P
+e
+W
+po r
+s
+t
+t a
+o
+f
+f
+f
+F
+a
+a
+b
+r
+o
+m
+v e
+o n
+1 2
+d
+.
+a
+5
+t
+A
+a
+c res
+Nu B m lo b c e k r s o f A
+P
+c
+la
+h
+n
+ie
+n
+v
+e
+e
+d
+d
+1
+1
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+st register.
+e IPM Demo farms by PW staff below 12.5Acres
+P (Small farms) Number of Planned 100 100 100
+3 SOV: Management Report of Farm on data Blocks
+Achieved 100 100 100
+register.",extracted,0.6,false
+fact_00070,pest_warning,,,,,"Radio Talks on plant protection measures Planned 40 20 20
+4 SOV: Acknowledgment Letter from Director Number
+Achieved 150 81 69
+s
+Information/concerned offices/FM Radio
+s TV Talks on plant protection measures Planned 2 1 1
+e n e 5 SOV: Talk Recordings Number Achieved 5 1 4
+ar Popular Articles Planned 40 20 20
+A
+w 6 SOV: Copies of published articles Number Achieved 85 45 40
+Social Media Uploading on Plant Protection Planned 24 12 12
+7 SOV: Official Facebook page of Agri/Pest Number
+Achieved 300 12 288
+Warning Department/media channels etc.",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,43,4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE,"Radio Talks on plant protection measures Planned 40 20 20
+4 SOV: Acknowledgment Letter from Director Number
+Achieved 150 81 69
+s
+Information/concerned offices/FM Radio
+s TV Talks on plant protection measures Planned 2 1 1
+e n e 5 SOV: Talk Recordings Number Achieved 5 1 4
+ar Popular Articles Planned 40 20 20
+A
+w 6 SOV: Copies of published articles Number Achieved 85 45 40
+Social Media Uploading on Plant Protection Planned 24 12 12
+7 SOV: Official Facebook page of Agri/Pest Number
+Achieved 300 12 288
+Warning Department/media channels etc.",extracted,0.75,false
+fact_00071,pesticide_quality_control,cotton; vegetables,,,,"Pest monitoring through PBW sex pheromone
+Planned 118 118 118
+8 traps Number
+s
+SOV: Weekly/Fortnightly Reports/Data Register Achieved 118 118 118
+st Pest monitoring through Light Traps Planned 100 100 100
+of
+p e 9 SOV: Weekly/Fortnightly Reports/Data Register Number Achieved 100 100 100
+g Issuance of Weekly (Major crops) Pest Situation Planned 48 24 24
+ori n 1 0 R
+SO
+ep
+V
+o
+:
+r
+W
+ts
+eekly Reports
+Number
+Achieved 48 24 24
+o
+nit
+Issuance of Fortnightly (vegetables/general Planned 24 12 12
+M 1 1 crops) pest situation reports Number
+SOV: Weekly/Fortnightly Reports Achieved 24 12 12
+Pesticide Dealers to be checked for compliance
+of SOPs notified under Punjab Agricultural
+Planned 10,000 5000 5000
+1 2 Pesticide (Amendment) Act 2012 and Rules Number
+2018
+SOV: Check list proforma Achieved 31053 125",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,43,4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE,"Pest monitoring through PBW sex pheromone
+Planned 118 118 118
+8 traps Number
+s
+SOV: Weekly/Fortnightly Reports/Data Register Achieved 118 118 118
+st Pest monitoring through Light Traps Planned 100 100 100
+of
+p e 9 SOV: Weekly/Fortnightly Reports/Data Register Number Achieved 100 100 100
+g Issuance of Weekly (Major crops) Pest Situation Planned 48 24 24
+ori n 1 0 R
+SO
+ep
+V
+o
+:
+r
+W
+ts
+eekly Reports
+Number
+Achieved 48 24 24
+o
+nit
+Issuance of Fortnightly (vegetables/general Planned 24 12 12
+M 1 1 crops) pest situation reports Number
+SOV: Weekly/Fortnightly Reports Achieved 24 12 12
+Pesticide Dealers to be checked for compliance
+of SOPs notified under Punjab Agricultural
+Planned 10,000 5000 5000
+1 2 Pesticide (Amendment) Act 2012 and Rules Number
+2018
+SOV: Check list proforma Achieved 31053 12515 18538
+of Pesticide Distributors to be checked for
+y
+c o
+ntr ol
+sti ci
+d e s 1 3 c A
+a
+S
+o
+n
+g
+O
+m
+d
+r
+V
+i c p
+R
+:
+u l
+C
+u
+i l a t
+l
+h
+u
+e
+n r
+e
+s
+c a
+c
+e
+2
+l
+k
+P
+0
+o
+l
+1
+f e
+i s
+S
+8
+s
+t
+t O
+p
+ic
+r
+P i
+o
+d s
+f
+e
+o
+n
+r
+(
+m
+o A t m
+a
+ifi e e d n d u m nd e e n r t) P A u c n t ja 2 b 0 12 Number
+A
+P
+c
+la
+h
+n
+ie
+n
+v
+e
+e
+d
+d
+2
+6
+5
+0
+0
+2
+1
+2
+2
+2
+5
+3
+1
+3
+2
+7
+5
+9
+Q u
+alit
+p
+e
+1 4
+P
+P
+e
+e
+s
+s
+t
+t
+i
+i
+c
+",extracted,0.85,false
+fact_00072,laboratory_result,rice,,,,"A
+P
+c
+la
+h
+n
+ie
+n
+v
+e
+e
+d
+d 395,518,31
+F
+4
+e e colle
+1
+c
+8
+tio
+6
+n
+,2
+f
+8
+r
+7
+o
+,
+m
+22 2
+ap plican
+2
+ts
+0 9,231,092
+Pesticide Standardization Research Trials No. of trails Planned 4 2 2
+Trail s SOV: Trial Data Achieved 4 2 2
+Paddy Sample collection and analysis for
+P e sti ci d e r e si d u e s a n al y si s p S re e O p s V o ti r c : t i s S d a e m re p s le id d u i e s s p atch and receipt report lab A P c la h n ie n v e e d d 1 1 0 9 0 2 1 1 0 9 0 2
+SOV: Source of verification",,,,,,,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,43,4. KEY ACHIEVEMENTS OF THE DEPARTMENT FOR THE,"A
+P
+c
+la
+h
+n
+ie
+n
+v
+e
+e
+d
+d 395,518,31
+F
+4
+e e colle
+1
+c
+8
+tio
+6
+n
+,2
+f
+8
+r
+7
+o
+,
+m
+22 2
+ap plican
+2
+ts
+0 9,231,092
+Pesticide Standardization Research Trials No. of trails Planned 4 2 2
+Trail s SOV: Trial Data Achieved 4 2 2
+Paddy Sample collection and analysis for
+P e sti ci d e r e si d u e s a n al y si s p S re e O p s V o ti r c : t i s S d a e m re p s le id d u i e s s p atch and receipt report lab A P c la h n ie n v e e d d 1 1 0 9 0 2 1 1 0 9 0 2
+SOV: Source of verification",extracted,0.85,false

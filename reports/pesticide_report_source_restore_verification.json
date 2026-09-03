@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T20:37:00+00:00",
+  "task": "Phase 3: Official Pesticide Report Source Portability Restore + Reproducibility Verification",
+  "project_root": "D:/KisaanDost",
+  "status": "SUCCESS",
+  "source_provenance": {
+    "external_original_path": "D:/Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf",
+    "external_original_size_bytes": 8058335,
+    "external_original_sha256": "d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725",
+    "in_repo_destination_path": "Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf",
+    "in_repo_size_bytes": 8058335,
+    "in_repo_sha256": "d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725",
+    "checksum_match": true,
+    "pdf_read_check": {
+      "readable": true,
+      "page_count": 43,
+      "encrypted": false,
+      "text_layer_present": true,
+      "total_characters": 45005
+    }
+  },
+  "extraction_rerun_metrics": {
+    "status": "ok",
+    "facts_count": 72,
+    "chunks_count": 43,
+    "review_queue_count": 1,
+    "dose_integrity_violations": 0,
+    "table_warnings": 33
+  },
+  "reproducibility_comparison": {
+    "result": "exact_deterministic_match",
+    "comparison_report": "reports/pesticide_extraction_reproducibility_comparison.md",
+    "comparison_csv": "reports/pesticide_extraction_reproducibility_comparison.csv"
+  },
+  "tests_executed": [
+    {
+      "command": "python -m pytest tests/test_07_ingest_pesticide_report.py tests/test_08_validate_pesticide_report.py tests/test_pest_alerts_api.py -v --tb=short",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "command": "flutter test test/unit/pest_models_test.dart test/unit/pest_provider_test.dart test/widget/pest_alerts_screen_test.dart",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "command": "python -m pytest tests -q -rs --tb=short",
+      "passed": 49,
+      "failed": 0
+    }
+  ],
+  "blocker_2_status": "RESOLVED",
+  "rollback_instructions": "Remove Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf and revert scripts/07_ingest_pesticide_report.py DEFAULT_PDF_PATH."
+}

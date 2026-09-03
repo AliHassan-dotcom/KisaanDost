@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Dashboard</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+
+    <div class="greeting" id="greeting" data-i18n="greeting">Good day, farmer</div>
+
+    <section id="dashboard" class="card">
+      <p data-i18n="loading">Loading...</p>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="quickActions">Quick Actions</h2>
+      <div class="quick-actions">
+        <a class="action-btn" href="/scan.html"><span class="icon">📷</span><span data-i18n="scanCrop">Scan crop</span></a>
+        <a class="action-btn" href="/weather.html"><span class="icon">🌤</span><span data-i18n="weather">Weather</span></a>
+        <a class="action-btn" href="/pest-alerts.html"><span class="icon">🐛</span><span data-i18n="pestAlerts">Pest alerts</span></a>
+        <a class="action-btn" href="/settings.html"><span class="icon">⚙️</span><span data-i18n="settings">Settings</span></a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    renderNav("home");
+    async function loadDashboard() {
+      const container = document.getElementById("dashboard");
+      const resp = await apiFetch("/dashboard");
+      if (!resp) return;
+      if (!resp.ok) { showError(container, "Could not load dashboard"); return; }
+      const json = await resp.json();
+      const d = json.data;
+      const lang = getLanguage();
+      const uncertainClass = d.farm_health.uncertain ? "status-uncertain" : "status-live";
+      container.innerHTML = `
+        <div class="card">
+          <h2 data-i18n="weather">Weather</h2>
+          ${statusPill(d.weather.status, d.weather.is_mock)}
+          <div class="value-grid">
+            <div class="value"><div class="label">District</div><div class="number">${d.weather.district}</div></div>
+            <div class="value"><div class="label">Temp °C</div><div class="number">${d.weather.temperature_c}</div></div>
+            <div class="value"><div class="label">Humidity %</div><div class="number">${d.weather.humidity_percent}</div></div>
+            <div class="value"><div class="label">Rain mm</div><div class="number">${d.weather.rainfall_mm}</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 data-i18n="farmHealth">Farm Health</h2>
+          <span class="status-pill ${uncertainClass}">${d.farm_health.uncertain ? i18n[lang].uncertain : (d.farm_health.status || "no scan")}</span>
+          <div class="value-grid">
+            <div class="value"><div class="label">Latest</div><div class="number">${d.farm_health.status}</div></div>
+            <div class="value"><div class="label">Confidence</div><div class="number">${d.farm_health.confidence ?? "-"}</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 data-i18n="market">Market Rates</h2>
+          ${statusPill(d.market.status, true)}
+          <div class="value-grid">
+            <div class="value"><div class="label">Crop</div><div class="number">${d.market.crop}</div></div>
+            <div class="value"><div class="label">Price</div><div class="number">${d.market.current_price}</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 data-i18n="satellite">Satellite Status</h2>
+          ${statusPill(d.satellite.status, true)}
+          <p>${d.satellite.reason}</p>
+        </div>
+      `;
+      setLanguage(lang);
+    }
+    loadDashboard();
+  </script>
+</body>
+</html>

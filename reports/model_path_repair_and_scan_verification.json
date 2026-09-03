@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T20:16:00+00:00",
+  "task": "Phase 1: Safe ML Model-Path Repair + End-to-End Crop Scan Verification",
+  "project_root": "D:/KisaanDost",
+  "status": "SUCCESS",
+  "changed_files": [
+    {
+      "path": "app/config/settings.py",
+      "reason": "Correct default model_path to point to verified Kisaan_Dost_Data/models/best_plantvillage_model_v2.pt and enhance path resolution methods to handle absolute and relative paths with resolve()."
+    },
+    {
+      "path": "app/backend/services/disease_service.py",
+      "reason": "Add security and boundary validations in load_model (regular file check, trusted project directory containment, class mapping file existence, checkpoint structure validation) and add reset_cached_model helper for test isolation."
+    },
+    {
+      "path": "tests/test_mvp.py",
+      "reason": "Convert model-dependent skip in test_crop_health_scan to an assertion asserting real v2 checkpoint existence and inference execution."
+    },
+    {
+      "path": "tests/test_disease_model_inference.py",
+      "reason": "Add 9 targeted tests for model path resolution, lazy loading, inference outputs, upload validations, unauthenticated rejection, safe 503 behavior, and path traversal rejection."
+    },
+    {
+      "path": "scripts/check_handoff_completeness.py",
+      "reason": "Update blocker 1 check to dynamically resolve settings.model_full_path() and confirm resolution."
+    }
+  ],
+  "model_path_resolution": {
+    "old_configured_path": "models/best_plantvillage_model_v2.pt",
+    "old_resolved_path": "D:\\KisaanDost\\models\\best_plantvillage_model_v2.pt (absent)",
+    "new_configured_path": "Kisaan_Dost_Data/models/best_plantvillage_model_v2.pt",
+    "new_resolved_path": "D:\\KisaanDost\\Kisaan_Dost_Data\\models\\best_plantvillage_model_v2.pt",
+    "exists": true,
+    "size_bytes": 44815115,
+    "checkpoint_modified": false
+  },
+  "model_metadata": {
+    "architecture": "ResNet-18 backbone",
+    "head_architecture": "baseline (nn.Sequential(nn.Dropout(0.3), nn.Linear(512, 15)))",
+    "trainable_modules": ["layer4", "fc"],
+    "training_approach": "finetune_resnet18_layer4_fc",
+    "num_classes": 15,
+    "preprocessing": {
+      "resize": 256,
+      "center_crop": 224,
+      "mean": [0.485, 0.456, 0.406],
+      "std": [0.229, 0.224, 0.225]
+    },
+    "checkpoint_metrics": {
+      "val_accuracy": 0.962867,
+      "val_macro_f1": 0.957748,
+      "selection_metric": "validation_macro_f1"
+    }
+  },
+  "class_mapping": {
+    "path": "Kisaan_Dost_Data/data/processed/plantvillage_class_mapping.csv",
+    "count": 15,
+    "classes": [
+      "Pepper__bell___Bacterial_spot",
+      "Pepper__bell___healthy",
+      "Potato___Early_blight",
+      "Potato___Late_blight",
+      "Potato___healthy",
+      "Tomato_Bacterial_spot",
+      "Tomato_Early_blight",
+      "Tomato_Late_blight",
+      "Tomato_Leaf_Mold",
+      "Tomato_Septoria_leaf_spot",
+      "Tomato_Spider_mites_Two_spotted_spider_mite",
+      "Tomato__Target_Spot",
+      "Tomato__Tomato_YellowLeaf__Curl_Virus",
+      "Tomato__Tomato_mosaic_virus",
+      "Tomato_healthy"
+    ]
+  },
+  "inference_verification": {
+    "test_image_type": "224x224 RGB JPEG sample leaf",
+    "prediction_output": {
+      "predicted_class": "Tomato_Septoria_leaf_spot",
+      "confidence": 0.6249,
+      "class_id": 9,
+      "model_version": "plantvillage_v2_baseline",
+      "uncertain": true,
+      "warning": "Low confidence prediction. Please consult an extension worker for confirmation."
+    }
+  },
+  "commands_run": [
+    {
+      "command": "python -m pytest tests/test_disease_model_inference.py -v --tb=short",
+      "result": "9 passed in 5.35s"
+    },
+    {
+      "command": "python -m pytest tests/test_mvp.py -v --tb=short",
+      "result": "14 passed in 7.95s (0 skipped)"
+    },
+    {
+      "command": "python -m pytest tests -q -rs --tb=short",
+      "result": "48 passed in 24.43s (0 skipped, 0 failed)"
+    },
+    {
+      "command": "python scripts/run_mvp_smoke_tests.py",
+      "result": "14 passed in 9.96s (MVP smoke tests PASSED)"
+    },
+    {
+      "command": "python -m pytest Kisaan_Dost_Data/tests -q -rs --tb=short",
+      "result": "376 passed in 29.92s"
+    },
+    {
+      "command": "python scripts/run_final_verification.py",
+      "result": "10 passed, 0 failed, 1 skipped (APK freeze protection)"
+    },
+    {
+      "command": "python scripts/check_handoff_completeness.py",
+      "result": "COMPLETE (exit code 0)"
+    }
+  ],
+  "test_metrics_comparison": {
+    "backend_tests": {
+      "before": {"passed": 38, "failed": 0, "skipped": 1},
+      "after": {"passed": 48, "failed": 0, "skipped": 0}
+    },
+    "data_pipeline_tests": {
+      "before": {"passed": 376, "failed": 0, "skipped": 0},
+      "after": {"passed": 376, "failed": 0, "skipped": 0}
+    },
+    "verification_sweep": {
+      "before": {"passed": 9, "failed": 1, "skipped": 1},
+      "after": {"passed": 10, "failed": 0, "skipped": 1}
+    }
+  },
+  "api_contract_confirmation": {
+    "endpoint": "POST /api/v1/crop-health/scan",
+    "authentication": "Required (Bearer JWT token)",
+    "request_content_type": "multipart/form-data",
+    "allowed_image_types": ["image/jpeg", "image/png"],
+    "max_upload_size_bytes": 5242880,
+    "response_shape": {
+      "success": true,
+      "data": {
+        "scan_id": "str",
+        "user_id": "str",
+        "image_path": "str (internal storage only)",
+        "predicted_class": "str",
+        "confidence": "float [0.0 - 1.0]",
+        "model_version": "str",
+        "uncertain": "bool",
+        "scanned_at": "ISO-8601 string"
+      }
+    },
+    "error_handling": {
+      "unauthenticated": "401 Unauthorized",
+      "unsupported_type": "400 Bad Request",
+      "oversized_file": "413 Payload Too Large / 400 Bad Request",
+      "missing_model": "503 Service Unavailable (message: 'Disease model is not available.', no path leaked)"
+    }
+  },
+  "blocker_status": {
+    "blocker_1_model_path_mismatch": "RESOLVED",
+    "blocker_2_pesticide_pdf_portability": "ACTIVE_DISCLOSED (official PDF on host at D:\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf, missing in repo)"
+  },
+  "limitations": [
+    "PlantVillage class scope covers 15 classes across Pepper bell, Potato, and Tomato only.",
+    "Vision model is a diagnostic classifier, not a treatment prescriber.",
+    "Confidence < 0.75 triggers uncertainty warning.",
+    "Source annual report PDF remains an external dependency for fresh reproduction."
+  ],
+  "rollback_instructions": "Revert app/config/settings.py default model_path to Path('models/best_plantvillage_model_v2.pt'), revert app/backend/services/disease_service.py, remove tests/test_disease_model_inference.py, and restore skip in tests/test_mvp.py."
+}

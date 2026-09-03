@@ -1,0 +1,23 @@
+column_name,source,description,unit,valid_range,notes
+date,derived from year + month columns,"Calendar month as ISO 8601 date (first day of month)",date (YYYY-MM-DD),2024-01-01 to 2026-08-01,"Raw files carry separate year/month columns; no date column existed"
+year,all raw monthly files :: year,Calendar year of the record,year,2024-2026,Retained from raw export
+month,all raw monthly files :: month,Calendar month number,month (1-12),1-12,Retained from raw export
+season,derived,"Meteorological season (Pakistan Meteorological Department convention)",category,Winter / Spring / Summer / Autumn,"Winter = Dec-Feb; Spring = Mar-May; Summer (monsoon) = Jun-Sep; Autumn = Oct-Nov"
+NDVI_mean,NDVI_Punjab_YYYY_Monthly.csv :: NDVI_mean,Monthly Punjab-wide mean NDVI (vegetation greenness),unitless index,-1 to 1,Higher values indicate denser vegetation
+NDWI_mean,NDWI_Punjab_YYYY_Monthly.csv :: NDWI_mean,Monthly Punjab-wide mean NDWI (surface water content),unitless index,-1 to 1,All 32 values negative; inconsistent with earlier annual export - see quality report
+rainfall_mean_mm_per_day,Rainfall_Punjab_YYYY_Monthly.csv :: rainfall_mean_mm_per_day,Monthly mean daily rainfall across Punjab,mm/day,>= 0,
+rainfall_total_mm,Rainfall_Punjab_YYYY_Monthly.csv :: rainfall_total_mm,Total monthly rainfall across Punjab,mm/month,>= 0,Approximately equals rainfall_mean_mm_per_day x days in month
+temp_max_c,Temperature_Punjab_YYYY_Monthly.csv :: temp_max_c,Monthly maximum 2 m air temperature,degrees Celsius,plausible -10 to 55,"Source export already in Celsius; no Kelvin conversion applied"
+temp_mean_c,Temperature_Punjab_YYYY_Monthly.csv :: temp_mean_c,Monthly mean 2 m air temperature,degrees Celsius,plausible -10 to 55,"Source export already in Celsius; no Kelvin conversion applied"
+temp_min_c,Temperature_Punjab_YYYY_Monthly.csv :: temp_min_c,Monthly minimum 2 m air temperature,degrees Celsius,plausible -10 to 55,"Source export already in Celsius; no Kelvin conversion applied"
+soil_moisture_0_7cm,SoilMoisture_Punjab_YYYY_Monthly.csv :: soil_moisture_0_7cm,Monthly mean volumetric soil water content for the 0-7 cm layer,m3/m3 (volumetric fraction),0 to 1,Preserved exactly as exported
+soil_moisture_7_28cm,SoilMoisture_Punjab_YYYY_Monthly.csv :: soil_moisture_7_28cm,Monthly mean volumetric soil water content for the 7-28 cm layer,m3/m3 (volumetric fraction),0 to 1,Preserved exactly as exported
+bare_km2,LandCover_Punjab_YYYY_Monthly.csv :: bare_km2,Monthly land area classified as bare ground,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+built_km2,LandCover_Punjab_YYYY_Monthly.csv :: built_km2,Monthly land area classified as built-up,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+crops_km2,LandCover_Punjab_YYYY_Monthly.csv :: crops_km2,Monthly land area classified as cropland,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+flooded_vegetation_km2,LandCover_Punjab_YYYY_Monthly.csv :: flooded_vegetation_km2,Monthly land area classified as flooded vegetation,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+grass_km2,LandCover_Punjab_YYYY_Monthly.csv :: grass_km2,Monthly land area classified as grass,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+shrub_and_scrub_km2,LandCover_Punjab_YYYY_Monthly.csv :: shrub_and_scrub_km2,Monthly land area classified as shrub and scrub,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+snow_and_ice_km2,LandCover_Punjab_YYYY_Monthly.csv :: snow_and_ice_km2,Monthly land area classified as snow and ice,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+trees_km2,LandCover_Punjab_YYYY_Monthly.csv :: trees_km2,Monthly land area classified as trees,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"
+water_km2,LandCover_Punjab_YYYY_Monthly.csv :: water_km2,Monthly land area classified as open water,km2,>= 0,"Dynamic World-style classes; monthly class totals vary with mosaic coverage - see quality report"

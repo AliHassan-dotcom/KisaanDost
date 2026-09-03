@@ -1,0 +1,13 @@
+commodity_id,commodity_name,default_unit,status
+1,Wheat,Rs/100Kg,allowlisted_phase7b
+21,Potato Fresh,Rs/100Kg,allowlisted_phase7b
+22,Potato Store,Rs/100Kg,allowlisted_phase7b
+3,Rice Basmati Super (New),Rs/100Kg,allowlisted_phase7b
+4,Rice (IRRI),Rs/100Kg,allowlisted_phase7b
+9,Gram Black Bareek,Rs/100Kg,allowlisted_phase7b
+11,Moong,Rs/100Kg,allowlisted_phase7b
+17,Maize,Rs/100Kg,allowlisted_phase7b
+23,Onion,Rs/100Kg,allowlisted_phase7b
+26,Tomato,Rs/100Kg,allowlisted_phase7b
+49,Seed Cotton(Phutti),Rs/100Kg,allowlisted_phase7b
+125,Sugarcane,Rs/100Kg,allowlisted_phase7b

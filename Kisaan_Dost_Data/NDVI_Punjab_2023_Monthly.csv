@@ -1,0 +1,13 @@
+system:index,NDVI_mean,month,year,.geo
+0,0.3964429467429992,1,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+1,0.4353079657173054,2,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+2,0.41453158849629085,3,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+3,0.2758670416168556,4,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+4,0.22929707091051307,5,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+5,0.24897308894889889,6,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+6,0.28519036091087613,7,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+7,0.35458073444956145,8,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+8,0.3741468902890671,9,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+9,0.33693873898831456,10,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+10,0.25796593043460125,11,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+11,0.3275157373434176,12,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"

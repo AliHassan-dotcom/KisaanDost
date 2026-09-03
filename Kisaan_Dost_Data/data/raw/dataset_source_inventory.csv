@@ -1,0 +1,7 @@
+source_dataset,download_path,detected_root,total_images,valid_images,corrupt_images,num_classes,notes
+PlantVillage,C:\Users\R Y Z E N\.cache\kagglehub\datasets\emmarex\plantdisease\versions\1,C:\Users\R Y Z E N\.cache\kagglehub\datasets\emmarex\plantdisease\versions\1\PlantVillage,20638,20638,0,15,Leaf-level disease dataset; 15 classes across 3 crops.
+Wheat Disease,,,0,0,0,0,skipped: Wheat leaf disease dataset.
+Wheat and Rice Leaf Disease,,,0,0,0,0,skipped: Combined wheat and rice leaf disease images.
+Cotton Leaf Disease,,,0,0,0,0,skipped: Cotton leaf disease detection dataset.
+Sugarcane Leaf Diseases,,,0,0,0,0,skipped: Sugarcane leaf disease images.
+Citrus Leaves,C:\Users\R Y Z E N\.cache\kagglehub\datasets\sourabh2001\citrus-leaves-dataset\versions\1,C:\Users\R Y Z E N\.cache\kagglehub\datasets\sourabh2001\citrus-leaves-dataset\versions\1\Leaves,1036,1036,0,5,Citrus leaf images.

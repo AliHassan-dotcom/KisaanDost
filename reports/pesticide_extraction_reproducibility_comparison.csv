@@ -1,0 +1,15 @@
+metric_or_dimension,prior_validated_value,rerun_value,status,difference_explanation
+source_file_path,Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf,Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf,EXACT_MATCH,Copied from external verified source D:/Kisaan_Dost_Data/
+source_file_size_bytes,8058335,8058335,EXACT_MATCH,Byte size identical
+source_sha256,d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725,d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725,EXACT_MATCH,Cryptographic SHA-256 identical
+pdf_page_count,43,43,EXACT_MATCH,All 43 pages extracted
+pdf_text_layer_chars,45005,45005,EXACT_MATCH,Text layer character count identical
+extracted_facts_count,72,72,EXACT_MATCH,All 72 advisory facts generated
+extracted_chunks_count,43,43,EXACT_MATCH,All 43 page-bounded chunks generated
+review_queue_count,1,1,EXACT_MATCH,1 ambiguous dose fact queued
+facts_with_explicit_dose,0,0,EXACT_MATCH,Zero explicit dose entries in source text
+dose_integrity_violations,0,0,EXACT_MATCH,Zero invented dose violations
+source_page_references_valid,72/72 (100%),72/72 (100%),EXACT_MATCH,All fact pages within 1..43 range
+source_excerpts_present,72/72 (100%),72/72 (100%),EXACT_MATCH,All facts cite verbatim text excerpts
+table_extraction_warnings,33,33,EXACT_MATCH,Quality control table filter warnings identical
+validator_success,PASS,PASS,EXACT_MATCH,0 errors returned by 08_validate_pesticide_report.py

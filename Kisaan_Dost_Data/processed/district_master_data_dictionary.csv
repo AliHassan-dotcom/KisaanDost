@@ -1,0 +1,19 @@
+column,description,unit
+date,YYYY-MM-01 first-of-month ISO date derived from year and month,date
+year,Calendar year of observation,integer
+month,Month of year (1-12),integer
+district,Standardized Punjab district name,text
+NDVI_mean,Mean Normalized Difference Vegetation Index for the district-month,unitless (-1 to 1)
+NDWI_mean,Mean Normalized Difference Water Index for the district-month,unitless (-1 to 1)
+rainfall_total_mm,Monthly total rainfall; 2025-2026 maps from single Rainfall_mm column,mm
+rainfall_mean_mm_per_day,Daily mean rainfall (only available for 2022-2024),mm/day
+temp_max_c,Monthly maximum temperature (only available for 2022-2024),degrees Celsius
+temp_mean_c,Monthly mean temperature; 2025-2026 maps from single Temperature_C column,degrees Celsius
+temp_min_c,Monthly minimum temperature (only available for 2022-2024),degrees Celsius
+soil_moisture_0_7cm,Volumetric soil moisture 0-7 cm layer; 2025-2026 maps from single SoilMoisture column,m3/m3
+soil_moisture_7_28cm,Volumetric soil moisture 7-28 cm layer (only available for 2022-2024),m3/m3
+landcover_crops_km2,Area classified as crops from monthly land-cover data (2022-2024 only),km2
+landcover_cropland_fraction,Annual cropland fraction from 2025-2026 simplified land-cover exports,fraction
+data_source_schema,Either legacy_detailed (2022-2024) or modern_simplified (2025-2026),text
+data_quality_flag,Quality flag e.g. suspicious_zero_monsoon_rainfall,text
+missing_columns_note,Explanation when 2025-2026 simplified schema cannot provide legacy columns,text

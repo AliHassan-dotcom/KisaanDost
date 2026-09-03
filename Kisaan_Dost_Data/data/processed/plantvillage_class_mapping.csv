@@ -1,0 +1,16 @@
+class_id,class_name,crop,disease,is_healthy,num_images,num_train,num_val,num_test
+0,Pepper__bell___Bacterial_spot,Pepper bell,Bacterial spot,False,997,698,150,149
+1,Pepper__bell___healthy,Pepper bell,healthy,True,1478,1035,222,221
+2,Potato___Early_blight,Potato,Early blight,False,1000,700,150,150
+3,Potato___Late_blight,Potato,Late blight,False,1000,700,150,150
+4,Potato___healthy,Potato,healthy,True,152,106,23,23
+5,Tomato_Bacterial_spot,Tomato,Bacterial spot,False,2127,1489,319,319
+6,Tomato_Early_blight,Tomato,Early blight,False,1000,700,150,150
+7,Tomato_Late_blight,Tomato,Late blight,False,1909,1336,286,287
+8,Tomato_Leaf_Mold,Tomato,Leaf Mold,False,952,666,143,143
+9,Tomato_Septoria_leaf_spot,Tomato,Septoria leaf spot,False,1771,1240,266,265
+10,Tomato_Spider_mites_Two_spotted_spider_mite,Tomato,Spider mites Two spotted spider mite,False,1676,1173,251,252
+11,Tomato__Target_Spot,Tomato,Target Spot,False,1404,983,211,210
+12,Tomato__Tomato_YellowLeaf__Curl_Virus,Tomato,Tomato YellowLeaf Curl Virus,False,3208,2246,481,481
+13,Tomato__Tomato_mosaic_virus,Tomato,Tomato mosaic virus,False,373,261,56,56
+14,Tomato_healthy,Tomato,healthy,True,1591,1114,239,238

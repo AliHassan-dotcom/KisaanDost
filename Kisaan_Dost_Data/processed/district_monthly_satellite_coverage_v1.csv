@@ -1,0 +1,35 @@
+district,normalized_district,has_authoritative_polygon,total_expected_months,months_with_satellite_data,coverage_percentage,data_status,polygon_source,notes
+Attock,Attock District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Bahawalnagar,Bahawalnagar District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Bahawalpur,Bahawalpur District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Bhakkar,Bhakkar District,False,48,0,0.0%,boundary_unavailable,None,Omitted from ArcGIS source GeoJSON (31 features); null metrics emitted.
+Chakwal,Chakwal District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Dera Ghazi Khan,Dera Ghazi Khan District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Faisalabad,Faisalabad District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Gujranwala,Gujranwala District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Gujrat,Gujrat District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Hafizabad,Hafizabad District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Jhang,Jhang District,False,48,0,0.0%,boundary_unavailable,None,Omitted from ArcGIS source GeoJSON (31 features); null metrics emitted.
+Jhelum,Jhelum District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Kasur,Kasur District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Khanewal,Khanewal District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Khushab,Khushab District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Lahore,Lahore District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Layyah,Layyah District,False,48,0,0.0%,boundary_unavailable,None,Omitted from ArcGIS source GeoJSON (31 features); null metrics emitted.
+Lodhran,Lodhran District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Mandi Bahauddin,Mandi Bahauddin District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Mianwali,Mianwali District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Multan,Multan District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Muzaffargarh,Muzaffargarh District,False,48,0,0.0%,boundary_unavailable,None,Omitted from ArcGIS source GeoJSON (31 features); null metrics emitted.
+Narowal,Narowal District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Okara,Okara District,False,48,0,0.0%,boundary_unavailable,None,Omitted from ArcGIS source GeoJSON (31 features); null metrics emitted.
+Pakpattan,Pakpattan District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Rahim Yar Khan,Rahim Yar Khan District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Rajanpur,Rajanpur District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Rawalpindi,Rawalpindi District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Sahiwal,Sahiwal District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Sargodha,Sargodha District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Sheikhupura,Sheikhupura District,True,48,48,100.0%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Sialkot,Sialkot District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Toba Tek Singh,Toba Tek Singh District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline
+Vehari,Vehari District,True,48,47,97.9%,historical_satellite_baseline,ArcGIS Punjab_District_Boundaries (WGS84),Full 48-month cloud-masked monthly baseline

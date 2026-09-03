@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T19:48:00+00:00",
+  "project_root": "D:/KisaanDost",
+  "freeze_status": "Repository frozen and ready for Antigravity Pro continuation.",
+  "live_components": [
+    {
+      "path": "app/",
+      "description": "Live FastAPI backend, security, services, and fallback frontend mount.",
+      "status": "verified_with_config_blocker",
+      "downstream_dependencies": ["tests/", "data/processed/", "Kisaan_Dost_Data/processed/"]
+    },
+    {
+      "path": "mobile_app/",
+      "description": "Live Flutter farmer-facing mobile MVP.",
+      "status": "analyze_clean_44_tests_passed",
+      "downstream_dependencies": ["FastAPI /api/v1", "Flutter SDK", "Android device or emulator"]
+    }
+  ],
+  "legacy_or_superseded_components": [
+    {"path": "backend/", "description": "Earlier scaffold; not the live app backend.", "replacement": "app/"},
+    {"path": "mobile/", "description": "Earlier Flutter scaffold; not the live mobile app.", "replacement": "mobile_app/"},
+    {"path": "web/", "description": "Deprecated web frontend path.", "replacement": "mobile_app/"},
+    {"path": "Makefile", "description": "Targets legacy backend/mobile trees; do not use as final verification authority."}
+  ],
+  "mobile": {
+    "root": "mobile_app/",
+    "entry": "mobile_app/lib/main.dart",
+    "routes": ["/", "/login", "/register", "/dashboard", "/profile", "/scan", "/weather", "/irrigation", "/pest", "/satellite", "/market", "/settings", "/admin"],
+    "route_guard": "Unauthenticated users redirect to login; authenticated users leave auth routes for dashboard; /admin requires UserRole.admin.",
+    "screens": ["splash", "login", "register", "dashboard", "profile setup/edit", "scan", "weather", "irrigation", "pest alerts", "satellite", "market", "settings", "admin placeholder"],
+    "mock_live_toggle": "const USE_MOCKS via --dart-define; providers select mock or live repositories at compile time.",
+    "secure_storage": "flutter_secure_storage stores access token and language only; passwords are not persisted.",
+    "api_configuration": "API_BASE_URL dart define, default http://10.0.2.2:8000; API prefix /api/v1.",
+    "commands": ["flutter run --dart-define=USE_MOCKS=true", "flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8000", "flutter analyze", "flutter test", "flutter build apk --debug"],
+    "debug_apk": {"path": "mobile_app/build/app/outputs/flutter-apk/app-debug.apk", "status": "existing artifact preserved during freeze"}
+  },
+  "backend": {
+    "run_command": "python -m uvicorn app.backend.main:app --host 0.0.0.0 --port 8000",
+    "api_prefix": "/api/v1",
+    "contracts": "app/backend/schemas.py",
+    "endpoints": ["POST /auth/register", "POST /auth/login", "GET /auth/me", "GET/PATCH /profile", "GET /dashboard", "GET /weather/districts", "GET /weather/current", "GET /weather/historical", "POST /crop-health/scan", "GET /crop-health/history", "GET /pest-alerts/recent", "POST /pest-alerts/advisory", "GET /pest-alerts/sources", "GET /market/summary", "GET /market/history", "GET /admin/users", "GET /admin/audit", "GET /admin/stats"],
+    "auth_roles": "bcrypt password hashes; HS256 JWT access token claims include farmer, extension_worker, or admin role; admin routes require admin.",
+    "rate_limits": "In-memory general/login/advisory limiters; not distributed or multi-worker safe.",
+    "upload_validation": "Name, extension, claimed MIME type, 5 MB maximum, UUID server filename, resolved-path traversal defense.",
+    "audit": "Thread-locked append-only JSONL for auth, scans, and pesticide access; no rotation and not multi-process safe.",
+    "storage_limit": "app_data/store/users.json is MVP-only read-modify-write storage; PostgreSQL migration is required before production."
+  },
+  "ml": {
+    "baseline_checkpoint": "Kisaan_Dost_Data/models/best_plantvillage_model.pt",
+    "selected_checkpoint": "Kisaan_Dost_Data/models/best_plantvillage_model_v2.pt",
+    "runtime_configuration_status": "blocked: settings points to models/best_plantvillage_model_v2.pt under project root, which is absent.",
+    "architecture": "ResNet-18 with selected mlp_256 classification head.",
+    "preprocessing": "Resize 256; center crop 224; tensor; ImageNet normalization.",
+    "class_mapping": "Kisaan_Dost_Data/data/processed/plantvillage_class_mapping.csv",
+    "scope": "15 PlantVillage classes across Pepper bell, Potato, and Tomato only.",
+    "metrics": {"baseline_test_accuracy": 0.8507, "baseline_test_macro_f1": 0.8281, "v2_test_accuracy": 0.8963, "v2_test_macro_f1": 0.8825},
+    "inference_endpoint": "POST /api/v1/crop-health/scan",
+    "low_confidence_policy": "confidence below 0.75 is flagged uncertain; vision output is not pesticide advice."
+  },
+  "data_artifacts": [
+    {"path": "Kisaan_Dost_Data/Historical Data/", "description": "NASA POWER daily source JSON, 2022-2025.", "provenance": "NASA POWER"},
+    {"path": "Kisaan_Dost_Data/raw/arcgis/punjab_district_boundaries.geojson", "description": "Punjab district polygons.", "provenance": "ArcGIS FeatureServer"},
+    {"path": "Kisaan_Dost_Data/processed/district_coordinates.csv", "description": "41-district coordinate table.", "provenance": "project prompt mapping"},
+    {"path": "Kisaan_Dost_Data/processed/weather_join_keys.csv", "description": "NASA grid-to-district joins and fallback flags.", "provenance": "spatial join"},
+    {"path": "Kisaan_Dost_Data/processed/district_monthly_weather.csv", "description": "Monthly district weather aggregate.", "provenance": "NASA POWER aggregation"},
+    {"path": "Kisaan_Dost_Data/data/processed/plantvillage_manifest_clean.csv", "description": "PlantVillage clean split manifest.", "provenance": "Kaggle-derived indexing/split"},
+    {"path": "Kisaan_Dost_Data/data/processed/unified_crop_disease_manifest_clean.csv", "description": "Unified crop-disease manifest.", "provenance": "source inventory and cleanup"},
+    {"path": "Kisaan_Dost_Data/processed/pbs_*.csv", "description": "PBS Agricultural Census 2024 extracted context tables.", "provenance": "official PBS report"},
+    {"path": "Kisaan_Dost_Data/processed/kisaan_dost_context_only.csv", "description": "PBS context rows excluded from remote-sensing master join.", "provenance": "PBS context merge"},
+    {"path": "data/processed/pesticide_report_facts.csv", "description": "72 source-traceable pesticide report facts.", "provenance": "official report text extraction"},
+    {"path": "data/processed/pesticide_report_chunks.jsonl", "description": "43 source-preserving report page chunks.", "provenance": "official report text extraction"},
+    {"path": "data/processed/pesticide_report_review_queue.csv", "description": "One human-review record.", "provenance": "official report text extraction"},
+    {"path": "data/processed/pesticide_report_ingestion_meta.json", "description": "Ingestion metadata and table warnings.", "provenance": "official report text extraction"}
+  ],
+  "external_dependencies": [
+    {"path": "D:/Kisaan_Dost_Data/Annual Report 2024-25_copy.pdf", "required_for": "pesticide extraction reproduction", "status": "present on this workstation but absent from repository", "sha256": "d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725"},
+    {"path": "local Kaggle cache paths in PlantVillage manifests", "required_for": "retraining/evaluation image access", "status": "non-portable source image dependency"}
+  ],
+  "safety": ["Report-backed advisory only.", "No inferred pesticide quantity.", "No displayed dose without explicit source text.", "Source title/page/section/excerpt tracking is preserved.", "Vision model does not prescribe pesticide use.", "Mock, historical, live, unavailable, and error states must remain visible."],
+  "product_status": [
+    {"feature": "login/profile", "status": "ready for demo", "dependency": "live backend or mock"},
+    {"feature": "dashboard", "status": "ready for demo", "dependency": "live backend or mock"},
+    {"feature": "crop scanning", "status": "backend required; configuration blocker", "dependency": "corrected local model path"},
+    {"feature": "weather", "status": "ready with historical/mock labels", "dependency": "backend and NASA CSV coverage"},
+    {"feature": "irrigation", "status": "ready as guidance", "dependency": "profile/weather context"},
+    {"feature": "pesticide advisory", "status": "ready with report facts; reproduction blocked", "dependency": "backend and external official PDF for regeneration"},
+    {"feature": "satellite", "status": "mock only", "dependency": "Phase 2 GEE"},
+    {"feature": "market", "status": "mock only", "dependency": "verified market source"},
+    {"feature": "GEE", "status": "Phase 2", "dependency": "monthly district aggregation"},
+    {"feature": "land utilization", "status": "Phase 2", "dependency": "official context/admin UX"},
+    {"feature": "water availability", "status": "Phase 2", "dependency": "official context/admin UX"},
+    {"feature": "export/import/trade", "status": "Phase 2", "dependency": "verified source and admin UX"},
+    {"feature": "agricultural GDP", "status": "Phase 2", "dependency": "verified source and admin UX"},
+    {"feature": "admin dashboard", "status": "placeholder", "dependency": "production admin implementation"},
+    {"feature": "notifications", "status": "Phase 2", "dependency": "notification service"},
+    {"feature": "Urdu localization", "status": "partial", "dependency": "translated strings and accessibility review"},
+    {"feature": "release signing", "status": "not complete", "dependency": "signing key and HTTPS release endpoint"},
+    {"feature": "production database", "status": "not complete", "dependency": "PostgreSQL migration"}
+  ],
+  "verification_reference": "reports/final_project_verification.json",
+  "known_failures": [
+    {"check_id": "configured_data_model_paths", "classification": "code", "summary": "Configured runtime checkpoint path is absent while the selected checkpoint exists under Kisaan_Dost_Data/models."},
+    {"check_id": "flutter_debug_apk", "classification": "freeze_protection", "summary": "Build intentionally skipped to preserve the existing validated debug APK."}
+  ]
+}

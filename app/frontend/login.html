@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Login</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2 data-i18n="login">Login</h2>
+      <form id="loginForm">
+        <label>Phone</label>
+        <input type="tel" id="phone" required placeholder="03001234567">
+        <label>Password</label>
+        <input type="password" id="password" required placeholder="••••••">
+        <button type="submit" class="btn" data-i18n="login">Login</button>
+      </form>
+      <p style="text-align:center;margin-top:12px;"><a href="/register.html">Create account</a></p>
+      <div id="message"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+      const resp = await fetch(`${API_PREFIX}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, password }),
+      });
+      const data = await resp.json();
+      if (resp.ok && data.access_token) {
+        localStorage.setItem("kd_token", data.access_token);
+        window.location.href = "/";
+      } else {
+        showError(document.getElementById("message"), data.detail || data.error?.message || "Login failed");
+      }
+    });
+  </script>
+</body>
+</html>

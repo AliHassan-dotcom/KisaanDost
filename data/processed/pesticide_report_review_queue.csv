@@ -1,0 +1,29 @@
+fact_id,category,crop,pest_or_disease,district,date_or_period,advisory_text,pesticide_name,active_ingredient,formulation,explicit_dose_text,safety_text,quality_control_status,source_report_title,source_report_year,source_filename,source_page,source_section,source_excerpt,extraction_status,confidence,reviewed
+fact_00032,pesticide_quality_control,rice,,Gujranwala; Gujrat; Lahore,,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.
+ In non-core rice areas prohibition warning for use of these 13/not recommended pesticides
+are also being pasted on product labels.
+ Govt. of Punjab played a role in banning of hazardous pesticides and as a result Thirteen
+(13) pesticides have been banned for use in rice crop in 63rd APTAC meeting. Thirteen Prohibited Pesticides in rice crop
+I. Imidacloprid II. Buprofezin
+III. Acetamiprid IV. Thiamethoxam
+V. Chlorpyrifos VI. Profenofos
+VII. Triazophos VIII. Carbendazim
+IX.",Imidacloprid; Thiamethoxam; Acetamiprid; Triazophos; Chlorpyrifos; Carbendazim,,,,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.",restricted/banned,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,15,1. Pest Surveillance & Forecasting,"Enforcement
+ Supply, sale, storage and advertisement have been totally banned in core rice areas
+(Lahore, Gujranwala, Gujrat divisions) and are being rigorously monitored by the pesticide
+inspectors.
+ In non-core rice areas prohibition warning for use of these 13/not recommended pesticides
+are also being pasted on product labels.
+ Govt. of Punjab played a role in banning of hazardous pesticides and as a result Thirteen
+(13) pesticides have been banned for use in rice crop in 63rd APTAC meeting. Thirteen Prohibited Pesticides in rice crop
+I. Imidacloprid II. Buprofezin
+III. Acetamiprid IV. Thiamethoxam
+V. Chlorpyrifos VI. Profenofos
+VII. Triazophos VIII. Carbendazim
+IX.",ambiguous_dose,0.75,false

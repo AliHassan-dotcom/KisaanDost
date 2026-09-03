@@ -1,0 +1,8 @@
+commodity_group,commodity_name,fiscal_year,value_million_usd,quantity_thousand_mt,share_of_agri_imports_pct,primary_origins,data_source,processed_at
+Edible Oils,Palm Oil & Soybean Oil,2023-24,3450.0,3200.0,41.6,"Indonesia, Malaysia",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Oilseeds,Oilseeds (Soybean & Canola),2023-24,1120.0,1850.0,13.5,"USA, Brazil, Canada",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Fibers,Raw Cotton,2023-24,1380.0,780.0,16.6,"USA, Brazil, Egypt, Afghanistan",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Food Staples,Pulses & Legumes,2023-24,720.0,1150.0,8.7,"Canada, Australia, Myanmar",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Beverages,Tea & Coffee,2023-24,560.0,260.0,6.7,"Kenya, Rwanda, Vietnam",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Food Staples,Wheat (Strategic Inflow),2023-24,520.0,1600.0,6.3,"Russia, Ukraine",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00
+Other Agri,"Spices, Dry Fruits & Other",2023-24,550.0,420.0,6.6,"India (via 3rd party), Afghanistan, China",Pakistan Bureau of Statistics / Economic Survey,2026-09-02T04:07:55.596801+00:00

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 9: GDP / Trade / Export–Import Charts (Agriculture Focus)",
+  "generated_at_utc": "2026-09-02T03:00:30+00:00",
+  "status": "complete",
+  "data_sources": {
+    "economic_survey_and_pbs": {
+      "sources": [
+        "Pakistan Economic Survey (Chapter 2: Agriculture)",
+        "Pakistan Economic Survey (Chapter 8: Foreign Trade and Balance of Payments)",
+        "Pakistan Bureau of Statistics (PBS) Foreign Trade Statistics",
+        "Indus River System Authority (IRSA) & State Bank of Pakistan (SBP)"
+      ],
+      "geography": "Pakistan (National) and Punjab Province",
+      "time_period": "FY2019-20 to FY2024-25"
+    }
+  },
+  "generated_datasets": {
+    "gdp_trends_csv": {
+      "path": "Kisaan_Dost_Data/processed/agri_gdp_trends_v1.csv",
+      "row_count": 7,
+      "metrics": [
+        "agri_gdp_share_pct", "agri_growth_rate_pct", "crops_subsector_share_pct",
+        "important_crops_share_pct", "other_crops_share_pct", "livestock_subsector_share_pct",
+        "forestry_subsector_share_pct", "fishing_subsector_share_pct", "punjab_agri_value_add_share_pct"
+      ]
+    },
+    "exports_csv": {
+      "path": "Kisaan_Dost_Data/processed/agri_exports_v1.csv",
+      "row_count": 6,
+      "major_commodities": ["Rice (Basmati & Non-Basmati)", "Raw Cotton & Yarn", "Fruits (Citrus/Mango)", "Vegetables (Potatoes/Onions)", "Spices"]
+    },
+    "imports_csv": {
+      "path": "Kisaan_Dost_Data/processed/agri_imports_v1.csv",
+      "row_count": 7,
+      "major_commodities": ["Palm Oil & Edible Oils", "Oilseeds (Soybean/Canola)", "Raw Cotton", "Pulses & Legumes", "Tea & Coffee", "Wheat"]
+    },
+    "trade_summary_csv": {
+      "path": "Kisaan_Dost_Data/processed/agri_trade_summary_v1.csv",
+      "row_count": 2,
+      "metrics": ["total_agri_exports_million_usd", "total_agri_imports_million_usd", "agri_trade_balance_million_usd"]
+    }
+  },
+  "endpoints": [
+    "/api/v1/agri/gdp",
+    "/api/v1/agri/exports",
+    "/api/v1/agri/imports",
+    "/api/v1/agri/trade-summary"
+  ],
+  "verification_results": {
+    "trade_pipeline_tests": "3 passed",
+    "backend_agri_tests": "10 passed",
+    "all_backend_tests": "87 passed",
+    "data_pipeline_tests": "396 passed",
+    "flutter_tests": "72 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "handoff_completeness_gate": "COMPLETE (0 Active Blockers)"
+  },
+  "safety_invariants": {
+    "no_ml_forecasting": true,
+    "no_price_predictions": true,
+    "no_policy_advice": true,
+    "strict_provenance_attribution": true
+  }
+}

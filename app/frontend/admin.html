@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Admin</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2>Admin</h2>
+      <div id="message"></div>
+      <h3>Users</h3>
+      <div id="users"></div>
+      <h3>Recent audit</h3>
+      <div id="audit"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    async function loadAdmin() {
+      const [usersResp, auditResp] = await Promise.all([
+        apiFetch("/admin/users"),
+        apiFetch("/admin/audit?limit=20"),
+      ]);
+      if (!usersResp || !usersResp.ok) {
+        showError(document.getElementById("message"), "Admin access denied or failed.");
+        return;
+      }
+      const users = (await usersResp.json()).data;
+      const audit = (await auditResp.json()).data;
+      document.getElementById("users").innerHTML = users.map(u => `
+        <div class="value" style="margin-bottom:8px;">
+          <div class="number">${u.phone}</div>
+          <div class="label">${u.role}</div>
+        </div>
+      `).join("");
+      document.getElementById("audit").innerHTML = audit.slice().reverse().map(e => `
+        <div class="value" style="margin-bottom:8px;">
+          <div class="number">${e.event}</div>
+          <div class="label">${e.timestamp}</div>
+        </div>
+      `).join("");
+    }
+    loadAdmin();
+  </script>
+</body>
+</html>

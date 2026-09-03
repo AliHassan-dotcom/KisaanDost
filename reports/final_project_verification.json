@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-09-01T20:39:27.941371+00:00",
+  "project_root": "D:\\KisaanDost",
+  "read_only_guarantee": {
+    "ingestion_invoked": false,
+    "training_invoked": false,
+    "downloads_invoked": false,
+    "migrations_invoked": false,
+    "dependency_installation_invoked": false,
+    "written_paths": [
+      "reports/final_project_verification.json",
+      "reports/final_project_verification.md"
+    ]
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+    "pytest": "pytest 9.1.1\n",
+    "flutter_executable": "D:\\flutter\\bin\\flutter.bat",
+    "git_repository": false,
+    "project_root": "D:\\KisaanDost"
+  },
+  "checks": [
+    {
+      "id": "root_python_tests",
+      "category": "backend_and_pesticide_tests",
+      "command": "C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m pytest tests -q -rs --tb=short",
+      "cwd": ".",
+      "expected": "FastAPI API, pesticide extraction, and validation tests pass.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 25.743,
+      "classification": null,
+      "note": "",
+      "stdout_tail": ".................................................                        [100%]\n============================== warnings summary ===============================\nC:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n49 passed, 1 warning in 23.15s\n",
+      "stderr_tail": "",
+      "metrics": {
+        "passed": 49
+      }
+    },
+    {
+      "id": "data_pipeline_tests",
+      "category": "data_pipeline_tests",
+      "command": "C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m pytest Kisaan_Dost_Data/tests -q -rs --tb=short",
+      "cwd": ".",
+      "expected": "NASA POWER, boundaries, coordinates, joins, PlantVillage, and unified-manifest tests pass or disclose skips.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 29.502,
+      "classification": null,
+      "note": "",
+      "stdout_tail": "........................................................................ [ 19%]\n........................................................................ [ 38%]\n........................................................................ [ 57%]\n........................................................................ [ 76%]\n........................................................................ [ 95%]\n................                                                         [100%]\n376 passed in 25.54s\n",
+      "stderr_tail": "",
+      "metrics": {
+        "passed": 376
+      }
+    },
+    {
+      "id": "mvp_smoke_tests",
+      "category": "smoke_tests",
+      "command": "C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe scripts/run_mvp_smoke_tests.py",
+      "cwd": ".",
+      "expected": "MVP smoke wrapper passes.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 11.683,
+      "classification": null,
+      "note": "",
+      "stdout_tail": "..............                                                           [100%]\n============================== warnings summary ===============================\nC:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n14 passed, 1 warning in 9.50s\nRunning MVP smoke tests...\nCommand: C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m pytest tests/test_mvp.py -q --tb=short\n\nMVP smoke tests PASSED.\n",
+      "stderr_tail": "",
+      "metrics": {}
+    },
+    {
+      "id": "pbs_validation",
+      "category": "data_validation",
+      "command": "C:\\Users\\R Y Z E N\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe Kisaan_Dost_Data/scripts/validate_pbs_extracted_tables.py",
+      "cwd": ".",
+      "expected": "PBS extracted-table validator reports all checks passed.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 0.077,
+      "classification": null,
+      "note": "",
+      "stdout_tail": "\n=== pbs_farm_structure.csv ===\n  PASS  Row count = 37\n  PASS  No blank 'district'\n  PASS  No blank 'farm_count'\n  PASS  No blank 'total_farm_area'\n  PASS  No blank 'cultivated_area'\n  PASS  No blank 'average_farm_size'\n  PASS  No blank 'uncultivated_area'\n  PASS  Sum farm_count == 5,050,236\n  PASS  Sum total_farm_area == 31,039,972\n  INFO  Sum cultivated_area off by 1 (census rounding): got 29,644,854, expected 29,644,855\n\n=== pbs_land_tenure.csv ===\n  PASS  Row count = 37\n  PASS  No blank 'district'\n  PASS  No blank 'total_farms'\n  PASS  No blank 'owner_farms'\n  PASS  No blank 'owner_cum_tenant_farms'\n  PASS  No blank 'tenant_farms'\n  PASS  No blank 'total_farm_area'\n  PASS  Tenure sub-types sum to total_farms (exact)\n  INFO  Tenure off by 1 (census rounding) in 10 district(s): Chiniot District, Faisalabad District, Jhang District, Gujranwala District, Gujrat District...\n\n=== pbs_irrigation.csv ===\n  PASS  Row count = 37\n  PASS  No blank 'district'\n  PASS  No blank 'total_cultivated_area'\n  PASS  No blank 'irrigated_area'\n  INFO  unirrigated_area blank (census reported '-') in districts: Khanewal District\n  PASS  irrigated + unirrigated <= total_cultivated_area\n\n=== pbs_crops.csv ===\n  PASS  Row count = 703\n  PASS  No blank 'district'\n  PASS  No blank 'crop_name'\n  PASS  No blank 'season'\n  PASS  No blank 'total_cropped_area'\n  PASS  Each district has exactly 19 crop rows\n\n=== pbs_machinery.csv ===\n  PASS  Row count = 37\n  PASS  No blank 'district'\n  PASS  No blank 'tractor_count'\n  PASS  No blank 'tubewell_count'\n\n=== pbs_livestock.csv ===\n  PASS  Row count = 333\n  PASS  No blank 'district'\n  PASS  No blank 'animal_type'\n  PASS  No blank 'animal_count' (excluding Yak/Dzo/Dzomo)\n  INFO  Yak/Dzo/Dzomo count blank in all 37 districts (species not present in Punjab)\n  PASS  Each district has all 9 animal types\n\n=== pbs_modern_farming.csv ===\n  PASS  Row count = 37\n  PASS  No blank 'district'\n  PASS  No blank 'tunnel_farming'\n  PASS  sprinkler/drip/central_pivot intentionally blank\n\n=== pbs_credit.csv ===\n  PASS  File exists\n  PASS  Intentionally empty (0 data rows)\n\n=== District name cross-check ===\n  PASS  No unexpected non-master district names\n  PASS  All 34 master districts present in outputs\n  PASS  Expected non-master unit present: Chiniot District\n  PASS  Expected non-master unit present: Cholistan Area\n  PASS  Expected non-master unit present: Nankana Sahib District\n\n==================================================\nINFO notes (4 — acceptable known issues):\n  - Sum cultivated_area off by 1 (census rounding): got 29,644,854, expected 29,644,855\n  - Tenure off by 1 (census rounding) in 10 district(s): Chiniot District, Faisalabad District, Jhang District, Gujranwala District, Gujrat District...\n  - unirrigated_area blank (census reported '-') in districts: Khanewal District\n  - Yak/Dzo/Dzomo count blank in all 37 districts (species not present in Punjab)\nRESULT: All checks passed\n",
+      "stderr_tail": "",
+      "metrics": {}
+    },
+    {
+      "id": "pesticide_artifact_validator",
+      "category": "pesticide",
+      "command": "validate(data/processed, reports) via scripts/08_validate_pesticide_report.py",
+      "cwd": ".",
+      "expected": "Valid source-traceable extraction artifacts with no validation errors.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 0.008,
+      "classification": null,
+      "note": "The validator function was called directly because its command entry point rewrites an existing quality report, which is prohibited during freeze.",
+      "stdout_tail": "{\"success\": true, \"errors\": [], \"info\": [], \"facts\": 72, \"chunks\": 43, \"review_queue\": 1, \"dose_integrity_violations\": 0}",
+      "stderr_tail": "",
+      "metrics": {
+        "facts": 72,
+        "chunks": 43,
+        "review_queue": 1,
+        "dose_integrity_violations": 0
+      }
+    },
+    {
+      "id": "pesticide_artifact_consistency",
+      "category": "pesticide",
+      "command": "read-only CSV, JSONL, and metadata consistency inspection",
+      "cwd": ".",
+      "expected": "Facts, chunks, review queue, and metadata counts agree.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 0.0,
+      "classification": null,
+      "note": "Metadata and artifact counts agree.",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "metrics": {
+        "required_files_present": 4,
+        "facts_csv_rows": 72,
+        "chunks_jsonl_rows": 43,
+        "review_queue_rows": 1,
+        "meta_num_facts": 72,
+        "meta_num_chunks": 43,
+        "meta_num_review_queue": 1,
+        "meta_page_count": 43,
+        "meta_status": "ok",
+        "meta_table_warnings": 33
+      }
+    },
+    {
+      "id": "pesticide_source_pdf_resolution",
+      "category": "pesticide",
+      "command": "read-only source-PDF path and checksum inspection",
+      "cwd": ".",
+      "expected": "Official PDF is available at the configured external path; the repository does not substitute a source copy.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 0.0,
+      "classification": null,
+      "note": "The nested in-repository candidate and the configured external sibling are reported separately.",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "metrics": {
+        "requested_nested_path": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf",
+          "exists": true,
+          "size_bytes": 8058335,
+          "modified_at_utc": "2026-09-01T16:25:58.045944+00:00"
+        },
+        "configured_unresolved_path": "D:\\KisaanDost\\..\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf",
+        "configured_external_path": {
+          "path": "D:\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf",
+          "exists": true,
+          "size_bytes": 8058335,
+          "modified_at_utc": "2026-09-01T16:25:58.045944+00:00",
+          "sha256": "d8088a00e0614407091bbc56df42b152ec300787f3f0863eea529c158416c725"
+        }
+      }
+    },
+    {
+      "id": "configured_data_model_paths",
+      "category": "runtime_configuration",
+      "command": "read-only Settings path resolution inspection",
+      "cwd": ".",
+      "expected": "Configured runtime model and data paths resolve to available artifacts.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 0.0,
+      "classification": null,
+      "note": "Configured inference checkpoint is present.",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "metrics": {
+        "configured_model": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\models\\best_plantvillage_model_v2.pt",
+          "exists": true,
+          "size_bytes": 44815115,
+          "modified_at_utc": "2026-09-01T14:42:18.395824+00:00"
+        },
+        "configured_class_mapping": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\data\\processed\\plantvillage_class_mapping.csv",
+          "exists": true,
+          "size_bytes": 1166,
+          "modified_at_utc": "2026-08-31T13:34:08.847313+00:00"
+        },
+        "configured_weather_csv": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\processed\\district_monthly_weather.csv",
+          "exists": true,
+          "size_bytes": 208807,
+          "modified_at_utc": "2026-08-31T11:58:25.645264+00:00"
+        },
+        "configured_coordinates_csv": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\processed\\district_coordinates.csv",
+          "exists": true,
+          "size_bytes": 3974,
+          "modified_at_utc": "2026-08-31T11:28:05.453499+00:00"
+        },
+        "configured_pesticide_pdf": {
+          "path": "D:\\Kisaan_Dost_Data\\Annual Report 2024-25_copy.pdf",
+          "exists": true,
+          "size_bytes": 8058335,
+          "modified_at_utc": "2026-09-01T16:25:58.045944+00:00"
+        },
+        "configured_pesticide_facts": {
+          "path": "D:\\KisaanDost\\data\\processed\\pesticide_report_facts.csv",
+          "exists": true,
+          "size_bytes": 97106,
+          "modified_at_utc": "2026-09-01T20:38:07.613525+00:00"
+        },
+        "actual_v2_model": {
+          "path": "D:\\KisaanDost\\Kisaan_Dost_Data\\models\\best_plantvillage_model_v2.pt",
+          "exists": true,
+          "size_bytes": 44815115,
+          "modified_at_utc": "2026-09-01T14:42:18.395824+00:00"
+        }
+      }
+    },
+    {
+      "id": "flutter_analyze",
+      "category": "flutter",
+      "command": "D:\\flutter\\bin\\flutter.bat analyze",
+      "cwd": "mobile_app",
+      "expected": "No analyzer issues.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 9.48,
+      "classification": null,
+      "note": "",
+      "stdout_tail": "Analyzing mobile_app...                                         \nNo issues found! (ran in 5.2s)\n",
+      "stderr_tail": "",
+      "metrics": {}
+    },
+    {
+      "id": "flutter_test",
+      "category": "flutter",
+      "command": "D:\\flutter\\bin\\flutter.bat test",
+      "cwd": "mobile_app",
+      "expected": "All unit and widget tests pass.",
+      "status": "pass",
+      "returncode": 0,
+      "duration_seconds": 18.955,
+      "classification": null,
+      "note": "",
+      "stdout_tail": "00:00 +0: loading D:/KisaanDost/mobile_app/test/unit/auth_provider_test.dart\n00:00 +0: D:/KisaanDost/mobile_app/test/unit/auth_provider_test.dart: AuthNotifier logs in and updates state\n00:00 +1: D:/KisaanDost/mobile_app/test/unit/auth_provider_test.dart: AuthNotifier surfaces error on failed login\n00:00 +2: D:/KisaanDost/mobile_app/test/unit/auth_provider_test.dart: AuthNotifier logout clears state\n00:00 +3: D:/KisaanDost/mobile_app/test/unit/disease_prediction_test.dart: DiseasePrediction.fromJson parses live backend response envelope and scanned_at timestamp\n00:00 +4: D:/KisaanDost/mobile_app/test/unit/disease_prediction_test.dart: DiseasePrediction.fromJson parses direct map with created_at fallback\n00:00 +5: D:/KisaanDost/mobile_app/test/unit/disease_prediction_test.dart: DiseasePrediction.fromJson uses safe defaults for missing fields\n00:00 +6: D:/KisaanDost/mobile_app/test/unit/image_validator_test.dart: ImageValidator returns error when file is null\n00:00 +7: D:/KisaanDost/mobile_app/test/unit/image_validator_test.dart: ImageValidator returns error for missing file\n00:00 +8: D:/KisaanDost/mobile_app/test/unit/image_validator_test.dart: ImageValidator returns error for unsupported extension\n00:00 +9: D:/KisaanDost/mobile_app/test/unit/image_validator_test.dart: ImageValidator returns error for empty file\n00:01 +10: D:/KisaanDost/mobile_app/test/unit/language_persistence_test.dart: SettingsNotifier loads persisted language on creation\n00:01 +11: D:/KisaanDost/mobile_app/test/unit/language_persistence_test.dart: SettingsNotifier setLanguage persists and updates state\n00:01 +12: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: PestAlert.fromJson parses new backend shape\n00:01 +13: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: PestAlert.fromJson falls back to legacy field names\n00:01 +14: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: PestAlert.fromJson uses defaults for missing fields\n00:01 +15: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: Advisory.fromJson parses full advisory response\n00:01 +16: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: Advisory.fromJson topic falls back through crop and district\n00:01 +17: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: PestCitation.fromJson parses citation with defaults\n00:01 +18: D:/KisaanDost/mobile_app/test/unit/pest_models_test.dart: PestSource.fromJson parses source metadata\n00:02 +19: D:/KisaanDost/mobile_app/test/unit/pest_provider_test.dart: PestNotifier build loads alerts and sources\n00:02 +20: D:/KisaanDost/mobile_app/test/unit/pest_provider_test.dart: PestNotifier loadAlerts passes optional filters\n00:02 +21: D:/KisaanDost/mobile_app/test/unit/pest_provider_test.dart: PestNotifier getAdvisory updates advisory in state\n00:02 +22: D:/KisaanDost/mobile_app/test/unit/role_guard_test.dart: UserRole farmer is not admin\n00:02 +23: D:/KisaanDost/mobile_app/test/unit/role_guard_test.dart: UserRole admin is admin\n00:02 +24: D:/KisaanDost/mobile_app/test/unit/role_guard_test.dart: UserRole extension worker serializes correctly\n00:02 +25: D:/KisaanDost/mobile_app/test/unit/role_guard_test.dart: UserRole unknown role throws\n00:02 +26: D:/KisaanDost/mobile_app/test/unit/role_guard_test.dart: User copyWith preserves fields\n00:02 +27: D:/KisaanDost/mobile_app/test/unit/secure_storage_test.dart: SecureStorageService write and read token\n00:03 +28: D:/KisaanDost/mobile_app/test/unit/secure_storage_test.dart: SecureStorageService delete removes value\n00:03 +29: D:/KisaanDost/mobile_app/test/unit/secure_storage_test.dart: SecureStorageService deleteAll clears store\n00:03 +30: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators phone rejects empty input\n00:03 +31: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators phone rejects too few digits\n00:03 +32: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators phone accepts valid phone\n00:03 +33: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators password rejects short input\n00:03 +34: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators password accepts 6+ characters\n00:03 +35: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators name rejects empty input\n00:03 +36: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators farmSize accepts null/empty\n00:03 +37: D:/KisaanDost/mobile_app/test/unit/validators_test.dart: Validators farmSize rejects invalid values\n00:03 +38: D:/KisaanDost/mobile_app/test/widget/dashboard_status_badge_test.dart: StatusBadge renders correct label for mock\n00:05 +39: D:/KisaanDost/mobile_app/test/widget/login_screen_test.dart: Login screen validates empty fields\n00:05 +40: D:/KisaanDost/mobile_app/test/widget/login_screen_test.dart: Login screen validates empty fields\n00:07 +41: D:/KisaanDost/mobile_app/test/widget/offline_loading_error_test.dart: Dashboard shows loading then data\n00:07 +42: D:/KisaanDost/mobile_app/test/widget/offline_loading_error_test.dart: Dashboard shows loading then data\n00:07 +43: D:/KisaanDost/mobile_app/test/widget/pest_alerts_screen_test.dart: PestAlertsScreen renders alerts, advisory and sources\n00:08 +44: D:/KisaanDost/mobile_app/test/widget/scan_screen_test.dart: Scan screen shows image picker buttons\n00:08 +45: D:/KisaanDost/mobile_app/test/widget/pest_alerts_screen_test.dart: Advisory card shows dose guidance and safety notice\n00:09 +46: D:/KisaanDost/mobile_app/test/widget_test.dart: App renders and shows splash\n00:10 +47: All tests passed!\n",
+      "stderr_tail": "",
+      "metrics": {}
+    },
+    {
+      "id": "flutter_debug_apk",
+      "category": "flutter",
+      "command": "D:\\flutter\\bin\\flutter.bat build apk --debug",
+      "cwd": "mobile_app",
+      "expected": "Debug APK builds successfully.",
+      "status": "skipped",
+      "returncode": null,
+      "duration_seconds": 0.0,
+      "classification": "freeze_protection",
+      "note": "Not executed because a debug APK may be overwritten and the freeze prohibits overwriting validated mobile artifacts. Existing artifact metadata was inspected instead: {\"path\": \"D:\\\\KisaanDost\\\\mobile_app\\\\build\\\\app\\\\outputs\\\\flutter-apk\\\\app-debug.apk\", \"exists\": true, \"size_bytes\": 157516411, \"modified_at_utc\": \"2026-09-01T16:12:13.518327+00:00\", \"sha256\": \"8649a343f8c1b09179afcf81636cc8e0e5291791684ad60eca6daa6ebe0b9e5b\"}",
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "metrics": {}
+    }
+  ],
+  "failures": [
+    {
+      "check_id": "flutter_debug_apk",
+      "status": "skipped",
+      "classification": "freeze_protection",
+      "severity": "recorded_skip",
+      "evidence": "Not executed because a debug APK may be overwritten and the freeze prohibits overwriting validated mobile artifacts. Existing artifact metadata was inspected instead: {\"path\": \"D:\\\\KisaanDost\\\\mobile_app\\\\build\\\\app\\\\outputs\\\\flutter-apk\\\\app-debug.apk\", \"exists\": true, \"size_bytes\": 157516411, \"modified_at_utc\": \"2026-09-01T16:12:13.518327+00:00\", \"sha256\": \"8649a343f8c1b09179afcf81636cc8e0e5291791684ad60eca6daa6ebe0b9e5b\"}",
+      "concealed": false
+    }
+  ],
+  "counts": {
+    "total": 11,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 1
+  },
+  "overall_status": "complete_with_recorded_failures"
+}

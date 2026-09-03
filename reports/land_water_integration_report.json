@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 8: Land Utilization & Water Availability Charts",
+  "generated_at_utc": "2026-09-02T02:47:30+00:00",
+  "status": "complete",
+  "data_sources": {
+    "pbs_agricultural_census": {
+      "name": "Pakistan Bureau of Statistics (PBS) 2024 Agricultural Census",
+      "tables_used": [
+        "Table 1.0 (Number and Area of Farms)",
+        "Table 1.1 (Land Utilization of Farms)",
+        "Table 1.3 (Land Tenure of Farms)",
+        "Table 4.2 (Irrigated Area by Source of Irrigation)",
+        "Table 6.5 (Crop Area and Percentage Distribution)"
+      ],
+      "geography": "Punjab Province (37 Administrative Units/Districts)"
+    },
+    "water_context_baselines": {
+      "pakistan_economic_survey_and_irsa": {
+        "provincial_annual_canal_withdrawals_maf": 53.5,
+        "national_per_capita_water_m3_year": 860.0,
+        "falkenmark_benchmark": "Water-Stressed (<1,000 m3/capita)"
+      }
+    }
+  },
+  "generated_datasets": {
+    "land_utilization_csv": {
+      "path": "Kisaan_Dost_Data/processed/district_land_utilization_v1.csv",
+      "row_count": 37,
+      "key_columns": [
+        "district", "total_farm_area_acres", "cultivated_area_acres", "uncultivated_area_acres",
+        "total_cropped_area_acres", "cultivated_share_pct", "cropping_intensity_pct",
+        "wheat_area_acres", "wheat_share_pct", "rice_area_acres", "rice_share_pct",
+        "cotton_area_acres", "cotton_share_pct", "sugarcane_area_acres", "sugarcane_share_pct",
+        "maize_area_acres", "maize_share_pct", "fodder_area_acres", "fodder_share_pct"
+      ]
+    },
+    "water_availability_csv": {
+      "path": "Kisaan_Dost_Data/processed/district_water_availability_v1.csv",
+      "row_count": 37,
+      "key_columns": [
+        "district", "total_cultivated_area_acres", "irrigated_area_acres", "unirrigated_area_acres",
+        "irrigation_coverage_pct", "canal_only_acres", "canal_only_pct", "canal_and_tubewell_acres",
+        "tubewell_only_acres", "tubewell_only_pct", "barani_rainfed_acres", "barani_share_pct",
+        "groundwater_reliance_pct", "canal_surface_reliance_pct", "primary_irrigation_mode",
+        "water_source_classification", "provincial_annual_canal_withdrawals_maf"
+      ]
+    }
+  },
+  "endpoints": [
+    "/api/v1/agri/land-utilization",
+    "/api/v1/agri/water-availability"
+  ],
+  "verification_results": {
+    "pipeline_tests": "3 passed",
+    "backend_agri_tests": "4 passed",
+    "all_backend_tests": "81 passed",
+    "data_pipeline_tests": "393 passed",
+    "flutter_tests": "72 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "handoff_completeness_gate": "COMPLETE (0 Active Blockers)"
+  },
+  "safety_invariants": {
+    "no_ml_forecasting": true,
+    "no_yield_predictions": true,
+    "no_policy_advice": true,
+    "strict_provenance_attribution": true
+  }
+}

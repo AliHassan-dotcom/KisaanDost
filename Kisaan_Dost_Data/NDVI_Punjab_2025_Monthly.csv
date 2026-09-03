@@ -1,0 +1,13 @@
+system:index,NDVI_mean,month,year,.geo
+0,0.40187822803360324,1,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+1,0.43806594132973403,2,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+2,0.4178599733037536,3,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+3,0.25208906439761963,4,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+4,0.19142275926985977,5,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+5,0.2100214283340477,6,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+6,0.27645977242551073,7,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+7,0.34258353426867466,8,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+8,0.39175070433106957,9,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+9,0.3363812052983615,10,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+10,0.27474844907778745,11,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"
+11,0.3320939059177482,12,2025,"{""type"":""MultiPoint"",""coordinates"":[]}"

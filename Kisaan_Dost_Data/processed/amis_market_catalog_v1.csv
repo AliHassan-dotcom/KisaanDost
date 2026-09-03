@@ -1,0 +1,4 @@
+market_name,source_market_id,province,mapped_district,notes
+Lahore,1,Punjab,Lahore District,Verified from AMIS public prices table
+Faisalabad,2,Punjab,Faisalabad District,Verified from AMIS public prices table
+Multan,Multan,Punjab,Multan District,Verified from AMIS public prices table

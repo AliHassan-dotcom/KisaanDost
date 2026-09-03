@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 6: Open-Meteo Live Weather Backend + Flutter Integration",
+  "generated_at_utc": "2026-09-01T21:40:00+00:00",
+  "status": "complete",
+  "open_meteo_integration": {
+    "base_url": "https://api.open-meteo.com/v1/forecast",
+    "coordinates_source": "Kisaan_Dost_Data/processed/district_coordinates.csv",
+    "total_coordinate_entries": 41,
+    "master_districts": 34,
+    "variables": {
+      "current": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "precipitation",
+        "wind_speed_10m"
+      ],
+      "hourly": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "dewpoint_2m",
+        "precipitation",
+        "vapour_pressure_deficit",
+        "et0_fao_evapotranspiration",
+        "wind_speed_10m",
+        "wind_gusts_10m",
+        "weather_code",
+        "soil_temperature_0cm",
+        "soil_temperature_6cm",
+        "soil_temperature_18cm",
+        "soil_moisture_0_to_1cm",
+        "soil_moisture_1_to_3cm",
+        "soil_moisture_3_to_9cm",
+        "soil_moisture_9_to_27cm",
+        "shortwave_radiation",
+        "direct_normal_irradiance"
+      ],
+      "daily": [
+        "temperature_2m_max",
+        "precipitation_sum",
+        "precipitation_probability_max",
+        "shortwave_radiation_sum",
+        "et0_fao_evapotranspiration"
+      ],
+      "models": ["ecmwf_ifs", "best_match"],
+      "timezone": "auto"
+    },
+    "caching": {
+      "strategy": "in_memory_ttl_with_stale_fallback",
+      "current_ttl_seconds": 1800,
+      "forecast_ttl_seconds": 3600,
+      "stale_fallback_supported": true,
+      "statuses": ["fresh_live", "cached_live", "stale_fallback", "upstream_error", "mock"]
+    },
+    "security": {
+      "arbitrary_coordinates_blocked": true,
+      "server_side_district_resolution": true,
+      "timeout_seconds": 5.0
+    },
+    "attribution": "Weather data by Open-Meteo.com under CC BY 4.0"
+  },
+  "endpoints": [
+    "/api/v1/weather/districts",
+    "/api/v1/weather/current",
+    "/api/v1/weather/forecast",
+    "/api/v1/weather/historical",
+    "/api/v1/dashboard"
+  ],
+  "flutter_components": {
+    "models": [
+      "mobile_app/lib/models/weather_summary.dart",
+      "mobile_app/lib/models/weather_forecast.dart"
+    ],
+    "repositories": [
+      "mobile_app/lib/repositories/weather_repository_impl.dart",
+      "mobile_app/lib/repositories/mock/mock_weather_repository.dart"
+    ],
+    "provider": "mobile_app/lib/providers/weather_provider.dart",
+    "screens_and_widgets": [
+      "mobile_app/lib/screens/weather_screen.dart",
+      "mobile_app/lib/widgets/weather_card.dart"
+    ],
+    "mock_mode_preserved": true
+  },
+  "verification_results": {
+    "weather_backend_tests": "9 passed",
+    "all_backend_tests": "70 passed",
+    "flutter_tests": "62 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "data_pipeline_tests": "384 passed"
+  }
+}

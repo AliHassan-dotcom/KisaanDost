@@ -1,0 +1,29 @@
+{
+  "default_farmer": {
+    "user_id": "default_farmer",
+    "selected_district": "Multan District",
+    "selected_market": "Multan",
+    "selected_crops": [
+      "Cotton",
+      "Wheat"
+    ],
+    "alert_types": [
+      "weather",
+      "market"
+    ],
+    "channels": [
+      "in_app",
+      "local"
+    ],
+    "enable_weather_alerts": true,
+    "enable_market_alerts": true,
+    "enable_advisory_reminders": true,
+    "heatwave_temp_threshold": 42.0,
+    "rainfall_threshold_mm": 25.0,
+    "frost_temp_threshold": 3.0,
+    "market_mover_threshold_pct": 10.0,
+    "fcm_token": null,
+    "fcm_status": "not_configured",
+    "updated_at_utc": "2026-09-02T05:43:41.704648+00:00"
+  }
+}

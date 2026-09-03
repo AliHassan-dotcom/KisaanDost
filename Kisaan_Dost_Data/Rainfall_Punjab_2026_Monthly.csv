@@ -1,0 +1,9 @@
+system:index,month,rainfall_mean_mm_per_day,rainfall_total_mm,year,.geo
+0,1,0.6136031505521606,19.02169768080092,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+1,2,0.21120063867123004,5.913617883238249,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+2,3,1.1422824288693343,35.410755310408426,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+3,4,1.3317101421056914,39.951304251717474,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+4,5,0.7028893169427756,21.7895688190598,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+5,6,1.0380952330073183,31.142857015090936,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+6,7,3.938176681054616,122.08347709831988,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"
+7,8,0.0,0.0,2026,"{""type"":""MultiPoint"",""coordinates"":[]}"

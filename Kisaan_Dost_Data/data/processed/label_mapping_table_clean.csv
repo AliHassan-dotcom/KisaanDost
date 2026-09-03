@@ -1,0 +1,21 @@
+source_dataset,source_class_name,crop,disease,canonical_label,is_healthy
+PlantVillage,Pepper__bell___Bacterial_spot,Pepper,Bell Bacterial Spot,Pepper__Bell Bacterial Spot,False
+PlantVillage,Pepper__bell___healthy,Pepper,Bell Healthy,Pepper__Bell Healthy,False
+PlantVillage,Potato___Early_blight,Potato,Early Blight,Potato__Early Blight,False
+PlantVillage,Potato___Late_blight,Potato,Late Blight,Potato__Late Blight,False
+PlantVillage,Potato___healthy,Potato,healthy,Potato__healthy,True
+PlantVillage,Tomato_Bacterial_spot,Tomato,Bacterial Spot,Tomato__Bacterial Spot,False
+PlantVillage,Tomato_Early_blight,Tomato,Early Blight,Tomato__Early Blight,False
+PlantVillage,Tomato_Late_blight,Tomato,Late Blight,Tomato__Late Blight,False
+PlantVillage,Tomato_Leaf_Mold,Tomato,Leaf Mold,Tomato__Leaf Mold,False
+PlantVillage,Tomato_Septoria_leaf_spot,Tomato,Septoria Leaf Spot,Tomato__Septoria Leaf Spot,False
+PlantVillage,Tomato_Spider_mites_Two_spotted_spider_mite,Tomato,Spider Mites Two Spotted Spider Mite,Tomato__Spider Mites Two Spotted Spider Mite,False
+PlantVillage,Tomato__Target_Spot,Tomato,Target Spot,Tomato__Target Spot,False
+PlantVillage,Tomato__Tomato_YellowLeaf__Curl_Virus,Tomato,Tomato Yellowleaf Curl Virus,Tomato__Tomato Yellowleaf Curl Virus,False
+PlantVillage,Tomato__Tomato_mosaic_virus,Tomato,Tomato Mosaic Virus,Tomato__Tomato Mosaic Virus,False
+PlantVillage,Tomato_healthy,Tomato,healthy,Tomato__healthy,True
+Citrus Leaves,Black spot,citrus,black spot,citrus_black_spot,False
+Citrus Leaves,Melanose,citrus,melanose,citrus_melanose,False
+Citrus Leaves,canker,citrus,canker,citrus_canker,False
+Citrus Leaves,greening,citrus,greening,citrus_greening,False
+Citrus Leaves,healthy,citrus,healthy,citrus_healthy,True

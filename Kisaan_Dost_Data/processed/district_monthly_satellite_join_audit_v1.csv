@@ -1,0 +1,35 @@
+district_id,district_name,normalized_district,geojson_match_status,geometry_type,vertex_count,lon_min,lon_max,lat_min,lat_max,centroid_lon,centroid_lat,satellite_aggregation_eligible,audit_reason
+dist_001,Attock,Attock District,matched,Polygon,2568,71.7048,72.9244,33.0005,34.0059,72.4213,33.5153,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_002,Bahawalnagar,Bahawalnagar District,matched,Polygon,1520,72.2869,73.972,28.8542,30.377,73.0742,29.9005,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_003,Bahawalpur,Bahawalpur District,matched,Polygon,1401,70.8925,72.8529,27.7993,29.8738,71.9178,29.2859,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_004,Bhakkar,Bhakkar District,missing_in_geojson,None,0,,,,,,,False,Known ArcGIS Punjab boundary incompleteness. Nearest-centroid grid fallback strictly prohibited for satellite zonal statistics.
+dist_005,Chakwal,Chakwal District,matched,Polygon,2456,71.8031,73.2458,32.5432,33.2148,72.6205,32.8792,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_006,Dera Ghazi Khan,Dera Ghazi Khan District,matched,Polygon,2178,69.9154,70.9092,29.5704,31.3387,70.4179,30.479,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_007,Faisalabad,Faisalabad District,matched,Polygon,1766,72.6695,73.67,30.6929,31.7898,73.1858,31.1079,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_008,Gujranwala,Gujranwala District,matched,Polygon,1141,73.6788,74.5676,31.814,32.5486,74.164,32.1441,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_009,Gujrat,Gujrat District,matched,Polygon,936,73.5794,74.4769,32.3915,33.0042,74.0803,32.7098,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_010,Hafizabad,Hafizabad District,matched,Polygon,567,73.1422,73.8268,31.7573,32.3442,73.4553,32.035,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_011,Jhang,Jhang District,missing_in_geojson,None,0,,,,,,,False,Known ArcGIS Punjab boundary incompleteness. Nearest-centroid grid fallback strictly prohibited for satellite zonal statistics.
+dist_012,Jhelum,Jhelum District,matched,Polygon,2393,72.6045,73.7986,32.4238,33.2491,73.2397,32.8783,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_013,Kasur,Kasur District,matched,Polygon,1762,73.6338,74.7029,30.6275,31.3405,74.11,31.0521,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_014,Khanewal,Khanewal District,matched,Polygon,1794,71.5384,72.4784,29.8671,30.7399,71.9905,30.3523,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_015,Khushab,Khushab District,matched,Polygon,1915,71.6095,72.6318,31.5243,32.7292,72.1106,32.221,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_016,Lahore,Lahore District,matched,Polygon,1576,74.0017,74.6549,31.2247,31.7154,74.3594,31.4469,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_017,Layyah,Layyah District,missing_in_geojson,None,0,,,,,,,False,Known ArcGIS Punjab boundary incompleteness. Nearest-centroid grid fallback strictly prohibited for satellite zonal statistics.
+dist_018,Lodhran,Lodhran District,matched,Polygon,1371,71.3346,72.1443,29.3518,29.9434,71.762,29.7043,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_019,Mandi Bahauddin,Mandi Bahauddin District,matched,Polygon,1221,73.046,73.8827,32.1212,32.7416,73.403,32.4357,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_020,Mianwali,Mianwali District,matched,Polygon,1514,71.1066,71.9595,32.1648,33.241,71.5451,32.7308,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_021,Multan,Multan District,matched,Polygon,1676,71.0219,71.8393,29.3778,30.449,71.3562,29.8981,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_022,Muzaffargarh,Muzaffargarh District,missing_in_geojson,None,0,,,,,,,False,Known ArcGIS Punjab boundary incompleteness. Nearest-centroid grid fallback strictly prohibited for satellite zonal statistics.
+dist_023,Narowal,Narowal District,matched,Polygon,1120,74.5951,75.3815,31.9215,32.4972,74.9457,32.2171,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_024,Okara,Okara District,missing_in_geojson,None,0,,,,,,,False,Known ArcGIS Punjab boundary incompleteness. Nearest-centroid grid fallback strictly prohibited for satellite zonal statistics.
+dist_025,Pakpattan,Pakpattan District,matched,Polygon,3050,72.811,73.6221,29.9969,30.6541,73.1978,30.398,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_026,Rahim Yar Khan,Rahim Yar Khan District,matched,MultiPolygon,1312,69.4688,71.1192,27.7051,29.2301,70.1681,28.5087,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_027,Rajanpur,Rajanpur District,matched,Polygon,1453,69.3214,70.7276,28.4071,29.9485,70.1438,29.2877,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_028,Rawalpindi,Rawalpindi District,matched,Polygon,5657,72.6317,73.6405,33.062,34.0182,73.2037,33.5598,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_029,Sahiwal,Sahiwal District,matched,Polygon,3950,72.3857,73.3433,30.1716,30.9314,72.9105,30.5468,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_030,Sargodha,Sargodha District,matched,Polygon,2357,72.2162,73.3003,31.5717,32.5919,72.7515,32.0997,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_031,Sheikhupura,Sheikhupura District,matched,Polygon,1708,73.2632,74.7007,31.3468,32.0684,74.1061,31.7031,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_032,Sialkot,Sialkot District,matched,Polygon,1767,74.1986,74.9473,32.0471,32.8425,74.5907,32.4399,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_033,Toba Tek Singh,Toba Tek Singh District,matched,Polygon,2161,72.1386,72.8393,30.5271,31.3785,72.5599,30.836,True,Authoritative boundary polygon available in ArcGIS GeoJSON.
+dist_034,Vehari,Vehari District,matched,Polygon,2246,71.7385,72.9716,29.5848,30.3679,72.3731,30.0407,True,Authoritative boundary polygon available in ArcGIS GeoJSON.

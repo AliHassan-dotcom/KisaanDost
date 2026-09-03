@@ -1,0 +1,207 @@
+===== PDF PAGE 20 =====
+Agricultural Census 20 24 | Integrated Digital Count
+6. SCOPE OF THE CENSUS
+The scope of the Agricultural Census 2024 as finally approved includes all the topics
+concerned with some restrictions mentioned as follows.
+The Agricultural Census 2024 only focused on agricultural households involved in operating
+agricultural land, rearing livestock, and having agricultural machinery. The selection of
+Households to be interviewed was made on the basis of their involvement in agricultural
+activities segregating them after listing operation.
+The scope refers to the range / subjects / items covered by the Agricultural Census 2024. For
+Agricultural Census 2024, the scope with reference to farm area was restricted to the
+Agricultural farm(s) / holding(s) held and or operated by the Government or by private
+household(s), individually or collectively or under joint arrangement at the time of census
+enumeration. Consequently, undistributed government lands other than government farms,
+undistributed portions of the land resumed by the Government under land reforms, built up
+areas, land under roads, rails, ravines, rivers, canals, government forests, parks, lakes, water
+bodies, shallow lands, hills and mountains, etc. falling under the category of non-farm areas
+were outside the scope of the census.
+It included the collection of data on type, size, tenure and parcels of farms, land utilization,
+irrigation, area under crops and orchards, number of fruit and non-fruit trees, use of agricultural
+machinery, livestock population, loan and its sources, economic activities of household
+members and their main source of income.
+It included all public and private tractors / bulldozers / combine harvesters used wholly or
+partly for agricultural purposes. Tractors / bulldozers which are nonfunctional and/or used
+entirely for non-agricultural purposes were not covered in the census. The farm implements
+normally pulled by or motivated with tractor and in possession of tractor owners were also
+enumerated. All public and private tubewells / wells with pump / lift pumps / submersible
+pumps used for irrigation purposes were also enumerated. The machines sunk only for
+drinking water fell outside the scope of this census. Ascertaining the extent and pattern of use
+of public and private owned farm machinery.
+Moreover, the information regarding number of livestock holders possessing animals was
+ascertained. Livestock count was restricted to the head count of cattle, buffaloes, sheep, goats
+and camels by age, sex and breed distribution, whereas information about the horses, mules
+and asses was
+
+===== PDF PAGE 23 =====
+Agricultural Census 20 24 | Integrated Digital Count
+broader national framework. These deliberations focused on critical aspects such as field
+deployment strategies, data-sharing protocols, and execution mechanisms. The outcome was
+the development of a well-coordinated and harmonized approach, which not only aligned
+provincial initiatives with national objectives but also enhanced the accuracy, credibility, and
+overall coverage of the census across the country.
+10.5 Meetings with District Governments
+The District Level Meetings were convened nationwide in June 2024 to
+comprehensively review the progress of census activities, address emerging challenges in
+data collection, and formulate strategies aimed at enhancing both accuracy and efficiency.
+These meetings, presided over by the Deputy Commissioners, served as vital platforms of
+coordination by bringing together the district heads of key provincial departments including
+agriculture, livestock, crop reporting services, education, and revenue alongside local
+stakeholders. This collaborative engagement ensured that operational challenges were
+addressed promptly and that district level efforts were seamlessly aligned with provincial and
+national objectives. The principal objectives of these district-level meetings were as follows:
+• To ensure the availability of the requisite number of enumeration and supervisory staff
+for smooth field operations.
+• To systematically address challenges encountered during data collection and devise
+practical solutions.
+• To strengthen coordination among stakeholders, thereby fostering synergy in census
+implementation.
+• To deliberate upon the integration of technological advancements in census activities,
+with particular emphasis on digital innovation.
+• To outline future steps for the successful and timely completion of the census.
+• To enhance community engagement through well-structured awareness and
+sensitization programs.
+• To improve the training of enumerators with a focus on digital data collection methods
+and modern tools.
+• To provide strengthened logistical support for field teams, ensuring efficiency and
+reliability in operations.
+• To establish a helpdesk mechanism for prompt resolution of field-related issues.
+• To conduct periodic review meetings for tracking progress and proactively addressing
+emerging challenges.
+The extensive stakeholder engagement process proved instrumental in the successful
+planning and execution of the Agricultural Census. It not only fostered cross-sectoral
+collaboration but also promoted data standardization and ensured that the adop
+
+===== PDF PAGE 24 =====
+Agricultural Census 20 24 | Integrated Digital Count
+11. SAMPLING PLAN
+Pakistan Bureau of Statistics successfully conducted Agricultural Census by merging
+three censuses i.e. Agricultural Census, Livestock Census and Agricultural Machinery Census.
+Previously, three separate censuses on Agriculture, Livestock and Machinery were conducted
+on different points of time on old sample designs that were different and independent to each
+other. Pakistan has vast experience of carrying out separate censuses for Agriculture (sample
+based), Livestock (sample-based) and Agricultural Machinery (a mixture of complete counting
+and sample based detailed interviewing).
+Agricultural Census 2024 being merger of all three types of censuses conducted in one go,
+under the same logistic operation. In the light of discussion between PBS technical team and
+FAO International sampling expert: Sample design of Agricultural Census developed in 2021.
+The sample design increase efficiency on targeting the three sub-populations of interest, crop
+producers, livestock holders, and agricultural machinery owners, in a sample-based census.
+11.1 Universe
+The universe of the census consists of all urban and rural areas of Pakistan. Results
+are representative at overall district level.
+11.2 Sampling Frame
+To prepare the sampling frame of the Agricultural Census (AC), the Mouza Census
+2020 was conducted. Each mouza also contains Enumeration Blocks (EBs)/block; the mouza
+may consist of one or more blocks. After the conduct of the latest Population & Housing
+Census (P&HC) 2023, updated information is used in the framework of the Agricultural
+Census. Therefore, the mapping of Mouza Census Frame 2020 and P&HC 2023 has been
+carried out. The latest information on EBs against each mouza of the Mouza Census Frame
+has been updated. Later, the Mouza Census Frame 2020 was mapped with the updated
+sampling frame of 7th Population and Housing Census 2023 for the Agricultural Census 2024.
+11.3 Sample Size Estimation
+Sample size estimation has been carried out at the district level using 15% Margin of
+Error at 95% confidence interval. The previous sample size of the Agricultural Census and
+Livestock Census in each district has been considered along with information of cultivated
+land and livestock concentration based on the Mouza Census 2020. Initially, the sample size
+of a total of 11,054 mouzas/blocks was estimated; however, later, it was enhanced with the
+addition of 53 mouzas/blocks/Gawala colonies, as detailed below:
+Table 1: Summary of Estimated Sample Size
+Sr.
+Name of Province No. of Mouza No. of Blocks 
+
+===== PDF PAGE 29 =====
+Agricultural Census 20 24 | Integrated Digital Count
+Table: 5: Number of Trainers trained at NIBAF, Islamabad
+Department No. of Participants
+Pakistan Bureau of Statistics (PBS) 320
+Crop Reporting Services (CRS) 7
+Agriculture Extension (AE) 13
+Agriculture Research (AR) 1
+Education Department (ED) 6
+Information Technology (IT) 1
+Livestock (LS) 1
+Provincial Bureau of Statistics (BoS) 3
+Total 352
+B. Second Tier – Field Staff Training Sep-2024 (Phase-I), Dec-2024 (Phase-II)
+Following the training of Census Master Trainers, 1st phase training of enumerators and
+supervisors in September while 2nd phase training was conducted in December, 2024 at district
+levels.
+• Total 7686, field staff were trained by master trainers to ensure uniform understanding
+and execution of census protocols.
+• The training covered field data collection techniques, ethical considerations, digital tool
+usage, and troubleshooting common challenges in data gathering.
+• Role-playing and simulated interviews were conducted to enhance enumerators'
+interaction skills with farmers.
+The Agricultural Census Training served as a crucial platform for evaluating the census
+progress, the accuracy and efficiency of the census process.
+13.2 Field Operations
+The Agricultural Census of Pakistan was conducted in two distinct phases to account
+for varying climatic conditions across the country. This comprehensive national exercise was
+aimed to collect up-to-date and accurate agricultural data to support policy formulation and
+strategic planning for the agricultural sector.
+13.3 Inaugurations
+Formal launch ceremonies were held at
+federal and provincial levels, marking the
+nationwide rollout of census activities. The
+Minister of Planning, Development and Special
+Initiatives, Mr. Ahsan Iqbal, oversaw the
+inauguration events and Inaugurated the Field
+Operations at National Level. In Khyber
+Pakhtunkhwa, the Minister of Agriculture,
+Major (Retd.) Sajjad Barkwal, inaugurated the
+field operations. In Balochistan, the Chief
+Minister, Sarfaraz Bugti, inaugurated the event, Inauguration of field operation of 7th
+while in Punjab, the Finance Minister, Mian Agricultural Census 2024 in Islamabad
+28
+
+===== PDF PAGE 30 =====
+Agricultural Census 20 24 | Integrated Digital Count
+Mujtaba Shujaur-Rehman, inaugurated the field operation on behalf of the Chief Minister. In
+Sindh, Mr. Nasir Hussain Shah, Minister for Local Government, Forests, and Religious Affairs,
+led the inauguration. Senior officials from the Pakistan Bureau of Statistics in the respective
+provinces also attended the ceremonies. At District level the field operations were inaugurated
+by the respective Deputy Commissioners.
+The census enumeration was carried out in two phases across 160 districts of Pakistan.
+Phase I was conducted from 2nd September to 31st October 2024, covering 24 districts
+including selected areas of Khyber Pakhtunkhwa, Balochistan, Azad Jammu and Kashmir & all
+districts of Gilgit Baltistan.
+Phase II was conducted from 1st November to 31st December 2024, covering the remaining
+136 districts, including Islamabad Capital Territory, Punjab, Sindh, Khyber Pakhtunkhwa,
+Balochistan & Azad Jammu and Kashmir. In total, 160 districts were enumerated. Additionally,
+nomads, gypsies, and migratory populations were listed and enumerated whenever they are
+found within the boundaries of any selected Mouza or block during household listing or
+enumeration.
+14. ESTIMATION OF THE CENSUS RESULTS
+14.1. Sample Design (Rural Part)
+Agricultural Census in rural part employs a stratified multi-stage sampling design with
+the following stages:
+A. First Stage: Selection of Rural Mouzas
+• Stratum Z1 (Mouzas without cultivated land): Simple Random Sampling (SRS)
+• Stratum Z2 (Mouzas with cultivated land): Probability Proportional to Size (PPS) using
+cultivated area as Measure of Size (MoS)
+B. Second Stage: Selection of one block from selected big Mouzas using Multivariate PPS
+(MPPS), with:
+• Livestock-rearing households
+• Self-agriculture households as measures of size (MOS).
+C. Third Stage: Selection of households within selected Mouza/block:
+• Certainty enumeration for NCH, MCH, machinery-only households, and nomads/gypsy
+• Systematic Random Sampling (SRS) for:
+▪ Agricultural land operator households
+▪ Livestock-only households
+2. Notation
+Let:
+• h=1,2,...,H denote rural strata
+•
+29
+i = 1 , 2 , ... , N
+h
+denote Mouzas in stratum h
+• b=1,2,...,B denote blocks within Mouzas i
+hi
+• j =1,2,...,M denote households in ith Mouza of hthstratum
+hib
+Study variable:
+y = value of interest (land area, livestock count, machinery count)
+hibj
+

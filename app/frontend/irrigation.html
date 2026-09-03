@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Irrigation</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2>Irrigation Planner</h2>
+      <span class="status-pill status-mock" data-i18n="mock">Offline preview</span>
+      <p>This module will combine crop type, soil moisture, and weather forecasts once the satellite feed is connected.</p>
+      <ul>
+        <li>Check soil moisture before each irrigation.</li>
+        <li>Water early morning to reduce evaporation.</li>
+        <li>Adjust schedule after rainfall events.</li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>renderNav("settings");</script>
+</body>
+</html>

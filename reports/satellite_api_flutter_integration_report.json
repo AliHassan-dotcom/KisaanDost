@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 5B: Real Satellite API, Flutter Charts, and Explainable Attention Status",
+  "generated_at_utc": "2026-09-01T21:30:00+00:00",
+  "status": "complete",
+  "formula_integrity": {
+    "ndvi_formula": "(B8 - B4) / (B8 + B4)",
+    "ndwi_formula": "(B8 - B11) / (B8 + B11)",
+    "synthetic_validation": "passed",
+    "physical_bounds": "[-1.0, 1.0]",
+    "status": "verified"
+  },
+  "backend_service": {
+    "module": "app.backend.services.satellite_service.py",
+    "router": "app.backend.routers.satellite.py",
+    "endpoints": [
+      "/api/v1/satellite/districts",
+      "/api/v1/satellite/latest",
+      "/api/v1/satellite/history",
+      "/api/v1/satellite/coverage"
+    ],
+    "master_districts_count": 34,
+    "historical_months_count": 48,
+    "total_matrix_rows": 1632,
+    "missing_boundary_districts": [
+      "Bhakkar District",
+      "Jhang District",
+      "Layyah District",
+      "Muzaffargarh District",
+      "Okara District"
+    ],
+    "attention_statuses": [
+      "normal_observation",
+      "vegetation_attention",
+      "water_attention",
+      "insufficient_satellite_data",
+      "boundary_unavailable"
+    ],
+    "security": {
+      "auth_required": true,
+      "filesystem_paths_exposed": false,
+      "zero_coercion_of_nulls": true
+    }
+  },
+  "flutter_integration": {
+    "repository_impl": "mobile_app/lib/repositories/satellite_repository_impl.dart",
+    "mock_repository": "mobile_app/lib/repositories/mock/mock_satellite_repository.dart",
+    "provider": "mobile_app/lib/providers/satellite_provider.dart",
+    "screens": [
+      "mobile_app/lib/screens/satellite_screen.dart",
+      "mobile_app/lib/screens/dashboard_screen.dart"
+    ],
+    "widgets": [
+      "mobile_app/lib/widgets/satellite_trend_chart.dart",
+      "mobile_app/lib/widgets/satellite_card.dart"
+    ],
+    "mock_toggle_preserved": true,
+    "chart_implementation": "CustomPaint/Canvas time-series sparkline",
+    "localization": "English and Urdu status/attention messages"
+  },
+  "test_results": {
+    "backend_satellite_tests": "12 passed",
+    "backend_total_tests": "61 passed",
+    "data_pipeline_tests": "384 passed",
+    "flutter_tests": "56 passed",
+    "flutter_analyze": "clean (0 issues)"
+  }
+}

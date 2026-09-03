@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "task": "Phase 12: Database Migration (JSON to PostgreSQL)",
+  "generated_at_utc": "2026-09-02T04:09:45+00:00",
+  "status": "complete",
+  "database_architecture": {
+    "engine": "PostgreSQL 14+ / SQLAlchemy ORM",
+    "fallback_mode": "SQLite / JSON Store",
+    "connection_pooling": {
+      "pool_size": 10,
+      "max_overflow": 20,
+      "pool_pre_ping": true,
+      "pool_recycle_seconds": 3600
+    },
+    "tables_created": [
+      "users",
+      "crop_scans",
+      "weather_cache",
+      "market_prices",
+      "user_preferences",
+      "notifications",
+      "audit_logs",
+      "migration_metadata"
+    ]
+  },
+  "migration_results": {
+    "status": "success",
+    "migration_name": "001_initial_json_to_db_migration",
+    "source_json_snapshot_hash": "d5a39e501369f6776ec7913d7829d86f27be7a19262dc980c2fd7b368e205558",
+    "row_counts": {
+      "users": 2,
+      "crop_scans": 2,
+      "weather_cache": 41,
+      "market_prices": 12,
+      "user_preferences": 1,
+      "notifications": 3
+    }
+  },
+  "endpoints_added": [
+    "GET /api/v1/health/db",
+    "GET /api/v1/admin/migration-status"
+  ],
+  "ops_artifacts": {
+    "docker_compose": "docker-compose.yml",
+    "init_sql": "init.sql",
+    "env_example": ".env.example",
+    "setup_guide": "DATABASE_SETUP.md",
+    "rollback_guide": "MIGRATION_ROLLBACK.md"
+  },
+  "verification_results": {
+    "database_unit_and_integration_tests": "7 passed",
+    "root_backend_tests": "96 passed",
+    "data_pipeline_tests": "396 passed",
+    "flutter_tests": "76 passed",
+    "flutter_analyze": "clean (0 issues)",
+    "handoff_completeness_gate": "COMPLETE (0 Active Blockers)"
+  },
+  "safety_and_fallback_invariants": {
+    "zero_data_loss": true,
+    "json_fallback_enabled": true,
+    "rollback_script_verified": true,
+    "no_hardcoded_credentials": true
+  }
+}

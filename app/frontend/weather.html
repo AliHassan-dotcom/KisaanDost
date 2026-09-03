@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Weather</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2 data-i18n="weather">Weather</h2>
+      <form id="weatherForm">
+        <label>District</label>
+        <select id="district"></select>
+        <button type="submit" class="btn" data-i18n="submit">Submit</button>
+      </form>
+      <div id="current"></div>
+      <div id="history"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    renderNav("weather");
+    async function loadDistricts() {
+      const resp = await apiFetch("/weather/districts");
+      if (!resp || !resp.ok) return;
+      const districts = (await resp.json()).data;
+      const sel = document.getElementById("district");
+      sel.innerHTML = districts.map(d => `<option value="${d}">${d}</option>`).join("");
+    }
+    document.getElementById("weatherForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const district = document.getElementById("district").value;
+      const [curResp, histResp] = await Promise.all([
+        apiFetch(`/weather/current?district=${encodeURIComponent(district)}`),
+        apiFetch(`/weather/historical?district=${encodeURIComponent(district)}`),
+      ]);
+      if (!curResp || !histResp) return;
+      const current = (await curResp.json()).data;
+      const history = (await histResp.json()).data;
+      document.getElementById("current").innerHTML = `
+        <div class="card">
+          ${statusPill(current.status, current.is_mock)}
+          <div class="value-grid">
+            <div class="value"><div class="label">Temp °C</div><div class="number">${current.temperature_c}</div></div>
+            <div class="value"><div class="label">Humidity %</div><div class="number">${current.humidity_percent}</div></div>
+            <div class="value"><div class="label">Rain mm</div><div class="number">${current.rainfall_mm}</div></div>
+            <div class="value"><div class="label">Year/Month</div><div class="number">${current.year}-${String(current.month).padStart(2,"0")}</div></div>
+          </div>
+        </div>
+      `;
+      document.getElementById("history").innerHTML = `
+        <h3>Historical (${history.length} records)</h3>
+        ${history.slice(-6).map(r => `
+          <div class="value" style="margin-bottom:8px;">
+            <div class="number">${r.year}-${String(r.month).padStart(2,"0")}</div>
+            <div class="label">${r.temperature_c}°C · ${r.humidity_percent}% · ${r.rainfall_mm}mm</div>
+          </div>
+        `).join("")}
+      `;
+    });
+    loadDistricts();
+  </script>
+</body>
+</html>

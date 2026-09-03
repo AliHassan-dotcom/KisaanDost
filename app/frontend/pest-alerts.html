@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Dost - Pest Alerts</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kisaan Dost</h1>
+      <select id="lang" class="lang-select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+      </select>
+    </header>
+    <div class="card">
+      <h2 data-i18n="pestAlerts">Pest alerts</h2>
+      <form id="advisoryForm">
+        <label>Crop</label>
+        <input type="text" id="crop" required placeholder="wheat">
+        <label>Pest / Disease</label>
+        <input type="text" id="pest" required placeholder="aphid">
+        <button type="submit" class="btn" data-i18n="submit">Submit</button>
+      </form>
+      <div id="advisory"></div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+  <script>
+    renderNav("scan");
+    document.getElementById("advisoryForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const body = {
+        crop: document.getElementById("crop").value,
+        pest: document.getElementById("pest").value,
+      };
+      const resp = await apiFetch("/pest-alerts/advisory", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!resp) return;
+      const data = await resp.json();
+      const container = document.getElementById("advisory");
+      if (resp.ok) {
+        const a = data;
+        container.innerHTML = `
+          <div class="card">
+            <span class="status-pill status-mock">${a.status}</span>
+            <p><strong>${a.crop}</strong> · ${a.pest}</p>
+            <ul>${a.recommendations.map(r => `<li>${r}</li>`).join("")}</ul>
+            <p class="error" data-i18n="advisoryDisclaimer">${i18n[getLanguage()].advisoryDisclaimer}</p>
+          </div>
+        `;
+      } else {
+        showError(container, data.detail || data.error?.message);
+      }
+    });
+  </script>
+</body>
+</html>
