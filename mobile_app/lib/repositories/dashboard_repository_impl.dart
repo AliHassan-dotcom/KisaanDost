@@ -22,7 +22,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
       throw ApiException.fromResponse(response);
     }
     final body = jsonDecode(response.body) as Map<String, dynamic>;
-    final data = body['data'] as Map<String, dynamic>;
+    final data = (body['data'] as Map<String, dynamic>?) ?? body;
 
     return DashboardData(
       user: (data['user'] as Map<String, dynamic>?) ?? const <String, dynamic>{},

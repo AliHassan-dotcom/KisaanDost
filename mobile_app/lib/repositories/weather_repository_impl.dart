@@ -39,7 +39,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
     final body = jsonDecode(response.body) as Map<String, dynamic>;
     return WeatherSummary.fromJson(
-      (body['data'] as Map<String, dynamic>?) ?? const <String, dynamic>{},
+      (body['data'] as Map<String, dynamic>?) ?? body,
     );
   }
 
@@ -57,7 +57,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
     final body = jsonDecode(response.body) as Map<String, dynamic>;
     return WeatherForecast.fromJson(
-      (body['data'] as Map<String, dynamic>?) ?? const <String, dynamic>{},
+      (body['data'] as Map<String, dynamic>?) ?? body,
     );
   }
 
