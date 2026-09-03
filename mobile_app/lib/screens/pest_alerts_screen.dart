@@ -250,7 +250,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
               const SizedBox(height: 8),
               ...advisory.citations.map((c) {
                 return Text(
-                  c.sourceExcerpt ?? '',
+                  c.sourceExcerpt,
                   style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                 );
               }),
@@ -267,7 +267,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       child: ListTile(
         leading: const Icon(Icons.picture_as_pdf, color: Colors.red),
         title: Text(source.title),
-        subtitle: Text('${source.year ?? ""} · ${source.filename ?? ""}'),
+        subtitle: Text('${source.year} · ${source.filename}'),
       ),
     );
   }

@@ -1,23 +1,31 @@
 /// Environment-aware configuration and single source of truth for API base URL.
-///
-/// Overridden at build/run time via:
-///   `--dart-define=API_BASE_URL=http://<IP>:8000` (e.g. for physical devices)
-///
-/// Default:
-///   `http://10.0.2.2:8000` (for Android emulator debug)
-///
-/// Production / Release builds enforce HTTPS.
 class AppConfig {
   const AppConfig._();
 
-  static const String apiBaseUrl = String.fromEnvironment(
+  static String _activeBaseUrl = const String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://10.0.2.2:8000',
+    defaultValue: 'http://localhost:8000',
   );
+
+  static String get apiBaseUrl => _activeBaseUrl;
+
+  static void setActiveBaseUrl(String url) {
+    _activeBaseUrl = url;
+  }
 
   static const String apiPrefix = '/api/v1';
 
   static Uri apiUri(String path) => Uri.parse('$apiBaseUrl$apiPrefix$path');
+
+  /// Fallback candidates when network changes between USB tunnel, Wi-Fi, and emulator.
+  static List<String> get candidateBaseUrls => <String>[
+        _activeBaseUrl,
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://192.168.1.7:8000',
+        'http://192.168.1.5:8000',
+        'http://10.0.2.2:8000',
+      ];
 
   /// Indicates if API_BASE_URL was explicitly provided at build/run time.
   static bool get isCustomBaseUrl => const bool.hasEnvironment('API_BASE_URL');
@@ -29,7 +37,7 @@ class AppConfig {
   }
 
   /// Timeout for general HTTP requests.
-  static Duration get httpTimeout => const Duration(seconds: 15);
+  static Duration get httpTimeout => const Duration(seconds: 10);
 
   /// Validates security constraints for current build mode.
   static void validate() {

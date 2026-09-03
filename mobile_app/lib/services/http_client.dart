@@ -38,44 +38,81 @@ class HttpClient {
     return headers;
   }
 
+  Future<T> _withFallback<T>(Future<T> Function(Uri uri) requestFn, Uri initialUri) async {
+    try {
+      return await requestFn(initialUri);
+    } catch (e) {
+      // If the primary connection failed (e.g. SocketException), test candidates
+      for (final candidateBase in AppConfig.candidateBaseUrls) {
+        final candidateUri = _replaceBase(initialUri, candidateBase);
+        if (candidateUri == initialUri) continue;
+        try {
+          final result = await requestFn(candidateUri);
+          AppConfig.setActiveBaseUrl(candidateBase);
+          return result;
+        } catch (_) {
+          continue;
+        }
+      }
+      rethrow;
+    }
+  }
+
+  Uri _replaceBase(Uri uri, String newBase) {
+    final parsedBase = Uri.parse(newBase);
+    return uri.replace(
+      scheme: parsedBase.scheme,
+      host: parsedBase.host,
+      port: parsedBase.hasPort ? parsedBase.port : null,
+    );
+  }
+
   Future<Response> get(Uri uri) async {
-    final response = await _client
-        .get(uri, headers: await _headers())
-        .timeout(AppConfig.httpTimeout);
-    return _checkStatus(response);
+    return _withFallback((targetUri) async {
+      final response = await _client
+          .get(targetUri, headers: await _headers())
+          .timeout(AppConfig.httpTimeout);
+      return _checkStatus(response);
+    }, uri);
   }
 
   Future<Response> post(Uri uri, {Object? body}) async {
-    final response = await _client
-        .post(
-          uri,
-          headers: await _headers(),
-          body: body == null ? null : jsonEncode(body),
-        )
-        .timeout(AppConfig.httpTimeout);
-    return _checkStatus(response);
+    return _withFallback((targetUri) async {
+      final response = await _client
+          .post(
+            targetUri,
+            headers: await _headers(),
+            body: body == null ? null : jsonEncode(body),
+          )
+          .timeout(AppConfig.httpTimeout);
+      return _checkStatus(response);
+    }, uri);
   }
 
   Future<Response> put(Uri uri, {Object? body}) async {
-    final response = await _client
-        .put(
-          uri,
-          headers: await _headers(),
-          body: body == null ? null : jsonEncode(body),
-        )
-        .timeout(AppConfig.httpTimeout);
-    return _checkStatus(response);
+    return _withFallback((targetUri) async {
+      final response = await _client
+          .put(
+            targetUri,
+            headers: await _headers(),
+            body: body == null ? null : jsonEncode(body),
+          )
+          .timeout(AppConfig.httpTimeout);
+      return _checkStatus(response);
+    }, uri);
   }
 
   Future<Response> patch(Uri uri, {Object? body}) async {
-    final response = await _client
-        .patch(
-          uri,
-          headers: await _headers(),
-          body: body == null ? null : jsonEncode(body),
-        )
-        .timeout(AppConfig.httpTimeout);
-    return _checkStatus(response);
+    return _withFallback((targetUri) async {
+      final response = await _client
+          .patch(
+            targetUri,
+            headers: await _headers(),
+            body: body == null ? null : jsonEncode(body),
+          )
+          .timeout(AppConfig.httpTimeout);
+      return _checkStatus(response);
+    }, uri);
   }
 
   Future<StreamedResponse> multipartPost(
@@ -83,16 +120,18 @@ class HttpClient {
     required Map<String, String> fields,
     required List<MultipartFile> files,
   }) async {
-    final request = http.MultipartRequest('POST', uri)
-      ..fields.addAll(fields)
-      ..files.addAll(files)
-      ..headers.addAll(await _headers(multipart: true));
+    return _withFallback((targetUri) async {
+      final request = http.MultipartRequest('POST', targetUri)
+        ..fields.addAll(fields)
+        ..files.addAll(files)
+        ..headers.addAll(await _headers(multipart: true));
 
-    final response = await request.send().timeout(AppConfig.httpTimeout);
-    if (response.statusCode == HttpStatus.unauthorized) {
-      throw const UnauthorizedException('Session expired. Please log in again.');
-    }
-    return response;
+      final response = await request.send().timeout(AppConfig.httpTimeout);
+      if (response.statusCode == HttpStatus.unauthorized) {
+        throw const UnauthorizedException('Session expired. Please log in again.');
+      }
+      return response;
+    }, uri);
   }
 
   Response _checkStatus(Response response) {
