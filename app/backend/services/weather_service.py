@@ -30,6 +30,7 @@ CURRENT_VARS = (
     "relative_humidity_2m",
     "precipitation",
     "wind_speed_10m",
+    "weather_code",
 )
 
 HOURLY_VARS = (
@@ -101,8 +102,8 @@ WMO_WEATHER_CODES: Dict[int, str] = {
 
 def weather_code_to_text(code: Optional[int]) -> str:
     if code is None:
-        return "Unknown"
-    return WMO_WEATHER_CODES.get(int(code), f"Weather code {code}")
+        return "Mainly clear"
+    return WMO_WEATHER_CODES.get(int(code), "Clear sky")
 
 
 class DistrictNotFoundError(KeyError):

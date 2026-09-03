@@ -116,6 +116,20 @@ class PesticideService:
             out.append(fact)
             if len(out) >= limit:
                 break
+
+        # Fallback to general Punjab advisories if district-specific alerts are empty
+        if not out and district:
+            for fact in facts:
+                if fact["confidence"] < 0.60 and not fact["reviewed"]:
+                    continue
+                if crop and not self._matches(crop, fact.get("crop", "")):
+                    continue
+                if category and not self._matches(category, fact.get("category", "")):
+                    continue
+                out.append(fact)
+                if len(out) >= limit:
+                    break
+
         return out
 
     # -----------------------------------------------------------------------
