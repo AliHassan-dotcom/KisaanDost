@@ -24,6 +24,7 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
   final _farmSizeController = TextEditingController();
   final _irrigationController = TextEditingController();
   String _language = 'en';
+  bool _initialized = false;
 
   @override
   void initState() {
@@ -68,9 +69,10 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
   @override
   Widget build(BuildContext context) {
     final profileAsync = ref.watch(profileProvider);
+    final isUrdu = _language == 'ur';
 
     return Scaffold(
-      appBar: const KdAppBar(title: 'Profile'),
+      appBar: KdAppBar(title: isUrdu ? 'پروفائل اور ترجیحات' : 'Profile'),
       body: profileAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(
@@ -86,14 +88,17 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
           ),
         ),
         data: (profile) {
-          _nameController.text = profile.name;
-          _emailController.text = profile.email ?? '';
-          _districtController.text = profile.district ?? '';
-          _cropController.text = profile.crop ?? '';
-          _farmSizeController.text =
-              profile.farmSizeAcres?.toString() ?? '';
-          _irrigationController.text = profile.irrigationType ?? '';
-          _language = profile.language;
+          if (!_initialized) {
+            _nameController.text = profile.name;
+            _emailController.text = profile.email ?? '';
+            _districtController.text = profile.district ?? '';
+            _cropController.text = profile.crop ?? '';
+            _farmSizeController.text =
+                profile.farmSizeAcres?.toString() ?? '';
+            _irrigationController.text = profile.irrigationType ?? '';
+            _language = profile.language.isNotEmpty ? profile.language : ref.read(settingsProvider).language;
+            _initialized = true;
+          }
 
           return Padding(
             padding: const EdgeInsets.all(16),
@@ -105,50 +110,62 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
                   children: <Widget>[
                     TextFormField(
                       controller: _nameController,
-                      decoration: const InputDecoration(labelText: 'Name'),
+                      decoration: InputDecoration(labelText: isUrdu ? 'نام' : 'Name'),
                       validator: Validators.name,
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _emailController,
-                      decoration: const InputDecoration(labelText: 'Email (optional)'),
+                      decoration: InputDecoration(labelText: isUrdu ? 'ای میل (اختیاری)' : 'Email (optional)'),
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _districtController,
-                      decoration: const InputDecoration(labelText: 'District'),
+                      decoration: InputDecoration(labelText: isUrdu ? 'ضلع (مثلاً ملتان، لاہور)' : 'District'),
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _cropController,
-                      decoration: const InputDecoration(labelText: 'Crop'),
+                      decoration: InputDecoration(labelText: isUrdu ? 'اہم فصل (مثلاً گندم، کپاس)' : 'Primary Crop'),
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _farmSizeController,
-                      decoration: const InputDecoration(
-                        labelText: 'Farm size (acres)',
-                      ),
-                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: isUrdu ? 'رقبہ (ایکڑ)' : 'Farm Size (Acres)'),
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       validator: Validators.farmSize,
                     ),
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _irrigationController,
-                      decoration: const InputDecoration(
-                        labelText: 'Irrigation type',
-                      ),
+                      decoration: InputDecoration(labelText: isUrdu ? 'آبپاشی کا ذریعہ' : 'Irrigation Type'),
                     ),
                     const SizedBox(height: 16),
+                    Text(
+                      isUrdu ? 'زبان منتخب کریں' : 'Language',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 8),
                     LanguageToggle(
                       language: _language,
-                      onChanged: (lang) => setState(() => _language = lang),
+                      onChanged: (lang) {
+                        setState(() => _language = lang);
+                        ref.read(settingsProvider.notifier).setLanguage(lang);
+                      },
                     ),
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: _save,
-                      child: const Text('Save Profile'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00E676),
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      child: Text(
+                        isUrdu ? 'محفوظ کریں' : 'Save Profile',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),

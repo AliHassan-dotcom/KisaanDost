@@ -220,9 +220,12 @@ class DashboardScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 14),
 
-                      // 9. Farm Insights Card (Irrigate in 2 days, Fertilizer recommended)
+                      // 9. Farm Insights Card (Live Agronomic & Irrigation Insights)
                       FarmInsightsHeroCard(
                         isUrdu: isUrdu,
+                        riskAssessment: data.riskAssessment,
+                        weather: data.weather,
+                        farmHealth: data.farmHealth,
                         onIrrigationTap: () => context.push(AppRoutes.irrigation),
                       ),
                       const SizedBox(height: 14),

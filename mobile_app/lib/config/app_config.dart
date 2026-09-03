@@ -4,11 +4,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class AppConfig {
   const AppConfig._();
 
-  static String _activeBaseUrl = 'http://192.168.1.5:8000';
+  static String _activeBaseUrl = 'http://127.0.0.1:8000';
 
   static String get apiBaseUrl {
     // 1. Check explicit runtime override
-    if (_activeBaseUrl.isNotEmpty && _activeBaseUrl != 'http://192.168.1.5:8000') {
+    if (_activeBaseUrl.isNotEmpty && _activeBaseUrl != 'http://127.0.0.1:8000') {
       return _activeBaseUrl;
     }
 
@@ -19,7 +19,9 @@ class AppConfig {
     // 3. Check flutter_dotenv
     try {
       final envVal = dotenv.env['API_BASE_URL'];
-      if (envVal != null && envVal.isNotEmpty) return envVal;
+      if (envVal != null && envVal.isNotEmpty && !envVal.contains('your_')) {
+        return envVal;
+      }
     } catch (_) {}
 
     return _activeBaseUrl;
@@ -40,13 +42,18 @@ class AppConfig {
 
   static Uri apiUri(String path) => Uri.parse('$apiBaseUrl$apiPrefix$path');
 
-  /// Fallback candidates when network changes between USB tunnel, Wi-Fi, and emulator.
+  /// Fallback candidates prioritized by latency:
+  /// 1. 127.0.0.1:8000 (ADB reverse over USB - instant)
+  /// 2. localhost:8000 (ADB reverse)
+  /// 3. 192.168.1.6:8000 (Wi-Fi LAN)
+  /// 4. 192.168.1.5:8000 / 192.168.1.7:8000
+  /// 5. 10.0.2.2:8000 (Android Emulator)
   static List<String> get candidateBaseUrls => <String>[
-        apiBaseUrl,
+        'http://127.0.0.1:8000',
+        'http://localhost:8000',
+        'http://192.168.1.6:8000',
         'http://192.168.1.5:8000',
         'http://192.168.1.7:8000',
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
         'http://10.0.2.2:8000',
       ];
 
@@ -60,7 +67,7 @@ class AppConfig {
   }
 
   /// Timeout for general HTTP requests.
-  static Duration get httpTimeout => const Duration(seconds: 10);
+  static Duration get httpTimeout => const Duration(seconds: 4);
 
   /// Validates security constraints for current build mode.
   static void validate() {

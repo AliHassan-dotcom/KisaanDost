@@ -19,9 +19,46 @@ _lock = threading.Lock()
 
 def _load_store(path: Path) -> Dict[str, Any]:
     if not path.exists():
-        return {"users": {}, "profiles": {}}
-    with open(path, "r", encoding="utf-8") as fh:
-        return json.load(fh)
+        data = {"users": {}, "profiles": {}}
+    else:
+        try:
+            with open(path, "r", encoding="utf-8") as fh:
+                data = json.load(fh)
+        except Exception:
+            data = {"users": {}, "profiles": {}}
+
+    # Auto-seed default demonstration accounts if not present
+    if "03001234567" not in data.get("users", {}):
+        data.setdefault("users", {})["03001234567"] = {
+            "id": "user_000001",
+            "phone": "03001234567",
+            "role": "farmer",
+            "password_hash": hash_password("password123"),
+            "created_at": _now_iso(),
+        }
+        data.setdefault("profiles", {})["user_000001"] = {
+            "user_id": "user_000001",
+            "name": "Farm Hero",
+            "district": "Multan",
+            "crop": "wheat",
+            "language": "en",
+        }
+    if "03009999999" not in data.get("users", {}):
+        data.setdefault("users", {})["03009999999"] = {
+            "id": "user_000002",
+            "phone": "03009999999",
+            "role": "admin",
+            "password_hash": hash_password("admin123"),
+            "created_at": _now_iso(),
+        }
+        data.setdefault("profiles", {})["user_000002"] = {
+            "user_id": "user_000002",
+            "name": "Agri Admin",
+            "district": "Lahore",
+            "crop": "wheat",
+            "language": "en",
+        }
+    return data
 
 
 def _save_store(path: Path, data: Dict[str, Any]) -> None:
