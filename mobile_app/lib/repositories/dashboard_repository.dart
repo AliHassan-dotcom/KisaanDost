@@ -1,5 +1,6 @@
 import '../models/farm_health_summary.dart';
 import '../models/market_price.dart';
+import '../models/risk_assessment.dart';
 import '../models/satellite_summary.dart';
 import '../models/weather_summary.dart';
 
@@ -11,6 +12,7 @@ class DashboardData {
     required this.market,
     required this.satellite,
     required this.quickActions,
+    this.riskAssessment,
   });
 
   final Map<String, dynamic> user;
@@ -19,6 +21,7 @@ class DashboardData {
   final MarketPrice market;
   final SatelliteSummary satellite;
   final List<Map<String, String>> quickActions;
+  final RiskAssessment? riskAssessment;
 }
 
 abstract interface class DashboardRepository {

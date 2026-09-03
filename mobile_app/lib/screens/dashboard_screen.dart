@@ -6,13 +6,16 @@ import '../providers/auth_provider.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/settings_provider.dart';
 import '../routing/app_router.dart';
-import '../widgets/farm_health_card.dart';
-import '../widgets/greeting_header.dart';
+import '../widgets/crop_diagnosis_hero_card.dart';
+import '../widgets/disease_hotspot_hero_card.dart';
+import '../widgets/farm_insights_hero_card.dart';
+import '../widgets/hero_greeting_header.dart';
 import '../widgets/kd_app_bar.dart';
-import '../widgets/language_toggle.dart';
-import '../widgets/market_card.dart';
-import '../widgets/satellite_card.dart';
-import '../widgets/weather_card.dart';
+import '../widgets/market_prices_hero_card.dart';
+import '../widgets/ndvi_vegetation_hero_card.dart';
+import '../widgets/quick_actions_hub.dart';
+import '../widgets/summary_metric_grid.dart';
+import '../widgets/weather_forecast_hero_card.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -25,12 +28,13 @@ class DashboardScreen extends ConsumerWidget {
     final isUrdu = settings.language == 'ur';
 
     return Scaffold(
+      backgroundColor: const Color(0xFF071D12),
       appBar: KdAppBar(
         title: isUrdu ? 'کسان دوست' : 'Kisaan Dost',
         showBack: false,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.mic, color: Colors.green),
+            icon: const Icon(Icons.mic, color: Color(0xFF00E676)),
             tooltip: isUrdu ? 'وائس اسسٹنٹ' : 'Voice AI',
             onPressed: () => context.push(AppRoutes.voice),
           ),
@@ -44,362 +48,229 @@ class DashboardScreen extends ConsumerWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.green.shade800,
-        foregroundColor: Colors.white,
-        elevation: 4,
-        icon: const Icon(Icons.mic, size: 24),
-        label: Text(
-          isUrdu ? 'آواز سے بات کریں' : 'Talk with Voice AI',
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        onPressed: () => context.push(AppRoutes.voice),
-      ),
-      body: dashboardAsync.when(
-        loading: () => const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Loading agricultural intelligence...'),
-            ],
-          ),
-        ),
-        error: (error, stack) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.spa, size: 56, color: Colors.green.shade700),
-                const SizedBox(height: 16),
-                Text(
-                  isUrdu ? 'ڈیٹا لوڈ نہیں ہو سکا' : 'Could not load dashboard',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '$error',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.grey, fontSize: 12),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton.icon(
-                  onPressed: () => ref.read(dashboardProvider.notifier).refresh(),
-                  icon: const Icon(Icons.refresh),
-                  label: Text(isUrdu ? 'دوبارہ کوشش کریں' : 'Retry Connection'),
-                ),
-              ],
-            ),
-          ),
-        ),
-        data: (data) => RefreshIndicator(
-          onRefresh: () => ref.read(dashboardProvider.notifier).refresh(),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                // Farmer Greeting & Language Selector Card
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Colors.green.shade50,
-                        Colors.white,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.green.shade200),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: GreetingHeader(
-                          name: data.user['name'] as String?,
-                          district: data.user['district'] as String?,
-                          crop: data.user['crop'] as String?,
-                          isUrdu: isUrdu,
-                        ),
-                      ),
-                      LanguageToggle(
-                        language: settings.language,
-                        onChanged: (lang) =>
-                            ref.read(settingsProvider.notifier).setLanguage(lang),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 14),
-
-                // Hero Gemini Live Voice Assistant Banner
-                _buildVoiceHeroBanner(context, isUrdu),
-                const SizedBox(height: 14),
-
-                // Live Weather Card
-                WeatherCard(
-                  summary: data.weather,
-                  isUrdu: isUrdu,
-                  onTap: () => context.push(AppRoutes.weather),
-                ),
-                const SizedBox(height: 12),
-
-                // Crop Disease AI Diagnostic Card
-                FarmHealthCard(
-                  summary: data.farmHealth,
-                  isUrdu: isUrdu,
-                  onTap: () => context.push(AppRoutes.scan),
-                ),
-                const SizedBox(height: 12),
-
-                // Mandi Market Rates Card
-                MarketCard(
-                  price: data.market,
-                  isUrdu: isUrdu,
-                  onTap: () => context.push(AppRoutes.market),
-                ),
-                const SizedBox(height: 12),
-
-                // Satellite Vegetation NDVI/NDWI Card
-                SatelliteCard(
-                  summary: data.satellite,
-                  isUrdu: isUrdu,
-                  onTap: () => context.push(AppRoutes.satellite),
-                ),
-                const SizedBox(height: 20),
-
-                // Quick Action Hub Header
-                Row(
-                  children: <Widget>[
-                    Icon(Icons.dashboard_customize, size: 20, color: Colors.green.shade800),
-                    const SizedBox(width: 8),
-                    Text(
-                      isUrdu ? 'فوری زرعی سہولیات' : 'Quick Actions',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green.shade900,
-                          ),
-                    ),
+      floatingActionButton: _buildFloatingVoiceButton(context),
+      body: Stack(
+        children: <Widget>[
+          // Background Sunset Wheat Field Agricultural Gradient
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFFE65100), // Sunset Amber Sky
+                    Color(0xFF4E342E), // Horizon Earth
+                    Color(0xFF1B5E20), // Lush Field
+                    Color(0xFF071D12), // Dark Canopy Floor
                   ],
+                  stops: <double>[0.0, 0.15, 0.45, 1.0],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
-                const SizedBox(height: 12),
-
-                // 6 Core Agricultural Action Tiles
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 0.95,
-                  children: <Widget>[
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.mic,
-                      color: Colors.green,
-                      label: isUrdu ? 'وائس AI' : 'Voice AI',
-                      sublabel: isUrdu ? 'Gemini Live' : 'Real-time',
-                      onTap: () => context.push(AppRoutes.voice),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.camera_alt,
-                      color: Colors.teal,
-                      label: isUrdu ? 'فصل اسکین' : 'Crop Scan',
-                      sublabel: isUrdu ? 'AI تشخیص' : 'AI Disease',
-                      onTap: () => context.push(AppRoutes.scan),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.wb_sunny,
-                      color: Colors.orange,
-                      label: isUrdu ? 'موسم' : 'Weather',
-                      sublabel: isUrdu ? 'پیشگوئی' : 'Forecast',
-                      onTap: () => context.push(AppRoutes.weather),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.trending_up,
-                      color: Colors.green,
-                      label: isUrdu ? 'منڈی ریٹس' : 'Mandi Rates',
-                      sublabel: isUrdu ? 'روزانہ قیمت' : 'Daily Prices',
-                      onTap: () => context.push(AppRoutes.market),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.satellite_alt,
-                      color: Colors.indigo,
-                      label: isUrdu ? 'سیٹلائٹ' : 'Satellite',
-                      sublabel: isUrdu ? 'NDVI ہریالی' : 'Canopy Health',
-                      onTap: () => context.push(AppRoutes.satellite),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.water_drop,
-                      color: Colors.blue,
-                      label: isUrdu ? 'آبپاشی شیڈول' : 'Irrigation',
-                      sublabel: isUrdu ? 'نمی کنٹرول' : 'Soil Water',
-                      onTap: () => context.push(AppRoutes.irrigation),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                if (auth.user?.role.isAdmin ?? false)
-                  ElevatedButton.icon(
-                    onPressed: () => context.push(AppRoutes.admin),
-                    icon: const Icon(Icons.admin_panel_settings),
-                    label: const Text('Admin Panel'),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildVoiceHeroBanner(BuildContext context, bool isUrdu) {
-    return InkWell(
-      onTap: () => context.push(AppRoutes.voice),
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[
-              Colors.green.shade800,
-              Colors.green.shade900,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.green.shade900.withAlpha(60),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(40),
-                shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.mic, color: Colors.white, size: 28),
             ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
+          ),
+
+          // Frosted Dark Ambient Tint
+          Positioned.fill(
+            child: Container(
+              color: const Color(0xFF04140C).withAlpha(190),
+            ),
+          ),
+
+          // Main Scrollable Dashboard Content
+          SafeArea(
+            child: dashboardAsync.when(
+              loading: () => const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00E676)),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Loading agricultural intelligence...',
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                    ),
+                  ],
+                ),
+              ),
+              error: (error, stack) => Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      const Icon(Icons.spa, size: 56, color: Color(0xFF00E676)),
+                      const SizedBox(height: 16),
                       Text(
-                        isUrdu ? 'کسان دوست لائیو وائس AI' : 'KisaanDost Gemini Live AI',
+                        isUrdu ? 'ڈیٹا لوڈ نہیں ہو سکا' : 'Could not load dashboard',
                         style: const TextStyle(
                           color: Colors.white,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(4),
+                      const SizedBox(height: 8),
+                      Text(
+                        '$error',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white60, fontSize: 12),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        onPressed: () => ref.read(dashboardProvider.notifier).refresh(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00E676),
+                          foregroundColor: Colors.black,
                         ),
-                        child: const Text(
-                          'LIVE',
-                          style: TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
+                        icon: const Icon(Icons.refresh),
+                        label: Text(isUrdu ? 'دوبارہ کوشش کریں' : 'Retry Connection'),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 3),
-                  Text(
-                    isUrdu
-                        ? 'اردو یا رومن اردو میں بول کر براہ راست سوال پوچھیں'
-                        : 'Real-time two-way voice assistant in Urdu & English',
-                    style: TextStyle(color: Colors.green.shade100, fontSize: 11),
+                ),
+              ),
+              data: (data) => RefreshIndicator(
+                onRefresh: () => ref.read(dashboardProvider.notifier).refresh(),
+                color: const Color(0xFF00E676),
+                backgroundColor: const Color(0xFF0F2E1E),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 90),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      // 1. Top Header Card (Good Morning, Farm Hero 👋, Urdu Toggle, Date, Bell)
+                      HeroGreetingHeader(
+                        name: data.user['name'] as String?,
+                        isUrdu: isUrdu,
+                        onLanguageToggle: () {
+                          final newLang = isUrdu ? 'en' : 'ur';
+                          ref.read(settingsProvider.notifier).setLanguage(newLang);
+                        },
+                        onNotificationTap: () => context.push(AppRoutes.pest),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 2. 2x2 Metric Summary Grid (Farm Health 92%, Weather 32.5°C, Market Rs. 3,850, Satellite 0.685)
+                      SummaryMetricGrid(
+                        farmHealth: data.farmHealth,
+                        weather: data.weather,
+                        market: data.market,
+                        satellite: data.satellite,
+                        isUrdu: isUrdu,
+                        onFarmHealthTap: () => context.push(AppRoutes.scan),
+                        onWeatherTap: () => context.push(AppRoutes.weather),
+                        onMarketTap: () => context.push(AppRoutes.market),
+                        onSatelliteTap: () => context.push(AppRoutes.satellite),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 3. Quick Actions Hub (Urdu Voice, Scan Crop, Satellite View, Market Prices, Weather, Irrigation, Alerts)
+                      QuickActionsHub(
+                        isUrdu: isUrdu,
+                        onVoiceTap: () => context.push(AppRoutes.voice),
+                        onScanTap: () => context.push(AppRoutes.scan),
+                        onSatelliteTap: () => context.push(AppRoutes.satellite),
+                        onMarketTap: () => context.push(AppRoutes.market),
+                        onWeatherTap: () => context.push(AppRoutes.weather),
+                        onIrrigationTap: () => context.push(AppRoutes.irrigation),
+                        onAlertsTap: () => context.push(AppRoutes.pest),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 4. Crop Diagnosis Card (Wheat Leaf Rust Detected, Severity 65%, Confidence 92%)
+                      CropDiagnosisHeroCard(
+                        summary: data.farmHealth,
+                        isUrdu: isUrdu,
+                        onViewDetails: () => context.push(AppRoutes.scan),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 5. Weather Forecast Card (5-Day Forecast, Rain 70%, Wind 18km/h, Humidity 65%, AI Advice)
+                      WeatherForecastHeroCard(
+                        weather: data.weather,
+                        isUrdu: isUrdu,
+                        onTap: () => context.push(AppRoutes.weather),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 6. Market Prices (Wheat) Card (Best Market Lahore Mandi Rs. 3,850/40kg, Faisalabad, Multan)
+                      MarketPricesHeroCard(
+                        market: data.market,
+                        isUrdu: isUrdu,
+                        onTap: () => context.push(AppRoutes.market),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 7. NDVI (Vegetation Health) Card (3D Field Canopy Perspective & High/Med/Low Legend)
+                      NdviVegetationHeroCard(
+                        satellite: data.satellite,
+                        isUrdu: isUrdu,
+                        onTap: () => context.push(AppRoutes.satellite),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 8. Disease Hotspot (Pakistan) & Risk Model Card (Punjab Radar Nodes + 78% High Risk Gauge)
+                      DiseaseHotspotHeroCard(
+                        riskAssessment: data.riskAssessment,
+                        isUrdu: isUrdu,
+                        onTap: () => context.push(AppRoutes.pest),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // 9. Farm Insights Card (Irrigate in 2 days, Fertilizer recommended)
+                      FarmInsightsHeroCard(
+                        isUrdu: isUrdu,
+                        onIrrigationTap: () => context.push(AppRoutes.irrigation),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // Admin Panel Link if Admin
+                      if (auth.user?.role.isAdmin ?? false)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: ElevatedButton.icon(
+                            onPressed: () => context.push(AppRoutes.admin),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white12,
+                              foregroundColor: Colors.white,
+                            ),
+                            icon: const Icon(Icons.admin_panel_settings),
+                            label: const Text('Admin Panel'),
+                          ),
+                        ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildServiceTile(
-    BuildContext context, {
-    required IconData icon,
-    required MaterialColor color,
-    required String label,
-    required String sublabel,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
-        side: BorderSide(color: color.shade100, width: 1),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: color.shade50,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(icon, color: color.shade800, size: 22),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                label,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                sublabel,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+  Widget _buildFloatingVoiceButton(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: const Color(0xFF00E676).withAlpha(120),
+            blurRadius: 18,
+            spreadRadius: 3,
+            offset: const Offset(0, 4),
           ),
-        ),
+        ],
+      ),
+      child: FloatingActionButton(
+        backgroundColor: const Color(0xFF00E676),
+        foregroundColor: Colors.black87,
+        elevation: 6,
+        onPressed: () => context.push(AppRoutes.voice),
+        child: const Icon(Icons.mic, size: 28, color: Colors.black),
       ),
     );
   }

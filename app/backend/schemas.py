@@ -61,6 +61,7 @@ class DashboardResponse(BaseModel):
     farm_health: Dict[str, Any]
     market: Dict[str, Any]
     satellite: Dict[str, Any]
+    risk_assessment: Optional[Dict[str, Any]] = None
     quick_actions: List[Dict[str, str]]
 
 

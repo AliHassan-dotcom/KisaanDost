@@ -4,6 +4,7 @@ import 'dart:io';
 import '../config/app_config.dart';
 import '../models/farm_health_summary.dart';
 import '../models/market_price.dart';
+import '../models/risk_assessment.dart';
 import '../models/satellite_summary.dart';
 import '../models/weather_summary.dart';
 import '../services/http_client.dart';
@@ -40,6 +41,9 @@ class DashboardRepositoryImpl implements DashboardRepository {
         (data['satellite'] as Map<String, dynamic>?) ??
             const <String, dynamic>{},
       ),
+      riskAssessment: data['risk_assessment'] != null
+          ? RiskAssessment.fromJson(data['risk_assessment'] as Map<String, dynamic>)
+          : RiskAssessment.mockDefault(),
       quickActions: _parseQuickActions(data['quick_actions']),
     );
   }
