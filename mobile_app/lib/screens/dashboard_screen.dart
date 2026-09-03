@@ -30,6 +30,11 @@ class DashboardScreen extends ConsumerWidget {
         showBack: false,
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.mic, color: Colors.green),
+            tooltip: isUrdu ? 'وائس اسسٹنٹ' : 'Voice AI',
+            onPressed: () => context.push(AppRoutes.voice),
+          ),
+          IconButton(
             icon: const Icon(Icons.person),
             onPressed: () => context.push(AppRoutes.profile),
           ),
@@ -38,6 +43,17 @@ class DashboardScreen extends ConsumerWidget {
             onPressed: () => context.push(AppRoutes.settings),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.green.shade800,
+        foregroundColor: Colors.white,
+        elevation: 4,
+        icon: const Icon(Icons.mic, size: 24),
+        label: Text(
+          isUrdu ? 'آواز سے بات کریں' : 'Talk with Voice AI',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        onPressed: () => context.push(AppRoutes.voice),
       ),
       body: dashboardAsync.when(
         loading: () => const Center(
@@ -84,7 +100,7 @@ class DashboardScreen extends ConsumerWidget {
           onRefresh: () => ref.read(dashboardProvider.notifier).refresh(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -123,7 +139,11 @@ class DashboardScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
+
+                // Hero Gemini Live Voice Assistant Banner
+                _buildVoiceHeroBanner(context, isUrdu),
+                const SizedBox(height: 14),
 
                 // Live Weather Card
                 WeatherCard(
@@ -184,8 +204,16 @@ class DashboardScreen extends ConsumerWidget {
                   children: <Widget>[
                     _buildServiceTile(
                       context,
-                      icon: Icons.camera_alt,
+                      icon: Icons.mic,
                       color: Colors.green,
+                      label: isUrdu ? 'وائس AI' : 'Voice AI',
+                      sublabel: isUrdu ? 'Gemini Live' : 'Real-time',
+                      onTap: () => context.push(AppRoutes.voice),
+                    ),
+                    _buildServiceTile(
+                      context,
+                      icon: Icons.camera_alt,
+                      color: Colors.teal,
                       label: isUrdu ? 'فصل اسکین' : 'Crop Scan',
                       sublabel: isUrdu ? 'AI تشخیص' : 'AI Disease',
                       onTap: () => context.push(AppRoutes.scan),
@@ -209,18 +237,10 @@ class DashboardScreen extends ConsumerWidget {
                     _buildServiceTile(
                       context,
                       icon: Icons.satellite_alt,
-                      color: Colors.teal,
+                      color: Colors.indigo,
                       label: isUrdu ? 'سیٹلائٹ' : 'Satellite',
                       sublabel: isUrdu ? 'NDVI ہریالی' : 'Canopy Health',
                       onTap: () => context.push(AppRoutes.satellite),
-                    ),
-                    _buildServiceTile(
-                      context,
-                      icon: Icons.pest_control,
-                      color: Colors.deepOrange,
-                      label: isUrdu ? 'کیڑے مار ادویات' : 'Pest Advisory',
-                      sublabel: isUrdu ? 'ماہرانہ مشورہ' : 'Punjab RAG',
-                      onTap: () => context.push(AppRoutes.pest),
                     ),
                     _buildServiceTile(
                       context,
@@ -243,6 +263,90 @@ class DashboardScreen extends ConsumerWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVoiceHeroBanner(BuildContext context, bool isUrdu) {
+    return InkWell(
+      onTap: () => context.push(AppRoutes.voice),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Colors.green.shade800,
+              Colors.green.shade900,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.green.shade900.withAlpha(60),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(40),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.mic, color: Colors.white, size: 28),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        isUrdu ? 'کسان دوست لائیو وائس AI' : 'KisaanDost Gemini Live AI',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          'LIVE',
+                          style: TextStyle(
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    isUrdu
+                        ? 'اردو یا رومن اردو میں بول کر براہ راست سوال پوچھیں'
+                        : 'Real-time two-way voice assistant in Urdu & English',
+                    style: TextStyle(color: Colors.green.shade100, fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+          ],
         ),
       ),
     );

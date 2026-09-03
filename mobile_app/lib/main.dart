@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,10 +9,18 @@ import 'routing/app_router.dart';
 import 'theme/app_theme.dart';
 import 'utils/logger.dart';
 
-void main() {
+Future<void> main() async {
   Logger.startup('App bootstrap initiated');
   WidgetsFlutterBinding.ensureInitialized();
   Logger.startup('WidgetsFlutterBinding initialized');
+
+  try {
+    await dotenv.load(fileName: '.env');
+    Logger.startup('Environment variables loaded from .env');
+  } catch (e) {
+    Logger.startup('dotenv load skipped or .env missing: $e');
+  }
+
   runApp(const ProviderScope(child: KisaanDostApp()));
   Logger.startup('runApp executed');
 }

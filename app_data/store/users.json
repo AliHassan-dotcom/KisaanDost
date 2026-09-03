@@ -4,22 +4,36 @@
       "id": "user_000001",
       "phone": "03001112233",
       "role": "farmer",
-      "password_hash": "$2b$12$eHk1JCpwSqb3PAfrB1qtI.UgdxtwiKEFnJwKF2Ao/S0I/yM6KNdmC",
+      "password_hash": "$2b$12$eJDM/69ojaJVcMefA14.PuqRXulRoCF6hLbE15/PJiDcebpRQomFy",
       "created_at": "2026-09-01T20:10:28.090682+00:00"
     },
     "03007654321": {
       "id": "user_000002",
       "phone": "03007654321",
       "role": "farmer",
-      "password_hash": "$2b$12$5qfO9hIaAwJUZ7UqxwHxDe03uEht/sTY6rwsJKPoj3zZo1Vop.z4W",
+      "password_hash": "$2b$12$qpxOZh2YSC1lni507B72c.yDEXg1s2I8pwjg5/Vp7l.4WU96zqcFK",
       "created_at": "2026-09-01T21:32:57.726038+00:00"
     },
     "03713903767": {
       "id": "user_000003",
       "phone": "03713903767",
       "role": "farmer",
-      "password_hash": "$2b$12$m6iWeAU9l/adw04FzYP1..3SaLgzmdzgPfbtBKIGa10wZGA6UjzCy",
+      "password_hash": "$2b$12$hK8IcERvwkePzqDbby1XGeUmDs9oyHK4tYnPPag9dYxCJ2NRp2dLm",
       "created_at": "2026-09-02T18:28:08.634129+00:00"
+    },
+    "03001234567": {
+      "id": "user_000004",
+      "phone": "03001234567",
+      "role": "farmer",
+      "password_hash": "$2b$12$m9PhKZJTlom6wak1ApQ7cuXE9PtbtswLXoJxLjKTb2gEk8ukBVBoa",
+      "created_at": "2026-09-03T07:28:30.073058+00:00"
+    },
+    "03009998877": {
+      "id": "user_000005",
+      "phone": "03009998877",
+      "role": "farmer",
+      "password_hash": "$2b$12$xhn5u.jjYsy1U6xpQQxf9O9L61qRQzQc.YEZouqzYfvlP55XhudUu",
+      "created_at": "2026-09-03T12:44:01.086762+00:00"
     }
   },
   "profiles": {
@@ -47,6 +61,26 @@
       "user_id": "user_000003",
       "name": "ali",
       "phone": "03713903767",
+      "district": null,
+      "crop": null,
+      "farm_size_acres": null,
+      "irrigation_type": null,
+      "language": "en"
+    },
+    "user_000004": {
+      "user_id": "user_000004",
+      "name": "Ali Hassan",
+      "phone": "03001234567",
+      "district": null,
+      "crop": null,
+      "farm_size_acres": null,
+      "irrigation_type": null,
+      "language": "en"
+    },
+    "user_000005": {
+      "user_id": "user_000005",
+      "name": "Kisaan Bhai",
+      "phone": "03009998877",
       "district": null,
       "crop": null,
       "farm_size_acres": null,

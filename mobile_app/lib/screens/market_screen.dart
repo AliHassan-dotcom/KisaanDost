@@ -230,7 +230,7 @@ class MarketScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${price.sourceName ?? "Official AMIS Punjab"}',
+              price.sourceName ?? 'Official AMIS Punjab',
               style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
             ),
           ],

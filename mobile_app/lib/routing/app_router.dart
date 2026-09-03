@@ -16,6 +16,7 @@ import '../screens/satellite_screen.dart';
 import '../screens/scan_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/splash_screen.dart';
+import '../screens/voice_screen.dart';
 import '../screens/weather_screen.dart';
 import '../utils/logger.dart';
 
@@ -33,6 +34,7 @@ class AppRoutes {
   static const String pest = '/pest';
   static const String satellite = '/satellite';
   static const String market = '/market';
+  static const String voice = '/voice';
   static const String settings = '/settings';
   static const String admin = '/admin';
 }
@@ -155,6 +157,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.market,
         builder: (context, state) => const MarketScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.voice,
+        builder: (context, state) => const VoiceScreen(),
       ),
       GoRoute(
         path: AppRoutes.settings,
