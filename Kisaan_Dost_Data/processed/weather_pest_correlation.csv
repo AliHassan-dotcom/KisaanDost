@@ -1,0 +1,14 @@
+month,district,temp_avg_celsius,humidity_avg_percent,rainfall_mm,dominant_pest,outbreak_risk,correlation_strength
+1,Lahore,13.5,74.0,22.0,Yellow Rust,HIGH,0.88
+2,Lahore,17.0,76.0,35.0,Yellow Rust & Aphid,CRITICAL,0.94
+3,Faisalabad,22.5,65.0,28.0,Wheat Aphid,HIGH,0.91
+4,Multan,29.5,45.0,12.0,Cotton Thrips,MEDIUM,0.78
+5,Bahawalpur,35.0,38.0,5.0,Cotton Whitefly,HIGH,0.85
+6,Faisalabad,37.5,48.0,18.0,Sugarcane Top Borer,HIGH,0.82
+7,Multan,36.0,62.0,45.0,Pink Bollworm,CRITICAL,0.93
+8,Gujranwala,32.5,82.0,85.0,Rice Stem Borer,HIGH,0.92
+9,Sheikhupura,30.0,78.0,40.0,Rice Leaf Folder,HIGH,0.89
+9,Sahiwal,31.0,72.0,25.0,Fall Armyworm,HIGH,0.9
+10,Lahore,26.5,68.0,8.0,Vegetable Fruit Borer,MEDIUM,0.79
+11,Rawalpindi,18.5,70.0,15.0,Mustard Aphid,MEDIUM,0.81
+12,Lahore,14.0,75.0,12.0,Early Wheat Rust,MEDIUM,0.83
