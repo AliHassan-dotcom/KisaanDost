@@ -4,13 +4,20 @@ class AppConfig {
 
   static String _activeBaseUrl = const String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://localhost:8000',
+    defaultValue: 'http://192.168.1.7:8000',
   );
 
   static String get apiBaseUrl => _activeBaseUrl;
 
   static void setActiveBaseUrl(String url) {
-    _activeBaseUrl = url;
+    var cleaned = url.trim();
+    if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
+      cleaned = 'http://$cleaned';
+    }
+    if (cleaned.endsWith('/')) {
+      cleaned = cleaned.substring(0, cleaned.length - 1);
+    }
+    _activeBaseUrl = cleaned;
   }
 
   static const String apiPrefix = '/api/v1';
@@ -20,9 +27,9 @@ class AppConfig {
   /// Fallback candidates when network changes between USB tunnel, Wi-Fi, and emulator.
   static List<String> get candidateBaseUrls => <String>[
         _activeBaseUrl,
+        'http://192.168.1.7:8000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://192.168.1.7:8000',
         'http://192.168.1.5:8000',
         'http://10.0.2.2:8000',
       ];
