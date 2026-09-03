@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional, Union
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     app_name: str = "Kisaan Dost MVP"
     environment: str = "dev"
     api_prefix: str = "/api/v1"
-    cors_origins: List[str] = Field(default=["http://localhost:3000", "http://localhost:8080", "http://localhost:8000"])
+    cors_origins: Any = Field(default=["http://localhost:3000", "http://localhost:8080", "http://localhost:8000"])
 
     # Auth
     jwt_secret_key: str = Field(default="change-me-in-every-env", min_length=8)
@@ -32,10 +32,10 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
 
     # Rate limiting
-    rate_limit_requests: int = 30
+    rate_limit_requests: int = 120
     rate_limit_window_seconds: int = 60
-    login_rate_limit_requests: int = 5
-    login_rate_limit_window_seconds: int = 300
+    login_rate_limit_requests: int = 100
+    login_rate_limit_window_seconds: int = 60
 
     # Database Configuration (PostgreSQL / SQLite fallback)
     database_url: Optional[str] = Field(default=None)
