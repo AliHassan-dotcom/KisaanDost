@@ -99,15 +99,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   items: const <DropdownMenuItem<String>>[
                     DropdownMenuItem<String>(
                       value: 'farmer',
-                      child: Text('Farmer'),
+                      child: Text('Farmer (کسان)'),
                     ),
                     DropdownMenuItem<String>(
                       value: 'extension_worker',
-                      child: Text('Extension Worker'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'admin',
-                      child: Text('Admin'),
+                      child: Text('Extension Worker (زرعی فیلڈ اسسٹنٹ)'),
                     ),
                   ],
                   onChanged: (value) {

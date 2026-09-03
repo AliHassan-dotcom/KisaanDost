@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../providers/auth_provider.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/settings_provider.dart';
 import '../routing/app_router.dart';
@@ -23,7 +22,6 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardAsync = ref.watch(dashboardProvider);
-    final auth = ref.watch(authProvider);
     final settings = ref.watch(settingsProvider);
     final isUrdu = settings.language == 'ur';
 
@@ -229,21 +227,6 @@ class DashboardScreen extends ConsumerWidget {
                         onIrrigationTap: () => context.push(AppRoutes.irrigation),
                       ),
                       const SizedBox(height: 14),
-
-                      // Admin Panel Link if Admin
-                      if (auth.user?.role.isAdmin ?? false)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: ElevatedButton.icon(
-                            onPressed: () => context.push(AppRoutes.admin),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white12,
-                              foregroundColor: Colors.white,
-                            ),
-                            icon: const Icon(Icons.admin_panel_settings),
-                            label: const Text('Admin Panel'),
-                          ),
-                        ),
                     ],
                   ),
                 ),

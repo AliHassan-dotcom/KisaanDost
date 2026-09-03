@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.backend.routers import admin, agri_stats, auth, crop_health, dashboard, market, notifications, pest_alerts, profile, satellite, weather
+from app.backend.routers import agri_stats, ai_assistant, auth, crop_health, dashboard, market, notifications, pest_alerts, profile, satellite, weather
 from app.config import settings
 
 app = FastAPI(
@@ -37,7 +37,7 @@ app.include_router(pest_alerts.router, prefix=f"{api_prefix}")
 app.include_router(market.router, prefix=f"{api_prefix}")
 app.include_router(agri_stats.router, prefix=f"{api_prefix}")
 app.include_router(notifications.router, prefix=f"{api_prefix}")
-app.include_router(admin.router, prefix=f"{api_prefix}")
+app.include_router(ai_assistant.router, prefix=f"{api_prefix}")
 
 
 @app.get("/health")

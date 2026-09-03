@@ -16,6 +16,7 @@ class VoiceScreen extends ConsumerStatefulWidget {
 
 class _VoiceScreenState extends ConsumerState<VoiceScreen> {
   final ScrollController _scrollController = ScrollController();
+  final TextEditingController _textController = TextEditingController();
 
   final List<Map<String, String>> _suggestionChips = const <Map<String, String>>[
     {
@@ -43,6 +44,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -56,6 +58,22 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
         );
       }
     });
+  }
+
+  void _submitText(String text) {
+    final query = text.trim();
+    if (query.isEmpty) return;
+    _textController.clear();
+
+    final voiceNotifier = ref.read(voiceProvider.notifier);
+    final state = ref.read(voiceProvider);
+    if (!state.isConnected) {
+      voiceNotifier.startSession().then((_) {
+        voiceNotifier.sendTextMessage(query);
+      });
+    } else {
+      voiceNotifier.sendTextMessage(query);
+    }
   }
 
   void _showSettingsDialog(BuildContext context, VoiceState voiceState) {
@@ -98,7 +116,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'Assistant Voice (لهجہ و آواز):',
+                  'Assistant Voice (Prebuilt Voice):',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 8),
@@ -106,14 +124,14 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                   initialValue: selectedVoice,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    prefixIcon: Icon(Icons.record_voice_over),
                   ),
                   items: const <DropdownMenuItem<String>>[
-                    DropdownMenuItem(value: 'Aoede', child: Text('Aoede (Warm & Natural)')),
-                    DropdownMenuItem(value: 'Puck', child: Text('Puck (Energetic)')),
-                    DropdownMenuItem(value: 'Kore', child: Text('Kore (Calm)')),
-                    DropdownMenuItem(value: 'Fenrir', child: Text('Fenrir (Deep)')),
-                    DropdownMenuItem(value: 'Charon', child: Text('Charon (Gentle)')),
+                    DropdownMenuItem<String>(value: 'Aoede', child: Text('Aoede (Natural Female)')),
+                    DropdownMenuItem<String>(value: 'Puck', child: Text('Puck (Energetic Male)')),
+                    DropdownMenuItem<String>(value: 'Charon', child: Text('Charon (Authoritative Male)')),
+                    DropdownMenuItem<String>(value: 'Kore', child: Text('Kore (Calm Female)')),
+                    DropdownMenuItem<String>(value: 'Fenrir', child: Text('Fenrir (Deep Male)')),
                   ],
                   onChanged: (val) {
                     if (val != null) {
@@ -121,35 +139,29 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.green.shade200),
-                  ),
-                  child: const Text(
-                    '⚡ Model: gemini-2.0-flash-exp (16kHz PCM In, 24kHz Out, Realtime Barge-in)',
-                    style: TextStyle(fontSize: 11, color: Colors.green),
-                  ),
-                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.pop(ctx),
+              onPressed: () => Navigator.of(ctx).pop(),
               child: const Text('Cancel'),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
               onPressed: () {
                 final newKey = keyController.text.trim();
                 ref.read(voiceProvider.notifier).setApiKey(newKey);
                 ref.read(voiceProvider.notifier).setVoice(selectedVoice);
-                Navigator.pop(ctx);
+                Navigator.of(ctx).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Gemini Live settings saved.'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
               },
-              child: const Text('Save Settings'),
+              child: const Text('Save'),
             ),
           ],
         ),
@@ -163,16 +175,15 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
     final settings = ref.watch(settingsProvider);
     final isUrdu = settings.language == 'ur';
 
-    // Auto-scroll transcript when new messages arrive
-    ref.listen(voiceProvider, (prev, next) {
-      if (prev?.messages.length != next.messages.length) {
+    ref.listen<VoiceState>(voiceProvider, (previous, next) {
+      if (next.messages.length != (previous?.messages.length ?? 0)) {
         _scrollToBottom();
       }
     });
 
     return Scaffold(
       appBar: KdAppBar(
-        title: isUrdu ? 'کسان دوست لائیو وائس' : 'KisaanDost Voice AI',
+        title: isUrdu ? 'کسان دوست AI اسسٹنٹ' : 'KisaanDost Voice AI',
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.tune),
@@ -200,7 +211,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                       agentState: voiceState.agentState,
                       micLevel: voiceState.micLevel,
                       speakerLevel: voiceState.speakerLevel,
-                      size: 190,
+                      size: 170,
                       onTap: () {
                         if (voiceState.isConnected) {
                           ref.read(voiceProvider.notifier).stopSession();
@@ -210,20 +221,25 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                       },
                     ),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
 
                     // Dynamic State Prompt
                     _buildDynamicStateText(voiceState, isUrdu),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
 
                     // Quick Suggestion Chips
                     _buildSuggestionChips(isUrdu),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
 
                     // Live Conversation Transcript Box
                     _buildTranscriptSection(voiceState, isUrdu),
+
+                    const SizedBox(height: 12),
+
+                    // Quick Text Prompt Input Box
+                    _buildQuickTextInput(isUrdu),
                   ],
                 ),
               ),
@@ -252,7 +268,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
       statusIcon = Icons.sync;
     } else if (voiceState.isConnected) {
       statusColor = Colors.green;
-      statusText = isUrdu ? 'جڑا ہوا ہے (Gemini Live آن لائن)' : 'Connected • Gemini Live Ready';
+      statusText = isUrdu ? 'جڑا ہوا ہے (AI آن لائن)' : 'Connected • Agronomist AI Ready';
       statusIcon = Icons.wifi;
     } else {
       statusColor = Colors.grey;
@@ -303,7 +319,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
 
     switch (voiceState.agentState) {
       case VoiceAgentState.speaking:
-        stateHeading = isUrdu ? 'کسان دوست بول رہا ہے...' : 'KisaanDost is Speaking...';
+        stateHeading = isUrdu ? 'کسان دوست جواب دے رہا ہے...' : 'KisaanDost is Speaking...';
         stateDescription = isUrdu ? 'بول کر روک سکتے ہیں (Barge-in Active)' : 'You can interrupt anytime by speaking';
         break;
       case VoiceAgentState.listening:
@@ -316,7 +332,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
         break;
       case VoiceAgentState.idle:
         stateHeading = isUrdu ? 'بات چیت شروع کریں' : 'Start Voice Conversation';
-        stateDescription = isUrdu ? 'نیچے دیے گئے سبز مائیک بٹن کو دبائیں' : 'Tap the green microphone button below';
+        stateDescription = isUrdu ? 'نیچے دیے گئے سبز مائیک بٹن کو دبائیں یا سوال لکھیں' : 'Tap the green microphone button below or type a query';
         break;
     }
 
@@ -324,12 +340,12 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
       children: <Widget>[
         Text(
           stateHeading,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
         const SizedBox(height: 4),
         Text(
           stateDescription,
-          style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+          style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
         ),
       ],
     );
@@ -354,17 +370,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
                 child: ActionChip(
                   avatar: const Icon(Icons.chat_bubble_outline, size: 14, color: Colors.green),
                   label: Text(text, style: const TextStyle(fontSize: 12)),
-                  onPressed: () {
-                    final voiceNotifier = ref.read(voiceProvider.notifier);
-                    final state = ref.read(voiceProvider);
-                    if (!state.isConnected) {
-                      voiceNotifier.startSession().then((_) {
-                        voiceNotifier.sendTextMessage(text);
-                      });
-                    } else {
-                      voiceNotifier.sendTextMessage(text);
-                    }
-                  },
+                  onPressed: () => _submitText(text),
                 ),
               );
             }).toList(),
@@ -419,7 +425,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
             margin: const EdgeInsets.only(bottom: 8),
             alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
             child: Container(
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: isUser ? Colors.green.shade800 : Colors.white,
@@ -459,6 +465,30 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildQuickTextInput(bool isUrdu) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: TextField(
+            controller: _textController,
+            onSubmitted: _submitText,
+            decoration: InputDecoration(
+              hintText: isUrdu ? 'فصل، بیماری یا منڈی ریٹ کے بارے میں پوچھیں...' : 'Ask about crops, pests, mandi rates...',
+              hintStyle: const TextStyle(fontSize: 12),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(24)),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        IconButton.filled(
+          icon: const Icon(Icons.send, size: 18),
+          onPressed: () => _submitText(_textController.text),
+        ),
+      ],
     );
   }
 

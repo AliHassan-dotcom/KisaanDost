@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../models/user_role.dart';
 import '../providers/auth_provider.dart';
-import '../screens/admin_placeholder_screen.dart';
 import '../screens/dashboard_screen.dart';
 import '../screens/irrigation_screen.dart';
 import '../screens/login_screen.dart';
@@ -36,7 +34,6 @@ class AppRoutes {
   static const String market = '/market';
   static const String voice = '/voice';
   static const String settings = '/settings';
-  static const String admin = '/admin';
 }
 
 class RouterNotifier extends ChangeNotifier {
@@ -90,20 +87,12 @@ class RouterNotifier extends ChangeNotifier {
       return AppRoutes.dashboard;
     }
 
-    // Admin guard.
-    if (location == AppRoutes.admin && auth.user?.role != UserRole.admin) {
-      Logger.startup('Non-admin user redirected from admin -> ${AppRoutes.dashboard}');
-      return AppRoutes.dashboard;
-    }
-
     return null;
   }
 }
 
-final routerNotifierProvider = Provider<RouterNotifier>((ref) => RouterNotifier(ref));
-
 final appRouterProvider = Provider<GoRouter>((ref) {
-  final notifier = ref.watch(routerNotifierProvider);
+  final notifier = RouterNotifier(ref);
 
   return GoRouter(
     initialLocation: AppRoutes.splash,
@@ -165,10 +154,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.settings,
         builder: (context, state) => const SettingsScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.admin,
-        builder: (context, state) => const AdminPlaceholderScreen(),
       ),
     ],
   );
