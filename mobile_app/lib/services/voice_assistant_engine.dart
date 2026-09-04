@@ -5,7 +5,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 /// Robust Native Voice Assistant Engine managing:
 /// 1. Real-time Speech-to-Text (STT) via device microphone
-/// 2. Real-time Text-to-Speech (TTS) audio response playback
+/// 2. Natural Text-to-Speech (TTS) audio response playback
 /// 3. Instant Barge-in / Interruption handling
 class VoiceAssistantEngine {
   VoiceAssistantEngine() {
@@ -34,7 +34,8 @@ class VoiceAssistantEngine {
   Future<void> _initTts() async {
     try {
       await _tts.setLanguage('ur-PK');
-      await _tts.setSpeechRate(0.5);
+      // 0.85 is natural conversational speed; 0.5 was too slow and robotic!
+      await _tts.setSpeechRate(0.85);
       await _tts.setVolume(1.0);
       await _tts.setPitch(1.0);
 
@@ -146,12 +147,15 @@ class VoiceAssistantEngine {
     }
   }
 
-  /// Speak the response out loud in voice audio
+  /// Speak the response out loud in natural voice audio
   Future<void> speak(String text, {String language = 'ur'}) async {
     if (text.isEmpty) return;
 
-    // Clean markdown symbols (like **, ##, etc.) for clear natural pronunciation
-    final cleanText = text
+    // Clean numbers and formatting so TTS does not misread "11,200" as "11 rupee 200 paise"
+    String cleanText = text
+        .replaceAll(RegExp(r'(\d+),(\d+)'), r'$1$2') // Remove commas inside numbers (11,200 -> 11200)
+        .replaceAll('₨', 'روپے')
+        .replaceAll('PKR', 'روپے')
         .replaceAll(RegExp(r'[*#_`•\-\[\]\(\)]'), ' ')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
@@ -162,6 +166,7 @@ class VoiceAssistantEngine {
 
       final langCode = language == 'ur' ? 'ur-PK' : 'en-US';
       await _tts.setLanguage(langCode);
+      await _tts.setSpeechRate(0.85); // Natural fluid cadence
       await _tts.speak(cleanText);
     } catch (e) {
       debugPrint('TTS Speak error: $e');

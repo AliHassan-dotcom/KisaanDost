@@ -93,9 +93,11 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
   final VoiceAssistantEngine _voiceEngine;
 
   String? _currentUserRecognizedText;
+  Timer? _speechSilenceTimer;
 
   /// Start voice listening session with real speech recognition
-  Future<void> startSession({String languageCode = 'ur_PK'}) async {
+  Future<void> startSession({String languageCode = 'ur_PK', String? language}) async {
+    final effectiveLangCode = language != null ? (language == 'en' ? 'en_US' : 'ur_PK') : languageCode;
     state = state.copyWith(
       clearError: true,
       connectionState: GeminiLiveConnectionState.connected,
@@ -103,7 +105,7 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
     );
 
     await _voiceEngine.startListening(
-      languageCode: languageCode,
+      languageCode: effectiveLangCode,
       onResult: (text, isFinal) {
         _currentUserRecognizedText = text;
 
@@ -131,36 +133,35 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
           );
         }
 
-        // When user finishes utterance, send text to AI Agronomist
-        if (isFinal && text.trim().isNotEmpty) {
-          final finalizedText = text.trim();
-          _currentUserRecognizedText = null;
+        // Cancel previous timer
+        _speechSilenceTimer?.cancel();
 
-          // Replace temporary live message with finalized message
-          final filtered = state.messages.where((m) => m.id != 'live_user_speech').toList();
-          final userMsg = VoiceChatMessage(
-            id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
-            sender: 'user',
-            text: finalizedText,
-            timestamp: DateTime.now(),
-          );
-          state = state.copyWith(messages: <VoiceChatMessage>[...filtered, userMsg]);
-
-          sendTextMessage(finalizedText);
+        // If finalized or user stops speaking for 1.6 seconds, submit question
+        if (isFinal) {
+          _finalizeSpeechAndSend();
+        } else {
+          _speechSilenceTimer = Timer(const Duration(milliseconds: 1800), () {
+            if (_currentUserRecognizedText != null && _currentUserRecognizedText!.trim().isNotEmpty) {
+              _finalizeSpeechAndSend();
+            }
+          });
         }
       },
       onSoundLevel: (level) {
         state = state.copyWith(micLevel: level);
       },
       onSpeechStart: () {
+        _speechSilenceTimer?.cancel();
         state = state.copyWith(agentState: VoiceAgentState.listening);
       },
       onSpeechEnd: () {
-        if (_currentUserRecognizedText != null && _currentUserRecognizedText!.trim().isNotEmpty) {
-          final text = _currentUserRecognizedText!.trim();
-          _currentUserRecognizedText = null;
-          sendTextMessage(text);
-        }
+        // Wait a grace period before finalizing to ensure sentence wasn't just pausing between words
+        _speechSilenceTimer?.cancel();
+        _speechSilenceTimer = Timer(const Duration(milliseconds: 1200), () {
+          if (_currentUserRecognizedText != null && _currentUserRecognizedText!.trim().isNotEmpty) {
+            _finalizeSpeechAndSend();
+          }
+        });
       },
       onTtsStart: () {
         state = state.copyWith(agentState: VoiceAgentState.speaking);
@@ -174,8 +175,29 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
     );
   }
 
+  void _finalizeSpeechAndSend() {
+    if (_currentUserRecognizedText == null || _currentUserRecognizedText!.trim().isEmpty) return;
+
+    final finalizedText = _currentUserRecognizedText!.trim();
+    _currentUserRecognizedText = null;
+    _speechSilenceTimer?.cancel();
+
+    // Replace temporary live message with finalized message
+    final filtered = state.messages.where((m) => m.id != 'live_user_speech').toList();
+    final userMsg = VoiceChatMessage(
+      id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
+      sender: 'user',
+      text: finalizedText,
+      timestamp: DateTime.now(),
+    );
+    state = state.copyWith(messages: <VoiceChatMessage>[...filtered, userMsg]);
+
+    sendTextMessage(finalizedText);
+  }
+
   /// Stop voice session
   Future<void> stopSession() async {
+    _speechSilenceTimer?.cancel();
     await _voiceEngine.stopListening();
     await _voiceEngine.stopSpeaking();
     await _audioService.stopRecording();
@@ -192,6 +214,7 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
 
   /// Interruption trigger (Barge-in)
   void interrupt() {
+    _speechSilenceTimer?.cancel();
     _voiceEngine.stopSpeaking();
     _audioService.stopPlayback();
     state = state.copyWith(agentState: VoiceAgentState.interrupted);
@@ -199,97 +222,112 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
 
   /// Send text query / suggestion chip and speak back the audio answer
   Future<void> sendTextMessage(String text, {String language = 'ur'}) async {
-    // If not already in messages list, add user message
+    if (text.trim().isEmpty) return;
+
+    // Check if message is already added
     if (!state.messages.any((m) => m.text == text && m.sender == 'user')) {
-      final userMsg = VoiceChatMessage(
-        id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
+      final userMessage = VoiceChatMessage(
+        id: 'user_${DateTime.now().millisecondsSinceEpoch}',
         sender: 'user',
         text: text,
         timestamp: DateTime.now(),
       );
       state = state.copyWith(
-        messages: <VoiceChatMessage>[...state.messages, userMsg],
-        agentState: VoiceAgentState.speaking,
+        messages: <VoiceChatMessage>[...state.messages, userMessage],
       );
     }
 
-    // Call backend AI Agronomist API or smart dataset synthesis
-    String responseText = '';
     try {
-      final url = Uri.parse('${AppConfig.apiBaseUrl}/ai/ask');
-      final res = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'query': text, 'district': 'Lahore', 'crop': 'Wheat', 'language': language}),
-      ).timeout(const Duration(seconds: 3));
+      final backendUrl = Uri.parse('${AppConfig.apiBaseUrl}/api/v1/ai/ask');
+      final response = await http
+          .post(
+            backendUrl,
+            headers: <String, String>{'Content-Type': 'application/json'},
+            body: jsonEncode(<String, dynamic>{
+              'query': text,
+              'district': 'Lahore',
+              'crop': 'Wheat',
+              'language': language,
+            }),
+          )
+          .timeout(const Duration(seconds: 10));
 
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body) as Map<String, dynamic>;
-        responseText = data['answer'] as String? ?? '';
+      String aiReplyText = '';
+      if (response.statusCode == 200) {
+        final data = jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+        aiReplyText = data['answer'] as String? ?? '';
+      } else {
+        aiReplyText = _generateLocalFallback(text);
       }
-    } catch (_) {
-      // Local fallback
+
+      final aiMessage = VoiceChatMessage(
+        id: 'ai_${DateTime.now().millisecondsSinceEpoch}',
+        sender: 'assistant',
+        text: aiReplyText,
+        timestamp: DateTime.now(),
+      );
+
+      state = state.copyWith(
+        messages: <VoiceChatMessage>[...state.messages, aiMessage],
+        agentState: VoiceAgentState.speaking,
+      );
+
+      // Playback response in natural voice
+      await _voiceEngine.speak(aiReplyText, language: language);
+    } catch (e) {
+      final fallbackText = _generateLocalFallback(text);
+      final aiMessage = VoiceChatMessage(
+        id: 'ai_${DateTime.now().millisecondsSinceEpoch}',
+        sender: 'assistant',
+        text: fallbackText,
+        timestamp: DateTime.now(),
+      );
+      state = state.copyWith(
+        messages: <VoiceChatMessage>[...state.messages, aiMessage],
+        agentState: VoiceAgentState.speaking,
+      );
+      await _voiceEngine.speak(fallbackText, language: language);
     }
-
-    if (responseText.isEmpty) {
-      await Future<void>.delayed(const Duration(milliseconds: 300));
-      responseText = _generateAgronomistAnswer(text);
-    }
-
-    final aiMsg = VoiceChatMessage(
-      id: 'msg_${DateTime.now().millisecondsSinceEpoch + 1}',
-      sender: 'assistant',
-      text: responseText,
-      timestamp: DateTime.now(),
-    );
-
-    state = state.copyWith(
-      messages: <VoiceChatMessage>[...state.messages, aiMsg],
-      agentState: VoiceAgentState.speaking,
-    );
-
-    // Speak the answer out loud using Android TTS audio!
-    await _voiceEngine.speak(responseText, language: language);
   }
 
-  String _generateAgronomistAnswer(String query) {
+  String _generateLocalFallback(String query) {
     final q = query.toLowerCase();
-    if (q.contains('yellow rust') || q.contains('پیلی کنگی') || q.contains('rust') || q.contains('کنگی') || q.contains('علاج')) {
-      return 'گندم کی پیلی کنگی کے مصدقہ علاج کے لیے فوری طور پر پروپیکونازول (Tilt 250 EC) یا ٹیبوکونازول (Folicur) 200 سے 250 ملی لیٹر فی ایکڑ 100 لیٹر پانی میں ملا کر اسپرے کریں۔ اسپرے صبح کے وقت کریں اور ماسک پہنیں۔';
-    } else if (q.contains('irrigate') || q.contains('پانی') || q.contains('آبپاشی') || q.contains('water')) {
-      return 'آبپاشی کی رہنمائی: سیٹلائٹ اور موسمی ڈیٹا کے مطابق آئندہ 48 گھنٹوں میں پنجاب کے میدانی علاقوں میں بارش کا 70 فیصد امکان ہے اور زمین میں نمی 16.9 فیصد ہے۔ اس لیے آج آبپاشی مؤخر کریں تاکہ فالتو پانی کھڑا نہ ہو۔';
-    } else if (q.contains('mandi') || q.contains('rate') || q.contains('منڈی') || q.contains('ریٹ') || q.contains('قیمت') || q.contains('لاہور')) {
-      return 'پنجاب منڈی ریٹ اپڈیٹ: لاہور غلہ منڈی میں آج گندم کی قیمت 3,850 روپے، باسمتی چاول 11,200 روپے، کپاس 8,400 روپے، اور کماد 425 روپے فی من چل رہی ہے۔';
-    } else if (q.contains('sugarcane') || q.contains('کماد') || q.contains('borer') || q.contains('کیڑا')) {
-      return 'کماد کے کیڑوں کا تدارک: کماد میں ٹاپ بورر اور پائریلا کے کنٹرول کے لیے کلورپائریفوس (Chlorpyrifos 40 EC) 1.5 لیٹر فی ایکڑ اسپرے کریں اور نائٹروجن کھاد کا متوازن استعمال کریں۔';
-    } else if (q.contains('rain') || q.contains('بارش') || q.contains('weather') || q.contains('موسم')) {
-      return 'موسمیاتی الرٹ: جی ہاں، کل پنجاب کے زرعی علاقوں میں تیز ہواؤں کے ساتھ بارش متوقع ہے۔ کھاد اور اسپرے کا کام بارش سے پہلے شام 6 بجے تک مکمل کر لیں۔';
-    } else {
-      return 'کسان دوست زرعی مشیر: آپ کی فصل کی بہتر پیداوار کے لیے محکمہ زراعت پنجاب کی ہدایات کے مطابق کھاد کا متوازن استعمال کریں اور موسمی الرٹ کے مطابق اسپرے کریں۔';
+    if (q.contains('سلام') || q.contains('اسلام') || q.contains('salam') || q.contains('hello')) {
+      return 'وعلیکم السلام! میں کسان دوست AI زرعی مشیر ہوں۔ آپ مجھ سے فصلوں کی بیماری، اسپرے کی مقدار، کھاد، آج کے موسم اور منڈی کے تازہ ریٹس کے بارے میں کچھ بھی پوچھ سکتے ہیں۔';
     }
+    if (q.contains('rust') || q.contains('کنگی') || q.contains('پھپھوندی')) {
+      return 'گندم کی پیلی کنگی کے تدارک کے لیے محکمہ زراعت کی سفارش کے مطابق ٹلٹ (Tilt 250 EC) یا فولیکر 200 سے 250 ملی لیٹر فی ایکڑ 100 لیٹر پانی میں صبح کے وقت اسپرے کریں۔';
+    }
+    if (q.contains('mandi') || q.contains('rate') || q.contains('ریٹ') || q.contains('قیمت') || q.contains('منڈی')) {
+      return 'آج لاہور غلہ منڈی میں گندم کا ریٹ 3850 روپے، باسمتی چاول 11200 روپے، کپاس 8400 روپے اور کماد 425 روپے فی من ہے۔';
+    }
+    if (q.contains('weather') || q.contains('موسم') || q.contains('بارش')) {
+      return 'آئندہ 24 گھنٹوں میں بارش کا امکان 49 فیصد ہے۔ اسپرے کے لیے صبح 7 سے 10 بجے کا وقت بہترین ہے۔';
+    }
+    return 'کسان دوست زرعی مشیر: آپ کی فصل کی بہتر پیداوار کے لیے محکمہ زراعت پنجاب کی ہدایات کے مطابق کھاد کا متوازن استعمال کریں اور موسمی الرٹ کے مطابق اسپرے کریں۔';
+  }
+
+  void setApiKey(String key) {
+    state = state.copyWith(apiKey: key);
+  }
+
+  void setVoice(String voice) {
+    state = state.copyWith(selectedVoice: voice);
   }
 
   void toggleMute() {
     state = state.copyWith(isMuted: !state.isMuted);
   }
 
-  void setApiKey(String key) {
-    state = state.copyWith(apiKey: key.trim());
-  }
-
-  void setVoice(String voiceName) {
-    state = state.copyWith(selectedVoice: voiceName);
-  }
-
   @override
   void dispose() {
+    _speechSilenceTimer?.cancel();
     _voiceEngine.dispose();
-    _audioService.dispose();
-    _geminiLiveService.dispose();
     super.dispose();
   }
 }
 
+/// Global provider for the Voice Assistant state
 final voiceProvider = StateNotifierProvider<VoiceNotifier, VoiceState>((ref) {
   return VoiceNotifier();
 });

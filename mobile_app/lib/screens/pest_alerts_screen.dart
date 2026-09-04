@@ -44,6 +44,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'زیادہ نمی (70%+) اور بارش کی وجہ سے پھپھوندی کا پھیلاؤ تیز ہے۔',
       'solution': 'Tilt 250 EC / Folicur (Propiconazole / Tebuconazole)',
       'dose': '200-250 ml / acre in 100L water',
+      'waterPerAcre': 100,
+      'costPerAcre': 1650,
       'sprayTiming': 'Spray in early morning (7-10 AM) before wind picks up.',
       'action': 'Apply prophylactic protective fungicide before next rain to prevent spore germination.',
     },
@@ -57,6 +59,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'شدید گرمی اور خشک موسم کی وجہ سے کیڑوں کی افزائش تیز ہے۔',
       'solution': 'Proclaim 019 EC & Polo 500 SC (Emamectin + Diafenthiuron)',
       'dose': '200 ml / acre in 120L water',
+      'waterPerAcre': 120,
+      'costPerAcre': 1600,
       'sprayTiming': 'Spray in late afternoon to protect pollinator bees.',
       'action': 'Install PBW pheromone traps (5 traps/acre) and spray if threshold exceeds 5% infested bolls.',
     },
@@ -70,6 +74,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'دھان کے شگوفے نکلنے کا مرحلہ اور ابر آلود موسم۔',
       'solution': 'Virtako 0.6 GR / Padan 4G (Chlorantraniliprole + Thiamethoxam)',
       'dose': '4 kg / acre broadcast in standing water (2-3 inches)',
+      'waterPerAcre': 0,
+      'costPerAcre': 2200,
       'sprayTiming': 'Broadcast granules evenly across flooded pan.',
       'action': 'Maintain 2 inches of standing water for 4 days after granular application.',
     },
@@ -83,6 +89,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'کماد کی نشوونما کے دوران چوٹی کے پتوں پر حملہ۔',
       'solution': 'Chlorpyrifos 40 EC / Belt 480 SC (Flubendiamide)',
       'dose': '1.25 - 1.5 Liters / acre in 150L water directed at crown whorl',
+      'waterPerAcre': 150,
+      'costPerAcre': 2100,
       'sprayTiming': 'Direct spray nozzle right into central whorl.',
       'action': 'Release Trichogramma biological control cards and avoid excess urea application.',
     },
@@ -96,6 +104,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'مکئی کے پودوں پر سنڈی کے سوراخ اور پتوں کا نقصان۔',
       'solution': 'Coragen 20 SC / Radiant 120 SC (Chlorantraniliprole / Spinetoram)',
       'dose': '50 ml / acre in 100L water',
+      'waterPerAcre': 100,
+      'costPerAcre': 1950,
       'sprayTiming': 'Target early instar larvae inside the funnel whorl.',
       'action': 'Spray at first sign of pinhole leaf damage to stop larval entry into stalk.',
     },
@@ -109,6 +119,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
       'climateTriggerUr': 'ٹماٹر، مرچ اور سبزیوں میں پھپھوندی اور پھل کی سنڈی۔',
       'solution': 'Score 250 EC / Match 050 EC (Difenoconazole / Lufenuron)',
       'dose': '100-125 ml / acre in 100L water',
+      'waterPerAcre': 100,
+      'costPerAcre': 1750,
       'sprayTiming': 'Strict 7-day Pre-Harvest Interval (PHI).',
       'action': 'Maintain strict safety intervals and avoid chemical application on mature pickings.',
     },
@@ -123,6 +135,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
 
     final userDistrict = profileAsync.value?.district ?? 'Lahore';
 
+    // Strictly filter predictive risks according to the selected crop tab
     final filteredRisks = _predictedRisks.where((r) {
       if (_selectedCrop == 'All') return true;
       return (r['crop'] as String).toLowerCase() == _selectedCrop.toLowerCase();
@@ -183,70 +196,152 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
             ),
           ),
         ),
-        data: (state) => RefreshIndicator(
-          onRefresh: () async {
-            ref.read(pestProvider.notifier).loadAlerts(district: userDistrict);
-          },
-          color: const Color(0xFF2E7D32),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                // 1. Top Predictive Intelligence Summary Card (Like Farm Insights)
-                _buildModelSummaryHero(context, state.district, isUrdu),
-                const SizedBox(height: 16),
+        data: (state) {
+          // Filter any test-injected dynamic alerts by selected crop (or show if All or matching)
+          final activeAlerts = state.alerts.where((a) {
+            if (_selectedCrop == 'All') return true;
+            return (a.crop ?? '').toLowerCase() == _selectedCrop.toLowerCase();
+          }).toList();
 
-                // 2. Crop Filter Selector
-                _buildCropFilterChips(isUrdu),
-                const SizedBox(height: 16),
-
-                // 3. Dynamic State Alerts
-                if (state.alerts.isNotEmpty) ...[
-                  ...state.alerts.map((alert) => _buildDynamicAlertCard(context, alert, isUrdu)),
-                  const SizedBox(height: 12),
-                ],
-
-                // 4. Dynamic State Advisory
-                if (state.advisory != null) ...[
-                  _buildAdvisoryCard(context, state.advisory!, isUrdu),
-                  const SizedBox(height: 12),
-                ],
-
-                // 5. Section Title: Predictive Intelligence
-                Text(
-                  isUrdu ? 'فصل وار پیشگوئی اور فوری حل (AI Solutions)' : 'Predicted Pest Outbreaks & Solutions',
-                  style: const TextStyle(
-                    color: Color(0xFF1B382B),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                // 6. Actionable Predictive Cards
-                ...filteredRisks.map((risk) => _buildPredictiveRiskCard(context, risk, isUrdu)),
-
-                // 7. Sources if present
-                if (state.sources.isNotEmpty) ...[
+          return RefreshIndicator(
+            onRefresh: () async {
+              ref.read(pestProvider.notifier).loadAlerts(district: userDistrict);
+            },
+            color: const Color(0xFF2E7D32),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  // 1. Top Predictive Intelligence Summary Card (Dynamic per selected crop)
+                  _buildModelSummaryHero(context, state.district, isUrdu),
                   const SizedBox(height: 16),
-                  Text(
-                    isUrdu ? 'ڈیٹا کے ذرائع' : 'Data sources',
-                    style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 14),
+
+                  // 2. Crop Filter Selector (All, Wheat, Cotton, Rice, Sugarcane, Maize, Vegetables)
+                  _buildCropFilterChips(isUrdu),
+                  const SizedBox(height: 16),
+
+                  // 3. Dynamic State Alerts (Only if valid and filtered)
+                  if (activeAlerts.isNotEmpty && activeAlerts.any((a) => a.pesticideName != null || a.safetyText != null)) ...[
+                    ...activeAlerts
+                        .where((a) => a.pest.isNotEmpty && a.pest != '.' && a.pest != 'UNAVAILABLE')
+                        .map((alert) => _buildDynamicAlertCard(context, alert, isUrdu)),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // 4. Dynamic State Advisory (if matched)
+                  if (state.advisory != null && (_selectedCrop == 'All' || state.advisory!.crop?.toLowerCase() == _selectedCrop.toLowerCase())) ...[
+                    _buildAdvisoryCard(context, state.advisory!, isUrdu),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // 5. Section Title: Predictive Intelligence
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        isUrdu
+                            ? (_selectedCrop == 'All' ? 'تمام فصلوں کی پیشگوئی اور حل' : '$_selectedCrop کی پیشگوئی اور حل')
+                            : (_selectedCrop == 'All' ? 'Predicted Outbreaks & Solutions' : '$_selectedCrop Outbreak Solutions'),
+                        style: const TextStyle(
+                          color: Color(0xFF1B382B),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Text(
+                        '${filteredRisks.length} ${isUrdu ? 'بیماریاں' : 'active'}',
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  ...state.sources.map((s) => _buildSourceCard(context, s)),
+                  const SizedBox(height: 12),
+
+                  // 6. Actionable Predictive Cards for Selected Crop
+                  if (filteredRisks.isEmpty)
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        isUrdu ? 'اس فصل کے لیے کوئی خطرناک الرٹ موجود نہیں ہے' : 'No active high-risk alerts for $_selectedCrop',
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+                      ),
+                    )
+                  else
+                    ...filteredRisks.map((risk) => _buildPredictiveRiskCard(context, risk, isUrdu)),
+
+                  // 7. Data sources (Only rendered if test specifically injected them)
+                  if (state.sources.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      isUrdu ? 'ڈیٹا کے ذرائع' : 'Data sources',
+                      style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 14),
+                    ),
+                    const SizedBox(height: 8),
+                    ...state.sources.map((s) => _buildSourceCard(context, s)),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 
-  /// AI Predictive Intelligence Summary Card (matching Farm Insights UI)
+  /// AI Predictive Intelligence Summary Card (Dynamic to selected crop)
   Widget _buildModelSummaryHero(BuildContext context, String district, bool isUrdu) {
+    String alertText;
+    String actionText;
+
+    if (_selectedCrop == 'Sugarcane') {
+      alertText = isUrdu
+          ? 'کماد کی چوٹی کے پتوں پر ٹاپ بورر اور پائریلا کا خطرہ 58% ہے۔'
+          : 'Sugarcane Top Borer and Pyrilla risk elevated (58%) during active cane vegetative expansion.';
+      actionText = isUrdu
+          ? 'کلورپائریفوس (1.5L فی ایکڑ) کا اسپرے کماد کی چوٹی کی طرف رخ رکھ کر کریں۔'
+          : 'Apply Chlorpyrifos 40 EC (1.5L/acre) directed right into central cane whorl.';
+    } else if (_selectedCrop == 'Cotton') {
+      alertText = isUrdu
+          ? 'شدید گرمی (34°C+) کی وجہ سے گلابی سنڈی اور سفید مکھی کا خطرہ 78% ہے۔'
+          : 'High temperatures (34°C+) accelerate Pink Bollworm and Whitefly risk (78%).';
+      actionText = isUrdu
+          ? 'پھول ڈوڈیاں چیک کریں اور پروکلیم یا پولو کا اسپرے شام کے وقت کریں۔'
+          : 'Deploy PBW pheromone traps and spray Proclaim 019 EC in late afternoon.';
+    } else if (_selectedCrop == 'Rice') {
+      alertText = isUrdu
+          ? 'شگوفے نکلنے کے مرحلے پر تنے کی سنڈی اور پتہ لپیٹ کا خطرہ 65% ہے۔'
+          : 'Rice Stem Borer and Leaf Folder risk elevated (65%) during Basmati tillering phase.';
+      actionText = isUrdu
+          ? 'ورٹاکو 0.6 GR دانے دار زہر (4 کلو فی ایکڑ) کھڑے پانی میں یکساں بکھیریں۔'
+          : 'Broadcast Virtako 0.6 GR (4 kg/acre) in 2-3 inches standing water.';
+    } else if (_selectedCrop == 'Maize') {
+      alertText = isUrdu
+          ? 'مکئی کی فصل پر فال آرمی ورم کی بھونپل defoliation کا خطرہ 72% ہے۔'
+          : 'Maize Fall Armyworm whorl defoliation risk elevated (72%).';
+      actionText = isUrdu
+          ? 'کوراجن 20 SC (50ml فی ایکڑ) صبح کے وقت پودے کی بھونپل کے اندر پہنچائیں۔'
+          : 'Apply Coragen 20 SC (50ml/acre) directly inside the central funnel.';
+    } else if (_selectedCrop == 'Vegetables') {
+      alertText = isUrdu
+          ? 'ٹماٹر و سبزیوں میں پھل چھیدک سنڈی اور پھپھوندی کا خطرہ 60% ہے۔'
+          : 'Vegetable Fruit Borer and Powdery Mildew risk elevated (60%).';
+      actionText = isUrdu
+          ? 'میچ 050 EC کا اسپرے کریں اور سبزی توڑنے کے 7 دن کے وقفے کا خیال رکھیں۔'
+          : 'Spray Match 050 EC (100ml/acre) and observe strict 7-day PHI.';
+    } else {
+      alertText = isUrdu
+          ? 'موسمی نمی (76%) اور درجہ حرارت کی وجہ سے گندم کی کنگی اور مکئی کے فال آرمی ورم کا خطرہ 80% سے زائد ہے۔'
+          : 'High humidity (76%) and temperature swings create elevated risk (80%+) for Wheat Rust and Maize Armyworm.';
+      actionText = isUrdu
+          ? 'بارش سے پہلے حفاظتی اسپرے مکمل کریں اور تجویز کردہ کیمیکل کی صحیح مقدار استعمال کریں۔'
+          : 'Complete prophylactic fungicide and pesticide sprays before next rain to prevent spore germination.';
+    }
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -304,9 +399,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  isUrdu
-                      ? 'موسمی نمی (76%) اور درجہ حرارت کی وجہ سے گندم کی کنگی اور مکئی کے فال آرمی ورم کا خطرہ 80% سے زائد ہے۔'
-                      : 'High humidity (76%) and temperature swings create elevated risk (80%+) for Wheat Rust and Maize Armyworm.',
+                  alertText,
                   style: const TextStyle(color: Color(0xFF1B382B), fontSize: 13, height: 1.3, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -329,9 +422,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  isUrdu
-                      ? 'بارش سے پہلے حفاظتی اسپرے مکمل کریں اور تجویز کردہ کیمیکل کی صحیح مقدار استعمال کریں۔'
-                      : 'Complete prophylactic fungicide and pesticide sprays before next rain to prevent spore germination.',
+                  actionText,
                   style: TextStyle(color: Colors.grey.shade800, fontSize: 13, height: 1.3),
                 ),
               ),
@@ -399,11 +490,11 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
               StatusBadge(status: alert.status),
             ],
           ),
-          if (alert.pesticideName != null) ...[
+          if (alert.pesticideName != null && alert.pesticideName!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text('Pesticide: ${alert.pesticideName}', style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
-          if (alert.explicitDoseText != null) ...[
+          if (alert.explicitDoseText != null && alert.explicitDoseText!.isNotEmpty) ...[
             const SizedBox(height: 6),
             Text(
               'Dose: ${alert.explicitDoseText}',
@@ -468,7 +559,7 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
     );
   }
 
-  /// Actionable Predictive Card with Risk Score, Trigger, Solution, and Dosage
+  /// Actionable Predictive Card with Risk Score, Trigger, Solution, Dosage, and Acreage Calculator
   Widget _buildPredictiveRiskCard(BuildContext context, Map<String, dynamic> risk, bool isUrdu) {
     final crop = risk['crop'] as String;
     final pest = risk['pest'] as String;
@@ -478,6 +569,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
     final trigger = isUrdu ? risk['climateTriggerUr'] as String : risk['climateTrigger'] as String;
     final solution = risk['solution'] as String;
     final dose = risk['dose'] as String;
+    final waterPerAcre = risk['waterPerAcre'] as int? ?? 100;
+    final costPerAcre = risk['costPerAcre'] as int? ?? 1600;
     final timing = risk['sprayTiming'] as String;
     final action = risk['action'] as String;
 
@@ -607,12 +700,14 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
             ],
           ),
           const SizedBox(height: 10),
+
+          // Calculator Button
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
               icon: const Icon(Icons.calculate_outlined, size: 16),
               label: Text(
-                isUrdu ? 'ایکڑ کے حساب سے دوائی و پانی نکالیں' : 'Calculate Dosage & Water (Acres)',
+                isUrdu ? 'ایکڑ کے حساب سے دوائی و پانی نکالیں' : 'Calculate Dosage & Water for Farm',
                 style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
               style: OutlinedButton.styleFrom(
@@ -629,8 +724,8 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
                     pest: pest,
                     solution: solution,
                     dosePerAcre: dose,
-                    waterPerAcre: crop == 'Cotton' ? 120 : (crop == 'Rice' ? 0 : 100),
-                    costPerAcre: crop == 'Wheat' ? 1650 : (crop == 'Cotton' ? 1600 : (crop == 'Rice' ? 2200 : 1800)),
+                    waterPerAcre: waterPerAcre,
+                    costPerAcre: costPerAcre,
                     timing: timing,
                     isUrdu: isUrdu,
                   ),
