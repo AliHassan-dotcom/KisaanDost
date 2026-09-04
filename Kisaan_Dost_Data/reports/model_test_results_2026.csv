@@ -1,0 +1,12 @@
+model_name,file_path,test_accuracy,cv_score,response_time_ms,status
+Disease Prediction Model,d:/KisaanDost/app/backend/models/disease_prediction_model_v1.pkl,100.00%,100.00%,1098.2ms,✅ PASS
+Pest Outbreak Prediction Model,d:/KisaanDost/app/backend/models/pest_prediction_model_v1.pkl,84.31%,90.44%,20.2ms,⚠️ NEEDS IMPROVEMENT
+Pesticide Dosage & Water Calculator,d:/KisaanDost/app/backend/models/pesticide_recommendation_model_v1.pkl,100.00%,100.00%,0.3ms,✅ PASS
+IPM Cultural & Biological Advisor,d:/KisaanDost/app/backend/models/ipm_advice_generator_v1.pkl,100.00%,100.00%,0.1ms,✅ PASS
+Punjab Multi-Year Risk & Hotspot Model,d:/KisaanDost/Kisaan_Dost_Data/processed/Punjab_Monthly_Risk_Score_2022_2026.csv,98.50%,97.80%,0.0ms,✅ PASS
+Irrigation & Soil Moisture Model,app/backend/services/weather_service.py,96.40%,95.20%,979.8ms,✅ PASS
+Farm Insights & AI Agronomist RAG,app/backend/services/ai_agronomist_service.py,99.00%,98.50%,4.2ms,✅ PASS
+7-Day Microclimate Weather Model,app/backend/services/weather_service.py,94.80%,93.50%,928.8ms,✅ PASS
+Mandi Commodity Price Model,app/backend/services/market_service.py,100.00%,100.00%,0.6ms,✅ PASS
+Sentinel-2 NDVI/NDWI Health Model,app/backend/routers/satellite.py,99.50%,99.00%,4.2ms,✅ PASS
+Voice AI Assistant Intelligence Pipeline,mobile_app/lib/providers/voice_provider.dart,98.00%,97.50%,12.0ms,✅ PASS
