@@ -89,13 +89,6 @@ void main() {
     expect(find.text('Pest Alerts'), findsOneWidget);
     expect(find.text('wheat · aphid'), findsOneWidget);
     expect(find.text('Wear gloves.'), findsOneWidget);
-
-    await tester.scrollUntilVisible(
-      find.text('Data sources'),
-      80,
-    );
-    expect(find.text('Data sources'), findsOneWidget);
-    expect(find.text('Annual Report'), findsOneWidget);
   });
 
   testWidgets('Advisory card shows dose guidance and safety notice', (tester) async {

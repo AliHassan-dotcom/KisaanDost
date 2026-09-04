@@ -273,17 +273,6 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
                     )
                   else
                     ...filteredRisks.map((risk) => _buildPredictiveRiskCard(context, risk, isUrdu)),
-
-                  // 7. Data sources (Only rendered if test specifically injected them)
-                  if (state.sources.isNotEmpty) ...[
-                    const SizedBox(height: 16),
-                    Text(
-                      isUrdu ? 'ڈیٹا کے ذرائع' : 'Data sources',
-                      style: const TextStyle(color: Color(0xFF1B382B), fontWeight: FontWeight.bold, fontSize: 14),
-                    ),
-                    const SizedBox(height: 8),
-                    ...state.sources.map((s) => _buildSourceCard(context, s)),
-                  ],
                 ],
               ),
             ),
