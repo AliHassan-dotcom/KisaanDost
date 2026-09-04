@@ -8,6 +8,7 @@ import '../providers/pest_provider.dart';
 import '../providers/profile_provider.dart';
 import '../providers/settings_provider.dart';
 import '../widgets/kd_app_bar.dart';
+import '../widgets/pesticide_calculator_dialog.dart';
 import '../widgets/safety_notice.dart';
 import '../widgets/status_badge.dart';
 
@@ -604,6 +605,38 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.calculate_outlined, size: 16),
+              label: Text(
+                isUrdu ? 'ایکڑ کے حساب سے دوائی و پانی نکالیں' : 'Calculate Dosage & Water (Acres)',
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFF2E7D32),
+                side: const BorderSide(color: Color(0xFF2E7D32)),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => PesticideCalculatorDialog(
+                    crop: crop,
+                    pest: pest,
+                    solution: solution,
+                    dosePerAcre: dose,
+                    waterPerAcre: crop == 'Cotton' ? 120 : (crop == 'Rice' ? 0 : 100),
+                    costPerAcre: crop == 'Wheat' ? 1650 : (crop == 'Cotton' ? 1600 : (crop == 'Rice' ? 2200 : 1800)),
+                    timing: timing,
+                    isUrdu: isUrdu,
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
