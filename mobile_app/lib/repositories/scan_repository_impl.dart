@@ -17,7 +17,15 @@ class ScanRepositoryImpl implements ScanRepository {
   @override
   Future<DiseasePrediction> scan(String filePath) async {
     final file = File(filePath);
-    final multipartFile = await MultipartFile.fromPath('image', file.path);
+    final ext = filePath.split('.').last.toLowerCase();
+    final mediaType = (ext == 'png')
+        ? MediaType('image', 'png')
+        : (ext == 'webp' ? MediaType('image', 'webp') : MediaType('image', 'jpeg'));
+    final multipartFile = await MultipartFile.fromPath(
+      'image',
+      file.path,
+      contentType: mediaType,
+    );
     final streamed = await _client.multipartPost(
       AppConfig.apiUri('/crop-health/scan'),
       fields: const <String, String>{},

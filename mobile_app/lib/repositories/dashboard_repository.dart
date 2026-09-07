@@ -25,5 +25,9 @@ class DashboardData {
 }
 
 abstract interface class DashboardRepository {
-  Future<DashboardData> getDashboard();
+  Future<DashboardData> getDashboard({
+    double? latitude,
+    double? longitude,
+    String? district,
+  });
 }

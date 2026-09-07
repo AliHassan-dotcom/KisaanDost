@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -38,10 +39,22 @@ class HttpClient {
     return headers;
   }
 
+  bool _isNetworkError(Object error) {
+    return error is SocketException ||
+        error is ClientException ||
+        error is TimeoutException ||
+        error is HttpException ||
+        error is HandshakeException ||
+        error is IOException;
+  }
+
   Future<T> _withFallback<T>(Future<T> Function(Uri uri) requestFn, Uri initialUri) async {
     try {
       return await requestFn(initialUri);
     } catch (e) {
+      if (!_isNetworkError(e)) {
+        rethrow;
+      }
       // If the primary connection failed (e.g. SocketException), test candidates
       for (final candidateBase in AppConfig.candidateBaseUrls) {
         final candidateUri = _replaceBase(initialUri, candidateBase);
@@ -50,7 +63,10 @@ class HttpClient {
           final result = await requestFn(candidateUri);
           AppConfig.setActiveBaseUrl(candidateBase);
           return result;
-        } catch (_) {
+        } catch (candidateErr) {
+          if (!_isNetworkError(candidateErr)) {
+            rethrow;
+          }
           continue;
         }
       }
@@ -72,7 +88,7 @@ class HttpClient {
       final response = await _client
           .get(targetUri, headers: await _headers())
           .timeout(AppConfig.httpTimeout);
-      return _checkStatus(response);
+      return _checkStatus(response, targetUri: targetUri);
     }, uri);
   }
 
@@ -85,7 +101,7 @@ class HttpClient {
             body: body == null ? null : jsonEncode(body),
           )
           .timeout(AppConfig.httpTimeout);
-      return _checkStatus(response);
+      return _checkStatus(response, targetUri: targetUri);
     }, uri);
   }
 
@@ -98,7 +114,7 @@ class HttpClient {
             body: body == null ? null : jsonEncode(body),
           )
           .timeout(AppConfig.httpTimeout);
-      return _checkStatus(response);
+      return _checkStatus(response, targetUri: targetUri);
     }, uri);
   }
 
@@ -111,7 +127,7 @@ class HttpClient {
             body: body == null ? null : jsonEncode(body),
           )
           .timeout(AppConfig.httpTimeout);
-      return _checkStatus(response);
+      return _checkStatus(response, targetUri: targetUri);
     }, uri);
   }
 
@@ -127,15 +143,16 @@ class HttpClient {
         ..headers.addAll(await _headers(multipart: true));
 
       final response = await request.send().timeout(AppConfig.httpTimeout);
-      if (response.statusCode == HttpStatus.unauthorized) {
+      if (response.statusCode == HttpStatus.unauthorized && !targetUri.path.contains('/auth/')) {
         throw const UnauthorizedException('Session expired. Please log in again.');
       }
       return response;
     }, uri);
   }
 
-  Response _checkStatus(Response response) {
-    if (response.statusCode == HttpStatus.unauthorized) {
+  Response _checkStatus(Response response, {Uri? targetUri}) {
+    final isAuthRoute = targetUri != null && targetUri.path.contains('/auth/');
+    if (!isAuthRoute && response.statusCode == HttpStatus.unauthorized) {
       throw const UnauthorizedException('Session expired. Please log in again.');
     }
     return response;

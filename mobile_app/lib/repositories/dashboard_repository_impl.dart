@@ -17,8 +17,22 @@ class DashboardRepositoryImpl implements DashboardRepository {
   final HttpClient _client;
 
   @override
-  Future<DashboardData> getDashboard() async {
-    final response = await _client.get(AppConfig.apiUri('/dashboard'));
+  Future<DashboardData> getDashboard({
+    double? latitude,
+    double? longitude,
+    String? district,
+  }) async {
+    final queryParams = <String, String>{};
+    if (latitude != null) queryParams['lat'] = latitude.toString();
+    if (longitude != null) queryParams['lng'] = longitude.toString();
+    if (district != null && district.isNotEmpty) queryParams['district'] = district;
+
+    var uri = AppConfig.apiUri('/dashboard');
+    if (queryParams.isNotEmpty) {
+      uri = uri.replace(queryParameters: queryParams);
+    }
+
+    final response = await _client.get(uri);
     if (response.statusCode != HttpStatus.ok) {
       throw ApiException.fromResponse(response);
     }

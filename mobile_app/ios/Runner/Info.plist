@@ -66,5 +66,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show farm-specific data</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to show farm-specific data</string>
 </dict>
 </plist>

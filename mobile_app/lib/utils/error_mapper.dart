@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -51,6 +52,9 @@ class ApiException implements Exception {
           return error.message.isNotEmpty ? error.message : 'Something went wrong. Please try again.';
       }
     }
+    if (error is TimeoutException) {
+      return 'Connection timed out reaching ${AppConfig.apiBaseUrl}. Please check network or server status.';
+    }
     if (error is SocketException) {
       return 'Cannot reach server at ${AppConfig.apiBaseUrl}. Please ensure FastAPI backend is running and your device is on the same network.';
     }
@@ -59,6 +63,9 @@ class ApiException implements Exception {
     }
     if (error is HttpException || error is HandshakeException) {
       return 'Communication error with server at ${AppConfig.apiBaseUrl}.';
+    }
+    if (error.runtimeType.toString() == 'UnauthorizedException') {
+      return 'Invalid phone or password.';
     }
     return 'Connection failed. Please check network and server status.';
   }

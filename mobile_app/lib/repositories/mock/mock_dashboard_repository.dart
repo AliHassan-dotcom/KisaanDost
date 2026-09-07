@@ -12,19 +12,24 @@ class MockDashboardRepository implements DashboardRepository {
   final Duration delay;
 
   @override
-  Future<DashboardData> getDashboard() async {
+  Future<DashboardData> getDashboard({
+    double? latitude,
+    double? longitude,
+    String? district,
+  }) async {
     await Future<void>.delayed(delay);
+    final effectiveDistrict = district ?? 'Multan';
     return DashboardData(
-      user: const <String, dynamic>{
+      user: <String, dynamic>{
         'user_id': 'user_000001',
         'role': 'farmer',
         'name': 'Farm Hero',
-        'district': 'Multan',
+        'district': effectiveDistrict,
         'crop': 'wheat',
         'language': 'en',
       },
-      weather: const WeatherSummary(
-        district: 'Multan',
+      weather: WeatherSummary(
+        district: effectiveDistrict,
         status: ApiDataStatus.mock,
         year: 2026,
         month: 9,

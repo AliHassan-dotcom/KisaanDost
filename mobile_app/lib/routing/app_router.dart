@@ -16,6 +16,9 @@ import '../screens/settings_screen.dart';
 import '../screens/splash_screen.dart';
 import '../screens/voice_screen.dart';
 import '../screens/weather_screen.dart';
+import '../screens/disease_scanner_screen.dart';
+import '../screens/what_if_analysis_screen.dart';
+import '../screens/location_picker_screen.dart';
 import '../utils/logger.dart';
 
 class AppRoutes {
@@ -27,6 +30,7 @@ class AppRoutes {
   static const String dashboard = '/dashboard';
   static const String profile = '/profile';
   static const String scan = '/scan';
+  static const String diseaseScanner = '/disease-scanner';
   static const String weather = '/weather';
   static const String irrigation = '/irrigation';
   static const String pest = '/pest';
@@ -34,6 +38,8 @@ class AppRoutes {
   static const String market = '/market';
   static const String voice = '/voice';
   static const String settings = '/settings';
+  static const String whatIf = '/what-if';
+  static const String locationPicker = '/location-picker';
 }
 
 class RouterNotifier extends ChangeNotifier {
@@ -124,6 +130,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const ScanScreen(),
       ),
       GoRoute(
+        path: AppRoutes.diseaseScanner,
+        builder: (context, state) => const DiseaseScannerScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.weather,
         builder: (context, state) => const WeatherScreen(),
       ),
@@ -155,6 +165,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.settings,
         builder: (context, state) => const SettingsScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.whatIf,
+        builder: (context, state) => const WhatIfAnalysisScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.locationPicker,
+        builder: (context, state) => const LocationPickerScreen(),
+      ),
     ],
   );
 });
+
