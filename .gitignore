@@ -56,3 +56,6 @@ ios/Runner/GoogleService-Info.plist
 Thumbs.db
 *.log
 *.tmp
+scratch/
+app_data/uploads/
+data/processed/backup_snapshot_*/
