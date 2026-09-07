@@ -85,11 +85,13 @@
       "user_id": "user_000004",
       "name": "Ali Hassan",
       "phone": "03001234567",
-      "district": null,
-      "crop": null,
-      "farm_size_acres": null,
-      "irrigation_type": null,
-      "language": "en"
+      "district": "Lahore",
+      "crop": "wheat",
+      "farm_size_acres": 1.0,
+      "irrigation_type": "rain water",
+      "language": "en",
+      "email": "xyz@gmail.com",
+      "updated_at": "2026-09-07T15:45:50.715879+00:00"
     },
     "user_000005": {
       "user_id": "user_000005",
@@ -114,6 +116,56 @@
   },
   "scans": {
     "user_000004": [
+      {
+        "scan_id": "scan_000006",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\91c06954c1e442f89d63406a07a83f08.png",
+        "predicted_class": "Tomato_Leaf_Mold",
+        "confidence": 0.9644,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-07T15:54:09.510189+00:00"
+      },
+      {
+        "scan_id": "scan_000005",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\708347d1177646289c799a92832c6983.png",
+        "predicted_class": "Tomato_Leaf_Mold",
+        "confidence": 0.9644,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-07T15:53:31.866857+00:00"
+      },
+      {
+        "scan_id": "scan_000004",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\4dc1fb0fdd6640d69c37732658504984.png",
+        "predicted_class": "Tomato_Leaf_Mold",
+        "confidence": 0.9644,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-07T15:48:43.267844+00:00"
+      },
+      {
+        "scan_id": "scan_000003",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\099d5609ee4a4e1abdf561a90b3c82aa.png",
+        "predicted_class": "Tomato_Leaf_Mold",
+        "confidence": 0.9644,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-07T15:47:38.512356+00:00"
+      },
+      {
+        "scan_id": "scan_000002",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\26ab9d62739d4f48b490b28c93ab26a4.png",
+        "predicted_class": "Tomato_Leaf_Mold",
+        "confidence": 0.9644,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-07T15:47:10.634703+00:00"
+      },
       {
         "scan_id": "scan_000001",
         "user_id": "user_000004",

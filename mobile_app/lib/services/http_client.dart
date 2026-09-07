@@ -45,7 +45,8 @@ class HttpClient {
         error is TimeoutException ||
         error is HttpException ||
         error is HandshakeException ||
-        error is IOException;
+        error is IOException ||
+        error is StateError;
   }
 
   Future<T> _withFallback<T>(Future<T> Function(Uri uri) requestFn, Uri initialUri) async {
@@ -128,6 +129,38 @@ class HttpClient {
           )
           .timeout(AppConfig.httpTimeout);
       return _checkStatus(response, targetUri: targetUri);
+    }, uri);
+  }
+
+  /// Upload a file with fresh MultipartFile recreation on each retry attempt
+  Future<StreamedResponse> uploadFile(
+    Uri uri, {
+    required String filePath,
+    required String fieldName,
+    Map<String, String> fields = const <String, String>{},
+  }) async {
+    final file = File(filePath);
+    final ext = filePath.split('.').last.toLowerCase();
+    final mediaType = (ext == 'png')
+        ? MediaType('image', 'png')
+        : (ext == 'webp' ? MediaType('image', 'webp') : MediaType('image', 'jpeg'));
+
+    return _withFallback((targetUri) async {
+      final multipartFile = await http.MultipartFile.fromPath(
+        fieldName,
+        file.path,
+        contentType: mediaType,
+      );
+      final request = http.MultipartRequest('POST', targetUri)
+        ..fields.addAll(fields)
+        ..files.add(multipartFile)
+        ..headers.addAll(await _headers(multipart: true));
+
+      final response = await request.send().timeout(AppConfig.httpTimeout);
+      if (response.statusCode == HttpStatus.unauthorized && !targetUri.path.contains('/auth/')) {
+        throw const UnauthorizedException('Session expired. Please log in again.');
+      }
+      return response;
     }, uri);
   }
 

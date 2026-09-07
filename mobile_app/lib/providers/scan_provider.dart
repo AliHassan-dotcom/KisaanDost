@@ -9,15 +9,24 @@ class ScanNotifier extends AsyncNotifier<ScanState> {
 
   @override
   Future<ScanState> build() async {
-    final history = await _repository.getHistory();
-    return ScanState(history: history);
+    try {
+      final history = await _repository.getHistory();
+      return ScanState(history: history);
+    } catch (_) {
+      return const ScanState();
+    }
   }
 
   Future<void> scan(String filePath) async {
     state = const AsyncLoading<ScanState>();
     state = await AsyncValue.guard<ScanState>(() async {
       final prediction = await _repository.scan(filePath);
-      final history = await _repository.getHistory();
+      List<DiseasePrediction> history = state.value?.history ?? const <DiseasePrediction>[];
+      try {
+        history = await _repository.getHistory();
+      } catch (_) {
+        history = <DiseasePrediction>[prediction, ...history];
+      }
       return ScanState(
         lastPrediction: prediction,
         history: history,
