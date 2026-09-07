@@ -51,6 +51,7 @@ class AppConfig {
   static List<String> get candidateBaseUrls => <String>[
         'http://127.0.0.1:8000',
         'http://localhost:8000',
+        'http://10.224.161.46:8000',
         'http://192.168.1.9:8000',
         'http://192.168.1.6:8000',
         'http://192.168.1.5:8000',
