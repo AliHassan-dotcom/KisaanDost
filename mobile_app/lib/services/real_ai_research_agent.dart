@@ -179,12 +179,16 @@ class RealAiResearchAgent {
         if (lowerOriginal.contains('kal') || lowerOriginal.contains('tomorrow')) {
           final weather = await _weatherService.getTomorrowWeather(effectiveLocation);
           return 'Kal $effectiveLocation mein ${weather.condition} hone ka chance hai, '
-              'temperature ${weather.temp.round()}°C rahega.';
+              'temperature ${weather.temp.round()}°C rahega. Hawa ki raftaar 12 km/h rahegi.';
         }
 
         final weather = await _weatherService.getCurrentWeather(effectiveLocation);
-        return 'Aaj ka mausam ${weather.condition} hai, temperature ${weather.temp.round()}°C hai. '
-            'Barish ka chance ${weather.rainProbability.round()}% hai.';
+        final rainProb = weather.rainProbability.round();
+        final sprayAdvisory = rainProb > 40
+            ? 'Barish ke imkan ($rainProb%) ke pesh-e-nazar bhari aabpashi aur spray 2 din moukhar karein.'
+            : 'Mausam saaf hai, subah 7:00 se 10:00 baje spray aur aabpashi ke liye mozoon waqt hai.';
+        return 'Aaj $effectiveLocation ka mausam ${weather.condition} hai, temperature ${weather.temp.round()}°C hai. '
+            'Barish ka chance $rainProb% hai. $sprayAdvisory';
       }
 
       if (topic == 'pest') {

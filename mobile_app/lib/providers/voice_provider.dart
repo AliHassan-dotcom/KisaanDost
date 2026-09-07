@@ -248,55 +248,62 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
       aiReplyText = GreetingHandler.getGreetingResponse(text);
     } else {
       final district = _ref?.read(locationProvider).location.district ?? 'Lahore';
-      final researchAgent = RealAiResearchAgent(
-        googleApiKey: EnvConfig.googleApiKey,
-        googleSearchEngineId: EnvConfig.googleSearchEngineId,
-      );
 
-      aiReplyText = await researchAgent.answerQuestion(text, district);
+      // 1. Try production high-intelligence FastAPI backend
+      final candidateUrls = AppConfig.candidateBaseUrls
+          .map((base) => '$base/api/v1/ai/ask')
+          .toList();
 
-      if (aiReplyText.isEmpty || aiReplyText.contains('Maaf karein')) {
-        final candidateUrls = AppConfig.candidateBaseUrls
-            .map((base) => '$base/api/v1/ai/ask')
-            .toList();
+      for (final urlStr in candidateUrls) {
+        try {
+          final backendUrl = Uri.parse(urlStr);
+          final headers = <String, String>{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          };
 
-        for (final urlStr in candidateUrls) {
-          try {
-            final backendUrl = Uri.parse(urlStr);
-            final headers = <String, String>{
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            };
+          final response = await http
+              .post(
+                backendUrl,
+                headers: headers,
+                body: jsonEncode(<String, dynamic>{
+                  'query': text,
+                  'district': district,
+                  'crop': 'Wheat',
+                  'language': language,
+                }),
+              )
+              .timeout(const Duration(seconds: 4));
 
-            final response = await http
-                .post(
-                  backendUrl,
-                  headers: headers,
-                  body: jsonEncode(<String, dynamic>{
-                    'query': text,
-                    'district': district,
-                    'crop': 'Wheat',
-                    'language': language,
-                  }),
-                )
-                .timeout(const Duration(seconds: 4));
-
-            if (response.statusCode == 200) {
-              final data = jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
-              final answer = data['answer'] as String? ?? '';
-              if (answer.isNotEmpty) {
-                aiReplyText = answer;
-                break;
-              }
+          if (response.statusCode == 200) {
+            final data = jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+            final answer = data['answer'] as String? ?? '';
+            if (answer.isNotEmpty && !answer.contains('Maaf karein')) {
+              aiReplyText = answer;
+              break;
             }
-          } catch (_) {
-            // Try next candidate url
           }
+        } catch (_) {
+          // Try next candidate URL
         }
+      }
 
-        if (aiReplyText.isEmpty || aiReplyText.contains('Maaf karein')) {
-          aiReplyText = _generateLocalFallback(text);
+      // 2. If backend unreachable, query RealAiResearchAgent
+      if (aiReplyText.isEmpty || aiReplyText.contains('Maaf karein')) {
+        final researchAgent = RealAiResearchAgent(
+          googleApiKey: EnvConfig.googleApiKey,
+          googleSearchEngineId: EnvConfig.googleSearchEngineId,
+        );
+
+        final agentAns = await researchAgent.answerQuestion(text, district);
+        if (agentAns.isNotEmpty && !agentAns.contains('Maaf karein')) {
+          aiReplyText = agentAns;
         }
+      }
+
+      // 3. Robust local fallback if completely offline
+      if (aiReplyText.isEmpty || aiReplyText.contains('Maaf karein')) {
+        aiReplyText = _generateLocalFallback(text);
       }
     }
 

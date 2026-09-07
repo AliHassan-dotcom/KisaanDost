@@ -185,7 +185,7 @@ class AIAgronomistService:
         is_pest = any(re.search(p, q_lower) for p in pest_patterns)
 
         if is_pest:
-            matches = self.pesticide_service.search(query=query, district=district, limit=3)
+            matches = self.pesticide_service.search(query=query, crop=detected_crop, district=district, limit=3)
             if matches:
                 top = matches[0]
                 p_name = top.get("pesticide_name", "Tilt 250 EC / Folicur")
