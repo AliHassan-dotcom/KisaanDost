@@ -98,6 +98,23 @@ class AiResearchAgent {
     final q = question.trim();
     if (q.isEmpty) return 'Kripya koi sawal poochiye!';
 
+    // Check greetings first
+    final isGreeting = RegExp(
+      r'\b(salam|assalam|slam|salaam|aoa|adaab|adab|kaise\s+ho|kese\s+ho|hello|hi|hey)\b',
+      caseSensitive: false,
+    ).hasMatch(q.toLowerCase()) ||
+        q.contains('سلام') ||
+        q.contains('اسلام') ||
+        q.contains('کیسے') ||
+        q.contains('کیا حال');
+
+    if (isGreeting) {
+      if (q.contains('سلام') || q.contains('اسلام') || q.toLowerCase().contains('salam')) {
+        return 'Walaikum Assalam! Main KisaanDost hoon, aapka AI farming assistant. Fasal ki bimari, 7 din ke mausam, spray ki miqdaar aur mandi rates mein madad ke liye hazir hoon. Aaj kya madad chahiye?';
+      }
+      return 'Main bilkul theek hoon, shukriya! Main KisaanDost hoon, aapka AI farming assistant. Fasal ki bimari, mausam, khad ya mandi rates ke hawale se main aapki kya madad karun?';
+    }
+
     // Step 1: Understand question (NLP)
     final understoodQuestion = await understandQuestion(q);
 
@@ -106,18 +123,18 @@ class AiResearchAgent {
 
     // Step 3: If answer found in local datasets
     if (localAnswer != null && localAnswer.isNotEmpty) {
-      return '✅ Dataset se: $localAnswer';
+      return localAnswer;
     }
 
     // Step 4: If NOT found, perform Google / Web Search
     final googleAnswer = await googleSearch(q);
 
     if (googleAnswer != null && googleAnswer.isNotEmpty) {
-      return '🌐 Google se: $googleAnswer';
+      return googleAnswer;
     }
 
     // Step 5: Fallback if no answer could be retrieved
-    return 'Maaf karein, mujhe iska jawab nahi mila. Koi aur sawal poochiye!';
+    return 'Maaf karein, mujhe iska jawab nahi mila. Fasal ki bimari, mausam, khad ya mandi rate ke bare mein poochiye!';
   }
 
   /// Step 1: Understand question and extract core entities

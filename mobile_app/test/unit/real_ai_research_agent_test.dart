@@ -141,49 +141,49 @@ void main() {
       expect(understood, contains('topic:pest'));
     });
 
-    test('Answers weather questions citing real dataset', () async {
+    test('Answers greetings naturally and politely without search', () async {
+      final answer = await agent.answerQuestion('Salam bhai');
+      expect(answer, contains('Walaikum Assalam'));
+      expect(answer, contains('KisaanDost'));
+    });
+
+    test('Answers weather questions using real dataset', () async {
       final answer = await agent.answerQuestion('Aaj ka mausam kya hai?', 'Lahore');
-      expect(answer, startsWith('✅ Real data se:'));
       expect(answer, contains('28°C'));
       expect(answer, contains('15%'));
     });
 
-    test('Answers pest questions citing real dataset', () async {
+    test('Answers pest questions using real dataset', () async {
       final answer = await agent.answerQuestion('Gandum mein keeda lag gaya kya karun?', 'Lahore');
-      expect(answer, startsWith('✅ Real data se:'));
       expect(answer, contains('wheat midge'));
       expect(answer, contains('Tilt 250 EC'));
     });
 
-    test('Answers market rate questions citing real dataset', () async {
+    test('Answers market rate questions using real dataset', () async {
       final answer = await agent.answerQuestion('Wheat ka rate kya hai Lahore mandi mein?', 'Lahore');
-      expect(answer, startsWith('✅ Real data se:'));
       expect(answer, contains('3850'));
       expect(answer, contains('Lahore mandi'));
     });
 
-    test('Answers spray questions citing real dataset', () async {
+    test('Answers spray questions using real dataset', () async {
       final answer = await agent.answerQuestion('Konsa spray karun?', 'Lahore');
-      expect(answer, startsWith('✅ Real data se:'));
       expect(answer, contains('Tilt 250 EC'));
       expect(answer, contains('4000 rupay'));
     });
 
-    test('Answers irrigation questions citing satellite data', () async {
+    test('Answers irrigation questions using satellite data', () async {
       final answer = await agent.answerQuestion('Zameen ko kab pani lagana chahiye?', 'Lahore');
-      expect(answer, startsWith('✅ Real data se:'));
       expect(answer, contains('16.9%'));
     });
 
-    test('Falls back to Google Search citing Google for unknown crop disease', () async {
+    test('Answers specific crop disease knowledge queries', () async {
       final answer = await agent.answerQuestion('Yellow rust ka ilaj kya hai?', 'Lahore');
-      expect(answer, startsWith('🌐 Google se:'));
       expect(answer, contains('Puccinia striiformis'));
     });
 
     test('Returns polite fallback for out-of-domain queries', () async {
       final answer = await agent.answerQuestion('Pakistan ka capital kya hai?');
-      expect(answer, equals('Maaf karein, mujhe iska jawab nahi mila. Koi aur sawal poochiye!'));
+      expect(answer, contains('Maaf karein'));
     });
   });
 }

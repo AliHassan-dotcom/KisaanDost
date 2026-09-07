@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/app_config.dart';
 import '../config/env_config.dart';
+import 'greeting_handler.dart';
 import 'real_market_service.dart';
 import 'real_pest_service.dart';
 import 'real_satellite_service.dart';
@@ -52,6 +53,11 @@ class RealAiResearchAgent {
     final q = question.trim();
     if (q.isEmpty) return 'Kripya koi sawal poochiye!';
 
+    // Check greetings first
+    if (GreetingHandler.isGreeting(q)) {
+      return GreetingHandler.getGreetingResponse(q);
+    }
+
     // Step 1: Understand question
     final understoodQuestion = understandQuestion(q);
 
@@ -59,18 +65,18 @@ class RealAiResearchAgent {
     final datasetAnswer = await _searchDatasets(understoodQuestion, userLocation, q);
 
     if (datasetAnswer != null && datasetAnswer.isNotEmpty) {
-      return '✅ Real data se: $datasetAnswer';
+      return datasetAnswer;
     }
 
     // Step 3: Google search fallback if not found in datasets
     final googleAnswer = await _googleSearch(q);
 
     if (googleAnswer != null && googleAnswer.isNotEmpty) {
-      return '🌐 Google se: $googleAnswer';
+      return googleAnswer;
     }
 
     // Step 4: Polite fallback for out-of-domain or unanswerable queries
-    return 'Maaf karein, mujhe iska jawab nahi mila. Koi aur sawal poochiye!';
+    return 'Maaf karein, mujhe iska jawab nahi mila. Fasal ki bimari, mausam, khad ya mandi rate ke bare mein poochiye!';
   }
 
   /// Extracts crop, location, and topic entities from input text

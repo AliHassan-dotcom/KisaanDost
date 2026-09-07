@@ -63,6 +63,46 @@ class AIAgronomistService:
         is_urdu = language == "ur" or bool(re.search(r"[\u0600-\u06FF]", query))
 
         # -------------------------------------------------------------
+        # 0. GREETINGS & CASUAL CONVERSATION (Check FIRST for pure greetings)
+        # -------------------------------------------------------------
+        greeting_patterns = [
+            r"\b(salam|assalam|slam|salaam|aslam|aoa|adaab|adab)\b",
+            r"\b(hello|hi|hey|hy|morning|afternoon|evening)\b",
+            r"\b(kaise\s+ho|kese\s+ho|kaise\s+hain|kese\s+hain|kaisey\s+ho|kya\s+haal|kya\s+hal|kia\s+hal|theek\s+ho|kheriyat)\b",
+            r"\b(who\s+are\s+you|ap\s+kon\s+ho|aap\s+kon\s+hain|tum\s+kon\s+ho|kisaandost|kisan\s*dost)\b",
+            r"سلام", r"اسلام", r"السلام", r"وعلیکم", r"آداب", r"کیسے ہو", r"کیسے ہیں", r"کیا حال", r"خیریت", r"کون ہیں", r"کون ہو"
+        ]
+        has_greeting_word = any(re.search(p, q_lower) for p in greeting_patterns)
+
+        # Check if greeting is standalone or without technical agri queries
+        agri_action_patterns = [
+            r"\b(irrigate|water|pani|paani|abpashi)\b",
+            r"\b(pest|disease|spray|pesticide|fungicide|rust|kangi|sundi|keera|keerey|dawa|dawai)\b",
+            r"\b(fertilizer|khad|khaad|urea|dap|potash|zinc|boron)\b",
+            r"\b(mandi|rate|rates|price|prices|market|bhao|keemat|qimat)\b",
+            r"\b(weather|forecast|rain|temperature|mausam|barish)\b",
+            r"\b(sowing|seed|variety|kasht|beej|subsidy|card)\b",
+            r"پانی", r"اسپرے", r"کھاد", r"ریٹ", r"منڈی", r"موسم", r"بارش", r"کنگی", r"سنڈی", r"کیڑا", r"دوا"
+        ]
+        has_agri_action = any(re.search(p, q_lower) for p in agri_action_patterns)
+
+        if has_greeting_word and not has_agri_action:
+            if is_urdu:
+                if any(w in q_lower for w in ["kaise", "kese", "haal", "hal", "theek", "kheriyat"]) or any(w in q for w in ["کیسے", "حال", "خیریت"]):
+                    reply = (
+                        "الحمدللہ میں بالکل ٹھیک ہوں۔ میں کسان دوست AI زرعی مشیر ہوں۔ آپ مجھ سے گندم، کپاس، دھان، کھاد، اسپرے کی صحیح مقدار، 7 دن کے موسم یا منڈی کے تازہ ریٹس کے بارے میں پوچھ سکتے ہیں۔"
+                    )
+                else:
+                    reply = (
+                        "وعلیکم السلام! میں کسان دوست AI زرعی مشیر ہوں۔ میں پنجاب کے موسم، کھاد، اسپرے کی صحیح مقدار، فصلوں کی بیماریوں کے علاج اور منڈی کے تازہ ریٹس میں آپ کی رہنمائی کے لیے حاضر ہوں۔ آج میں آپ کی کیا مدد کر سکتا ہوں؟"
+                    )
+            else:
+                reply = (
+                    "Hello! I am KisaanDost, your AI farming assistant. I am here to help you with crop diseases, irrigation schedules, pesticide dosages, 7-day weather forecasts, and live mandi commodity rates. How may I help your farm today?"
+                )
+            return {"answer": reply, "source": "kisaandost_conversational_core", "confidence": 1.0}
+
+        # -------------------------------------------------------------
         # 1. IRRIGATION & WATER MANAGEMENT (Check FIRST to prevent false greetings)
         # -------------------------------------------------------------
         irrigation_patterns = [
@@ -342,29 +382,7 @@ class AIAgronomistService:
             return {"answer": reply, "source": "punjab_seed_corporation_and_parc", "confidence": 0.96}
 
         # -------------------------------------------------------------
-        # 7. GREETINGS & CASUAL CONVERSATION (Strict boundary regex)
-        # -------------------------------------------------------------
-        greeting_patterns = [
-            r"^\s*(salam|assalam|slam|وعلیکم|سلام|اسلام|السلام)\s*$",
-            r"^\s*(hello|hi|hey|hy)\s*$",
-            r"^\s*(kya\s+haal|kaise\s+ho|kese\s+ho|kaisey\s+ho|what\'?s\s+up)\s*$",
-            r"^\s*(who\s+are\s+you|ap\s+kon\s+ho|aap\s+kon\s+hain|آپ\s+کون\s+ہیں)\s*$"
-        ]
-        is_pure_greeting = any(re.search(p, q_lower) for p in greeting_patterns)
-
-        if is_pure_greeting:
-            if is_urdu:
-                reply = (
-                    "وعلیکم السلام! میں کسان دوست AI زرعی مشیر ہوں۔ میں پنجاب کے موسم، کھاد، اسپرے کی صحیح مقدار، فصلوں کی بیماریوں کے علاج اور منڈی کے تازہ ریٹس میں آپ کی رہنمائی کے لیے حاضر ہوں۔ آپ مجھ سے گندم، کپاس، دھان، کماد، مکئی، کھاد، پانی کے شیڈول یا بیماریوں کے بارے میں کوئی بھی سوال پوچھ سکتے ہیں۔"
-                )
-            else:
-                reply = (
-                    "Hello! I am KisaanDost AI Agronomist. I am here to assist you with Punjab crop diseases, irrigation schedules, pesticide dosages, 7-day weather forecasts, and live mandi commodity rates. How may I help your farm today?"
-                )
-            return {"answer": reply, "source": "kisaandost_conversational_core", "confidence": 1.0}
-
-        # -------------------------------------------------------------
-        # 8. GENERAL AGRONOMY & LIVE GOOGLE / DUCKDUCKGO SEARCH FALLBACK
+        # 7. GENERAL AGRONOMY & LIVE SEARCH FALLBACK (Clean, natural tone)
         # -------------------------------------------------------------
         crop_urdu = {
             "Wheat": "گندم", "Cotton": "کپاس", "Rice": "دھان",
@@ -385,47 +403,27 @@ class AIAgronomistService:
             top_snippet = web_results[0]["snippet"]
             if is_urdu:
                 reply = (
-                    f"🌾 کسان دوست زرعی مشیر — زرعی تحقیق و آن لائن رہنمائی ({district}):\n\n"
-                    f"آپ کا سوال: \"{query}\"\n\n"
-                    f"🔍 زرعی ماہرین و ریسرچ کے مطابق:\n"
-                    f"• {top_snippet}\n\n"
-                    f"💡 کسان دوست تجاویز برائے {crop_urdu}:\n"
-                    f"1. فصل پر کسی بھی کیمیکل یا کھاد کے استعمال سے قبل مقامی زرعی نمائندے یا کسان دوست ایپ سے تصدیق کر لیں۔\n"
-                    f"2. موسم کی 7 روزہ صورتحال دیکھ کر آبپاشی اور اسپرے کا شیڈول ترتیب دیں۔\n\n"
-                    f"آپ مزید مخصوص معلومات (جیسے کہ اسپرے، کھاد کی مقدار، یا بیماری کا علاج) کے لیے سوال پوچھ سکتے ہیں۔"
+                    f"🌾 {crop_urdu} کے لیے زرعی مشورہ ({district}):\n\n"
+                    f"{top_snippet}\n\n"
+                    f"💡 کسان دوست تجویز: کسی بھی اسپرے یا کھاد کے استعمال سے قبل 7 دن کے موسمی الرٹ اور وتر کی حالت کا جائزہ ضرور لیں۔"
                 )
             else:
                 reply = (
-                    f"🌾 KisaanDost Agronomist Intelligence — Web Knowledge Search ({district}):\n\n"
-                    f"Query: \"{query}\"\n\n"
-                    f"🔍 Agronomic Research Finding:\n"
-                    f"• {top_snippet}\n\n"
-                    f"💡 Key Recommendations for {detected_crop}:\n"
-                    f"1. Follow standard Punjab Agriculture Department guidelines for dosage and timing.\n"
-                    f"2. Check 7-day weather forecast before conducting chemical spray or heavy irrigation.\n\n"
-                    f"Feel free to ask for specific pesticide dosages, fertilizer plans, or market rates."
+                    f"🌾 Agronomic Guidance for {detected_crop} ({district}):\n\n"
+                    f"{top_snippet}\n\n"
+                    f"💡 Recommendation: Always review the 7-day weather forecast and soil moisture prior to chemical application."
                 )
-            return {"answer": reply, "source": "google_duckduckgo_agri_search", "confidence": 0.94}
+            return {"answer": reply, "source": "agronomic_knowledge_base", "confidence": 0.94}
 
         if is_urdu:
             reply = (
                 f"🌿 کسان دوست زرعی مشیر ({district}):\n\n"
-                f"آپ کا سوال: \"{query}\"\n\n"
-                f"محکمہ زراعت پنجاب اور زرعی تحقیقاتی ماہرین کے مطابق، {crop_urdu} کی فصل میں بہترین پیداوار کے لیے درج ذیل باتوں کا خاص خیال رکھیں:\n\n"
-                f"1. زمین میں نمی کا مناسب وتر برقرار رکھیں اور 7 دن کے موسمی الرٹ کو مدنظر رکھ کر پانی لگائیں۔\n"
-                f"2. کھادوں کا متوازن استعمال (نائٹروجن اور فاسفورس کے ساتھ پوٹاش) پودے کو بیماریوں اور سخت موسم کے خلاف قوتِ مدافعت فراہم کرتا ہے۔\n"
-                f"3. بیماری یا کیڑوں کی ابتدائی علامات ظاہر ہوتے ہی صبح کے وقت تصدیق شدہ زہر کا اسپرے کریں۔\n\n"
-                f"آپ مزید تفصیل کے لیے بیماری، کھاد، منڈی ریٹس یا آبپاشی کے بارے میں پوچھ سکتے ہیں۔"
+                f"{crop_urdu} کی فصل میں بہتر پیداوار کے لیے متوازن کھاد (یوریا اور ڈی اے پی کے ساتھ پوٹاش) کا استعمال کریں اور 7 روزہ موسمی الرٹ کے مطابق پانی لگائیں۔ آپ مجھ سے کیڑے مکوڑوں کے علاج، اسپرے کی مقدار یا منڈی ریٹس کے بارے میں مزید تفصیل پوچھ سکتے ہیں۔"
             )
         else:
             reply = (
                 f"🌿 KisaanDost Agronomist Intelligence ({district}):\n\n"
-                f"Query: \"{query}\"\n\n"
-                f"Based on Punjab agricultural agronomic guidelines for {detected_crop}:\n\n"
-                f"1. Align irrigation with current rootzone soil moisture and upcoming 3-day precipitation forecast.\n"
-                f"2. Ensure balanced NPK fertilization to strengthen crop resistance against environmental stresses.\n"
-                f"3. Perform pest surveillance weekly and apply approved active ingredients during optimal morning spray windows.\n\n"
-                f"Feel free to ask specifically about pest treatments, fertilizer dosages, mandi rates, or irrigation."
+                f"For optimal {detected_crop} yields, maintain balanced fertilization and align irrigation with upcoming weather conditions. Feel free to ask about specific pest remedies, fertilizer doses, or mandi rates."
             )
         return {"answer": reply, "source": "kisaandost_agronomist_brain", "confidence": 0.92}
 
