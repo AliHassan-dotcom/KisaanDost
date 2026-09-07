@@ -19,6 +19,7 @@ class QuickActionsHub extends StatelessWidget {
     required this.onWeatherTap,
     required this.onIrrigationTap,
     required this.onAlertsTap,
+    this.onWhatIfTap,
   });
 
   final bool isUrdu;
@@ -29,6 +30,7 @@ class QuickActionsHub extends StatelessWidget {
   final VoidCallback onWeatherTap;
   final VoidCallback onIrrigationTap;
   final VoidCallback onAlertsTap;
+  final VoidCallback? onWhatIfTap;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class QuickActionsHub extends StatelessWidget {
           ),
           const SizedBox(height: 12),
 
-          // Row 2: Weather | Irrigation Guide | Alerts
+          // Row 2: Weather | Irrigation Guide | Alerts | What-If
           Row(
             children: <Widget>[
               Expanded(
@@ -108,13 +110,20 @@ class QuickActionsHub extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Expanded(child: SizedBox.shrink()), // Spacer for symmetry
+              Expanded(
+                child: _buildActionTile(
+                  icon: Icons.tune_rounded,
+                  label: isUrdu ? 'منظر نامہ' : 'What-If\nScenario',
+                  onTap: onWhatIfTap ?? onAlertsTap,
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
   }
+
 
   Widget _buildActionTile({
     required IconData icon,

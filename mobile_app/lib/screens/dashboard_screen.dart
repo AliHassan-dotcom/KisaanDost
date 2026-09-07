@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../providers/dashboard_provider.dart';
+import '../providers/location_provider.dart';
 import '../providers/settings_provider.dart';
 import '../routing/app_router.dart';
 import '../widgets/crop_diagnosis_hero_card.dart';
@@ -22,6 +23,7 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardAsync = ref.watch(dashboardProvider);
+    final locationState = ref.watch(locationProvider);
     final settings = ref.watch(settingsProvider);
     final isUrdu = settings.language == 'ur';
 
@@ -31,6 +33,11 @@ class DashboardScreen extends ConsumerWidget {
         title: isUrdu ? 'کسان دوست' : 'Kisaan Dost',
         showBack: false,
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.location_on, color: Color(0xFF00E676)),
+            tooltip: isUrdu ? 'لوکیشن' : 'Farm Location',
+            onPressed: () => context.push(AppRoutes.locationPicker),
+          ),
           IconButton(
             icon: const Icon(Icons.mic, color: Color(0xFF00E676)),
             tooltip: isUrdu ? 'وائس اسسٹنٹ' : 'Voice AI',
@@ -139,10 +146,12 @@ class DashboardScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      // 1. Top Header Card (Good Morning, Farm Hero 👋, Urdu Toggle, Date, Bell)
+                      // 1. Top Header Card (Good Morning, Farm Hero 👋, Urdu Toggle, Date, Bell, Farm Location)
                       HeroGreetingHeader(
                         name: data.user['name'] as String?,
                         isUrdu: isUrdu,
+                        location: locationState.location.displayTitle,
+                        onLocationTap: () => context.push(AppRoutes.locationPicker),
                         onLanguageToggle: () {
                           final newLang = isUrdu ? 'en' : 'ur';
                           ref.read(settingsProvider.notifier).setLanguage(newLang);
@@ -165,16 +174,17 @@ class DashboardScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 14),
 
-                      // 3. Quick Actions Hub (Urdu Voice, Scan Crop, Satellite View, Market Prices, Weather, Irrigation, Alerts)
+                      // 3. Quick Actions Hub (Urdu Voice, Scan Crop, Satellite View, Market Prices, Weather, Irrigation, Alerts, What-If)
                       QuickActionsHub(
                         isUrdu: isUrdu,
                         onVoiceTap: () => context.push(AppRoutes.voice),
-                        onScanTap: () => context.push(AppRoutes.scan),
+                        onScanTap: () => context.push(AppRoutes.diseaseScanner),
                         onSatelliteTap: () => context.push(AppRoutes.satellite),
                         onMarketTap: () => context.push(AppRoutes.market),
                         onWeatherTap: () => context.push(AppRoutes.weather),
                         onIrrigationTap: () => context.push(AppRoutes.irrigation),
                         onAlertsTap: () => context.push(AppRoutes.pest),
+                        onWhatIfTap: () => context.push(AppRoutes.whatIf),
                       ),
                       const SizedBox(height: 14),
 
@@ -182,7 +192,7 @@ class DashboardScreen extends ConsumerWidget {
                       CropDiagnosisHeroCard(
                         summary: data.farmHealth,
                         isUrdu: isUrdu,
-                        onViewDetails: () => context.push(AppRoutes.scan),
+                        onViewDetails: () => context.push(AppRoutes.diseaseScanner),
                       ),
                       const SizedBox(height: 14),
 
@@ -221,6 +231,7 @@ class DashboardScreen extends ConsumerWidget {
                       // 9. Farm Insights Card (Live Agronomic & Irrigation Insights)
                       FarmInsightsHeroCard(
                         isUrdu: isUrdu,
+                        dashboardData: data,
                         riskAssessment: data.riskAssessment,
                         weather: data.weather,
                         farmHealth: data.farmHealth,

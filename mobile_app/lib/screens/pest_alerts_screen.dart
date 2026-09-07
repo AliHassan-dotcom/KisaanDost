@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/advisory.dart';
 import '../models/pest_alert.dart';
-import '../models/pest_source.dart';
 import '../providers/pest_provider.dart';
 import '../providers/profile_provider.dart';
 import '../providers/settings_provider.dart';
@@ -532,18 +531,6 @@ class _PestAlertsScreenState extends ConsumerState<PestAlertsScreen> {
             }),
           ],
         ],
-      ),
-    );
-  }
-
-  Widget _buildSourceCard(BuildContext context, PestSource source) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: const Icon(Icons.picture_as_pdf, color: Colors.red),
-        title: Text(source.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-        subtitle: Text('${source.year} · ${source.filename}', style: const TextStyle(fontSize: 11)),
       ),
     );
   }

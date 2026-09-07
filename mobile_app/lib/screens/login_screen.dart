@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 import '../config/app_config.dart';
 import '../providers/auth_provider.dart';
@@ -37,78 +38,165 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _showServerConfigDialog() {
     final controller = TextEditingController(text: AppConfig.apiBaseUrl);
+    String testStatus = '';
+    bool isTesting = false;
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Row(
-          children: <Widget>[
-            Icon(Icons.settings_ethernet, color: Colors.green),
-            SizedBox(width: 8),
-            Text('Server IP Settings', style: TextStyle(fontSize: 16)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            const Text(
-              'Select or type your computer/server backend URL:',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: controller,
-              decoration: const InputDecoration(
-                labelText: 'Backend URL',
-                hintText: 'http://192.168.1.7:8000',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDialogState) => AlertDialog(
+          title: const Row(
+            children: <Widget>[
+              Icon(Icons.settings_ethernet, color: Colors.green),
+              SizedBox(width: 8),
+              Text('Server IP Settings', style: TextStyle(fontSize: 16)),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ActionChip(
-                  label: const Text('Wi-Fi LAN (192.168.1.7)'),
-                  onPressed: () {
-                    controller.text = 'http://192.168.1.7:8000';
-                  },
+                const Text(
+                  'Select or type your computer backend URL:',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-                ActionChip(
-                  label: const Text('USB Cable (localhost)'),
-                  onPressed: () {
-                    controller.text = 'http://localhost:8000';
-                  },
+                const SizedBox(height: 12),
+                TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    labelText: 'Backend URL',
+                    hintText: 'http://192.168.1.6:8000',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-                ActionChip(
-                  label: const Text('Emulator (10.0.2.2)'),
-                  onPressed: () {
-                    controller.text = 'http://10.0.2.2:8000';
-                  },
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: <Widget>[
+                    ActionChip(
+                      avatar: const Icon(Icons.wifi, size: 14, color: Colors.green),
+                      label: const Text('Wi-Fi LAN (192.168.1.6)'),
+                      onPressed: () {
+                        setDialogState(() {
+                          controller.text = 'http://192.168.1.6:8000';
+                          testStatus = '';
+                        });
+                      },
+                    ),
+                    ActionChip(
+                      avatar: const Icon(Icons.usb, size: 14, color: Colors.blue),
+                      label: const Text('USB Cable (localhost)'),
+                      onPressed: () {
+                        setDialogState(() {
+                          controller.text = 'http://localhost:8000';
+                          testStatus = '';
+                        });
+                      },
+                    ),
+                    ActionChip(
+                      avatar: const Icon(Icons.usb, size: 14, color: Colors.blue),
+                      label: const Text('USB (127.0.0.1)'),
+                      onPressed: () {
+                        setDialogState(() {
+                          controller.text = 'http://127.0.0.1:8000';
+                          testStatus = '';
+                        });
+                      },
+                    ),
+                    ActionChip(
+                      avatar: const Icon(Icons.phone_android, size: 14, color: Colors.purple),
+                      label: const Text('Emulator (10.0.2.2)'),
+                      onPressed: () {
+                        setDialogState(() {
+                          controller.text = 'http://10.0.2.2:8000';
+                          testStatus = '';
+                        });
+                      },
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  icon: isTesting
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.network_check, size: 16),
+                  label: Text(isTesting ? 'Testing...' : 'Test Connection'),
+                  onPressed: isTesting
+                      ? null
+                      : () async {
+                          setDialogState(() {
+                            isTesting = true;
+                            testStatus = '';
+                          });
+                          var url = controller.text.trim();
+                          if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                            url = 'http://$url';
+                          }
+                          if (url.endsWith('/')) {
+                            url = url.substring(0, url.length - 1);
+                          }
+                          try {
+                            final resp = await http
+                                .get(Uri.parse('$url/health'))
+                                .timeout(const Duration(seconds: 3));
+                            setDialogState(() {
+                              isTesting = false;
+                              if (resp.statusCode == 200) {
+                                testStatus = 'SUCCESS: Connected to FastAPI backend (200 OK)';
+                              } else {
+                                testStatus = 'WARNING: HTTP status ${resp.statusCode}';
+                              }
+                            });
+                          } catch (e) {
+                            setDialogState(() {
+                              isTesting = false;
+                              testStatus = 'ERROR: Cannot connect (${e.runtimeType})';
+                            });
+                          }
+                        },
+                ),
+                if (testStatus.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      testStatus,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: testStatus.startsWith('SUCCESS')
+                            ? Colors.green.shade800
+                            : Colors.red.shade700,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
               ],
             ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (controller.text.trim().isNotEmpty) {
+                  setState(() {
+                    AppConfig.setActiveBaseUrl(controller.text.trim());
+                  });
+                }
+                Navigator.pop(ctx);
+              },
+              child: const Text('Save & Apply'),
+            ),
           ],
         ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (controller.text.trim().isNotEmpty) {
-                setState(() {
-                  AppConfig.setActiveBaseUrl(controller.text.trim());
-                });
-              }
-              Navigator.pop(ctx);
-            },
-            child: const Text('Save & Apply'),
-          ),
-        ],
       ),
     );
   }

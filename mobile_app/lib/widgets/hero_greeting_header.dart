@@ -13,6 +13,8 @@ class HeroGreetingHeader extends StatelessWidget {
     required this.onLanguageToggle,
     required this.onNotificationTap,
     this.unreadCount = 2,
+    this.location,
+    this.onLocationTap,
   });
 
   final String? name;
@@ -20,6 +22,8 @@ class HeroGreetingHeader extends StatelessWidget {
   final VoidCallback onLanguageToggle;
   final VoidCallback onNotificationTap;
   final int unreadCount;
+  final String? location;
+  final VoidCallback? onLocationTap;
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +77,53 @@ class HeroGreetingHeader extends StatelessWidget {
           ),
           const SizedBox(height: 4),
 
-          // Subtitle
-          Text(
-            isUrdu
-                ? 'لائیو جیمنائی وائس اور گرائونڈڈ زرعی AI آن لائن 🌿'
-                : 'Live Gemini 2.5 Voice & Grounded AI Agronomist Online 🌿',
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.green.shade200,
-              height: 1.3,
-            ),
+          // Subtitle & Farm Location
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  isUrdu
+                      ? 'لائیو جیمنائی وائس اور گرائونڈڈ زرعی AI آن لائن 🌿'
+                      : 'Live Gemini 2.5 Voice & Grounded AI Agronomist Online 🌿',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.green.shade200,
+                    height: 1.3,
+                  ),
+                ),
+              ),
+              if (onLocationTap != null)
+                InkWell(
+                  onTap: onLocationTap,
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00E676).withAlpha(30),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: const Color(0xFF00E676).withAlpha(90)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Icon(Icons.location_on, size: 13, color: Color(0xFF00E676)),
+                        const SizedBox(width: 4),
+                        Text(
+                          location ?? (isUrdu ? 'لاہور' : 'Lahore'),
+                          style: const TextStyle(
+                            color: Color(0xFF00E676),
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        const Icon(Icons.arrow_drop_down, size: 14, color: Color(0xFF00E676)),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
           ),
           const SizedBox(height: 14),
 
