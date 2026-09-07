@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends
+from typing import Optional
+
+from fastapi import APIRouter, Depends, Query
 
 from app.backend.database import UserStore, get_user_store
+from app.backend.routers.location import PUNJAB_DISTRICT_CENTERS, haversine_distance_km
 from app.backend.schemas import DashboardResponse
 from app.backend.services import market_service, risk_service, satellite_service, weather_service
 from app.security.auth import get_current_user
@@ -14,12 +17,30 @@ router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
 @router.get("", response_model=DashboardResponse)
 async def dashboard(
+    lat: Optional[float] = Query(None, description="Farm GPS Latitude"),
+    lng: Optional[float] = Query(None, description="Farm GPS Longitude"),
+    district: Optional[str] = Query(None, description="District override"),
     current_user: dict = Depends(get_current_user),
     store: UserStore = Depends(get_user_store),
     weather_svc: weather_service.WeatherService = Depends(weather_service.get_weather_service),
 ):
     profile = store.get_profile(current_user["user_id"]) or {}
-    district = profile.get("district") or "Lahore"
+    
+    # 1. Determine effective district and farm locality
+    if district and district.strip():
+        effective_district = district.strip()
+    elif lat is not None and lng is not None:
+        closest = "Lahore"
+        min_d = float("inf")
+        for dist_name, meta in PUNJAB_DISTRICT_CENTERS.items():
+            d = haversine_distance_km(lat, lng, meta["lat"], meta["lng"])
+            if d < min_d:
+                min_d = d
+                closest = dist_name
+        effective_district = closest
+    else:
+        effective_district = profile.get("district") or "Lahore"
+
     crop = profile.get("crop") or "wheat"
 
     scans = store.list_scans(current_user["user_id"])
@@ -37,15 +58,18 @@ async def dashboard(
             "user_id": current_user["user_id"],
             "role": current_user["role"].value,
             "name": profile.get("name") or "Farm Hero",
-            "district": district,
+            "district": effective_district,
             "crop": crop,
             "language": profile.get("language", "en"),
+            "latitude": lat,
+            "longitude": lng,
+            "is_gps_located": lat is not None and lng is not None,
         },
-        weather=weather_svc.current(district),
+        weather=weather_svc.current(effective_district),
         farm_health=farm_health,
-        market=market_service.market_summary(crop, district),
-        satellite=satellite_service.satellite_summary(district, crop),
-        risk_assessment=risk_service.get_risk_service().get_current_risk_assessment(district, crop),
+        market=market_service.market_summary(crop, effective_district),
+        satellite=satellite_service.satellite_summary(effective_district, crop, lat=lat, lng=lng),
+        risk_assessment=risk_service.get_risk_service().get_current_risk_assessment(effective_district, crop),
         quick_actions=[
             {"label": "Urdu Voice", "href": "/voice", "icon": "mic"},
             {"label": "Scan Crop", "href": "/scan", "icon": "camera"},
@@ -54,5 +78,6 @@ async def dashboard(
             {"label": "Weather", "href": "/weather", "icon": "cloud"},
             {"label": "Irrigation Guide", "href": "/irrigation", "icon": "water_drop"},
             {"label": "Alerts", "href": "/pest", "icon": "notifications"},
+            {"label": "Location (GPS)", "href": "/location-picker", "icon": "location_on"},
         ],
     )

@@ -2,7 +2,7 @@
 
 **Source:** Pest Warning and Quality Control of Pesticides Annual Report (2024-25)
 **File:** Annual Report 2024-25_copy.pdf
-**Ingested:** 2026-09-03T20:54:38.046517+00:00 UTC
+**Ingested:** 2026-09-04T04:25:16.455614+00:00 UTC
 
 ## PDF inspection
 
@@ -19,12 +19,12 @@
 
 ## Facts by category
 
-- crop_disease_warning: 15
-- general_agricultural_advisory: 9
-- inspection: 3
-- laboratory_result: 1
-- pest_warning: 10
-- pesticide_quality_control: 29
+- crop_disease_warning: 11
+- general_agricultural_advisory: 14
+- inspection: 4
+- laboratory_result: 7
+- pest_warning: 7
+- pesticide_quality_control: 24
 - pesticide_safety: 5
 
 ## Facts by crop

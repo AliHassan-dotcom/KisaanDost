@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.backend.routers import agri_stats, ai_assistant, auth, crop_health, dashboard, market, notifications, pest_alerts, pest_predictive_api, profile, satellite, weather
+from app.backend.routers import agri_stats, ai_assistant, analytics, auth, crop_health, dashboard, location, market, notifications, pest_alerts, pest_predictive_api, profile, satellite, weather
 from app.config import settings
 
 app = FastAPI(
@@ -30,6 +30,7 @@ api_prefix = settings.api_prefix
 app.include_router(auth.router, prefix=f"{api_prefix}")
 app.include_router(profile.router, prefix=f"{api_prefix}")
 app.include_router(dashboard.router, prefix=f"{api_prefix}")
+app.include_router(location.router, prefix=f"{api_prefix}")
 app.include_router(weather.router, prefix=f"{api_prefix}")
 app.include_router(satellite.router, prefix=f"{api_prefix}")
 app.include_router(crop_health.router, prefix=f"{api_prefix}")
@@ -39,6 +40,7 @@ app.include_router(market.router, prefix=f"{api_prefix}")
 app.include_router(agri_stats.router, prefix=f"{api_prefix}")
 app.include_router(notifications.router, prefix=f"{api_prefix}")
 app.include_router(ai_assistant.router, prefix=f"{api_prefix}")
+app.include_router(analytics.router, prefix=f"{api_prefix}")
 
 
 @app.get("/health")

@@ -90,9 +90,22 @@ class Settings(BaseSettings):
     pesticide_max_citations: int = 5
 
     # Upload security
-    upload_max_bytes: int = 5 * 1024 * 1024  # 5 MB
-    upload_allowed_types: List[str] = Field(default=["image/jpeg", "image/png"])
-    upload_allowed_extensions: List[str] = Field(default=[".jpg", ".jpeg", ".png"])
+    upload_max_bytes: int = 15 * 1024 * 1024  # 15 MB
+    upload_allowed_types: List[str] = Field(
+        default=[
+            "image/jpeg",
+            "image/jpg",
+            "image/pjpeg",
+            "image/png",
+            "image/webp",
+            "image/heic",
+            "image/heif",
+            "application/octet-stream",
+        ]
+    )
+    upload_allowed_extensions: List[str] = Field(
+        default=[".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif", ".jfif", ".bmp"]
+    )
 
     # Inference
     confidence_threshold: float = 0.75

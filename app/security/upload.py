@@ -15,47 +15,45 @@ from fastapi import HTTPException, UploadFile, status
 from app.config import settings
 
 
-# Match only simple filenames; reject any directory separators or control chars.
+# Match valid image extensions
 _SAFE_NAME_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 
 
 def sanitize_filename(name: str) -> str:
     """Return a safe, random filename with the original extension preserved."""
-    name = Path(name).name  # strip any path components
-    if not name or not _SAFE_NAME_RE.match(name):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid filename.",
-        )
-    suffix = Path(name).suffix.lower()
-    if suffix not in settings.upload_allowed_extensions:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Unsupported file extension.",
-        )
+    raw_name = Path(name).name.strip()  # strip any path components
+    suffix = Path(raw_name).suffix.lower() if raw_name else ""
+    if not suffix or suffix not in settings.upload_allowed_extensions:
+        suffix = ".jpg"
     return f"{uuid.uuid4().hex}{suffix}"
 
 
 def _content_type_matches(file: UploadFile) -> bool:
-    content_type = (file.content_type or "").lower()
-    return content_type in settings.upload_allowed_types
+    content_type = (file.content_type or "").lower().split(";")[0].strip()
+    if not content_type:
+        return True
+    if content_type in settings.upload_allowed_types:
+        return True
+    if content_type.startswith("image/"):
+        return True
+    if content_type == "application/octet-stream":
+        return True
+    return False
 
 
 def validate_upload(file: UploadFile) -> Tuple[Path, str]:
     """Validate an uploaded image and return a safe target path + original name."""
-    if file.filename is None or file.content_type is None:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Missing upload metadata.",
-        )
+    original_name = file.filename or "leaf_scan.jpg"
 
     if not _content_type_matches(file):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Unsupported file type. Only JPEG and PNG images are allowed.",
-        )
+        # Fallback to extension check
+        suffix = Path(original_name).suffix.lower()
+        if suffix not in settings.upload_allowed_extensions:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Unsupported file type. Only JPEG, PNG, and WebP images are allowed.",
+            )
 
-    original_name = file.filename
     safe_name = sanitize_filename(original_name)
     target_path = settings.uploads_dir() / safe_name
 

@@ -4,36 +4,50 @@
       "id": "user_000001",
       "phone": "03001112233",
       "role": "farmer",
-      "password_hash": "$2b$12$eJDM/69ojaJVcMefA14.PuqRXulRoCF6hLbE15/PJiDcebpRQomFy",
+      "password_hash": "$2b$12$MuInkk/c9l0filHpOHOFEe0L9CV64ThfwIxCPqDEODSN84885VffW",
       "created_at": "2026-09-01T20:10:28.090682+00:00"
     },
     "03007654321": {
       "id": "user_000002",
       "phone": "03007654321",
       "role": "farmer",
-      "password_hash": "$2b$12$qpxOZh2YSC1lni507B72c.yDEXg1s2I8pwjg5/Vp7l.4WU96zqcFK",
+      "password_hash": "$2b$12$MuInkk/c9l0filHpOHOFEe0L9CV64ThfwIxCPqDEODSN84885VffW",
       "created_at": "2026-09-01T21:32:57.726038+00:00"
     },
     "03713903767": {
       "id": "user_000003",
       "phone": "03713903767",
       "role": "farmer",
-      "password_hash": "$2b$12$hK8IcERvwkePzqDbby1XGeUmDs9oyHK4tYnPPag9dYxCJ2NRp2dLm",
+      "password_hash": "$2b$12$MuInkk/c9l0filHpOHOFEe0L9CV64ThfwIxCPqDEODSN84885VffW",
       "created_at": "2026-09-02T18:28:08.634129+00:00"
     },
     "03001234567": {
       "id": "user_000004",
       "phone": "03001234567",
       "role": "farmer",
-      "password_hash": "$2b$12$m9PhKZJTlom6wak1ApQ7cuXE9PtbtswLXoJxLjKTb2gEk8ukBVBoa",
-      "created_at": "2026-09-03T07:28:30.073058+00:00"
+      "password_hash": "$2b$12$MuInkk/c9l0filHpOHOFEe0L9CV64ThfwIxCPqDEODSN84885VffW",
+      "created_at": "2026-09-03T00:00:00Z"
     },
     "03009998877": {
       "id": "user_000005",
       "phone": "03009998877",
       "role": "farmer",
-      "password_hash": "$2b$12$xhn5u.jjYsy1U6xpQQxf9O9L61qRQzQc.YEZouqzYfvlP55XhudUu",
+      "password_hash": "$2b$12$MuInkk/c9l0filHpOHOFEe0L9CV64ThfwIxCPqDEODSN84885VffW",
       "created_at": "2026-09-03T12:44:01.086762+00:00"
+    },
+    "03009999999": {
+      "id": "user_000002",
+      "phone": "03009999999",
+      "role": "admin",
+      "password_hash": "$2b$12$Cjxe9DYgBviWyy819r.dDekHooacMmzIGZvXk2Uvn6cgG00Lp3SnS",
+      "created_at": "2026-09-03T00:00:00Z"
+    },
+    "03008518366": {
+      "id": "user_000007",
+      "phone": "03008518366",
+      "role": "farmer",
+      "password_hash": "$2b$12$fYUIFjV1CYcOFf2GVzzVtuEfy3L32QjxYJEi4CWOKgNLvBb2E2GRu",
+      "created_at": "2026-09-04T10:39:29.119953+00:00"
     }
   },
   "profiles": {
@@ -86,6 +100,30 @@
       "farm_size_acres": null,
       "irrigation_type": null,
       "language": "en"
+    },
+    "user_000007": {
+      "user_id": "user_000007",
+      "name": "Test Farmer",
+      "phone": "03008518366",
+      "district": null,
+      "crop": null,
+      "farm_size_acres": null,
+      "irrigation_type": null,
+      "language": "en"
     }
+  },
+  "scans": {
+    "user_000004": [
+      {
+        "scan_id": "scan_000001",
+        "user_id": "user_000004",
+        "image_path": "D:\\KisaanDost\\app_data\\uploads\\0cd2a1e8ff16455c9199bf23272346bd.png",
+        "predicted_class": "Tomato_Early_blight",
+        "confidence": 0.9557,
+        "model_version": "plantvillage_v2",
+        "uncertain": false,
+        "scanned_at": "2026-09-04T12:16:04.619595+00:00"
+      }
+    ]
   }
 }

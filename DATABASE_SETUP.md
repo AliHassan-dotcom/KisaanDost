@@ -19,8 +19,8 @@ The database will initialize automatically using [`init.sql`](file:///d:/KisaanD
 - **Port:** `5432`
 - **Database:** `kisaan_dost`
 - **User:** `kisaan_user`
-- **Password:** `kisaan_secure_pass_2026`
-- **Connection URL:** `postgresql://kisaan_user:kisaan_secure_pass_2026@localhost:5432/kisaan_dost`
+- **Password:** `<YOUR_POSTGRES_PASSWORD>`
+- **Connection URL:** `postgresql://kisaan_user:<YOUR_POSTGRES_PASSWORD>@localhost:5432/kisaan_dost`
 
 ---
 

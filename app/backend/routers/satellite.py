@@ -100,3 +100,79 @@ async def get_satellite_coverage(
         return SatelliteCoverageResponse(**cov)
     except ValueError as err:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err)) from err
+
+
+@router.get("/ndvi/timeseries")
+async def get_ndvi_timeseries(
+    district: Optional[str] = Query(None, description="Punjab district name"),
+    lat: Optional[float] = Query(None, description="Farm GPS Latitude"),
+    lng: Optional[float] = Query(None, description="Farm GPS Longitude"),
+    current_user: dict = Depends(get_current_user),
+    store: UserStore = Depends(get_user_store),
+    service: SatelliteService = Depends(get_satellite_service),
+):
+    """Retrieve 56-month full Sentinel-2 NDVI vegetative timeline with seasonal stages."""
+    target_district = _resolve_district(district, current_user, store)
+    try:
+        data = service.get_ndvi_timeseries(target_district)
+        if lat is not None and lng is not None:
+            data["farm_coordinates"] = {"latitude": lat, "longitude": lng}
+        return {"success": True, "data": data}
+    except ValueError as err:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err)) from err
+
+
+@router.get("/heatmap")
+async def get_satellite_heatmap(
+    district: Optional[str] = Query(None, description="Punjab district name"),
+    grid_size: int = Query(12, ge=8, le=32),
+    lat: Optional[float] = Query(None, description="Farm GPS Latitude"),
+    lng: Optional[float] = Query(None, description="Farm GPS Longitude"),
+    current_user: dict = Depends(get_current_user),
+    store: UserStore = Depends(get_user_store),
+    service: SatelliteService = Depends(get_satellite_service),
+):
+    """Retrieve localized spatial raster grid matrix with NDVI/NDWI and color gradient bounds."""
+    target_district = _resolve_district(district, current_user, store)
+    try:
+        data = service.get_heatmap_matrix(target_district, grid_size=grid_size, lat=lat, lng=lng)
+        return {"success": True, "data": data}
+    except ValueError as err:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err)) from err
+
+
+@router.get("/tiles/{district}/{z}/{x}/{y}.png")
+async def get_satellite_tile(
+    district: str,
+    z: int = 10,
+    x: int = 0,
+    y: int = 0,
+    service: SatelliteService = Depends(get_satellite_service),
+):
+    """Generate and serve an interpolated PNG RGB heatmap tile."""
+    from fastapi.responses import Response
+    try:
+        png_bytes = service.generate_tile_png(district, z=z, x=x, y=y)
+        return Response(content=png_bytes, media_type="image/png")
+    except ValueError as err:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err)) from err
+
+
+@router.get("/field-3d")
+async def get_field_3d(
+    district: Optional[str] = Query(None, description="Punjab district name"),
+    size: int = Query(16, ge=8, le=32),
+    lat: Optional[float] = Query(None, description="Farm GPS Latitude"),
+    lng: Optional[float] = Query(None, description="Farm GPS Longitude"),
+    current_user: dict = Depends(get_current_user),
+    store: UserStore = Depends(get_user_store),
+    service: SatelliteService = Depends(get_satellite_service),
+):
+    """Retrieve 3D elevation mesh heightmap and multi-layer canopy telemetry."""
+    target_district = _resolve_district(district, current_user, store)
+    try:
+        data = service.get_field_3d_mesh(target_district, size=size, lat=lat, lng=lng)
+        return {"success": True, "data": data}
+    except ValueError as err:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err)) from err
+

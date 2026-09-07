@@ -772,7 +772,7 @@ in
 g
 2 0 2 4
 Pest alerts of Cotton Whitefly and PBW issued by the Department for timely pest management",extracted,0.7,false
-fact_00027,crop_disease_warning,rice,,,2024-25,"12
+fact_00027,inspection,rice,,,2024-25,"12
 iii. Pest Surveillance Report of Rice
 Rice is a Kharif crop, cultivated over an area of 6.71
 million acres in Punjab during 2024-25. The pest and
@@ -1523,7 +1523,7 @@ were mobilized to monitor pest incidence, issue
 advisories, and guide farmers on integrated pest
 management practices to ensure healthy fruit
 production and safeguard yield quality.",extracted,0.7,false
-fact_00048,pesticide_safety,mango,,,,"29
+fact_00048,pest_warning,mango,,,,"29
 M o n t h M a n g o F r
 uit
 B o r e r M a n g o Ti
@@ -1986,7 +1986,7 @@ crops were surveyed across Punjab. Monitoring data revealed that pest infestatio
 throughout the year with two critical peaks: the first during July–September 2024, when the affected
 area consistently remained above 6,000 acres, and the second during February–April 2025, with
 infestation reaching its maximum of 7,667 acres in April 2025.",extracted,0.7,false
-fact_00051,crop_disease_warning,,,,,"34
+fact_00051,pesticide_quality_control,,,,,"34
 2. QUALITY CONTROL OF PESTICIDES
 Regulation of Pesticides business by 176 Pesticide Inspectors under Agricultural Pesticides
 Ordinance, 1971 (amended in 2012) and Punjab Agriculture Pesticide Rules 2018.
@@ -2099,7 +2099,7 @@ pesticide manufacturing factory situated at Basti
 dogran near pull Muzaffarabad Multan. The
 inspection revealed various companies packing
 materials and seals.",extracted,0.8,false
-fact_00056,pesticide_quality_control,,,Bahawalpur; Multan,,"Nine samples were collected
+fact_00056,laboratory_result,,,Bahawalpur; Multan,,"Nine samples were collected
 for quality testing, later found unfit by the
 Raid on illegal pesticide manufacturing factory at basti
 laboratory. This operation resulted in the dogran
@@ -2176,7 +2176,7 @@ Multan, where unauthorized pesticides
 production was underway. FIR was filed at the
 Muzaffarabad police station against the
 offenders.",extracted,0.8,false
-fact_00059,pesticide_quality_control,,,Multan,,"The operation led to the confiscation
+fact_00059,laboratory_result,,,Multan,,"The operation led to the confiscation
 Raid conducted on illegal factory near MM Plastic,
 of 3540 kg/L of counterfeit pesticides worth 10.83
 Industrial State, Multan
@@ -2207,7 +2207,7 @@ Raid on illegal manufacturing unit Near Bakht Enterprises
 packaged finished product, seals and sewing
 Multan
 machines during the operation.",extracted,0.8,false
-fact_00060,pesticide_quality_control,,,,,"A total of 68272 kg/L of pesticides, worth 41.38 million rupees, was seized and
+fact_00060,laboratory_result,,,,,"A total of 68272 kg/L of pesticides, worth 41.38 million rupees, was seized and
 handed over to the police. Seven pesticides samples were also been taken for quality
 analysis, later found unfit by the laboratory.",,,,,"Seven pesticides samples were also been taken for quality
 analysis, later found unfit by the laboratory.",enforcement action,Pest Warning and Quality Control of Pesticides Annual Report,2024-25,Annual Report 2024-25_copy.pdf,37,Summary Of Anti-Adulteration Compaign Of Pesticides From 01-07-2024 To,"A total of 68272 kg/L of pesticides, worth 41.38 million rupees, was seized and
@@ -2292,7 +2292,7 @@ Budget allocation (2024-25): 91.961 Million rupees
 This project focuses on addressing pesticide residue concerns across the
 entire production-to-marketing chain by actively engaging and linking all relevant
 stakeholders. Its covers ten districts in the Lahore and Gujranwala divisions.",extracted,0.9,false
-fact_00065,pesticide_quality_control,rice; vegetables,,,,"Following practices are being followed in said project:
+fact_00065,laboratory_result,rice; vegetables,,,,"Following practices are being followed in said project:
  Conduct regular surveillance and provide on-spot training to farmers regarding integrated pest
 management (IPM) strategies, including cultural, mechanical, biological practices and need-
 based use of recommended pesticides upon reaching ETL.
@@ -2329,7 +2329,7 @@ Integrated pest management activities at IPM demo farm
 Capacity building of Pesticide dealers & farmers in small and mega gatherings
 regarding the safer use of pesticides
 Mass awareness through print and social media regarding the pesticide",extracted,0.6,false
-fact_00067,pesticide_quality_control,rice; vegetables; pulses,,,2024-25; 2024-25,"PARTICULARS TARGETS ACHIEVEMENTS
+fact_00067,laboratory_result,rice; vegetables; pulses,,,2024-25; 2024-25,"PARTICULARS TARGETS ACHIEVEMENTS
 NO. 2024-25 2024-25
 1 Establishment of IPM Demo blocks
 1) 40 rice IPM Blocks 5 0 5 0
@@ -2646,7 +2646,7 @@ Social Media Uploading on Plant Protection Planned 24 12 12
 7 SOV: Official Facebook page of Agri/Pest Number
 Achieved 300 12 288
 Warning Department/media channels etc.",extracted,0.75,false
-fact_00071,pesticide_quality_control,cotton; vegetables,,,,"Pest monitoring through PBW sex pheromone
+fact_00071,laboratory_result,cotton; vegetables,,,,"Pest monitoring through PBW sex pheromone
 Planned 118 118 118
 8 traps Number
 s
