@@ -188,7 +188,7 @@ class VoiceAssistantEngine {
       } else {
         await _tts.setLanguage('en-US');
       }
-      await _tts.setSpeechRate(0.39); // Calm, natural human pace
+      await _tts.setSpeechRate(0.48); // Natural, clear conversational cadence
       await _tts.setPitch(1.0); // Warm, authentic tone
       await _tts.speak(cleanText);
     } catch (e) {
@@ -249,6 +249,76 @@ class VoiceAssistantEngine {
     return rem == 0 ? crText : '$crText ${numberToUrduWords(rem)}';
   }
 
+  static final Map<String, String> _urduPhoneticMap = <String, String>{
+    'tilt': 'ٹلٹ',
+    'folicur': 'فولیکر',
+    'nativo': 'نیٹیوو',
+    'score': 'اسکور',
+    'polo': 'پولو',
+    'belt': 'بیلٹ',
+    'proclaim': 'پروکلیم',
+    'propiconazole': 'پروپیکونازول',
+    'tebuconazole': 'ٹیبوکونازول',
+    'chlorpyrifos': 'کلورپائریفوس',
+    'lambda-cyhalothrin': 'لیمبڈا سائی ہیلوتھرین',
+    'lambda': 'لیمبڈا',
+    'cyhalothrin': 'سائی ہیلوتھرین',
+    'emamectin benzoate': 'ایمامیکٹن بینزوئیٹ',
+    'emamectin': 'ایمامیکٹن',
+    'diafenthiuron': 'ڈائیفینتھیوران',
+    'pyriproxyfen': 'پائری پروکسی فن',
+    'flubendiamide': 'فلو بینڈیامائیڈ',
+    'wheat': 'گندم',
+    'cotton': 'کپاس',
+    'rice': 'دھان',
+    'sugarcane': 'کماد',
+    'maize': 'مکئی',
+    'potato': 'آلو',
+    'tomato': 'ٹماٹر',
+    'yellow rust': 'پیلی کنگی',
+    'brown rust': 'بھوری کنگی',
+    'rust': 'کنگی',
+    'armyworm': 'لشکری سنڈی',
+    'bollworm': 'گلابی سنڈی',
+    'whitefly': 'سفید مکھی',
+    'aphid': 'تیلا',
+    'jassid': 'چست تیلا',
+    'thrips': 'تھرپس',
+    'borer': 'بورر',
+    'top borer': 'ٹاپ بورر',
+    'stem borer': 'تنے کا بورر',
+    'pyrilla': 'پائریلا',
+    'dap': 'ڈی اے پی',
+    'sop': 'ایس او پی',
+    'mop': 'ایم او پی',
+    'npk': 'این پی کے',
+    'urea': 'یوریا',
+    'zinc': 'زنک',
+    'boron': 'بوران',
+    'amis': 'پنجاب زرعی مارکیٹ',
+    'sentinel': 'سیٹلائٹ',
+    'moisture': 'نمی',
+    'ec': 'ای سی',
+    'sc': 'ایس سی',
+    'wg': 'ڈبلیو جی',
+    'wp': 'ڈبلیو پی',
+    'sl': 'ایس ایل',
+    'ml': 'ملی لیٹر',
+    'kg': 'کلوگرام',
+    'liters': 'لیٹر',
+    'liter': 'لیٹر',
+    'acre': 'ایکڑ',
+    'lahore': 'لاہور',
+    'faisalabad': 'فیصل آباد',
+    'multan': 'ملتان',
+    'sahiwal': 'ساہیوال',
+    'gujranwala': 'گوجرانوالہ',
+    'rawalpindi': 'راولپنڈی',
+    'bahawalpur': 'بہاولپور',
+    'sargodha': 'سرگودھا',
+    'rahim yar khan': 'رحیم یار خان',
+  };
+
   /// Converts formatted texts, numbers, and symbols into fluent natural spoken Urdu
   static String humanizeForSpeech(String input) {
     var s = input;
@@ -265,26 +335,27 @@ class VoiceAssistantEngine {
         .replaceAll(RegExp(r'(PKR|Rs\.?|₨)', caseSensitive: false), ' روپے ')
         .replaceAll('°C', ' ڈگری سینٹی گریڈ ')
         .replaceAll('°', ' ڈگری ')
-        .replaceAll('%', ' فیصد ')
-        .replaceAll(RegExp(r'\bml\b', caseSensitive: false), ' ملی لیٹر ')
-        .replaceAll(RegExp(r'\bkg\b', caseSensitive: false), ' کلوگرام ')
-        .replaceAll(RegExp(r'\bEC\b'), ' ای سی ')
-        .replaceAll(RegExp(r'\bWP\b'), ' ڈبلیو پی ')
-        .replaceAll(RegExp(r'\bWG\b'), ' ڈبلیو جی ')
-        .replaceAll(RegExp(r'\bDAP\b'), ' ڈی اے پی ')
-        .replaceAll(RegExp(r'\bSOP\b'), ' ایس او پی ');
+        .replaceAll('%', ' فیصد ');
+
+    // 3. Transliterate English chemical, crop, and agricultural terms to pure Urdu
+    for (final entry in _urduPhoneticMap.entries) {
+      s = s.replaceAll(
+        RegExp(r'\b' + RegExp.escape(entry.key) + r'\b', caseSensitive: false),
+        ' ${entry.value} ',
+      );
+    }
 
     // 4. Convert ranges like 100-120 -> 100 سے 120
     s = s.replaceAllMapped(RegExp(r'(\d+)\s*-\s*(\d+)'), (m) => '${m[1]} سے ${m[2]}');
 
-    // 4. Convert decimals like 16.9 or 1.5 -> 16 اعشاریہ 9
+    // 5. Convert decimals like 16.9 or 1.5 -> 16 اعشاریہ 9
     s = s.replaceAllMapped(RegExp(r'(\d+)\.(\d+)'), (m) {
       final whole = int.tryParse(m[1]!) ?? 0;
       final dec = int.tryParse(m[2]!) ?? 0;
       return '${numberToUrduWords(whole)} اعشاریہ ${numberToUrduWords(dec)}';
     });
 
-    // 5. Convert all standalone integers to Urdu words
+    // 6. Convert all standalone integers to Urdu words
     s = s.replaceAllMapped(RegExp(r'\b\d+\b'), (m) {
       final val = int.tryParse(m[0]!);
       if (val != null) {
@@ -293,8 +364,9 @@ class VoiceAssistantEngine {
       return m[0]!;
     });
 
-    // 6. Clean markdown characters and extra punctuation
-    s = s.replaceAll(RegExp(r'[*#_`•\-\[\]\(\)]'), ' ')
+    // 7. Clean markdown characters, leftover English letters, and extra punctuation
+    s = s.replaceAll(RegExp(r'[a-zA-Z]'), ' ')
+        .replaceAll(RegExp(r'[*#_`•\-\[\]\(\)/:;،]'), ' ')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
 
