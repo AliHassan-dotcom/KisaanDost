@@ -256,13 +256,9 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
       aiReplyText = await researchAgent.answerQuestion(text, district);
 
       if (aiReplyText.isEmpty || aiReplyText.contains('Maaf karein')) {
-        // Try backend or fallback
-        final candidateUrls = <String>[
-          '${AppConfig.apiBaseUrl}/api/v1/ai/ask',
-          'http://192.168.1.6:8000/api/v1/ai/ask',
-          'http://127.0.0.1:8000/api/v1/ai/ask',
-          'http://localhost:8000/api/v1/ai/ask',
-        ];
+        final candidateUrls = AppConfig.candidateBaseUrls
+            .map((base) => '$base/api/v1/ai/ask')
+            .toList();
 
         for (final urlStr in candidateUrls) {
           try {

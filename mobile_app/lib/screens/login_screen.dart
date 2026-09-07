@@ -77,20 +77,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: <Widget>[
                     ActionChip(
                       avatar: const Icon(Icons.wifi, size: 14, color: Colors.green),
-                      label: const Text('Wi-Fi LAN (192.168.1.6)'),
+                      label: const Text('Wi-Fi LAN (192.168.1.9)'),
                       onPressed: () {
                         setDialogState(() {
-                          controller.text = 'http://192.168.1.6:8000';
-                          testStatus = '';
-                        });
-                      },
-                    ),
-                    ActionChip(
-                      avatar: const Icon(Icons.usb, size: 14, color: Colors.blue),
-                      label: const Text('USB Cable (localhost)'),
-                      onPressed: () {
-                        setDialogState(() {
-                          controller.text = 'http://localhost:8000';
+                          controller.text = 'http://192.168.1.9:8000';
                           testStatus = '';
                         });
                       },
@@ -101,6 +91,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       onPressed: () {
                         setDialogState(() {
                           controller.text = 'http://127.0.0.1:8000';
+                          testStatus = '';
+                        });
+                      },
+                    ),
+                    ActionChip(
+                      avatar: const Icon(Icons.usb, size: 14, color: Colors.blue),
+                      label: const Text('USB (localhost)'),
+                      onPressed: () {
+                        setDialogState(() {
+                          controller.text = 'http://localhost:8000';
                           testStatus = '';
                         });
                       },
