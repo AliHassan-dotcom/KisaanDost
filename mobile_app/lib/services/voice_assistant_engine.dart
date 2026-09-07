@@ -177,8 +177,17 @@ class VoiceAssistantEngine {
       _isSpeaking = true;
       _onTtsStart?.call();
 
-      final langCode = language == 'ur' ? 'ur-PK' : 'en-US';
-      await _tts.setLanguage(langCode);
+      if (language == 'ur' || RegExp(r'[\u0600-\u06FF]').hasMatch(cleanText)) {
+        try {
+          await _tts.setLanguage('ur-PK');
+        } catch (_) {
+          try {
+            await _tts.setLanguage('ur');
+          } catch (_) {}
+        }
+      } else {
+        await _tts.setLanguage('en-US');
+      }
       await _tts.setSpeechRate(0.39); // Calm, natural human pace
       await _tts.setPitch(1.0); // Warm, authentic tone
       await _tts.speak(cleanText);

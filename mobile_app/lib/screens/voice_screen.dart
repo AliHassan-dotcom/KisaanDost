@@ -531,7 +531,7 @@ class _VoiceScreenState extends ConsumerState<VoiceScreen> {
               if (voiceState.isConnected) {
                 notifier.stopSession();
               } else {
-                notifier.startSession();
+                notifier.startSession(languageCode: isUrdu ? 'ur_PK' : 'en_US');
               }
             },
             child: Container(

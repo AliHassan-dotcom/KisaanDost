@@ -242,10 +242,17 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
       );
     }
 
+    final hasUrduScript = RegExp(r'[\u0600-\u06FF]').hasMatch(text);
+    final hasRomanUrdu = RegExp(
+      r'\b(salam|assalam|kaise|kese|haal|hal|kia|kya|bhai|gandum|gehun|kapas|dhan|chawal|kamad|makai|makki|aaloo|tamatar|kangi|sundi|keera|keerey|tila|makhi|safed|pani|paani|abpashi|aabpashi|khad|khaad|bhao|mandi|ilaj|dawa|dawai|aaj|kal|tar|watter|fasal|khet|roze|batao|bataien|karo|karein|chahiye|mein|par|se|ko|hai|hain|tha|the|kuch|konsa|konsi|kitna|kitni|kab|kare|karun)\b',
+      caseSensitive: false,
+    ).hasMatch(text);
+
+    final effectiveLanguage = (hasUrduScript || hasRomanUrdu) ? 'ur' : language;
     String aiReplyText = '';
 
     if (GreetingHandler.isGreeting(text)) {
-      aiReplyText = GreetingHandler.getGreetingResponse(text);
+      aiReplyText = GreetingHandler.getGreetingResponse(text, language: effectiveLanguage);
     } else {
       final district = _ref?.read(locationProvider).location.district ?? 'Lahore';
 
@@ -270,7 +277,7 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
                   'query': text,
                   'district': district,
                   'crop': 'Wheat',
-                  'language': language,
+                  'language': effectiveLanguage,
                 }),
               )
               .timeout(const Duration(seconds: 4));
@@ -320,7 +327,7 @@ class VoiceNotifier extends StateNotifier<VoiceState> {
     );
 
     // Playback response in calm, natural voice audio
-    await _voiceEngine.speak(aiReplyText, language: language);
+    await _voiceEngine.speak(aiReplyText, language: effectiveLanguage);
   }
 
   /// High-intelligence local fallback that understands Roman Urdu, English, and Urdu

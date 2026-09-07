@@ -45,7 +45,7 @@ class GreetingHandler {
   }
 
   /// Returns the customized, friendly greeting response with self-introduction and offer of help
-  static String getGreetingResponse(String input) {
+  static String getGreetingResponse(String input, {String? language}) {
     final clean = _normalize(input);
     final lower = clean.toLowerCase();
 

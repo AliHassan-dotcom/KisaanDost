@@ -59,8 +59,18 @@ class AIAgronomistService:
         """Synthesizes datasets into an authoritative agricultural response."""
         q = query.strip()
         q_lower = q.lower()
+        roman_urdu_words = [
+            "salam", "assalam", "kaise", "kese", "haal", "hal", "kia", "kya", "bhai", "gandum", "gehun",
+            "kapas", "dhan", "chawal", "kamad", "makai", "makki", "aaloo", "tamatar", "kangi", "sundi",
+            "keera", "keerey", "tila", "makhi", "pani", "paani", "abpashi", "aabpashi", "khad", "khaad",
+            "bhao", "mandi", "ilaj", "dawa", "dawai", "aaj", "kal", "tar", "watter", "fasal", "khet",
+            "roze", "batao", "bataien", "karo", "karein", "chahiye", "mein", "par", "se", "ko", "hai",
+            "hain", "tha", "the", "kuch", "konsa", "konsi", "kitna", "kitni"
+        ]
+        has_roman_urdu = any(re.search(rf"\b{re.escape(w)}\b", q_lower) for w in roman_urdu_words)
+        has_urdu_script = bool(re.search(r"[\u0600-\u06FF]", query))
+        is_urdu = (language == "ur") or has_urdu_script or has_roman_urdu or not any(w in q_lower for w in ["what", "how", "when", "why", "where", "which", "tell me in english"])
         detected_crop = self._extract_crop(q_lower, default_crop=crop)
-        is_urdu = language == "ur" or bool(re.search(r"[\u0600-\u06FF]", query))
 
         # -------------------------------------------------------------
         # 0. GREETINGS & CASUAL CONVERSATION (Check FIRST for pure greetings)
